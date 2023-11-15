@@ -61,8 +61,8 @@ namespace LinkApplication
 
         private void ShowEventsWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
             eventsWindow.Show();
+            this.Hide();
         }
     }
 }

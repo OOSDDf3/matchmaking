@@ -28,8 +28,8 @@ namespace LinkApplication
 
         private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
             mainWindowInstance.Show();
+            this.Hide();
         }
     }
 }

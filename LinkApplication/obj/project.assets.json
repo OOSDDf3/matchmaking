@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gideo\\source\\repos\\LinkApplication\\LinkApplication\\LinkApplication.csproj",
+      "projectUniqueName": "C:\\Users\\gideo\\OneDrive\\Documenten\\GitHub\\C#\\matchmaking\\LinkApplication\\LinkApplication.csproj",
       "projectName": "LinkApplication",
-      "projectPath": "C:\\Users\\gideo\\source\\repos\\LinkApplication\\LinkApplication\\LinkApplication.csproj",
+      "projectPath": "C:\\Users\\gideo\\OneDrive\\Documenten\\GitHub\\C#\\matchmaking\\LinkApplication\\LinkApplication.csproj",
       "packagesPath": "C:\\Users\\gideo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gideo\\source\\repos\\LinkApplication\\LinkApplication\\obj\\",
+      "outputPath": "C:\\Users\\gideo\\OneDrive\\Documenten\\GitHub\\C#\\matchmaking\\LinkApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gideo\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LinkApplication"
         mc:Ignorable="d"
         Background="Purple"
+        WindowState="Maximized"
         Title="SignInWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Terug naar hoofdpagina" HorizontalAlignment="Left" Margin="206,324,0,0" VerticalAlignment="Top" Click="ReturnToMainPageButton_Click"/>

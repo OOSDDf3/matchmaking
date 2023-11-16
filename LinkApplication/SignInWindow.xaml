@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinkApplication"
         mc:Ignorable="d" 
-        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         WindowStyle="SingleBorderWindow" 
         Background="#272537"
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
@@ -21,24 +21,48 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="0.5*"/>
-
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+
+        <Rectangle Grid.Column="2" Grid.Row="0" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="2" Grid.Row="1" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="2" Grid.Row="2" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="2" Grid.Row="3" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="2" Grid.Row="4" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="2" Grid.Row="5" Opacity="0.1" Fill="#FF527277"/>
+
         <Rectangle Grid.Column="1" Grid.Row="0" Opacity="0.1" Fill="#FF527277"/>
         <Rectangle Grid.Column="1" Grid.Row="1" Opacity="0.1" Fill="#FF527277"/>
         <Rectangle Grid.Column="1" Grid.Row="2" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="1" Grid.Row="3" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="1" Grid.Row="4" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="1" Grid.Row="5" Opacity="0.1" Fill="#FF527277"/>
+
+        <Rectangle Grid.Column="3" Grid.Row="0" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="3" Grid.Row="1" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="3" Grid.Row="2" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="3" Grid.Row="3" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="3" Grid.Row="4" Opacity="0.1" Fill="#FF527277"/>
+        <Rectangle Grid.Column="3" Grid.Row="5" Opacity="0.1" Fill="#FF527277"/>
 
 
 
+        <Label Grid.Column="2" Grid.Row="1" Content="L I N K" Foreground="White" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="{x:Null}" SnapsToDevicePixels="True" FontFamily="Kimberley Bl"/>
 
-        <TextBox x:Name="EmailBox" Grid.Row="1" Grid.Column="1" Width="600" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" FontSize="22" BorderBrush="#FF757575" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center">
+        <Label Grid.Column="2" Grid.Row="2" Content="Email Address" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" SnapsToDevicePixels="True" />
+        <TextBox x:Name="EmailBox" Grid.Row="2" Grid.Column="2" MinWidth="600" Width="600" HorizontalAlignment="Stretch" MinHeight="40" Height="40" VerticalAlignment="Stretch" FontSize="22" BorderBrush="#FF757575" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -46,28 +70,28 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox x:Name="WachtwoordBox" Grid.Row="1" Grid.Column="1" Width="600" HorizontalAlignment="Center" Height="40" Margin="0,210,0,0" VerticalAlignment="Center" BorderBrush="#FF8A8A8A" FontSize="22" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center">
+        <Label Grid.Column="2" Grid.Row="3" Content="Wachtwoord" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" />
+        <TextBox x:Name="WachtwoordBox" Grid.Row="3" Grid.Column="2" Width="600" HorizontalAlignment="Stretch" Height="40" VerticalAlignment="Stretch" BorderBrush="#FF8A8A8A" FontSize="22" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
+        <Button Grid.Column="2" Grid.Row="3" Content="Wachtwoord vergeten?" HorizontalAlignment="Right" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="#FF969393" Cursor="Hand" Background="{x:Null}" FontStyle="Italic" Click="ForgotPassword_Button" FontSize="18"/>
 
-        <Label Grid.Column="1" Content="Email Address" Grid.Row="1" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="174,0,0,80" Background="{x:Null}" SnapsToDevicePixels="True"/>
-        <Label Grid.Column="1" Content="Wachtwoord" Grid.Row="1" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="174,130,0,0" Background="{x:Null}" />
-        <Label Grid.Column="1" Content="Nog geen link account?" Grid.Row="1" Foreground="#FF969393" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center" FontStyle="Italic" Margin="307,550,0,0" Background="{x:Null}" />
 
-        <Button Grid.Column="1" Content="Wachtwoord vergeten?" HorizontalAlignment="Left" Margin="650,130,0,0" Grid.Row="1" VerticalAlignment="Center" BorderBrush="{x:Null}" Foreground="#FF969393" Cursor="Hand" Background="{x:Null}" FontStyle="Italic" Click="ForgotPassword_Button"/>
-        <Button Grid.Column="1" Content="Registreer nu!" HorizontalAlignment="Left" Margin="518,550,0,0" Grid.Row="1" VerticalAlignment="Center" BorderBrush="{x:Null}" Foreground="#FF969393" Cursor="Hand" FontSize="20" Background="{x:Null}" FontStyle="Italic" Click="Register_Button"/>
-        <Button x:Name="ButtonInloggen" Grid.Column="1" Grid.Row="1" Width="600" Height="50" Content="Inloggen" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="0,440,0,0" Background="#FF3C529E" Click="Login_Button" BorderBrush="{x:Null}" Cursor="Hand">
+        
+        <Button x:Name="ButtonInloggen" Grid.Column="2" Grid.Row="4" Width="600" Height="50" Content="Inloggen" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Background="#FF3C529E" Click="Login_Button" BorderBrush="{x:Null}" Cursor="Hand">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Grid.Column="1" Content="L I N K" Grid.Row="1" Foreground="White" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" SnapsToDevicePixels="True" FontFamily="Kimberley Bl" Margin="0,0,0,608"/>
+
+
+        <Button Grid.Column="2" Grid.Row="4" Content="Nog geen link account? Registreer nu!" HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderBrush="{x:Null}" Foreground="#FF969393" Cursor="Hand" FontSize="20" Background="{x:Null}" FontStyle="Italic" Click="Register_Button"/>
 
 
 

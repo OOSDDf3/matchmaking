@@ -28,43 +28,49 @@ namespace LinkApplication
         public MainWindow()
         {
             InitializeComponent();
-            interestsWindow = new InterestsWindow(this);
-            profileWindow = new ProfileWindow(this);
-            registerWindow = new RegisterWindow(this);
-            signInWindow = new SignInWindow(this);
-            eventsWindow = new EventsWindow(this);
 
         }
 
         private void ShowSignInWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            
+            signInWindow = new SignInWindow(this);
             signInWindow.Show();
+
+            this.Close();
+
         }
 
         private void ShowInterestsWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            interestsWindow = new InterestsWindow(this);
             interestsWindow.Show();
+
+            this.Close();
         }
 
         private void ShowRegisterWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            registerWindow = new RegisterWindow(this);
             registerWindow.Show();
+
+            this.Close();
         }
 
         private void ShowProfileWindowButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            profileWindow = new ProfileWindow(this);
             profileWindow.Show();
+
+            this.Close();
+            
         }
 
         private void ShowEventsWindowButton_Click(object sender, RoutedEventArgs e)
         {
+            eventsWindow = new EventsWindow(this);
             eventsWindow.Show();
-            this.Hide();
+
+            this.Close();
         }
     }
 }

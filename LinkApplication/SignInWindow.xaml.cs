@@ -32,5 +32,24 @@ namespace LinkApplication
             mainWindowInstance.Show();
         }
 
+        private void ForgotPassword_Button(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Register_Button(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Login_Button(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -31,5 +31,6 @@ namespace LinkApplication
             this.Hide();
             mainWindowInstance.Show();
         }
+
     }
 }

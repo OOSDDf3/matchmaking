@@ -4,12 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinkApplication"
-        mc:Ignorable="d"
-        Background="Purple"
-        WindowState="Maximized"
-        Title="SignInWindow" Height="450" Width="800">
+        mc:Ignorable="d" WindowState="Maximized" WindowStyle="SingleBorderWindow" Background="#272537"
+        Title="SignInWindow" Width="1920" Height="1080">
+
     <Grid>
-        <Button Content="Terug naar hoofdpagina" HorizontalAlignment="Left" Margin="206,324,0,0" VerticalAlignment="Top" Click="ReturnToMainPageButton_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ButtonInloggen" Grid.Column="1" Grid.Row="1" Width="200" Height="50" Content="Inloggen" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Foreground="Black" Margin="0,400,0,0"/>
+        <TextBlock/>
+        <TextBox x:Name="EmailBox" Grid.Row="1" Grid.Column="1" Width="400" Text="Email" HorizontalAlignment="Center" Height="50" Background="White" VerticalAlignment="Center"/>
+        <TextBox x:Name="WachtwoordBox" Grid.Row="1" Grid.Column="1" Width="400" Text="Wachtwoord" HorizontalAlignment="Center" Height="50" Background="White" Margin="0,200,0,0" VerticalAlignment="Center"/>
+
+
+
+
 
     </Grid>
+
+
 </Window>

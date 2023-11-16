@@ -33,11 +33,13 @@ namespace LinkApplication
             registerWindow = new RegisterWindow(this);
             signInWindow = new SignInWindow(this);
             eventsWindow = new EventsWindow(this);
+
         }
 
         private void ShowSignInWindowButton_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
+            
             signInWindow.Show();
         }
 

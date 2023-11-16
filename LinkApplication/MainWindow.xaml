@@ -6,14 +6,37 @@
         xmlns:local="clr-namespace:LinkApplication"
         mc:Ignorable="d"
         WindowState="Maximized"
-        Background="Blue"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Inloggen" HorizontalAlignment="Left" Margin="428,319,0,0" VerticalAlignment="Top" Click="ShowSignInWindowButton_Click"/>
-        <Button Content="Registreren" HorizontalAlignment="Left" Margin="324,319,0,0" VerticalAlignment="Top" Click="ShowRegisterWindowButton_Click"/>
-        <Button Content="Evenementen" HorizontalAlignment="Left" Margin="631,319,0,0" VerticalAlignment="Top" Click="ShowEventsWindowButton_Click"/>
-        <Button Content="Interesses" HorizontalAlignment="Left" Margin="219,319,0,0" VerticalAlignment="Top" Click="ShowInterestsWindowButton_Click"/>
-        <Button Content="Profiel" HorizontalAlignment="Left" Margin="539,319,0,0" VerticalAlignment="Top" Click="ShowProfileWindowButton_Click"/>
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Title="MainWindow" Height="1080" Width="1920">
+    <Border Background="#272537" CornerRadius="40">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Link"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="50"
+                       Margin="40,0,0,0"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"/>
+            </StackPanel>
+
+        </Grid>
+    </Border>
 </Window>

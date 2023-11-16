@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinkApplication"
-        mc:Ignorable="d" WindowState="Maximized" WindowStyle="SingleBorderWindow" Background="#272537"
-        Title="SignInWindow" Width="1920" Height="1080">
+        mc:Ignorable="d" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow" 
+        Background="#272537"
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}" 
+        Title="SignInWindow">
 
     <Grid>
         <Grid.Background>

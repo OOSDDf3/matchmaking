@@ -22,10 +22,30 @@ namespace LinkApplication
     public partial class SignInWindow : Window
     {
         MainWindow mainWindowInstance;
+        private void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
+        private void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
+        private void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
+
         public SignInWindow(MainWindow mainWindow)
         {
             InitializeComponent();
             mainWindowInstance = mainWindow;
+        }
+
+
+        private void ShowPasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Visible;
+            WachtwoordBox.Visibility = Visibility.Hidden;
+            PasswordUnmask.Text = WachtwoordBox.Password;
+        }
+
+        private void HidePasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Hidden;
+            WachtwoordBox.Visibility = Visibility.Visible;
         }
 
         private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)

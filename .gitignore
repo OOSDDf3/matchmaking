@@ -190,3 +190,12 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
+.vs/LinkApplication/FileContentIndex/63bc3b94-5e45-4a7b-8f53-2ffaba76f98a.vsidx
+.vs/LinkApplication/FileContentIndex/b620ed43-3bb2-4120-a9eb-080b87a12fcb.vsidx
+.vs/LinkApplication/FileContentIndex/4089a012-9824-417d-b9b5-283558635304.vsidx
+*.vsidx
+LinkApplication/obj/Debug/net6.0-windows/LinkApplication.assets.cache
+LinkApplication/obj/Debug/net6.0-windows/LinkApplication.GeneratedMSBuildEditorConfig.editorconfig
+LinkApplication/obj/Debug/net6.0-windows/LinkApplication_MarkupCompile.i.cache
+LinkApplication/obj/Debug/net6.0-windows/LinkApplication_MarkupCompile.i.lref
+LinkApplication/obj/Debug/net6.0-windows/SignInWindow.g.i.cs

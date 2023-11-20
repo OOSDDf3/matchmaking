@@ -10,17 +10,24 @@
         Background="#272537"
         Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
         Width="{x:Static SystemParameters.PrimaryScreenWidth}" 
+        Closed="Window_Closed"
         Title="SignInWindow">
+    
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/images.jpg" TileMode="None"/>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF314861"/>
+                <GradientStop Color="#FF39495B" Offset="1"/>
+                <GradientStop Color="#FF44678C" Offset="0.594"/>
+            </LinearGradientBrush>
         </Grid.Background>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 

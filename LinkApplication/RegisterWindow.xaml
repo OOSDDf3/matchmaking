@@ -8,22 +8,38 @@
         mc:Ignorable="d"
         WindowState="Maximized"
         Title="RegisterWindow" 
-        Width="1920"
-        Height="1080"
+        Height="{x:Static SystemParameters.PrimaryScreenHeight}" 
+        Width="{x:Static SystemParameters.PrimaryScreenWidth}" 
         Closed="Window_Closed">
+    
     <Grid Name="MainGrid">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF314861"/>
+                <GradientStop Color="#FF39495B" Offset="1"/>
+                <GradientStop Color="#FF44678C" Offset="0.594"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
-        <Button Content="L I N K" FontSize="100" Grid.Row="0" Grid.Column="0" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ReturnToMainPageButton_Click" Background="{x:Null}" Foreground="White" BorderThickness="0"/>
-        <Label Grid.Row="0" Grid.Column="1" Content="L I N K" Foreground="White" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Stretch" FontFamily="Kimberley B1" Background="{x:Null}" SnapsToDevicePixels="True"/>
+
+        <Rectangle Grid.Column="1" Opacity="0.25" Fill="#FF527277"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Opacity="0.25" Fill="#FF527277"/>
+        <Rectangle Grid.Column="1" Grid.Row="2" Opacity="0.25" Fill="#FF527277"/>
+
+
+        <Button Content="L I N K" FontSize="100" Grid.Column="1" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Click="ReturnToMainPageButton_Click" Background="{x:Null}" Foreground="White" BorderThickness="0" FontFamily="Kimberley Bl"/>
+
         <Grid Grid.Row="1" Grid.Column="1" Name="InputGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -31,47 +47,73 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="4*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Grid.Resources>
 
-            </Grid.Resources>
-            <Label Grid.Row="0" Grid.Column="0" x:Name = "labelPersonal" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Content = "Personal" FontSize="24" Foreground="White" Margin = "0,0,0,0" Width = "Auto" Height="Auto"/>
 
-            <Label Grid.Row="1" x:Name = "labelName" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Username" Foreground="White" Margin = "0,0,0,0" Width = "Auto" Height="Auto"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name = "textBoxName" HorizontalAlignment = "Left" VerticalAlignment = "Top" Height = "Auto" Width = "164" Margin = "90,0,0,0"/>
 
-            <Label Grid.Row="1" x:Name = "labelGender" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Gender" Foreground="White" Margin = "0,42,0,0" Width = "Auto" Height="Auto"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" Width="100" Height="24" HorizontalAlignment = "Left" VerticalAlignment = "Top" Margin="90,42,0,0" ItemsSource="{Binding GenderOptions}">
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White" Height="42"/>
+            <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White"/>
+
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White"/>
+            <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White" Foreground="Black" SelectionTextBrush="White"/>
+
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Gender" FontSize="16" Foreground="White"/>
+            <ComboBox x:Name="comboBoxGender" Grid.Row="3" Grid.Column="1" Height="25" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" ItemsSource="{Binding GenderOptions}" Background="{x:Null}" BorderBrush="White" Foreground="Black">
                 <ComboBoxItem Content="Female"/>
                 <ComboBoxItem Content="Male"/>
                 <ComboBoxItem Content="Other"/>
             </ComboBox>
 
-            <Label Grid.Row="1" x:Name = "labelBirth" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Birthday" Foreground="White" Margin = "0,82,0,0" Width = "Auto" Height="Auto"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name = "textBoxBirth" HorizontalAlignment = "Left" VerticalAlignment = "Top" Height = "Auto" Width = "164" Margin = "90,82,0,0"/>
+            <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Geboortedatum" FontSize="16" Foreground="White"/>
+            <TextBox x:Name = "textBoxBirth" Grid.Row="4" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White"/>
 
-            <Label Grid.Row="1" x:Name = "labelStreet" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Street" Foreground="White" Margin = "0,122,0,0" Width = "Auto" Height="Auto"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name = "textBoxStreet" HorizontalAlignment = "Left" VerticalAlignment = "Top" Height = "Auto" Width = "164" Margin = "90,122,0,0"/>
+            <Grid Grid.Row="5" Grid.Column="1" Name="PostcodeGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" x:Name = "labelPostalCode" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Postal code" Foreground="White" Margin = "0,162,0,0" Width = "Auto" Height="Auto"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name = "textBoxPostalCode" HorizontalAlignment = "Left" VerticalAlignment = "Top" Height = "Auto" Width = "164" Margin = "90,162,0,0"/>
+                <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Straatnaam" FontSize="16" Foreground="White"/>
+                <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Postcode" FontSize="16" Foreground="White"/>
 
-            <Label Grid.Row="2" Grid.Column="0" x:Name = "labelTitle" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Content = "Interests" FontSize="24" Foreground="White" Margin = "0,0,0,0" Width = "Auto" Height="Auto"/>
+                <TextBox x:Name = "textBoxStreet" Grid.Row="5" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White" BorderBrush="White" />
+                <TextBox x:Name = "textBoxPostalCode" Grid.Row="5" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White"/>
+            </Grid>
 
-            <Label Grid.Row="3" Grid.Column="0" x:Name = "labelInterests" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "Interests" Foreground="White" Margin = "0,0,0,0" Width = "Auto" Height="Auto"/>
-            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="comboBoxGender" Width="100" Height="24" HorizontalAlignment = "Left" VerticalAlignment = "Top" Margin="90,0,0,0" ItemsSource="{Binding InterestsOptions}">
-                <ComboBoxItem Content="Interest 1"/>
-                <ComboBoxItem Content="Interest 2"/>
-                <ComboBoxItem Content="Interest 3"/>
-            </ComboBox>
+            <Label Grid.Row="6" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Wachtwoord" FontSize="16" Foreground="White"/>
+            <PasswordBox x:Name = "textBoxPassword" Grid.Row="6" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height = "25" Background="White"/>
+            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="25" />
+            <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="6" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseUp" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="22"/>
 
-            <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonCancel" Content = "Cancel" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "75" Click="buttonCancel_Click"/>
-            <Button Grid.Row="3" Grid.Column="0" x:Name = "buttonCreate" Content = "Create" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "75" Click="buttonCreate_Click"/>
+            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16">
+                <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16">
+                <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+                </Button.Resources>
+                <Button.BorderBrush>
+                    <ImageBrush TileMode="None" Stretch="Fill"/>
+                </Button.BorderBrush>
+            </Button>
         </Grid>
     </Grid>
 </Window>

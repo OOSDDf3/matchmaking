@@ -37,6 +37,12 @@ namespace LinkApplication
         // Comboboxes
         ComboBox genderComboBox;
 
+        // Password 
+        public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
+        public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
+        public void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
+
+
         public RegisterWindow(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -123,6 +129,21 @@ namespace LinkApplication
             mainWindowInstance.profileWindow.Show();
         }
 
+        public void ShowPasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Visible;
+            textBoxPassword.Visibility = Visibility.Hidden;
+            PasswordUnmask.Text = textBoxPassword.Password;
+        }
+
+        public void HidePasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Hidden;
+            textBoxPassword.Visibility = Visibility.Visible;
+
+        }
         private void Window_Closed(object sender, EventArgs e)
         {
             Environment.Exit(0);

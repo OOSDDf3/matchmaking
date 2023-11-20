@@ -31,5 +31,14 @@ namespace LinkApplication
             this.Hide();
             mainWindowInstance.Show();
         }
+
+        private void buttonCreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

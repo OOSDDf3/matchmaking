@@ -1,0 +1,229 @@
+﻿<UserControl x:Class="LinkApplication.MVVM.View.ProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LinkApplication.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="950" d:DesignWidth="1670">
+    <StackPanel Margin="0,30,0,0">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,15">
+            <Border Width="850"
+                    Height="182"
+                    CornerRadius="15"
+                    Background="#5bc3ff">
+                <StackPanel>
+
+                    <TextBlock Text="Jouw persoonlijke info"
+                               Foreground="White"
+                               FontSize="46"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,25,0,0"/>
+
+                    <TextBlock Text="Beheer je profiel informatie"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <UniformGrid Columns="4" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+            <!-- Eerste blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#ffc554"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Gebruikersnaam"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="XanTippe"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Tweede blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#4e99ff"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Geboortedatum"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="01-01-1990"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Derde blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#4eff91"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Adres"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="FoShoStraat 10"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Vierde blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#ffe066"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Gender"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="Man"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Vijfde blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#ff7f50"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Taal"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="Vlaams"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Zesde blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#87cefa"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Interesses"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="Snel wandelen"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Zevende blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#da70d6"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Vervoeropties"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="Auto, Fiets"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Achtste blok -->
+            <Border Width="370"
+                    Height="300"
+                    CornerRadius="20"
+                    Background="#ffd700"
+                    Margin="10,0,10,10">
+                <StackPanel>
+                    <Image Source="/Images/ManPaintingPNG.png" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <TextBlock Text="Beschikbaarheid"
+                               Foreground="White"
+                               FontSize="37"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                    <TextBlock Text="Dinsdag"
+                               Foreground="White"
+                               FontSize="38"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

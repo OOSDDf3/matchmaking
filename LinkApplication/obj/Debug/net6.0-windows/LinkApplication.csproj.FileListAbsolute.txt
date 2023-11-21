@@ -58,3 +58,13 @@ C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Deb
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\LinkApplication.pdb
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\LinkApplication.genruntimeconfig.cache
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\ref\LinkApplication.dll
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\Theme\MenuButtonTheme.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\App.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\Theme\TextBoxTheme.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\HomeView.g.cs
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\HomeView.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\Interesses.g.cs
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\Interesses.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\ProfileView.g.cs
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\ProfileView.baml

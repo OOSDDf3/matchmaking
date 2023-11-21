@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LinkApplication"
+        xmlns:viewModel="clr-namespace:LinkApplication.MVVM.ViewModel"
         mc:Ignorable="d"
         WindowState="Maximized"
         WindowStyle="None"
@@ -11,16 +12,21 @@
         Background="Transparent"
         AllowsTransparency="True"
         Title="MainWindow" Height="1080" Width="1920">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
     <Border Background="#272537" CornerRadius="40">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="1670"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
-                <RowDefinition/>
+                <RowDefinition Height="980"/>
             </Grid.RowDefinitions>
 
             <TextBlock Text="Link"
@@ -34,9 +40,36 @@
                 <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
-                             FontSize="14"/>
+                             FontSize="24"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+                <RadioButton Content="Interesses"
+                            Height="50"
+                            Foreground="White"
+                            FontSize="24"
+                            Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding InteressesViewCommand}"/>
+                <RadioButton Content="Profiel"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="24"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ProfileViewCommand}"/>
             </StackPanel>
 
+            <TextBox Width="250"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Style="{StaticResource ModernTextBox}"/>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
         </Grid>
     </Border>
 </Window>

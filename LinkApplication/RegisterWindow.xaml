@@ -61,7 +61,7 @@
 
 
 
-            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White" Height="42"/>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White"/>
             <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "25" Background="White"/>
 
             <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White"/>
@@ -79,9 +79,9 @@
 
             <Grid Grid.Row="5" Grid.Column="1" Name="PostcodeGrid">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="0.1*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Straatnaam" FontSize="16" Foreground="White"/>

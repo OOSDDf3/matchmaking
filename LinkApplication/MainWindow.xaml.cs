@@ -20,11 +20,11 @@ namespace LinkApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        InterestsWindow interestsWindow;
-        ProfileWindow profileWindow;
-        RegisterWindow registerWindow;
-        SignInWindow signInWindow;
-        EventsWindow eventsWindow;
+        public InterestsWindow interestsWindow;
+        public ProfileWindow profileWindow;
+        public RegisterWindow registerWindow;
+        public SignInWindow signInWindow;
+        public EventsWindow eventsWindow;
         public MainWindow()
         {
             InitializeComponent();

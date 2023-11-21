@@ -45,12 +45,19 @@ namespace LinkApplication
 
         private void Register_Button(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            mainWindowInstance.registerWindow.Show();
         }
 
         private void Login_Button(object sender, RoutedEventArgs e)
         {
 
+            if(EmailBox.Text == "spichon01@hotmail.com" & WachtwoordBox.Password.ToString()== "Samuel")
+            {
+                mainWindowInstance.Show();
+                this.Hide();
+            }
+            
         }
 
 

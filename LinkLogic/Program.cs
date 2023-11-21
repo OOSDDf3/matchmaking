@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+using LinkApplication;
+
+Database_Connecter database_Connecter = new Database_Connecter();

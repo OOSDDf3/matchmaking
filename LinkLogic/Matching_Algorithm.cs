@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace LinkApplication
 {
-    internal class Matching_Algorithm
+    public class Matching_Algorithm
     {
+        //Lijst met accountID & elk account lijst met interesseID's
+        //Checken hoeveel van de interesseID's overeenkomen met andere accountID's
+        //Bepaalde waarde meegeven voor hoeveelheid overeenkomsten
+            //Bijvoorbeeld:    
+                //1 dezelfde? waarde = 1
+                //2 dezelfde? waarde = 2
+
+        //Bij het aanpassen van filter, de aangepaste criterea meenemen bij beoordeling
     }
 }

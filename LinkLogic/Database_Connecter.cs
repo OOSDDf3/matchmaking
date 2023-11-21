@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace LinkApplication
 {
-    internal class Database_Connecter
+    public class Database_Connecter
     {
+        //Connectie maken met de database
+
+        //Constructor waar je een query mee kan sturen
+            //te gebruiken door andere methodes
     }
 }

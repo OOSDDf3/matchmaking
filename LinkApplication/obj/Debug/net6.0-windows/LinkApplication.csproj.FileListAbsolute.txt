@@ -68,3 +68,4 @@ C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Deb
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\Interesses.baml
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\ProfileView.g.cs
 C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\obj\Debug\net6.0-windows\MVVM\View\ProfileView.baml
+C:\Users\gideo\OneDrive\Documenten\GitHub\C#\matchmaking\LinkApplication\bin\Debug\net6.0-windows\Images\ManPaintingPNG.png

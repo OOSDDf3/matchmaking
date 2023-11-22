@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkApplication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,26 +11,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LinkApplication
+namespace LinkApplicationGraphics.NVVM.View
 {
     /// <summary>
-    /// Interaction logic for ProfileWindow.xaml
+    /// Interaction logic for InterestView.xaml
     /// </summary>
-    public partial class ProfileWindow : Window
+    public partial class InterestView : UserControl
     {
-        MainWindow mainWindowInstance;
-        public ProfileWindow(MainWindow mainWindow)
+        public InterestView()
         {
             InitializeComponent();
-            mainWindowInstance = mainWindow;
         }
 
-        private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
+        private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-             this.Hide();
-            mainWindowInstance.Show();
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            Window.GetWindow(this).Close();
         }
     }
 }

@@ -2,8 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LinkApplication"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewModel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" 
+             xmlns:view="clr-namespace:LinkApplicationGraphics.NVVM.View">
+    
     <Application.Resources>
-         
+      
+        <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterViewModel}">
+            <view:RegisterView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type TypeName=viewModel:InterestViewModel}">
+            <view:InterestView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

@@ -9,22 +9,21 @@ namespace LinkApplication
 {
     public class Database_Connecter
     {
-        SqlConnectionStringBuilder? sqlConnectionStringBuilder = null;
+        SqlConnectionStringBuilder? sqlConnectionStringBuilder;
 
-        SqlConnection sqlConnection;
+        SqlConnection? sqlConnection;
 
         public Database_Connecter() { 
             ConnectToDatabase();
-            TestDatabase("SELECT naam, email, adres FROM Matching");
+            TestDatabase("SELECT name, email, address FROM Account");
         }
 
         protected void ConnectToDatabase()
         {
-
             sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = "localhost";
             sqlConnectionStringBuilder.UserID = "SA";
             sqlConnectionStringBuilder.Password = "@Matchingf3";
+            sqlConnectionStringBuilder.DataSource = "localhost";
             sqlConnectionStringBuilder.InitialCatalog = "Matching";
 
             sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);

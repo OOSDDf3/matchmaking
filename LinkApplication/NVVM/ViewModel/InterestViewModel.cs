@@ -33,5 +33,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
         }
+
+
     }
 }

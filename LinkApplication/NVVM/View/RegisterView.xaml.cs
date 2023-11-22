@@ -28,8 +28,10 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             InitializeComponent();
 
+            buttonCreate.IsEnabled = false;
+
         }
-        
+
         String gender;
         public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
         public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
@@ -71,7 +73,7 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 gender = "Vrouw";
             }
-            else
+            if(radioButtonGender3.IsChecked== true)
             {
                 gender = "Anders";
             }
@@ -95,5 +97,19 @@ namespace LinkApplicationGraphics.NVVM.View
             textBoxPassword.Visibility = Visibility.Visible;
 
         }
+
+        private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBoxName.Text))
+            {
+                buttonCreate.IsEnabled = true;
+            }
+            if (string.IsNullOrEmpty(textBoxName.Text))
+            {
+                buttonCreate.IsEnabled = false;
+            }
+        }
+
+
     }
 }

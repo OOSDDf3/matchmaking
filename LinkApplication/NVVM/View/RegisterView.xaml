@@ -168,7 +168,7 @@
             <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="30" Background="{x:Null}" Foreground="White"  FontSize="14"/>
             <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseDown" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="22" Foreground="#FFABADB3"/>
 
-            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16">
+            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16" Command="{Binding NavigateToBasePageCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

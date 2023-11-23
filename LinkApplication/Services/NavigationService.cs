@@ -11,15 +11,28 @@ namespace LinkApplicationGraphics.Services
     public interface INavigationService 
     { 
         ViewModel CurrentView { get; }
+        ViewModel NewView { get; } 
         void NavigateTo<T>() where T : ViewModel;
+        void NavigateToNew<T>() where T : ViewModel;
     }
 
 
     public class NavigationService : ObservableObject, INavigationService
     {
         private ViewModel _currentView;
+        private ViewModel _newView;
         private readonly Func<Type, ViewModel> _viewModelFactory;
 
+
+        public ViewModel NewView
+        {
+            get => _newView;
+            private set
+            {
+                _newView = value;
+                OnPropertyChanged();
+            }
+        }
         public ViewModel CurrentView
         {
             get => _currentView;
@@ -42,6 +55,13 @@ namespace LinkApplicationGraphics.Services
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
             
+        }
+        public void NavigateToNew<TViewModel>() where TViewModel : ViewModel
+        {
+
+            ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+            NewView = viewModel;
+
         }
     }
 }

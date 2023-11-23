@@ -22,11 +22,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
         public RelayCommand NavigateToRegisterCommand { get; set; }
+        public RelayCommand NavigateToHomePageCommand { get; set; }
+        public RelayCommand NavigateToBasePageCommand { get; set; }
+
 
         public MainViewModel(INavigationService navService) 
         { 
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
+            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: o => true);
+
+
         }
     }
 }

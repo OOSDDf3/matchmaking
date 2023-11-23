@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class RegisterView : UserControl
     {
+
+
         public RegisterView()
         {
             InitializeComponent();
@@ -43,10 +46,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
 
-            Window.GetWindow(this).Close();
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)

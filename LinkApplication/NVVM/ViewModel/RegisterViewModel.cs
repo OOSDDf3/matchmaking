@@ -27,10 +27,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public RelayCommand NavigateToInterestCommand { get; set; }
 
+        public RelayCommand NavigateToBasePageCommand {  get; set; }
+
         public RegisterViewModel(INavigationService navService)
         {
             Navigation = navService;
             NavigateToInterestCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<InterestViewModel>(); }, canExecute: o => true);
+            NavigateToBasePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<MainViewModel>(); }, canExecute: o => true);
+
         }
 
     }

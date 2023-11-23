@@ -33,6 +33,9 @@ namespace LinkApplication
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<InterestViewModel>();
             services.AddSingleton<RegisterViewModel>();
+            services.AddSingleton<HomePageViewModel>();
+            services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<ProfileViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
 
 

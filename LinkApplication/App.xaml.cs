@@ -18,7 +18,7 @@ namespace LinkApplication
     /// </summary>
     public partial class App : Application
     {
-        private readonly ServiceProvider _serviceProvider;
+        public readonly ServiceProvider _serviceProvider;
 
         public App() 
         {
@@ -50,6 +50,10 @@ namespace LinkApplication
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
             base.OnStartup(e);
+        }
+        public MainWindow CreateNewMainWindow()
+        {
+            return _serviceProvider.GetRequiredService<MainWindow>();
         }
     }
 }

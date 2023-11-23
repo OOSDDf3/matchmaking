@@ -25,7 +25,7 @@ namespace LinkApplication
         public MainWindow()
         {
             InitializeComponent();
-           
+
         }
 
         public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
@@ -57,7 +57,13 @@ namespace LinkApplication
         {
             Environment.Exit(0);
         }
-        
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true; // Cancel the close action
+            Hide(); // Hide the window instead
+        }
+
         //code voor wachtwoord
         public void ShowPasswordFunction()
         {

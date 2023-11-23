@@ -18,47 +18,89 @@
                 <RowDefinition Height="980*"/>
             </Grid.RowDefinitions>
             <Grid.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF314861"/>
-                    <GradientStop Color="#FF39495B" Offset="1"/>
-                    <GradientStop Color="#FF44678C" Offset="0.594"/>
+                <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
+                    <GradientStop Color="#FF1E293A" Offset="0.1"/>
+                    <GradientStop Color="Black" Offset="2.5"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <TextBlock Text="Link"
+            <TextBlock Text="L I N K"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="50"
-                       Margin="40,0,0,0"/>
+                       Margin="40,0,0,0" FontFamily="Kimberley Bl"/>
 
             <StackPanel Grid.Row="1">
                 <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="24"                           
-                             IsChecked="True"
-                             Command="{Binding NavigateToHomeViewCommand}"/>
+                             IsChecked="False"
+                             Command="{Binding NavigateToHomeViewCommand}"
+                             BorderThickness="0.5" Background="#FF172E67" BorderBrush="#FF1D49B7">
+                    <RadioButton.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </RadioButton.Resources>
+
+                    <RadioButton.Style>
+                        <StaticResource ResourceKey="{x:Type ToggleButton}"/>
+                    </RadioButton.Style>
+                </RadioButton>
                 <RadioButton Content="Interesses"
                             Height="50"
                             Foreground="White"
                             FontSize="24"
                            
-                             Command="{Binding NavigateToInteressesViewCommand}"/>
+                             Command="{Binding NavigateToInteressesViewCommand}" 
+                             BorderThickness="0.5" 
+                             Background="#FF172E67" BorderBrush="#FF1D49B7">
+                    <RadioButton.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </RadioButton.Resources>
+                    <RadioButton.Style>
+                        <StaticResource ResourceKey="{x:Type ToggleButton}"/>
+                    </RadioButton.Style>
+                </RadioButton>
+                
                 <RadioButton Content="Profiel"
                              Height="50"
                              Foreground="White"
                              FontSize="24"
                              
-                             Command="{Binding NavigateToProfileViewCommand}"/>
+                             Command="{Binding NavigateToProfileViewCommand}" 
+                             BorderThickness="0.5" 
+                             Background="#FF172E67" BorderBrush="#FF1D49B7">
+                    <RadioButton.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </RadioButton.Resources>
+                    <RadioButton.Style>
+                        <StaticResource ResourceKey="{x:Type ToggleButton}"/>
+                    </RadioButton.Style>
+                </RadioButton>
+                
             </StackPanel>
 
-            <TextBox Width="250"
+            <TextBox Width="400"
                      Height="40"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
                      Margin="5"
-                     Grid.Column="1"
-                     />
+                     Grid.Column="1" Background="{x:Null}" FontSize="24"
+                     VerticalContentAlignment="Center" Foreground="White"
+                     BorderThickness="2"
+                     >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"

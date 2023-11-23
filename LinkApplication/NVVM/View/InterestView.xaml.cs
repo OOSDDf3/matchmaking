@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,9 +39,6 @@ namespace LinkApplicationGraphics.NVVM.View
 
             AddCheckBoxesToInterestsPage(interests);
 
-            buttonCreate.IsEnabled = false;
-
-
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
@@ -49,12 +47,9 @@ namespace LinkApplicationGraphics.NVVM.View
             loopCheckbox();
             debugPrint();
 
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-
-            Window.GetWindow(this).Close();
-
+            // Assuming you're outside of the App class
             
+
 
         }
 

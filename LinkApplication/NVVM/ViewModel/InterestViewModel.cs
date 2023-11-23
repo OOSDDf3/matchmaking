@@ -27,13 +27,21 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
         public RelayCommand NavigateToRegisterCommand { get; set; }
+        public RelayCommand NavigateToHomePageCommand { get; set; }
+
+
 
         public InterestViewModel(INavigationService navService)
         {
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
+            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
         }
 
+        private bool CanExecuteNavigateToHomePage(object obj)
+        {
+            return true;
+        }
 
     }
 }

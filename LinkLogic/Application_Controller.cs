@@ -16,6 +16,7 @@ namespace LinkApplication
         {
             //Binnengehaalde info moet voldoen aan correcte notatie
             //Alle info d.m.v. query in database zetten
+            //Lijst interesses
             //AccountID wordt automatisch aangemaakt
         }
 

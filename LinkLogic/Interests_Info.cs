@@ -9,7 +9,7 @@ namespace LinkApplication
     public class Interests_Info
     {
         //Categorieen voor de interesses
-        public string category { get; protected set; }
+        //public string category { get; protected set; }
 
         //Naam van interesse
         public string name { get; protected set; }

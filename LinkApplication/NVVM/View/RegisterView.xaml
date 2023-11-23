@@ -43,7 +43,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="1*"/>
@@ -56,8 +56,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White"/>
-                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14" TextChanged="textBoxName_TextChanged">
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White"/>
+                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -65,14 +65,21 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Geboortedatum" FontSize="16" Foreground="White"/>
-                <DatePicker x:Name="textBoxBirth" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FirstDayOfWeek="Monday" Height="27"/>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Leeftijd" FontSize="16" Foreground="White"/>
+
+                <TextBox x:Name = "textBoxAge" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
 
 
             </Grid>
 
 
-            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White"/>
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White"/>
             <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" SelectionTextBrush="White" FontSize="14">
                 <TextBox.Resources>
                     <Style TargetType="Border">
@@ -82,20 +89,24 @@
             </TextBox>
 
 
-            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Gender" FontSize="16" Foreground="White"/>
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Gender" FontSize="16" Foreground="White"/>
 
             <Grid x:Name="RadioButtonGrid" Grid.Row="3" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2.3*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender1" Content="Man" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3" Width="120" Height="30">
+                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender1" Content="Man" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3">
                     <RadioButton.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -108,7 +119,7 @@
                     
                 </RadioButton>
 
-                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender2" Content="Vrouw" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3" Width="120" Height="30">
+                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender2" Content="Vrouw" Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3">
                     <RadioButton.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -119,7 +130,7 @@
                     </RadioButton.Style>
                 </RadioButton>
 
-                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender3" Content="Anders" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3" Width="120" Height="30">
+                <RadioButton GroupName="genderRadioButton" x:Name="radioButtonGender3" Content="Anders" Grid.Column="4" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="12" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="#FFABADB3">
                     <RadioButton.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="10"/>
@@ -162,7 +173,7 @@
             <PasswordBox x:Name = "textBoxPassword" Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14"/>
 
             <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="30" Background="{x:Null}" Foreground="White"  FontSize="14"/>
-            <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseDown" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="22" Foreground="#FFABADB3"/>
+            <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseUp" PreviewMouseUp="ShowPassword_PreviewMouseDown" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="22" Foreground="#FFABADB3"/>
 
             <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16" Command="{Binding NavigateToBasePageCommand}">
                 <Button.Resources>

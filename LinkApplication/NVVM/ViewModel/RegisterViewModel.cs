@@ -32,9 +32,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RegisterViewModel(INavigationService navService)
         {
             Navigation = navService;
-            NavigateToInterestCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<InterestViewModel>(); }, canExecute: o => true);
+            NavigateToInterestCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<InterestViewModel>(); }, canExecute: CanExecuteNavigateToInterestPage);
             NavigateToBasePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<MainViewModel>(); }, canExecute: o => true);
 
+        }
+
+        private bool CanExecuteNavigateToInterestPage(object obj)
+        {
+            return true;
         }
 
     }

@@ -6,26 +6,34 @@
              xmlns:view="clr-namespace:LinkApplicationGraphics.NVVM.View">
     
     <Application.Resources>
-      
-        <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterViewModel}">
-            <view:RegisterView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
 
-        <DataTemplate DataType="{x:Type TypeName=viewModel:InterestViewModel}">
-            <view:InterestView/>
-        </DataTemplate>
+            </ResourceDictionary.MergedDictionaries>
 
-        <DataTemplate DataType="{x:Type TypeName=viewModel:HomePageViewModel}">
-            <view:HomePageView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterViewModel}">
+                <view:RegisterView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
-            <view:HomeView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:InterestViewModel}">
+                <view:InterestView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type TypeName=viewModel:ProfileViewModel}">
-            <view:ProfileView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:HomePageViewModel}">
+                <view:HomePageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:ProfileViewModel}">
+                <view:ProfileView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+        
         
         
     </Application.Resources>

@@ -33,8 +33,7 @@ namespace LinkApplicationGraphics.NVVM.View
             InitializeComponent();
             List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", "Neukn", 
                 "Hockeyen", "Voetbal", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", 
-                "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",
-                "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen", "Basketballen" };
+                "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
 
             AddCheckBoxesToInterestsPage(interests);
@@ -57,13 +56,12 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             CheckBox checkBox = new CheckBox()
             {
-
-                Height = 30,
-                Width = 125,
+                Height = 27,
+                Width = 120,
                 Foreground = Brushes.White,
                 Background = null,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                //VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
                 Content = content,
                 Name = content
                 

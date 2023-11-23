@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
 
-    <StackPanel HorizontalAlignment="Left" Width="1177">
+    <StackPanel HorizontalAlignment="Left" Width="1600">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0">
-            <Border Width="800"
+            <Border Width="1200"
                     Height="120"
                     CornerRadius="15"
                     Background="#729CA7"
@@ -38,8 +38,8 @@
 
         <UniformGrid Columns="4" HorizontalAlignment="Center" Margin="0,0,0,0">
             <!-- Eerste blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,10"
@@ -69,8 +69,8 @@
             </Border>
 
             <!-- Tweede blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,10"
@@ -100,8 +100,8 @@
             </Border>
 
             <!-- Derde blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,10"
@@ -131,8 +131,8 @@
             </Border>
 
             <!-- Vierde blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,10"
@@ -162,8 +162,8 @@
             </Border>
 
             <!-- Vijfde blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,100"
@@ -193,8 +193,8 @@
             </Border>
 
             <!-- Zesde blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,100"
@@ -224,8 +224,8 @@
             </Border>
 
             <!-- Zevende blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7 "
                     Margin="10,0,10,100"
@@ -255,8 +255,8 @@
             </Border>
 
             <!-- Achtste blok -->
-            <Border Width="240"
-                    Height="140"
+            <Border Width="280"
+                    Height="170"
                     CornerRadius="20"
                     Background="#729CA7"
                     Margin="10,0,10,100"

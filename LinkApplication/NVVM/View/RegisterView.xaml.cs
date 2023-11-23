@@ -31,8 +31,6 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             InitializeComponent();
 
-            buttonCreate.IsEnabled = false;
-
         }
 
         String gender;
@@ -56,7 +54,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
             Debug.WriteLine(textBoxName.Text);
             Debug.WriteLine(textBoxEmail.Text);
-            Debug.WriteLine(textBoxBirth.Text);
+            Debug.WriteLine(textBoxAge.Text);
             Debug.WriteLine(textBoxStreet.Text);
             Debug.WriteLine(textBoxPostalCode.Text);
             SecureString password = textBoxPassword.SecurePassword;
@@ -97,19 +95,6 @@ namespace LinkApplicationGraphics.NVVM.View
             textBoxPassword.Visibility = Visibility.Visible;
 
         }
-
-        private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(textBoxName.Text))
-            {
-                buttonCreate.IsEnabled = true;
-            }
-            if (string.IsNullOrEmpty(textBoxName.Text))
-            {
-                buttonCreate.IsEnabled = false;
-            }
-        }
-
 
     }
 }

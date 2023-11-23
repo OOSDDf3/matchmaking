@@ -68,7 +68,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 return true;
 
             }
-            else return false;
+            else return true;
         }
     }
 }

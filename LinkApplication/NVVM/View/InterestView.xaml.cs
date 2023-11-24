@@ -32,7 +32,7 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             InitializeComponent();
             List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", "Neukn", 
-                "Hockeyen", "Voetbal", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", 
+                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeters", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
                 "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
 
@@ -62,6 +62,7 @@ namespace LinkApplicationGraphics.NVVM.View
                 Background = null,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalAlignment = VerticalAlignment.Stretch,
+                SnapsToDevicePixels = true,
                 Content = content,
                 Name = content
                 

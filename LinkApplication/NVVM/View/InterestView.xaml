@@ -10,8 +10,8 @@
     <Grid Name="MainGrid">
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
-                <GradientStop Color="#FF1E293A" Offset="0.1"/>
-                <GradientStop Color="Black" Offset="2.5"/>
+                <GradientStop Color="#FF1C242F" Offset="0.1"/>
+                <GradientStop Color="#FF1C1A3E" Offset="2.5"/>
             </LinearGradientBrush>
         </Grid.Background>
 
@@ -70,7 +70,7 @@
               
             </Grid>
 
-            <Button Grid.Row="2" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16" Command="{Binding NavigateToRegisterCommand}">
+            <Button Grid.Row="2" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToRegisterCommand}" FontFamily="Bahnschrift SemiLight">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -78,7 +78,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Grid.Row="2" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="30" Background="#FF4777ED" Foreground="White" FontSize="16" Command="{Binding NavigateToHomePageCommand}">
+            <Button Grid.Row="2" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

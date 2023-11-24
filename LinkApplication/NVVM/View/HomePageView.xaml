@@ -19,8 +19,8 @@
             </Grid.RowDefinitions>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
-                    <GradientStop Color="#FF1E293A" Offset="0.1"/>
-                    <GradientStop Color="Black" Offset="2.5"/>
+                    <GradientStop Color="#FF1C242F" Offset="0.1"/>
+                    <GradientStop Color="#FF1C1A3E" Offset="2.5"/>
                 </LinearGradientBrush>
             </Grid.Background>
             <TextBlock Text="L I N K"
@@ -31,9 +31,30 @@
                        FontFamily="Kimberley Bl"
                        Margin="15"/>
 
-            <Rectangle Grid.Column="1" Fill="AliceBlue" Opacity="0.02"/>
-            <Rectangle Grid.Column="0" Fill="AliceBlue" Opacity="0.02" Height="99"/>
-            <Rectangle Grid.Column="0" Grid.Row="1" Fill="AliceBlue" Opacity="0.02"/>
+            <Rectangle Grid.Column="1" Opacity="0.04" >
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
+                        <GradientStop Color="#FF7B92B5" Offset="0.1"/>
+                        <GradientStop Color="#FF757575" Offset="2.5"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="0" Opacity="0.04" Height="99">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
+                        <GradientStop Color="#FF7B92B5" Offset="0.1"/>
+                        <GradientStop Color="#FF757575" Offset="2.5"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Grid.Column="0" Grid.Row="1" Opacity="0.02">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
+                        <GradientStop Color="#FF7B92B5" Offset="0.1"/>
+                        <GradientStop Color="#FF757575" Offset="2.5"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
 
 
             <StackPanel Grid.Row="1">

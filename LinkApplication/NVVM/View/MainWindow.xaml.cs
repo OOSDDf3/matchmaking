@@ -1,4 +1,5 @@
 ﻿using LinkApplicationGraphics;
+using LinkApplicationGraphics.NVVM.View;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

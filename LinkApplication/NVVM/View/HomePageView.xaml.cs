@@ -10,26 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LinkApplication
+namespace LinkApplicationGraphics.NVVM.View
 {
     /// <summary>
-    /// Interaction logic for ProfileWindow.xaml
+    /// Interaction logic for HomePageView.xaml
     /// </summary>
-    public partial class ProfileWindow : Window
+    public partial class HomePageView : UserControl
     {
-        MainWindow mainWindowInstance;
-        public ProfileWindow(MainWindow mainWindow)
+        public HomePageView()
         {
             InitializeComponent();
-            mainWindowInstance = mainWindow;
-        }
-
-        private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
-        {
-             this.Hide();
-            mainWindowInstance.Show();
         }
     }
 }

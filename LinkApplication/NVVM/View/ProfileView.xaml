@@ -7,75 +7,112 @@
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
 
-    <StackPanel HorizontalAlignment="Left" Width="1600">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0">
-            <Border Width="1200"
-                    Height="120"
-                    CornerRadius="15"
-                    Background="#729CA7"
-                    Margin="10,0,10,10"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+
+    <Grid>
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="0.5*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Height="141" Grid.Row="1">
+            <Border 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom"
+            CornerRadius="15"
+            Background="#729CA7"
+            Margin="10,0,10,10"
+            BorderThickness="5">
+                
                 <StackPanel>
 
                     <TextBlock Text="Jouw persoonlijke info"
-                               Foreground="White"
-                               FontSize="36"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,5,0,0"/>
+                       Foreground="White"
+                       FontSize="36"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
 
                     <TextBlock Text="Beheer je profiel informatie"
-                               Foreground="#272537"
-                               FontSize="28"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,10,0,0"/>
+                       Foreground="#272537"
+                       FontSize="28"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
-        </StackPanel>
+            </StackPanel>
 
-        <UniformGrid Columns="4" HorizontalAlignment="Center" Margin="0,0,0,0">
-            <!-- Eerste blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,10"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+
+            </Grid.RowDefinitions>
+
+
+            <Border
+         Grid.Row="1"       
+         CornerRadius="20"
+         Background="#FF729CA7"  
+         BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                        Text="👤"
-                        Margin="0, 10,0,0"
-                        Foreground="#272537"
-                        FontSize="25"
-                        HorizontalAlignment="Center"/>
+             Text="👤"
+             Margin="0, 10,0,0"
+             Foreground="#272537"
+             FontSize="25"
+             HorizontalAlignment="Center"/>
                     <TextBlock Text="Naam"
-                               Foreground="White"
-                               FontSize="20"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,5,0,0"/>
+                    Foreground="White"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                               Foreground="#272537"
-                               FontSize="22"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,5,0,0"/>
+                    Foreground="#272537"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0"
+                    FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
+
             <!-- Tweede blok -->
-            <Border Width="280"
-                    Height="170"
+            <Border 
+                    Grid.Row="1"
+                    Grid.Column="2"
                     CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,10"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+                    BorderThickness="5" Background="#FF729CA7">
                 <StackPanel>
                     <TextBlock
                                 Text="🕰️"
@@ -89,201 +126,221 @@
                                 FontWeight="Bold"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                                Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                                Margin="0,5,0,0"
+                               FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
             <!-- Derde blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,10"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+            <Border 
+         Grid.Row="1"
+         Grid.Column="4"
+         CornerRadius="20"
+         Background="#FF729CA7"
+         BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                                Text="🏠"
-                                Margin="0, 10,0,0"
-                                Foreground="#272537"
-                                FontSize="25"
-                                HorizontalAlignment="Center"/>
+                     Text="🏠"
+                     Margin="0, 10,0,0"
+                     Foreground="#272537"
+                     FontSize="25"
+                     HorizontalAlignment="Center"/>
                     <TextBlock Text="Adres"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                     Foreground="White"
+                     FontSize="20"
+                     FontWeight="Bold"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                     Foreground="#272537"
+                     FontSize="22"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     Margin="0,5,0,0"
+                     FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
             <!-- Vierde blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,10"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+            <Border 
+                Grid.Row="1"
+                Grid.Column="6"
+                CornerRadius="20"
+                Background="#FF729CA7"     
+                BorderThickness="5">    
                 <StackPanel>
                     <TextBlock
-                                Text="⚥"
-                                Margin="0, 5,0,0"
-                                Foreground="#272537"
-                                FontSize="32"
-                                HorizontalAlignment="Center"/>
+                Text="⚥"
+                Margin="0, 5,0,0"
+                Foreground="#272537"
+                FontSize="32"
+                HorizontalAlignment="Center"/>
                     <TextBlock Text="Gender"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                Foreground="White"
+                FontSize="20"
+                FontWeight="Bold"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                               Foreground="#272537"
-                               FontSize="22"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Margin="0,5,0,0"/>
+           Foreground="#272537"
+           FontSize="22"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"
+           Margin="0,5,0,0"
+           FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
             <!-- Vijfde blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,100"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+            <Border
+                Grid.Row="3"
+        CornerRadius="20"
+        Background="#FF729CA7"
+        BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                                Text="🌍"
-                                Margin="0, 10,0,0"
-                                Foreground="#272537"
-                                FontSize="25"
-                                HorizontalAlignment="Center"/>
+                    Text="🌍"
+                    Margin="0, 10,0,0"
+                    Foreground="#272537"
+                    FontSize="25"
+                    HorizontalAlignment="Center"/>
                     <TextBlock Text="Taal"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="White"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="#272537"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0"
+                    FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
+
             <!-- Zesde blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7 "
-                    Margin="10,0,10,100"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+            <Border 
+                Grid.Row="3"
+                Grid.Column="2"
+        CornerRadius="20"                
+        Background="#729CA7 "
+        BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                                Text="🤺"
-                                Margin="0, 10,0,0"
-                                Foreground="#272537"
-                                FontSize="25"
-                                HorizontalAlignment="Center"/>
+                    Text="🤺"
+                    Margin="0, 10,0,0"
+                    Foreground="#272537"
+                    FontSize="25"
+                    HorizontalAlignment="Center"/>
                     <TextBlock Text="Interesse"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="White"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="Snelwandelen"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="#272537"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0"
+                    FontFamily="Bahnschrift SemiLight"           />
                 </StackPanel>
             </Border>
 
             <!-- Zevende blok -->
-            <Border Width="280"
-                    Height="170"
+            <Border 
+                    Grid.Row="3"
+                Grid.Column="4"
                     CornerRadius="20"
                     Background="#729CA7 "
-                    Margin="10,0,10,100"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+                    BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                                Text="🚃"
-                                Margin="0, 10,0,0"
-                                Foreground="#272537"
-                                FontSize="25"
-                                HorizontalAlignment="Center"/>
+                    Text="🚃"
+                    Margin="0, 10,0,0"
+                    Foreground="#272537"
+                    FontSize="25"
+                    HorizontalAlignment="Center"/>
                     <TextBlock Text="Email"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="White"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="#272537"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0"
+                    FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
 
             <!-- Achtste blok -->
-            <Border Width="280"
-                    Height="170"
-                    CornerRadius="20"
-                    Background="#729CA7"
-                    Margin="10,0,10,100"
-                    BorderThickness="5"
-                    BorderBrush="AliceBlue">
+            <Border 
+                Grid.Row="3"
+                Grid.Column="6"
+        CornerRadius="20"
+        Background="#729CA7"
+        BorderThickness="5">
                 <StackPanel>
                     <TextBlock
-                                Text="🗓️"
-                                Margin="0, 10,0,0"
-                                Foreground="#272537"
-                                FontSize="25"
-                                HorizontalAlignment="Center"/>
+                    Text="🗓️"
+                    Margin="0, 10,0,0"
+                    Foreground="#272537"
+                    FontSize="25"
+                    HorizontalAlignment="Center"/>
                     <TextBlock Text="Wachtwoord"
-                                Foreground="White"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="White"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"/>
+                    Foreground="#272537"
+                    FontSize="22"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,5,0,0"
+                    FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
-        </UniformGrid>
-    </StackPanel>
+
+
+
+
+
+        </Grid>
+
+        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "150" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <Button.BorderBrush>
+                <ImageBrush TileMode="None" Stretch="Fill"/>
+            </Button.BorderBrush>
+        </Button>
+
+
+    </Grid>
+    
 </UserControl>

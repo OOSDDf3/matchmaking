@@ -28,11 +28,6 @@ namespace LinkApplication
             InitializeComponent();
 
         }
-
-        public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
-        public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
-        public void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
-
         private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -66,19 +61,6 @@ namespace LinkApplication
         }
 
         //code voor wachtwoord
-        public void ShowPasswordFunction()
-        {
-            ShowPassword.Text = "👁️";
-            PasswordUnmask.Visibility = Visibility.Visible;
-            WachtwoordBox.Visibility = Visibility.Hidden;
-            PasswordUnmask.Text = WachtwoordBox.Password;
-        }
 
-        public void HidePasswordFunction()
-        {
-            ShowPassword.Text = "👁️";
-            PasswordUnmask.Visibility = Visibility.Hidden;
-            WachtwoordBox.Visibility = Visibility.Visible;
-        }
     }
 }

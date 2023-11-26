@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LinkApplication;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +22,10 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class LoginView : UserControl
     {
+
         public LoginView()
         {
+            
             InitializeComponent();
         }
 
@@ -76,5 +80,6 @@ namespace LinkApplicationGraphics.NVVM.View
             PasswordUnmask.Visibility = Visibility.Hidden;
             WachtwoordBox.Visibility = Visibility.Visible;
         }
+
     }
 }

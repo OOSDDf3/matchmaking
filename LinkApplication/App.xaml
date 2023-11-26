@@ -11,6 +11,9 @@
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:LoginViewModel}">
+                <view:LoginView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterViewModel}">
                 <view:RegisterView/>

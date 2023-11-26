@@ -30,6 +30,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public RelayCommand NavigateToRegisterCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
+        public RelayCommand NavigateToLoginPageCommand { get; set; }    
 
 
 
@@ -38,6 +39,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
         }
 
         private bool CanExecuteNavigateToHomePage(object obj)

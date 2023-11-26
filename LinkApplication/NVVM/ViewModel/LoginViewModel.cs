@@ -4,6 +4,7 @@ using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -15,6 +16,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     class LoginViewModel : Core.ViewModel
     {
         Database_Connecter _connecter;
+        Account_Info _account;
         public event EventHandler<string> EmailChanged;
 
 
@@ -35,51 +37,34 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public LoginViewModel(INavigationService navService)
         {
+            
+
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
         }   
 
-        private string _email;
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-                EmailChanged?.Invoke(this, _email);
-                // Notify command about the change
-            }
-        }
-
-        private SecureString _password;
-        public SecureString Password
-        {
-            get => _password;
-            set
-            {
-
-                _password = value;
-                OnPropertyChanged();
-
-            }
-        }
 
         private bool CanExecuteNavigateToHomePage(object obj)
         {
             _connecter = new Database_Connecter();
+            _account = new Account_Info();
 
 
 
-            if (_connecter.CheckLogin(Email, "Hallo123!"))
+            if (_connecter.CheckLogin("spichon01@Hotmail.com", "Hallo123!"))
             {
-
+                
                 return true;
 
             }
 
-            else return false;
+            else
+            {
+               ;
+
+                return true;
+            }
         }
     }
 

@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14">
+                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -67,7 +67,7 @@
 
                 <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Leeftijd" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <TextBox x:Name = "textBoxAge" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14">
+                <TextBox x:Name = "textBoxAge" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -80,7 +80,7 @@
 
 
             <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" SelectionTextBrush="White" FontSize="14"  Text="{Binding EmailRegister, Mode=Default, UpdateSourceTrigger=PropertyChanged}"  >
+            <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" SelectionTextBrush="White" FontSize="18"  Text="{Binding EmailRegister, Mode=Default, UpdateSourceTrigger=PropertyChanged}"  >
                 <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -153,14 +153,14 @@
                 <Label Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Straatnaam" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Column="2" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Postcode" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <TextBox x:Name = "textBoxStreet" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="White" FontSize="14" >
+                <TextBox x:Name = "textBoxStreet" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" BorderBrush="#FFABADB3" Foreground="White" FontSize="18" >
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name = "textBoxPostalCode" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14">
+                <TextBox x:Name = "textBoxPostalCode" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18">
                     <TextBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -170,12 +170,12 @@
             </Grid>
 
             <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Wachtwoord" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <PasswordBox x:Name = "textBoxPassword" Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height = "30" Background="{x:Null}" Foreground="White" FontSize="14"/>
+            <PasswordBox x:Name = "textBoxPassword" Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18"/>
 
-            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="30" Background="{x:Null}" Foreground="White"  FontSize="14"  Text="{Binding PasswordRegister, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="30" Background="{x:Null}" Foreground="White"  FontSize="18"  Text="{Binding PasswordRegister, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseUp" PreviewMouseUp="ShowPassword_PreviewMouseDown" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="22" Foreground="#FFABADB3"/>
 
-            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="40" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}">
+            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -183,7 +183,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="40" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToInterestCommand}" FontFamily="Bahnschrift SemiLight">
+            <Button Grid.Row="8" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToInterestCommand}" FontFamily="Bahnschrift SemiLight">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

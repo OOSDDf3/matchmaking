@@ -1,5 +1,8 @@
-﻿using System;
+﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,20 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class ProfileView : UserControl
     {
+
+        
+
         public ProfileView()
         {
             InitializeComponent();
+
+            
+
         }
+
+        
+        
+
+
     }
 }

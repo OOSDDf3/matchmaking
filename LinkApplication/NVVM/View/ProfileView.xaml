@@ -52,14 +52,14 @@
                         Foreground="#272537"
                         FontSize="25"
                         HorizontalAlignment="Center"/>
-                    <TextBlock Text="Gebruikersnaam"
+                    <TextBlock Text="Naam"
                                Foreground="White"
                                FontSize="20"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="0,5,0,0"/>
-                    <TextBlock Text="XanTippe"
+                    <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#272537"
                                FontSize="22"
                                HorizontalAlignment="Center"
@@ -90,7 +90,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="20"
+                    <TextBlock Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"
@@ -121,7 +121,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="FoShoStraat 10"
+                    <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"
@@ -152,7 +152,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="Man"
+                    <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#272537"
                                FontSize="22"
                                HorizontalAlignment="Center"
@@ -183,7 +183,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="Engels"
+                    <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"
@@ -238,14 +238,14 @@
                                 Foreground="#272537"
                                 FontSize="25"
                                 HorizontalAlignment="Center"/>
-                    <TextBlock Text="Vervoeropties"
+                    <TextBlock Text="Email"
                                 Foreground="White"
                                 FontSize="20"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="Auto, Fiets"
+                    <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"
@@ -269,14 +269,14 @@
                                 Foreground="#272537"
                                 FontSize="25"
                                 HorizontalAlignment="Center"/>
-                    <TextBlock Text="Beschikbaarheid"
+                    <TextBlock Text="Wachtwoord"
                                 Foreground="White"
                                 FontSize="20"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0"/>
-                    <TextBlock Text="Dinsdag"
+                    <TextBlock Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                                 Foreground="#272537"
                                 FontSize="22"
                                 HorizontalAlignment="Center"

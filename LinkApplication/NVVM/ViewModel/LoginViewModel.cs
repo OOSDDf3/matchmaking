@@ -1,20 +1,21 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    public class InterestViewModel : Core.ViewModel
+    class LoginViewModel : Core.ViewModel
     {
-        MainWindow mainWindow;
         Database_Connecter _connecter;
+        public event EventHandler<string> EmailChanged;
 
 
         public INavigationService _navigation;
@@ -32,21 +33,54 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand NavigateToHomePageCommand { get; set; }
 
 
-
-        public InterestViewModel(INavigationService navService)
+        public LoginViewModel(INavigationService navService)
         {
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
+        }   
+
+        private string _email;
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                OnPropertyChanged();
+                EmailChanged?.Invoke(this, _email);
+                // Notify command about the change
+            }
+        }
+
+        private SecureString _password;
+        public SecureString Password
+        {
+            get => _password;
+            set
+            {
+
+                _password = value;
+                OnPropertyChanged();
+
+            }
         }
 
         private bool CanExecuteNavigateToHomePage(object obj)
         {
-            
+            _connecter = new Database_Connecter();
 
-           
-            return true;
+
+
+            if (_connecter.CheckLogin(Email, "Hallo123!"))
+            {
+
+                return true;
+
+            }
+
+            else return false;
         }
-
     }
+
 }

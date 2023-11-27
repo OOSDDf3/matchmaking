@@ -57,7 +57,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             //Daadwerkelijk maken van command
             Navigation = navService;
 
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>();
+                                                                            NameProfile = string.Empty;
+                                                                            AgeProfile = string.Empty;
+                                                                            AddressProfile = string.Empty;
+                                                                            GenderProfile = string.Empty;
+                                                                            LanguageProfile = string.Empty;
+                                                                            EmailProfile = string.Empty;
+                                                                            PasswordProfile = string.Empty;},
+                                                                            canExecute: o => true);
 
 
         }

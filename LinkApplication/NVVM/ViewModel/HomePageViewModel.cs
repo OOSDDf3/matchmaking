@@ -32,12 +32,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public RelayCommand NavigateToHomeViewCommand { get; set; }
         public RelayCommand NavigateToProfileViewCommand { get; set; }
+        public RelayCommand NavigateToEventsViewCommand { get; set; }
+        public RelayCommand NavigateToMatchesViewCommand { get; set; }
 
 
         public HomePageViewModel(INavigationService navService)
         {
             Navigation = navService;
             NavigateToHomeViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<HomeViewModel>(); }, canExecute: o => true);
+            NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
+            NavigateToMatchesViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchesViewModel>(); }, canExecute: o => true);
             NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); }, canExecute: CanExecuteNavigateToProfile);
 
         }

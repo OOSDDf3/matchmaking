@@ -72,7 +72,7 @@
                             Foreground="White"
                             FontSize="24"
                            
-                             Command="{Binding NavigateToInteressesViewCommand}"
+                             Command="{Binding NavigateToEventsViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
 
@@ -80,7 +80,8 @@
                 <RadioButton Content="Matches"
                              Height="50"
                              Foreground="White"
-                             FontSize="24"       
+                             FontSize="24"     
+                             Command="{Binding NavigateToMatchesViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
             </StackPanel>

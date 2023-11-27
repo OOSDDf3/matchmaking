@@ -34,6 +34,15 @@
             <DataTemplate DataType="{x:Type TypeName=viewModel:ProfileViewModel}">
                 <view:ProfileView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=viewModel:MatchesViewModel}">
+                <view:MatchesView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=viewModel:EventsViewModel}">
+                <view:EventsView/>
+            </DataTemplate>
+
 
         </ResourceDictionary>
         

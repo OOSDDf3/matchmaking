@@ -6,26 +6,32 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace LinkApplication
 {
     public class Database_Connecter
     {
         DatabaseConnection dbCon = null;
-        
-        public Database_Connecter() {
+
+        public Database_Connecter()
+        {
             ConnectToLocalDatabase();
             //InsertAccount("Joas", "joas@hotmail.com", "securepassword", 70, "streetname 42", "Male", "English");
             CheckLogin("Joas Weeda", "newpassword");
             CheckLogin("Joas", "securepassword");
             CheckLogin("Joas", "unsecurepassword");
-            ShowUserInformation("Joas Weeda", "newpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
+            Dictionary<string, string> userInfo = ShowUserInformation("joas.weeda@student.windesheim.nl", "newpassword", "SELECT * FROM Account WHERE email = @email AND password = @password");
+            Console.WriteLine(userInfo["email"]);
+            Console.WriteLine(userInfo["password"]);
+            Console.WriteLine(userInfo["password"]);
+            ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE email = @email AND password = @password");
             dbCon.Close();
-        }      
+        }
 
         protected void ConnectToLocalDatabase()
         {
@@ -43,12 +49,12 @@ namespace LinkApplication
             dbCon.Database = "matchmaking";
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
-        }        
+        }
 
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
-            {               
+            {
                 if (dbCon.IsConnect())
                 {
                     string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
@@ -75,12 +81,12 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "SELECT Count(*) FROM Account WHERE name = @userName AND password = @password";
+                    string query = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@userName", userName);
+                    cmd.Parameters.AddWithValue("@email", userName);
                     cmd.Parameters.AddWithValue("@password", password);
                     var count = cmd.ExecuteScalar();
-                    if(count.ToString().Equals("1"))
+                    if (count.ToString().Equals("1"))
                     {
                         Console.WriteLine("Login succesfull");
                         return true;
@@ -100,30 +106,36 @@ namespace LinkApplication
             }
         }
 
-        public void ShowUserInformation(string userName, string password, string query)
+        public Dictionary<string, string> ShowUserInformation(string userName, string password, string query)
         {
+            Dictionary<string, string> keyValuePairs = new();
             try
             {
                 if (dbCon.IsConnect() & CheckLogin(userName, password))
                 {
                     var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@userName", userName);
+                    cmd.Parameters.AddWithValue("@email", userName);
                     cmd.Parameters.AddWithValue("@password", password);
                     var reader = cmd.ExecuteReader();
+                    string[] keys = new string[8] {"user_ID", "name", "email", "password", "age", "address", "gender", "language" };
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
                             Console.Write(reader.GetValue(i).ToString() + " ");
+                            keyValuePairs.Add(keys[i], reader.GetValue(i).ToString());
                         }
                         Console.WriteLine();
                     }
                     reader.Close();
+                    return keyValuePairs;
                 }
+                return keyValuePairs;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                return keyValuePairs;
             }
         }
     }

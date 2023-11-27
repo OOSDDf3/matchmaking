@@ -1,5 +1,6 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
+
             //Code voor ophalen informatie user en inzettend naar de pagina
-            dataPerson = _connecter.ShowUserInformation("spichon01@hotmail.com", "Hallo123!", "SELECT * FROM Account WHERE email = @email AND password = @password");
+            dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
 
             NameProfile = dataPerson["name"];
             AgeProfile = dataPerson["age"];
@@ -59,6 +61,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
         }
+
+
+
+
 
 
 

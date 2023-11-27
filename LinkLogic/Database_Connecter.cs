@@ -70,14 +70,26 @@ namespace LinkApplication
             }
         }
 
-        public bool CheckLogin(string email, string password)
+        public bool CheckLogin(string email, string password, out int user_ID)
         {
+            user_ID = Int32.MinValue;
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+                    var user_ID_reader = cmdID.ExecuteReader();
+                    while (user_ID_reader.Read())
+                    {
+                        user_ID = Int32.Parse(user_ID_reader.GetValue(0).ToString());
+                    }
+                    user_ID_reader.Close();
+
+                    string queryForInfo = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
+                    var cmd = new MySqlCommand(queryForInfo, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@password", password);
                     var count = cmd.ExecuteScalar();
@@ -101,23 +113,23 @@ namespace LinkApplication
             }
         }
 
-        public Dictionary<string, string> ShowUserInformation(string email, string password, string query)
+        public Dictionary<string, string> ShowUserInformation(int user_ID, string query)
         {
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
             try
             {
-                if (dbCon.IsConnect() & CheckLogin(email, password))
+                if (dbCon.IsConnect())
                 {
                     var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] {"user_ID", "name", "email", "password", "age", "address", "gender", "language" };
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language" };
 
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
+                            Console.WriteLine(reader.GetValue(i).ToString());
                             keyValuePairs.Add(keys[i], reader.GetValue(i).ToString());
                         }
                         Console.WriteLine();
@@ -135,5 +147,28 @@ namespace LinkApplication
                 return keyValuePairs;
             }
         }
+
+        //public int getUserID(string email, string password, string query)
+        //{
+        //    int userID = 0;
+        //    try
+        //    {
+        //        if (dbCon.IsConnect() & CheckLogin(email, password))
+        //        {
+        //            var cmd = new MySqlCommand(query, dbCon.Connection);
+        //            cmd.Parameters.AddWithValue("@email", email);
+        //            cmd.Parameters.AddWithValue("@password", password);
+        //            var reader = cmd.ExecuteReader();
+        //            return Int32.Parse(reader.GetValue(0).ToString());
+        //        }
+        //        else return userID;
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return userID;
+        //    }
+        //}
     }
 }

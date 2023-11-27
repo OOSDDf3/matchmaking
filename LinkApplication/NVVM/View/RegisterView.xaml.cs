@@ -79,7 +79,7 @@ namespace LinkApplicationGraphics.NVVM.View
             }
             Debug.WriteLine(gender);
 
-            //_connecter.InsertAccount(textBoxName.Text , textBoxEmail.Text , plainPassword, Int32.Parse(textBoxAge.Text), $"{textBoxStreet.Text} {textBoxPostalCode.Text}", gender , "Dutch");
+            _connecter.InsertAccount(textBoxName.Text, textBoxEmail.Text, plainPassword, Int32.Parse(textBoxAge.Text), $"{textBoxStreet.Text} {textBoxPostalCode.Text}", gender, "Dutch");
 
         }
 

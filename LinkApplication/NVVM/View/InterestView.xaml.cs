@@ -31,9 +31,9 @@ namespace LinkApplicationGraphics.NVVM.View
         public InterestView()
         {
             InitializeComponent();
-            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", "Neukn", 
-                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeters", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
-                "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen" };
+            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",  
+                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
+                "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
 
             AddCheckBoxesToInterestsPage(interests);

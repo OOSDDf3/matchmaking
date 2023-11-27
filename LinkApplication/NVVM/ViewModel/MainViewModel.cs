@@ -41,7 +41,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         { 
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
-            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
+            //NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
 
             //CurrentView = new LoginView();
@@ -60,45 +60,45 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //    }
         //}
 
-        private string _email;
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-                // Notify command about the change
-            }
-        }
+        //private string _email;
+        //public string Email
+        //{
+        //    get => _email;
+        //    set
+        //    {
+        //        _email = value;
+        //        OnPropertyChanged();
+        //        // Notify command about the change
+        //    }
+        //}
 
-        private SecureString _password;
-        public SecureString Password
-        {
-            get => _password;
-            set
-            {
+        //private SecureString _password;
+        //public SecureString Password
+        //{
+        //    get => _password;
+        //    set
+        //    {
                
-                _password = value;
-                OnPropertyChanged();
+        //        _password = value;
+        //        OnPropertyChanged();
                
-            }
-        }
+        //    }
+        //}
 
-        private bool CanExecuteNavigateToHomePage(object obj)
-        {
-            _connecter = new Database_Connecter();
+        //private bool CanExecuteNavigateToHomePage(object obj)
+        //{
+        //    _connecter = new Database_Connecter();
 
 
 
-            if (_connecter.CheckLogin(Email, "Hallo123!"))
-            {
+        //    if (_connecter.CheckLogin(Email, "Hallo123!"))
+        //    {
                 
-                return true;
+        //        return true;
 
-            }
+        //    }
 
-            else return false;
-        }
+        //    else return false;
+        //}
     }
 }

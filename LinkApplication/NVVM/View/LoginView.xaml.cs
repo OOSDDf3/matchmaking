@@ -27,6 +27,7 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             
             InitializeComponent();
+
         }
 
         public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
@@ -50,7 +51,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void Login_Button(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
 
@@ -81,5 +82,6 @@ namespace LinkApplicationGraphics.NVVM.View
             WachtwoordBox.Visibility = Visibility.Visible;
         }
 
+        
     }
 }

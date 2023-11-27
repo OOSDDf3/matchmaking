@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
              xmlns:model="clr-namespace:LinkApplicationGraphics.NVVM.Model"
-             xmlns:LinkApplication="clr-namespace:LinkApplication;assembly=LinkApplication" x:Class="LinkApplicationGraphics.NVVM.View.LoginView"
+             xmlns:LinkApplication="clr-namespace:LinkApplication;assembly=LinkApplication" xmlns:Security="clr-namespace:System.Security;assembly=System.Runtime.InteropServices" x:Class="LinkApplicationGraphics.NVVM.View.LoginView"
              mc:Ignorable="d" 
              d:DesignHeight="{x:Static SystemParameters.PrimaryScreenHeight}" Width="{x:Static SystemParameters.PrimaryScreenWidth}">
     <Grid>
@@ -45,21 +45,22 @@
 
         <Label Grid.Column="2" Grid.Row="2" Content="E-mailadres" Foreground="#FFF1F1F1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" SnapsToDevicePixels="True" FontFamily="Bahnschrift SemiLight" OpacityMask="Black" FontWeight="Bold" />
         <TextBox 
-        x:Name="textBoxEmail"       
+        Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"    
+        x:Name="textBoxEmail"     
         Grid.Row="2" Grid.Column="2" 
         FontWeight="Medium" FontFamily="Bahnschrift SemiLight"  
         CaretBrush="White" BorderThickness="0,0,0,3" 
         MinWidth="450" HorizontalAlignment="Stretch" MinHeight="40" 
         VerticalAlignment="Stretch" FontSize="20" BorderBrush="#FFF1F1F1" 
         Background="{x:Null}" Foreground="#FFF1F1F1" VerticalContentAlignment="Center" 
-        SelectionOpacity="0.5" Height="45" Padding="40,0,0,0" DataContext="{Binding Account_info.Email }">
-           
-        </TextBox>
+        SelectionOpacity="0.5" Height="45" Padding="40,0,0,0"/>
 
         <TextBlock Text="✉️" Grid.Row="2"  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25" Foreground="#FFF1F1F1" OpacityMask="Black" FontFamily="Bahnschrift SemiLight"/>
 
         <Label Grid.Column="2" Grid.Row="3" Content="Wachtwoord" Foreground="#FFF1F1F1" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontFamily="Bahnschrift SemiLight" OpacityMask="Black" FontWeight="Bold"/>
-        <PasswordBox x:Name="WachtwoordBox" PasswordChar="•" Grid.Row="3" Grid.Column="2"  FontWeight="Medium" FontFamily="Bahnschrift SemiLight"  CaretBrush="White" BorderThickness="0,0,0,3" MinWidth="350" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" Height="45" SelectionOpacity="0.5" BorderBrush="#FFF1F1F1" SelectionBrush="#FF4777ED" Padding="40,0,0,0" SelectionTextBrush="#FFCACACA" Cursor="{Binding Password, ElementName=WachtwoordBox, Mode=Default, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <PasswordBox  x:Name="WachtwoordBox" PasswordChar="•" Grid.Row="3" Grid.Column="2"  FontWeight="Medium" FontFamily="Bahnschrift SemiLight"  CaretBrush="White" BorderThickness="0,0,0,3" MinWidth="350" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" Height="45" SelectionOpacity="0.5" BorderBrush="#FFF1F1F1" SelectionBrush="#FF4777ED" Padding="40,0,0,0" SelectionTextBrush="#FFCACACA"/>
+
         <TextBox x:Name="PasswordUnmask" Text="{Binding Password, Mode=Default, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" Grid.Row="3" Grid.Column="2"  FontWeight="Medium" FontFamily="Bahnschrift SemiLight"  CaretBrush="White" BorderThickness="0,0,0,3" MinWidth="350" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="#FFF1F1F1" FontSize="20" Background="{x:Null}" Foreground="White" VerticalContentAlignment="Center" Height="45" Padding="40,0,0,0" SelectionTextBrush="#FFF1F1F1" />
         <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="3" Grid.Column="2" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseUp" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FFF1F1F1" FontSize="20" FontFamily="Bahnschrift SemiLight"/>
         <TextBlock Text="🔑" Grid.Row="3"  Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" Foreground="#FFF1F1F1" OpacityMask="Black"/>
@@ -68,7 +69,7 @@
 
 
 
-        <Button x:Name="ButtonInloggen" Grid.Column="2" Grid.Row="4" Content="Inloggen" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF1F1F1" Click="Login_Button" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToHomePageCommand}" >
+        <Button x:Name="ButtonInloggen" Grid.Column="2" Grid.Row="4" Content="Inloggen" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF1F1F1" Click="Login_Button" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToHomePageCommand}" CommandParameter="{Binding ElementName=WachtwoordBox}" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

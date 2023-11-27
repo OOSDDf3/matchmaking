@@ -13,6 +13,8 @@ namespace LinkApplication
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public static int User_ID;
+
         private string email;
         public string Email
         {
@@ -42,7 +44,8 @@ namespace LinkApplication
             Email = "<Default email>";
         }
 
-        
+      
+
 
 
     }

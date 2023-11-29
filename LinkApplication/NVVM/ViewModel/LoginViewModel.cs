@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
@@ -50,6 +51,18 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+
         private int user_ID;
 
 
@@ -76,33 +89,31 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             ev_OnLoginSuccesfull += Account.GetUserID;
 
-            NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
-            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>();  }, canExecute: CanExecuteNavigateToHomePage);
+            NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); ErrorMessage = "";  }, canExecute: o => true);
+            NavigateToHomePageCommand = new RelayCommand(execute: Login, canExecute: o => true);
         }   
 
 
         
-
-        private bool CanExecuteNavigateToHomePage(object parameter)
+        private void Login(object parameter)
         {
             _connecter = new Database_Connecter();
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
-            
+
 
             if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
             {
                 Debug.WriteLine(user_ID);
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
-                return true;
+                Navigation.NavigateTo<HomePageViewModel>();
             }
 
             else
             {
-                return false;
+                ErrorMessage = "Email adres of wachtwoord is verkeerd ingevuld";
             }
-        }
+        }  
     }
-
 }

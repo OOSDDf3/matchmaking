@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace LinkApplicationGraphics.NVVM.View
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
         List<string> intrestsPerson = new List<string>();
+        Account account;
+        Database_Connecter _connecter;
         public InterestView()
         {
             InitializeComponent();
@@ -42,12 +45,16 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            _connecter = new Database_Connecter();
             loopCheckbox();
             debugPrint();
 
+            Debug.WriteLine(Account.NameProfile);
+
+           
+
             // Assuming you're outside of the App class
-            
+
 
 
         }

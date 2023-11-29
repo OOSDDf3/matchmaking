@@ -1,5 +1,6 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>();createAccount(); }, canExecute: CanExecuteNavigateToLoginPage);
         }
 
         private bool CanExecuteNavigateToHomePage(object obj)
@@ -48,7 +49,24 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
            
             return true;
+        }   
+        private bool CanExecuteNavigateToLoginPage(object obj)
+        {
+            
+
+           
+            return true;
         }
 
+        private void createAccount()
+        {
+            _connecter = new Database_Connecter();
+
+            _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.PasswordProfile, Int32.Parse(Account.AgeProfile), $"{Account.AddressProfile}", Account.GenderProfile, "Dutch");
+
+
+        }
+
+ 
     }
 }

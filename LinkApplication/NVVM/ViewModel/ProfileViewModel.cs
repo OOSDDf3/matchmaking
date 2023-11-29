@@ -16,13 +16,13 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;
 
-        public string NameProfile { get; set; }
-        public string AgeProfile { get; set; }
-        public string AddressProfile { get; set; }
-        public string GenderProfile { get; set; }
-        public string LanguageProfile { get; set; }
-        public string EmailProfile { get; set; }
-        public string PasswordProfile { get; set; }
+        public static string NameProfile { get; set; }
+        public static string AgeProfile { get; set; }
+        public static string AddressProfile { get; set; }
+        public static string GenderProfile { get; set; }
+        public static string LanguageProfile { get; set; }
+        public static string EmailProfile { get; set; }
+        public static string PasswordProfile { get; set; }
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -38,35 +38,41 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand NavigateToLoginPageCommand { get; set; }
 
 
-        public ProfileViewModel(INavigationService navService) 
+        public ProfileViewModel(INavigationService navService)
         {
-            _connecter = new Database_Connecter();
-
-
-            //Code voor ophalen informatie user en inzettend naar de pagina
-            dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
-
-            NameProfile = dataPerson["name"];
-            AgeProfile = dataPerson["age"];
-            AddressProfile = dataPerson["address"];
-            GenderProfile = dataPerson["gender"];
-            LanguageProfile = dataPerson["language"];
-            EmailProfile = dataPerson["email"];
-            PasswordProfile = dataPerson["password"];
 
             //Daadwerkelijk maken van command
             Navigation = navService;
 
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>();
-                                                                            NameProfile = string.Empty;
-                                                                            AgeProfile = string.Empty;
-                                                                            AddressProfile = string.Empty;
-                                                                            GenderProfile = string.Empty;
-                                                                            LanguageProfile = string.Empty;
-                                                                            EmailProfile = string.Empty;
-                                                                            PasswordProfile = string.Empty;},
-                                                                            canExecute: o => true);
+            
 
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
+
+
+        }
+
+        private bool CanExecuteCommand(Object obj)
+        {
+            return true;
+        }
+
+        private void LogOut()
+        {
+            Account.user_ID = 0;
+            NameProfile = string.Empty;
+            AgeProfile = string.Empty;
+            AddressProfile = string.Empty;
+            GenderProfile = string.Empty;
+            LanguageProfile = string.Empty;
+            EmailProfile = string.Empty;
+            PasswordProfile = string.Empty;
+
+            Account.NameProfile = string.Empty;
+            Account.AgeProfile = string.Empty;
+            Account.AddressProfile = string.Empty;
+            Account.GenderProfile = string.Empty;
+            Account.LanguageProfile = string.Empty;
+            Account.PasswordProfile = string.Empty;
 
         }
 

@@ -24,5 +24,6 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             InitializeComponent();
         }
+
     }
 }

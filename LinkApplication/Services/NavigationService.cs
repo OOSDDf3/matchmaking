@@ -1,4 +1,5 @@
 ﻿using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.NVVM.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace LinkApplicationGraphics.Services
 {
     public interface INavigationService 
     { 
-        ViewModel CurrentView { get; }
-        ViewModel NewView { get; } 
+        public ViewModel CurrentView { get; }
+        public ViewModel NewView { get; } 
         void NavigateTo<T>() where T : ViewModel;
         void NavigateToNew<T>() where T : ViewModel;
     }
@@ -60,6 +61,7 @@ namespace LinkApplicationGraphics.Services
         {
 
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+            
             NewView = viewModel;
 
         }

@@ -77,7 +77,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             ev_OnLoginSuccesfull += Account.GetUserID;
 
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
-            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
+            NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>();  }, canExecute: CanExecuteNavigateToHomePage);
         }   
 
 

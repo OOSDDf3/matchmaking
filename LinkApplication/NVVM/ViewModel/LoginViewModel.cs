@@ -94,7 +94,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }   
 
 
-        
+        //functie om te checken of account gegevns kloppen. Als hij niet doorkomt geeft hij een errormessage. Anders stuurt hij je door naar de main pagina.
         private void Login(object parameter)
         {
             _connecter = new Database_Connecter();
@@ -106,8 +106,13 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
             {
                 Debug.WriteLine(user_ID);
+
+
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
+
+                ErrorMessage = "";
                 Navigation.NavigateTo<HomePageViewModel>();
+
             }
 
             else

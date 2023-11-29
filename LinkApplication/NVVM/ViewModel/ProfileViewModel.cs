@@ -16,6 +16,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;
 
+        //Tijdelijke opslag van account gegevens voor weergave.
         public static string NameProfile { get; set; }
         public static string AgeProfile { get; set; }
         public static string AddressProfile { get; set; }
@@ -56,6 +57,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
+        //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
         private void LogOut()
         {
             Account.user_ID = 0;

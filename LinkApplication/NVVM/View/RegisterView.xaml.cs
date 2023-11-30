@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using System;
@@ -25,7 +26,7 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class RegisterView : UserControl
     {
-
+        Database_Connecter _connecter;
 
         public RegisterView()
         {
@@ -49,6 +50,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
+            _connecter = new Database_Connecter();
 
             //Test of alle gegevens doorkomen
 
@@ -63,6 +65,7 @@ namespace LinkApplicationGraphics.NVVM.View
             System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(ptr);
             Debug.WriteLine(plainPassword);
 
+
             if (radioButtonGender1.IsChecked== true) 
             {
                 gender = "Man";
@@ -76,6 +79,10 @@ namespace LinkApplicationGraphics.NVVM.View
                 gender = "Anders";
             }
             Debug.WriteLine(gender);
+
+            //Account account = new Account(textBoxName.Text , textBoxAge.Text, textBoxStreet.Text, gender, "Dutch" ,textBoxEmail.Text, textBoxPassword.Password);
+
+            //_connecter.InsertAccount(textBoxName.Text, textBoxEmail.Text, plainPassword, Int32.Parse(textBoxAge.Text), $"{textBoxStreet.Text} {textBoxPostalCode.Text}", gender, "Dutch");
 
         }
 

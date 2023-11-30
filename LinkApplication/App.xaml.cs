@@ -31,10 +31,13 @@ namespace LinkApplication
             });
 
             services.AddSingleton<MainViewModel>();
+            services.AddSingleton<LoginViewModel>();
             services.AddSingleton<InterestViewModel>();
             services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<HomePageViewModel>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<MatchesViewModel>();
+            services.AddSingleton<EventsViewModel>();
             services.AddSingleton<ProfileViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
 

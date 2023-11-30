@@ -14,18 +14,19 @@ namespace LinkApplication
 {
     public class Database_Connecter
     {
-        DatabaseConnection dbCon = null;
-        
-        public Database_Connecter() {
+        public DatabaseConnection dbCon = null;
+
+        public Database_Connecter()
+        {
             ConnectToLocalDatabase();
             //InsertAccount("Joas", "joas@hotmail.com", "securepassword", 70, "streetname 42", "Male", "English");
-            CheckLogin("Joas Weeda", "newpassword");
-            CheckLogin("Joas", "securepassword");
-            CheckLogin("Joas", "unsecurepassword");
-            ShowUserInformation("Joas Weeda", "newpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            dbCon.Close();
-        }      
+            //CheckLogin("Joas Weeda", "newpassword");
+            //CheckLogin("Joas", "securepassword");
+            //CheckLogin("Joas", "unsecurepassword");
+            //ShowUserInformation("Joas Weeda", "newpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
+            //ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
+            //dbCon.Close();
+        }
 
         protected void ConnectToLocalDatabase()
         {
@@ -33,7 +34,7 @@ namespace LinkApplication
             dbCon.Server = "localhost";
             dbCon.Database = "matchmaking";
             dbCon.UserName = "root";
-            dbCon.Password = "MyNewPassword";
+            dbCon.Password = "";
         }
 
         protected void ConnectToServerDatabase()
@@ -43,12 +44,12 @@ namespace LinkApplication
             dbCon.Database = "matchmaking";
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
-        }        
+        }
 
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
-            {               
+            {
                 if (dbCon.IsConnect())
                 {
                     string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
@@ -69,18 +70,30 @@ namespace LinkApplication
             }
         }
 
-        public bool CheckLogin(string userName, string password)
+        public bool CheckLogin(string email, string password, out int user_ID)
         {
+            user_ID = Int32.MinValue;
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "SELECT Count(*) FROM Account WHERE name = @userName AND password = @password";
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@userName", userName);
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+                    var user_ID_reader = cmdID.ExecuteReader();
+                    while (user_ID_reader.Read())
+                    {
+                        user_ID = Int32.Parse(user_ID_reader.GetValue(0).ToString());
+                    }
+                    user_ID_reader.Close();
+
+                    string queryForInfo = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
+                    var cmd = new MySqlCommand(queryForInfo, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@password", password);
                     var count = cmd.ExecuteScalar();
-                    if(count.ToString().Equals("1"))
+                    if (count.ToString().Equals("1"))
                     {
                         Console.WriteLine("Login succesfull");
                         return true;
@@ -100,31 +113,62 @@ namespace LinkApplication
             }
         }
 
-        public void ShowUserInformation(string userName, string password, string query)
+        public Dictionary<string, string> ShowUserInformation(int user_ID, string query)
         {
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
             try
             {
-                if (dbCon.IsConnect() & CheckLogin(userName, password))
+                if (dbCon.IsConnect())
                 {
                     var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@userName", userName);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language" };
+
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.Write(reader.GetValue(i).ToString() + " ");
+                            Console.WriteLine(reader.GetValue(i).ToString());
+                            keyValuePairs.Add(keys[i], reader.GetValue(i).ToString());
                         }
                         Console.WriteLine();
                     }
                     reader.Close();
+
+                    return keyValuePairs;
                 }
+                return keyValuePairs;
             }
+
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                return keyValuePairs;
             }
         }
+
+        //public int getUserID(string email, string password, string query)
+        //{
+        //    int userID = 0;
+        //    try
+        //    {
+        //        if (dbCon.IsConnect() & CheckLogin(email, password))
+        //        {
+        //            var cmd = new MySqlCommand(query, dbCon.Connection);
+        //            cmd.Parameters.AddWithValue("@email", email);
+        //            cmd.Parameters.AddWithValue("@password", password);
+        //            var reader = cmd.ExecuteReader();
+        //            return Int32.Parse(reader.GetValue(0).ToString());
+        //        }
+        //        else return userID;
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.ToString());
+        //        return userID;
+        //    }
+        //}
     }
 }

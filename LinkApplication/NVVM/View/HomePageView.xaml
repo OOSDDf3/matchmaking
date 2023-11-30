@@ -39,7 +39,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle Grid.Column="0" Opacity="0.04" Height="99">
+            <Rectangle Grid.Column="0" Opacity="0.04">
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
                         <GradientStop Color="#FF7B92B5" Offset="0.1"/>
@@ -47,6 +47,7 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
+            
             <Rectangle Grid.Column="0" Grid.Row="1" Opacity="0.02">
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0,2" EndPoint="1,1">
@@ -61,7 +62,7 @@
                 <RadioButton Content="Swipe"
                              Height="50"
                              Foreground="White"
-                             FontSize="24"                           
+                             FontSize="24"
                              Command="{Binding NavigateToHomeViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
@@ -71,7 +72,7 @@
                             Foreground="White"
                             FontSize="24"
                            
-                             Command="{Binding NavigateToInteressesViewCommand}"
+                             Command="{Binding NavigateToEventsViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
 
@@ -79,7 +80,8 @@
                 <RadioButton Content="Matches"
                              Height="50"
                              Foreground="White"
-                             FontSize="24"       
+                             FontSize="24"     
+                             Command="{Binding NavigateToMatchesViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
             </StackPanel>
@@ -102,38 +104,53 @@
                 </TextBox.Resources>
             </TextBox>-->
 
-            <Ellipse
-                Margin="0,0,11,0"
-                Grid.Column="1"
-                Width="50"
-                Height="50"
-                Stroke="White"
-                StrokeThickness="2"
-                HorizontalAlignment="Right"
-                />
+           
 
-            <RadioButton Content="👤" Grid.Column="1" HorizontalAlignment="Right" Background="{x:Null}" FontSize="34" Foreground="White" BorderBrush="{x:Null}" Command="{Binding NavigateToProfileViewCommand}" Margin="0,0,9,7" GroupName="keuzeLocatie">
-                <RadioButton.Style>
-                    <Style TargetType="{x:Type ToggleButton}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="White" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </RadioButton.Style>
 
-            </RadioButton>
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                    
+                </Grid.ColumnDefinitions>
 
+                <Ellipse
+                     Margin="0,2,2,0"
+                     Grid.Column="1"
+                     Width="45"
+                     Height="45"
+                     Stroke="White"
+                     StrokeThickness="2"
+                     HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                     /> 
+
+                <RadioButton Content="👤" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" FontSize="34" Foreground="White" BorderBrush="{x:Null}" Command="{Binding NavigateToProfileViewCommand}" GroupName="keuzeLocatie">
+                    <RadioButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+
+                </RadioButton>
+
+
+            </Grid>
+            
 
 
             <ContentControl Grid.Row="1"

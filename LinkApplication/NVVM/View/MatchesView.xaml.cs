@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace LinkApplicationGraphics.NVVM.View
 {
     /// <summary>
-    /// Interaction logic for HomePageView.xaml
+    /// Interaction logic for MatchesView.xaml
     /// </summary>
-    public partial class HomePageView : UserControl
+    public partial class MatchesView : UserControl
     {
-        public HomePageView()
+        public MatchesView()
         {
             InitializeComponent();
         }
-
     }
 }

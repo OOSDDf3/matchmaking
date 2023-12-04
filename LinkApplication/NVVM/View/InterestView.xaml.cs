@@ -28,9 +28,13 @@ namespace LinkApplicationGraphics.NVVM.View
     {
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
+<<<<<<< Updated upstream
         List<string> intrestsPerson = new List<string>();
         Account account;
         Database_Connecter _connecter;
+=======
+        List<string> interestsPerson = new List<string>();
+>>>>>>> Stashed changes
         public InterestView()
         {
             InitializeComponent();
@@ -38,7 +42,7 @@ namespace LinkApplicationGraphics.NVVM.View
                 "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
-
+            AddCategoriesToCombobox();
             AddCheckBoxesToInterestsPage(interests);
 
         }
@@ -59,6 +63,18 @@ namespace LinkApplicationGraphics.NVVM.View
 
         }
 
+        private void AddCategoriesToCombobox()
+        {
+            List<string> hardcoded_categories = new List<string>() { "Sports", "Boardgames", "Games"};
+            List<string> categories = GetInterestCategories();
+            foreach (string category in categories)
+            {
+                comboBoxCategories.Items.Add(category); 
+            }
+
+            comboBoxCategories.SelectedIndex = 0;
+        }
+
         private CheckBox SetupCheckBoxInterestsPage(int row, int col, string content)
         {
             CheckBox checkBox = new CheckBox()
@@ -71,10 +87,8 @@ namespace LinkApplicationGraphics.NVVM.View
                 VerticalAlignment = VerticalAlignment.Stretch,
                 SnapsToDevicePixels = true,
                 Content = content,
-                Name = content
-                
-                
-        };
+                Name = content              
+            };
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(12)));
             checkBox.Resources.Add(typeof(Border), borderStyle);
@@ -112,20 +126,23 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 if(checkBox.IsChecked == true)
                 {
-
-                    intrestsPerson.Add(checkBox.Name);
-
+                    interestsPerson.Add(checkBox.Name);
                 }
             }
         }
 
         public void debugPrint()
         {
-            foreach(String naam in intrestsPerson) 
+            foreach(String naam in interestsPerson) 
             {
                 Debug.WriteLine(naam);
             }
             
+        }
+
+        private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
  

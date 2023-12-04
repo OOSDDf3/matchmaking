@@ -149,6 +149,7 @@ namespace LinkApplication
             }
         }
 
+<<<<<<< Updated upstream
         //public int getUserID(string email, string password, string query)
         //{
         //    int userID = 0;
@@ -171,5 +172,34 @@ namespace LinkApplication
         //        return userID;
         //    }
         //}
+=======
+        public List<string> GetInterestCategories()
+        {
+            List<string> categories = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT DISTINCT category FROM Interests";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        for(int i = 0;i < reader.FieldCount;i++)
+                        {
+                            Console.WriteLine(reader.GetValue(i).ToString());
+                            categories.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                }
+                return categories;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return categories;
+            }
+        }
+>>>>>>> Stashed changes
     }
 }

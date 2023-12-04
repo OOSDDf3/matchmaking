@@ -32,7 +32,7 @@
             Background="#729CA7"
             Margin="10,0,10,10"
             BorderThickness="5">
-                
+
                 <StackPanel>
 
                     <TextBlock Text="Jouw persoonlijke info"
@@ -42,16 +42,33 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Bottom"
                        Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
+                    <Button Background="Transparent" BorderThickness="0" Click="Button_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="12"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="AliceBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <TextBlock Text="Beheer je profiel informatie"
+                           Foreground="#272537"
+                           FontSize="28"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"/>
+                    </Button>
 
-                    <TextBlock Text="Beheer je profiel informatie"
-                       Foreground="#272537"
-                       FontSize="28"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"/>
                 </StackPanel>
             </Border>
-            </StackPanel>
+        </StackPanel>
 
 
 
@@ -76,7 +93,6 @@
 
             </Grid.RowDefinitions>
 
-
             <Border
          Grid.Row="1"       
          CornerRadius="20"
@@ -96,13 +112,42 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                    Foreground="#272537"
-                    FontSize="22"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="0,5,0,0"
-                    FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                           Foreground="#272537"
+                           FontSize="22"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,5,0,0"
+                           FontFamily="Bahnschrift SemiLight"
+                           Name="TextBlockProfileName"
+                           Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxName">
+                            <TextBox Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                     TextAlignment="Left"
+                                     Width="198"
+                                     Height="28"
+                                     Foreground="#AFAFAF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     GotFocus="TextBox_GotFocus"
+                                     Margin="10,0,0,0"
+                                     Name="NameTextbox">
+                            </TextBox>
+
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -128,12 +173,13 @@
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                                Foreground="#272537"
-                                FontSize="22"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Margin="0,5,0,0"
-                               FontFamily="Bahnschrift SemiLight"/>
+                           Foreground="#272537"
+                           FontSize="22"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,5,0,0"
+                           FontFamily="Bahnschrift SemiLight"
+                           Visibility="Visible"/>
                 </StackPanel>
             </Border>
 
@@ -158,13 +204,42 @@
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
                      Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                     Foreground="#272537"
-                     FontSize="22"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     Margin="0,5,0,0"
-                     FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfileAddress"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxAddress">
+                            <TextBox Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                     TextAlignment="Left"
+                                     Width="198"
+                                     Height="28"
+                                     Foreground="#AFAFAF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     GotFocus="TextBox_GotFocus"
+                                     Margin="10,0,0,0"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     Name="AddressTextBox"
+                                     />
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -174,7 +249,7 @@
                 Grid.Column="6"
                 CornerRadius="20"
                 Background="#FF729CA7"     
-                BorderThickness="5">    
+                BorderThickness="5">
                 <StackPanel>
                     <TextBlock
                 Text="⚥"
@@ -189,13 +264,42 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-           Foreground="#272537"
-           FontSize="22"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"
-           Margin="0,5,0,0"
-           FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfileGender"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxGender">
+                            <TextBox Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                     TextAlignment="Left"
+                                     Width="198"
+                                     Height="28"
+                                     Foreground="#AFAFAF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     GotFocus="TextBox_GotFocus"
+                                     Margin="10,0,0,0"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     Name="GenderTextBox"
+                                     />
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -219,13 +323,42 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                    Foreground="#272537"
-                    FontSize="22"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="0,5,0,0"
-                    FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfileLanguage"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxLanguage">
+                            <TextBox Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                     TextAlignment="Left"
+                                     Width="198"
+                                     Height="28"
+                                     Foreground="#AFAFAF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     GotFocus="TextBox_GotFocus"
+                                     Margin="10,0,0,0"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     Name="LanguageTextBox"
+                                     />
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -251,13 +384,52 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
+
+                    <!--<Grid>
+                        <TextBlock Text="{Binding InterestsProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfileInterests"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                            BorderBrush="#272537"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Width="200"
+                            Height="30"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Visibility="Hidden"
+                            Name="UpdateInformationTextBoxInterests">
+                            <TextBox Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                 TextAlignment="Left"
+                                 Width="198"
+                                 Height="28"
+                                 Foreground="#AFAFAF"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 FontSize="20"
+                                 GotFocus="TextBox_GotFocus"
+                                 Margin="10,0,0,0"
+                                 PreviewTextInput="TextBox_PreviewTextInput"
+                                 Name="InterestsTextBox"
+                                 />
+                        </Border>
+                    </Grid>-->
+
                     <TextBlock Text="Snelwandelen"
                     Foreground="#272537"
                     FontSize="22"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0"
-                    FontFamily="Bahnschrift SemiLight"           />
+                    FontFamily="Bahnschrift SemiLight"
+                    Name="InterestsTextBox"           />
                 </StackPanel>
             </Border>
 
@@ -282,13 +454,42 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                    Foreground="#272537"
-                    FontSize="22"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="0,5,0,0"
-                    FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfileEmail"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxEmail">
+                            <TextBox Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                     TextAlignment="Left"
+                                     Width="198"
+                                     Height="28"
+                                     Foreground="#AFAFAF"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     GotFocus="TextBox_GotFocus"
+                                     Margin="10,0,0,0"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     Name="EmailTextBox"
+                                     />
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -313,13 +514,42 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                    Foreground="#272537"
-                    FontSize="22"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="0,5,0,0"
-                    FontFamily="Bahnschrift SemiLight"/>
+                    <Grid>
+                        <TextBlock Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                            Foreground="#272537"
+                            FontSize="22"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,5,0,0"
+                            FontFamily="Bahnschrift SemiLight"
+                            Name="TextBlockProfilePassword"
+                            Visibility="Visible"/>
+
+                        <Border Background="Transparent" 
+                                BorderBrush="#272537"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Width="200"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="Hidden"
+                                Name="UpdateInformationTextBoxPassword">
+                            <TextBox Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                                 TextAlignment="Left"
+                                 Width="198"
+                                 Height="28"
+                                 Foreground="#AFAFAF"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 FontSize="20"
+                                 GotFocus="TextBox_GotFocus"
+                                 Margin="10,0,0,0"
+                                 PreviewTextInput="TextBox_PreviewTextInput"
+                                  Name="PasswordTextBox"
+                                 />
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
 
@@ -341,6 +571,17 @@
         </Button>
 
 
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <Button.BorderBrush>
+                <ImageBrush TileMode="None" Stretch="Fill"/>
+            </Button.BorderBrush>
+        </Button>
+
     </Grid>
-    
+
 </UserControl>

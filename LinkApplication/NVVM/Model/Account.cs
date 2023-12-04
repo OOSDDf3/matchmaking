@@ -10,15 +10,16 @@ namespace LinkApplicationGraphics.NVVM.Model
     {
         public static int user_ID;
 
-        public static string? NameProfile { get; set; }
-        public static string? AgeProfile { get; set; }
-        public static string? AddressProfile { get; set; }
-        public static string? GenderProfile { get; set; }
-        public static string? LanguageProfile { get; set; }
-        public static string? EmailProfile { get; set; }
-        public static string? PasswordProfile { get; set; }
+        public static string NameProfile { get; set; }
+        public static string AgeProfile { get; set; }
+        public static string AddressProfile { get; set; }
+        public static string GenderProfile { get; set; }
+        public static string LanguageProfile { get; set; }
+        public static string EmailProfile { get; set; }
+        public static string PasswordProfile { get; set; }
+        public static Byte[] ProfilePicture { get; set; }
 
-        public Account(string name, string age, string address, string gender, string Language, string email, string password ) 
+        public Account(string name, string age, string address, string gender, string Language, string email, string password , Byte[] profilePicture) 
         {
             NameProfile = name;
             AgeProfile = age;
@@ -26,6 +27,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             GenderProfile = gender;
             EmailProfile = email;
             PasswordProfile = password;
+            ProfilePicture = profilePicture;
   
         }
 

@@ -3,6 +3,7 @@ using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,11 +84,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public LoginViewModel(INavigationService navService)
         {
-            
-
             Navigation = navService;
 
             ev_OnLoginSuccesfull += Account.GetUserID;
+
 
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); ErrorMessage = "";  }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: Login, canExecute: o => true);
@@ -101,23 +101,22 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
-
-
-            if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
+            if (Email.IsNullOrEmpty() || clearTextPassword.IsNullOrEmpty())
             {
-                Debug.WriteLine(user_ID);
-
-
-                ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
-
-                ErrorMessage = "";
-                Navigation.NavigateTo<HomePageViewModel>();
+                ErrorMessage = "Email adres of wachtwoord is niet ingevuld";
 
             }
-
+            else if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
+            {
+                ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
+                ErrorMessage = "";
+                Navigation.NavigateTo<HomePageViewModel>();
+                
+            }
             else
             {
                 ErrorMessage = "Email adres of wachtwoord is verkeerd ingevuld";
+
             }
         }  
     }

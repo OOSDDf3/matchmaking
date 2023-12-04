@@ -24,9 +24,9 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class ProfileView : UserControl
     {
-
         public ProfileView()
         {
+            
             InitializeComponent();
             
         }

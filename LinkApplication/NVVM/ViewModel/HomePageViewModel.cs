@@ -17,6 +17,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         MainWindow mainWindow;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
 
+
         Database_Connecter _connecter;
 
         
@@ -56,23 +57,28 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
+        public static int count = 0;
+
         private void showUserInfo()
         {
             _connecter = new Database_Connecter();
 
 
             //Code voor ophalen informatie user en inzettend naar de pagina
-            dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
+            if(count < 1)
+            {
+                dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
 
-            ProfileViewModel.NameProfile = dataPerson["name"];
-            ProfileViewModel.AgeProfile = dataPerson["age"];
-            ProfileViewModel.AddressProfile = dataPerson["address"];
-            ProfileViewModel.GenderProfile = dataPerson["gender"];
-            ProfileViewModel.LanguageProfile = dataPerson["language"];
-            ProfileViewModel.EmailProfile = dataPerson["email"];
-            ProfileViewModel.PasswordProfile = dataPerson["password"];
+                ProfileViewModel.NameProfile = dataPerson["name"];
+                ProfileViewModel.AgeProfile = dataPerson["age"];
+                ProfileViewModel.AddressProfile = dataPerson["address"];
+                ProfileViewModel.GenderProfile = dataPerson["gender"];
+                ProfileViewModel.LanguageProfile = dataPerson["language"];
+                ProfileViewModel.EmailProfile = dataPerson["email"];
+                ProfileViewModel.PasswordProfile = dataPerson["password"];
+
+                count++;
+            }
         }
-
-
     }
 }

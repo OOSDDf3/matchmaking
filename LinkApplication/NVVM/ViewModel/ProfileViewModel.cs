@@ -5,9 +5,11 @@ using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -25,6 +27,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string EmailProfile { get; set; }
         public static string PasswordProfile { get; set; }
 
+
         public INavigationService _navigation;
         public INavigationService Navigation
         {
@@ -41,7 +44,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public ProfileViewModel(INavigationService navService)
         {
-
+            
             //Daadwerkelijk maken van command
             Navigation = navService;
 
@@ -75,6 +78,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
+
+            HomePageViewModel.count = 0;
 
         }
 

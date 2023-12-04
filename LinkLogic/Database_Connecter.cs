@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -45,7 +46,6 @@ namespace LinkApplication
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
         }
-
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
@@ -67,6 +67,41 @@ namespace LinkApplication
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+            }
+        }
+        public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language, Byte[] imageData)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`, `picture`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la, @im);";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
+                    cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
+                    cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
+                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = age;
+                    cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
+                    cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
+                    cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
+
+                    if (imageData != null)
+                    {
+                        cmd.Parameters.Add("@im", MySqlDbType.Blob).Value = imageData;
+                    }
+                    else
+                    {
+                        cmd.Parameters.Add("@im", MySqlDbType.Blob).Value = DBNull.Value;
+                    }
+
+                    Debug.WriteLine(cmd.ExecuteNonQuery());
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
             }
         }
 

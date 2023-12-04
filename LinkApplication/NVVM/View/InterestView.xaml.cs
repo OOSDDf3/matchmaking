@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,14 @@ namespace LinkApplicationGraphics.NVVM.View
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
         List<string> intrestsPerson = new List<string>();
+        Account account;
+        Database_Connecter _connecter;
         public InterestView()
         {
             InitializeComponent();
-            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen", "Neukn", 
-                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Hondermeters", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
-                "Neukn", "Hockeyen", "Voetbal", "Computeren", "Gamen" };
+            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",  
+                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
+                "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
 
             AddCheckBoxesToInterestsPage(interests);
@@ -42,12 +45,16 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-
+            _connecter = new Database_Connecter();
             loopCheckbox();
             debugPrint();
 
+            Debug.WriteLine(Account.NameProfile);
+
+           
+
             // Assuming you're outside of the App class
-            
+
 
 
         }

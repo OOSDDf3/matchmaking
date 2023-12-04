@@ -11,6 +11,9 @@
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:LoginViewModel}">
+                <view:LoginView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=viewModel:RegisterViewModel}">
                 <view:RegisterView/>
@@ -31,6 +34,15 @@
             <DataTemplate DataType="{x:Type TypeName=viewModel:ProfileViewModel}">
                 <view:ProfileView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=viewModel:MatchesViewModel}">
+                <view:MatchesView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type TypeName=viewModel:EventsViewModel}">
+                <view:EventsView/>
+            </DataTemplate>
+
 
         </ResourceDictionary>
         

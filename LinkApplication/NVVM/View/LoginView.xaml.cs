@@ -1,5 +1,4 @@
-﻿using LinkApplicationGraphics;
-using LinkApplicationGraphics.NVVM.View;
+﻿using LinkApplication;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,18 +15,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LinkApplication
+namespace LinkApplicationGraphics.NVVM.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginView : UserControl
     {
-        public MainWindow()
+
+        public LoginView()
         {
+            
             InitializeComponent();
 
         }
+
+        public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
+        public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
+        public void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
+
         private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -57,10 +63,25 @@ namespace LinkApplication
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true; // Cancel the close action
-            Hide(); // Hide the window instead
+            
         }
 
         //code voor wachtwoord
+        public void ShowPasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Visible;
+            WachtwoordBox.Visibility = Visibility.Hidden;
+            PasswordUnmask.Text = WachtwoordBox.Password;
+        }
 
+        public void HidePasswordFunction()
+        {
+            ShowPassword.Text = "👁️";
+            PasswordUnmask.Visibility = Visibility.Hidden;
+            WachtwoordBox.Visibility = Visibility.Visible;
+        }
+
+        
     }
 }

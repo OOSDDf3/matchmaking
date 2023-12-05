@@ -62,7 +62,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.PasswordProfile, Int32.Parse(Account.AgeProfile), Account.AddressProfile, Account.GenderProfile , "Dutch", Account.ProfilePicture);
+            _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.PasswordProfile, Int32.Parse(Account.AgeProfile), Account.AddressProfile, Account.GenderProfile , "Dutch");
 
 
 

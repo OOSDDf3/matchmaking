@@ -82,7 +82,7 @@ namespace LinkApplicationGraphics.NVVM.View
             }
             Debug.WriteLine(gender);
 
-            Account account = new Account(textBoxName.Text, textBoxAge.Text, textBoxStreet.Text, gender, "Dutch", textBoxEmail.Text, textBoxPassword.Password, BufferFromImage(selectedImage));
+            Account account = new Account(textBoxName.Text, textBoxAge.Text, textBoxStreet.Text, gender, "Dutch", textBoxEmail.Text, textBoxPassword.Password);
 
 
             //_connecter.InsertAccount("Jan", "Frederick", "Pieter", 1, "Hallo", "MyG", "Flikka", BufferFromImage(selectedImage));

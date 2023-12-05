@@ -19,6 +19,17 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static string PasswordProfile { get; set; }
         public static Byte[] ProfilePicture { get; set; }
 
+        public Account(string name, string age, string address, string gender, string Language, string email, string password)
+        {
+            NameProfile = name;
+            AgeProfile = age;
+            AddressProfile = address;
+            GenderProfile = gender;
+            EmailProfile = email;
+            PasswordProfile = password;
+
+        }
+
         public Account(string name, string age, string address, string gender, string Language, string email, string password , Byte[] profilePicture) 
         {
             NameProfile = name;

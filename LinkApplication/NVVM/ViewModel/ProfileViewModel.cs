@@ -16,7 +16,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     class ProfileViewModel : Core.ViewModel
     {
-        public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
@@ -42,6 +41,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //Command voor navigeren naar login page, uitvoering staat in xaml bij de button
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
+        public RelayCommand NavigateToProfileViewCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -53,7 +53,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
-            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);  
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
+            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Account.showUserInfo(); Navigation.NavigateToNew<ProfileViewModel>();  }, canExecute: o => true);
+
 
 
         }
@@ -68,6 +70,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if (ProfileView.magDoor)
             {
                 Navigation.NavigateToNew<HomeViewModel>();
+                ErrorMessage = "";
             }
             else
             {
@@ -106,8 +109,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
-
-            HomePageViewModel.count = 0;
 
         }
 

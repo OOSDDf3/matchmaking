@@ -47,7 +47,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             NavigateToHomeViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<HomeViewModel>(); }, canExecute: o => true);
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
             NavigateToMatchesViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchesViewModel>(); }, canExecute: o => true);
-            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); showUserInfo(); }, canExecute: CanExecuteNavigateToProfile);
+            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); Account.showUserInfo(); }, canExecute: CanExecuteNavigateToProfile);
 
         }
 
@@ -57,28 +57,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
-        public static int count = 0;
-
-        private void showUserInfo()
-        {
-            _connecter = new Database_Connecter();
 
 
-            //Code voor ophalen informatie user en inzettend naar de pagina
-            if(count < 1)
-            {
-                dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
-
-                ProfileViewModel.NameProfile = dataPerson["name"];
-                ProfileViewModel.AgeProfile = dataPerson["age"];
-                ProfileViewModel.AddressProfile = dataPerson["address"];
-                ProfileViewModel.GenderProfile = dataPerson["gender"];
-                ProfileViewModel.LanguageProfile = dataPerson["language"];
-                ProfileViewModel.EmailProfile = dataPerson["email"];
-                ProfileViewModel.PasswordProfile = dataPerson["password"];
-
-                count++;
-            }
-        }
+       
     }
 }

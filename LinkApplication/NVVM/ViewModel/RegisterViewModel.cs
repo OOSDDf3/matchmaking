@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -176,6 +177,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             ErrorMessagePostalCode = "";
             ErrorMessageGender = "";
             ErrorMessagePassword = "";
+            ErrorMessagePasswordToShort = "";
 
         }
 
@@ -211,20 +213,19 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             string clearTextPassword = passwordBox.Password;
 
             //gaat elke methode langs, deze checkt of hij leeg staat. Zo ja zet hij de foutmelding voor die desbetreffende textBox om hem rood te maken
-            bool hasError = false;
-            hasError |= CheckNaam();
-            hasError |= CheckEmail();
-            hasError |= CheckAge();
-            hasError |= CheckStreet();
-            hasError |= CheckPostalCode();
-            hasError |= CheckGender();
-            hasError |= CheckPassword(clearTextPassword);
-
+            bool hasErrorEmpty = false;
+            //hasErrorEmpty |= CheckNaam();
+            //hasErrorEmpty |= CheckEmail();
+            //hasErrorEmpty |= CheckAge();
+            //hasErrorEmpty |= CheckStreet();
+            //hasErrorEmpty |= CheckPostalCode();
+            //hasErrorEmpty |= CheckGender();
+            //hasErrorEmpty |= CheckPassword(clearTextPassword);
 
             //Checkt hier of alle velden zijn ingevuld, zo niet krijg je een error message. Zo wel gaat hij door naar de interesse pagina
-            if (hasError)
+            if (hasErrorEmpty)
             {
-                ErrorMessage = $"Een aantal gegevens ontbreken, vul deze in!";
+                ErrorMessage = $"Een aantal gegevens kloppen niet, vul deze in!";
             }
             else
 
@@ -265,16 +266,25 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         }
         private bool CheckEmail()
-        {
-            if (EmailProfile.IsNullOrEmpty())
+        {   
+            if (!EmailProfile.IsNullOrEmpty())
             {
-                ErrorMessageEmail = "Email";
-                return true;
+                if (Regex.IsMatch(EmailProfile, @"^[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+                {
+                    ErrorMessageEmail = "";
+                    return false;
+                }
+                else
+                {
+                    ErrorMessageEmail = "Email";
+                    return true;
+                }
             }
             else
             {
-                ErrorMessageEmail = "";
-                return false;
+
+                ErrorMessageEmail = "Email"; 
+                return true;
             }
         }
 

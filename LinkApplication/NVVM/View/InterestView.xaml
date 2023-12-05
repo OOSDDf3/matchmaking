@@ -68,15 +68,10 @@
 
               
             </Grid>
-            <ComboBox Grid.Column="1" x:Name="comboBoxCategories" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" FontSize="16" Background="#FF463692" FontFamily="Bahnschrift SemiLight" SelectionChanged="comboBoxCategories_SelectionChanged">
-                <ComboBox.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </ComboBox.Resources>
-            </ComboBox>
+            <ComboBox Grid.Column="1" x:Name="comboBoxCategories" Style="{StaticResource CustomComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" FontSize="16" SelectionChanged="comboBoxCategories_SelectionChanged"/>
 
-            <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToRegisterCommand}" FontFamily="Bahnschrift SemiLight">
+
+            <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToRegisterCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

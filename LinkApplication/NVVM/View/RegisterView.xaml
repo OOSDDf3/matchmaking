@@ -250,7 +250,7 @@
                 </PasswordBox.Style>
             </PasswordBox>
 
-            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White"  FontSize="18"  Text="{Binding PasswordRegister, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White"  FontSize="18"/>
             <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseUp" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="26" Foreground="#FFABADB3"/>
 
             <!--Grid voor foto-->

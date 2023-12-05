@@ -66,10 +66,9 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-
               
             </Grid>
-            <ComboBox Grid.Column="1" x:Name="comboBoxCategories" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" SelectionChanged="comboBoxCategories_SelectionChanged">
+            <ComboBox Grid.Column="1" x:Name="comboBoxCategories" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" FontSize="16" Background="#FF463692" FontFamily="Bahnschrift SemiLight" SelectionChanged="comboBoxCategories_SelectionChanged">
                 <ComboBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

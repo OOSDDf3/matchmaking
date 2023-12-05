@@ -28,13 +28,10 @@ namespace LinkApplicationGraphics.NVVM.View
     {
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
-<<<<<<< Updated upstream
-        List<string> intrestsPerson = new List<string>();
         Account account;
         Database_Connecter _connecter;
-=======
         List<string> interestsPerson = new List<string>();
->>>>>>> Stashed changes
+
         public InterestView()
         {
             InitializeComponent();
@@ -42,14 +39,13 @@ namespace LinkApplicationGraphics.NVVM.View
                 "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
+            _connecter = new Database_Connecter();
             AddCategoriesToCombobox();
-            AddCheckBoxesToInterestsPage(interests);
-
+            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            _connecter = new Database_Connecter();
             loopCheckbox();
             debugPrint();
 
@@ -65,14 +61,12 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void AddCategoriesToCombobox()
         {
-            List<string> hardcoded_categories = new List<string>() { "Sports", "Boardgames", "Games"};
-            List<string> categories = GetInterestCategories();
+            List<string> categories = _connecter.GetInterestCategories();
             foreach (string category in categories)
             {
                 comboBoxCategories.Items.Add(category); 
             }
-
-            comboBoxCategories.SelectedIndex = 0;
+            comboBoxCategories.SelectedIndex = 1;
         }
 
         private CheckBox SetupCheckBoxInterestsPage(int row, int col, string content)
@@ -102,19 +96,19 @@ namespace LinkApplicationGraphics.NVVM.View
             return checkBox;
         }
 
-        public void AddCheckBoxesToInterestsPage(List<string> interests)
+        public void AddCheckBoxesToInterestsPage(string category)
         {
+            List<string> interests = _connecter.GetInterestsWithCategory(category);
             int counter = 0;
             for (int i = 0; i <= interests.Count/4; i++)
             {
-
                 for (int j = 0; j < 4; j++)
                 {
                     if (counter == interests.Count)
                     {
                         break;
                     }
-                    checkBoxes.Add( SetupCheckBoxInterestsPage(i, j, interests[counter]));
+                    checkBoxes.Add(SetupCheckBoxInterestsPage(i, j, interests[counter]));
                     counter++;
                 }
             }
@@ -142,7 +136,8 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            CheckBoxGrid.Children.Clear();
+            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
     }
  

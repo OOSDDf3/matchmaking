@@ -51,11 +51,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
             Debug.WriteLine(Account.NameProfile);
 
-           
-
-            // Assuming you're outside of the App class
-
-
+            Account.InterestsProfile = interestsPerson;
 
         }
 

@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static Azure.Core.HttpHeader;
 
 namespace LinkApplication
 {
@@ -71,41 +72,7 @@ namespace LinkApplication
                 Console.WriteLine(ex.ToString());
             }
         }
-        public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language, Byte[] imageData)
-        {
-            try
-            {
-                if (dbCon.IsConnect())
-                {
-                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`, `picture`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la, @im);";
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
-                    cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
-                    cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
-                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = age;
-                    cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
-                    cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
-                    cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
 
-                    if (imageData != null)
-                    {
-                        cmd.Parameters.Add("@im", MySqlDbType.Blob).Value = imageData;
-                    }
-                    else
-                    {
-                        cmd.Parameters.Add("@im", MySqlDbType.Blob).Value = DBNull.Value;
-                    }
-
-                    Debug.WriteLine(cmd.ExecuteNonQuery());
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-            }
-        }
 
         public void UpdateAccount(int userID, string name, string email, string password, string address, string gender, string language)
         {
@@ -184,7 +151,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language" };
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language"};
 
                     while (reader.Read())
                     {
@@ -209,25 +176,31 @@ namespace LinkApplication
         }
 
 
-        public int getUserID(string email, string password, string query)
+        public int getUserID(string email, string password)
         {
-            int userID = 0;
+            int user_ID = Int32.MinValue;
             try
             {
-                if (dbCon.IsConnect() & CheckLogin(email, password, out userID))
+                if (dbCon.IsConnect())
                 {
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    var reader = cmd.ExecuteReader();
-                    return Int32.Parse(reader.GetValue(0).ToString());
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+                    var user_ID_reader = cmdID.ExecuteReader();
+                    while (user_ID_reader.Read())
+                    {
+                        user_ID = Int32.Parse(user_ID_reader.GetValue(0).ToString());
+                    }
+                    user_ID_reader.Close();
                 }
-                else return userID;
+                return user_ID;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return userID;
+                dbCon.Close();
+                return user_ID;
             }
         }
 
@@ -289,5 +262,47 @@ namespace LinkApplication
                 return interests;
             }
         }
+        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[]picture)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    foreach (string interest in interests)
+                    {
+                        string querySelect = "SELECT  interest_Id FROM Interests WHERE name = @in";
+                        var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                        cmdSelect.Parameters.AddWithValue("@in", interest);
+                        var reader = cmdSelect.ExecuteReader();
+                        int interest_ID = Int32.MinValue;
+                        while (reader.Read())
+                        {
+                            interest_ID = Int32.Parse(reader.GetValue(0).ToString());
+                        }
+                        reader.Close();
+                        Debug.WriteLine(interest_ID);
+                        Debug.WriteLine($"{user_ID}, {interest_ID}");
+
+                        string queryInsertInterest = "INSERT INTO `userinterestlist` (`user_ID`, `interest_ID`) VALUES (@us, @inID)";
+                        var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
+                        cmdInsertInterest.Parameters.AddWithValue("@us", user_ID);
+                        cmdInsertInterest.Parameters.AddWithValue("@inID", interest_ID);
+                        cmdInsertInterest.ExecuteNonQuery();
+                    }
+
+                    string queryInsertPicture = "INSERT INTO `profilepicture` (`user_ID`, `picture`) VALUES (@us1, @pi)";
+                    var cmdInsertPicture = new MySqlCommand(queryInsertPicture, dbCon.Connection);
+                    cmdInsertPicture.Parameters.Add("@us1", MySqlDbType.VarChar, 100).Value = user_ID;
+                    cmdInsertPicture.Parameters.Add("@pi", MySqlDbType.Blob).Value = picture;
+                    cmdInsertPicture.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
     }
 }

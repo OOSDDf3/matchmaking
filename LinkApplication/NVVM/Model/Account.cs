@@ -21,6 +21,8 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static string PasswordProfile { get; set; }
         public static Byte[] ProfilePicture { get; set; }
 
+        public static List<string> InterestsProfile { get; set; }
+
         public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         static Database_Connecter _connecter;
 

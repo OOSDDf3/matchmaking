@@ -47,6 +47,8 @@ namespace LinkApplicationGraphics.NVVM.View
 
         }
 
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             foreach (var (textBlock, border) in profileElements)
@@ -55,6 +57,7 @@ namespace LinkApplicationGraphics.NVVM.View
                     border.Visibility = Visibility.Visible;
             }
             buttonSave.Visibility = Visibility.Visible;
+            ErrorMessageTextBlock.Visibility = Visibility.Visible;
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -66,26 +69,6 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (IsEmailValid(EmailTextBox.Text))
-            {
-                // E-mail is geldig, voer de gewenste logica uit
-                //MessageBox.Show("E-mail is geldig!");
-            }
-            else
-            {
-                //MessageBox.Show("Ongeldige e-mail!");
-            }
-
-            if (IsPasswordValid(PasswordTextBox.Text))
-            {
-                // Wachtwoord is geldig, voer de gewenste logica uit
-                //MessageBox.Show("Wachtwoord is geldig!");
-                
-            }
-            else
-            {
-                //MessageBox.Show("Ongeldig wachtwoord!");
-            }
             string NameTextBoxValue = NameTextbox.Text;
             if (string.IsNullOrEmpty(NameTextBoxValue)) { NameTextBoxValue = TextBlockProfileName.Text; }
 
@@ -104,12 +87,13 @@ namespace LinkApplicationGraphics.NVVM.View
             string LanguageTextBoxValue = LanguageTextBox.Text;
             if (string.IsNullOrEmpty(LanguageTextBoxValue)) { LanguageTextBoxValue = TextBlockProfileLanguage.Text; }
 
-            if (!NameTextBoxValue.IsNullOrEmpty())
+            if (IsEmailValid(EmailTextBox.Text) && IsPasswordValid(PasswordTextBox.Text))
             {
                 magDoor = true;
+                dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
             }
 
-            dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
+
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

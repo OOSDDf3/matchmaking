@@ -65,9 +65,24 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             {
                 Navigation.NavigateToNew<HomeViewModel>();
             }
+            else
+            {
+                ErrorMessage = "Het E-mail voldoet niet aan het standaard format en het wachtwoord moet minimaal 5 tekens lang zijn";
+            }
         }
-            
-        
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+
 
         private void LogOut()
         {

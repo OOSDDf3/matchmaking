@@ -582,6 +582,24 @@
             </Button.BorderBrush>
         </Button>
 
+        <TextBlock Background="Transparent" 
+               Grid.Column="1" 
+               Grid.Row="3" 
+               Height="80" 
+               Width="800" 
+               VerticalAlignment="Top" 
+               HorizontalAlignment="Center"
+               Text="{Binding ErrorMessage}"
+               FontSize="20"
+               TextAlignment="Center"
+               TextWrapping="WrapWithOverflow"
+               Margin="0,0,0,0"    
+               Foreground="#FFAD2E2E"
+               Visibility="Visible"
+               Name="ErrorMessageTextBlock">
+            
+        </TextBlock>
+
     </Grid>
 
 </UserControl>

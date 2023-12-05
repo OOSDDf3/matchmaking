@@ -47,10 +47,9 @@ namespace LinkApplicationGraphics.NVVM.View
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
             loopCheckbox();
-            debugPrint();
-
+            //debugPrint();            
             Debug.WriteLine(Account.NameProfile);
-
+            Account.InterestsProfile = interestsPerson;
            
 
             // Assuming you're outside of the App class

@@ -80,7 +80,7 @@ namespace LinkApplicationGraphics.NVVM.View
             }
             Debug.WriteLine(gender);
 
-            //Account account = new Account(textBoxName.Text , textBoxAge.Text, textBoxStreet.Text, gender, "Dutch" ,textBoxEmail.Text, textBoxPassword.Password);
+            Account account = new Account(textBoxName.Text , textBoxAge.Text, textBoxStreet.Text, gender, "Dutch" ,textBoxEmail.Text, textBoxPassword.Password);
 
             //_connecter.InsertAccount(textBoxName.Text, textBoxEmail.Text, plainPassword, Int32.Parse(textBoxAge.Text), $"{textBoxStreet.Text} {textBoxPostalCode.Text}", gender, "Dutch");
 

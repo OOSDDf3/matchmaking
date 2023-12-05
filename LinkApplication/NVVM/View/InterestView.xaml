@@ -27,8 +27,6 @@
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
-
-
         <Button Content="L I N K" FontSize="100" Grid.Column="1" Width="400" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{x:Null}" Foreground="White" BorderThickness="0" FontFamily="Kimberley Bl" Command="{Binding NavigateToRegisterCommand}"/>
 
         <Grid Grid.Row="1" Grid.Column="1">
@@ -39,7 +37,9 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
@@ -64,9 +64,23 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>              
+            </Grid>
+            <Grid Grid.Row="3" Grid.Column="1" Name="SelectedGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
 
-              
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
             </Grid>
             <ComboBox Grid.Column="1" x:Name="comboBoxCategories" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" FontSize="16" Background="#FF463692" FontFamily="Bahnschrift SemiLight" SelectionChanged="comboBoxCategories_SelectionChanged">
                 <ComboBox.Resources>
@@ -76,7 +90,11 @@
                 </ComboBox.Resources>
             </ComboBox>
 
-            <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToRegisterCommand}" FontFamily="Bahnschrift SemiLight">
+            <Label Grid.Column="1" Grid.Row="2" Content="Geselecteerd" Foreground="White" FontSize="24" FontFamily="Bahnschrift SemiLight" VerticalAlignment="Top"/>
+            <Rectangle Grid.Column="1" Grid.Row="2"  Fill="White" Stroke="White" Height="2" Width="Auto" VerticalAlignment="Bottom"/>
+
+
+            <Button Grid.Row="4" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToRegisterCommand}" FontFamily="Bahnschrift SemiLight">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -84,7 +102,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
+            <Button Grid.Row="4" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

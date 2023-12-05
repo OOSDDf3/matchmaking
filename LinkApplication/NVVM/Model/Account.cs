@@ -17,8 +17,9 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static string? LanguageProfile { get; set; }
         public static string? EmailProfile { get; set; }
         public static string? PasswordProfile { get; set; }
+        public static List<string>? InterestsProfile { get; set; }
 
-        public Account(string name, string age, string address, string gender, string Language, string email, string password ) 
+        public Account(string name, string age, string address, string gender, string Language, string email, string password) 
         {
             NameProfile = name;
             AgeProfile = age;
@@ -26,14 +27,12 @@ namespace LinkApplicationGraphics.NVVM.Model
             GenderProfile = gender;
             EmailProfile = email;
             PasswordProfile = password;
-  
         }
 
         public static void GetUserID(object sender, LoginEventargs e)
         {
             user_ID = e.User_ID;
-        }
-
+        }       
 
     }
 }

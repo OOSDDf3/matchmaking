@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -111,6 +112,7 @@ namespace LinkApplication
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                dbCon.Close();
                 return false;
             }
         }
@@ -145,30 +147,37 @@ namespace LinkApplication
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                dbCon.Close();
                 return keyValuePairs;
             }
         }
 
 
-        public int getUserID(string email, string password, string query)
+        public int getUserID(string email, string password)
         {
-            int userID = 0;
+            int user_ID = Int32.MinValue;
             try
             {
-                if (dbCon.IsConnect() & CheckLogin(email, password, out userID))
+                if (dbCon.IsConnect())
                 {
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    var reader = cmd.ExecuteReader();
-                    return Int32.Parse(reader.GetValue(0).ToString());
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+                    var user_ID_reader = cmdID.ExecuteReader();
+                    while (user_ID_reader.Read())
+                    {
+                        user_ID = Int32.Parse(user_ID_reader.GetValue(0).ToString());
+                    }
+                    user_ID_reader.Close();
                 }
-                else return userID;
+                return user_ID;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return userID;
+                dbCon.Close();
+                return user_ID;
             }
         }
 
@@ -197,6 +206,7 @@ namespace LinkApplication
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                dbCon.Close();
                 return categories;
             }
         }
@@ -227,7 +237,44 @@ namespace LinkApplication
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
+                dbCon.Close();
                 return interests;
+            }
+        }
+
+        public void InsertIntoUserInterestList(int user_ID, List<string> interests)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    foreach (string interest in interests)
+                    {
+                        string querySelect = "SELECT  interest_Id FROM Interests WHERE name = @in";
+                        var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                        cmdSelect.Parameters.AddWithValue("@in", interest);
+                        var reader = cmdSelect.ExecuteReader();
+                        int interest_ID = Int32.MinValue;
+                        while (reader.Read())
+                        {
+                            interest_ID = Int32.Parse(reader.GetValue(0).ToString());
+                        }
+                        reader.Close();
+                        Debug.WriteLine(interest_ID);
+                        Debug.WriteLine($"{user_ID}, {interest_ID}");
+
+                        string queryInsert = "INSERT INTO `userinterestlist` (`user_ID`, `interest_ID`) VALUES (@us, @inID)";
+                        var cmdInsert = new MySqlCommand(queryInsert, dbCon.Connection);
+                        cmdInsert.Parameters.AddWithValue("@us", user_ID);
+                        cmdInsert.Parameters.AddWithValue("@inID", interest_ID);
+                        cmdInsert.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
             }
         }
     }

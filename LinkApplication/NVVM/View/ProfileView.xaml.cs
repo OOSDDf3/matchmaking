@@ -1,6 +1,7 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.NVVM.ViewModel;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,6 +28,8 @@ namespace LinkApplicationGraphics.NVVM.View
     {
         private List<(TextBlock, Border)> profileElements;
         Database_Connecter dbConnector = new Database_Connecter();
+
+        public static bool magDoor;
 
         public ProfileView()
         {
@@ -77,6 +80,7 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 // Wachtwoord is geldig, voer de gewenste logica uit
                 //MessageBox.Show("Wachtwoord is geldig!");
+                
             }
             else
             {
@@ -99,6 +103,11 @@ namespace LinkApplicationGraphics.NVVM.View
 
             string LanguageTextBoxValue = LanguageTextBox.Text;
             if (string.IsNullOrEmpty(LanguageTextBoxValue)) { LanguageTextBoxValue = TextBlockProfileLanguage.Text; }
+
+            if (!NameTextBoxValue.IsNullOrEmpty())
+            {
+                magDoor = true;
+            }
 
             dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
         }

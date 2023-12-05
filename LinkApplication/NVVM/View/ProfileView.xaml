@@ -571,7 +571,7 @@
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -70,6 +70,30 @@ namespace LinkApplication
             }
         }
 
+        public void UpdateAccount(int userID, string name, string email, string password, string address, string gender, string language)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `account` SET `name` = @na, `email` = @em, `password` = @pa,`address` = @ad, `gender` = @ge, `language` = @la WHERE `user_ID` = @userID;";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.Add("@userID", MySqlDbType.Int32, 4).Value = userID;
+                    cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
+                    cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
+                    cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
+                    cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
+                    cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
+                    cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+
         public bool CheckLogin(string email, string password, out int user_ID)
         {
             user_ID = Int32.MinValue;

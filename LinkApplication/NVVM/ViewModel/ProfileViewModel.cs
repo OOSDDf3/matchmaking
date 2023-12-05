@@ -1,6 +1,7 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
+using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
         //Command voor navigeren naar login page, uitvoering staat in xaml bij de button
         public RelayCommand NavigateToLoginPageCommand { get; set; }
+        public RelayCommand NavigateToHomePageCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -48,6 +50,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);  
 
 
         }
@@ -57,7 +60,35 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
+
+        private void Opslaan(Object obj)
+        {
+            if (ProfileView.magDoor)
+            {
+                Navigation.NavigateToNew<HomeViewModel>();
+            }
+            else
+            {
+                ErrorMessage = "Het E-mail voldoet niet aan het standaard format en het wachtwoord moet minimaal 5 tekens lang zijn";
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+
+
+
         //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
+
         private void LogOut()
         {
             Account.user_ID = 0;

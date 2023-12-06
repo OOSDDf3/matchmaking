@@ -7,7 +7,104 @@
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="White"><Run Text="PLACEHOLDER "/><Run Language="en-gb" Text="EVENT CREATE"/><LineBreak/><Run/></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="EventName_Interests_Grid" Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <TextBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" >
+                 <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesses" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text=""/>
+        </Grid>
+        
+
+        <Grid x:Name="Participants_Location_Grid" Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Max. aantal deelnemers" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <TextBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Locatie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <TextBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" >
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+        </Grid>
+
+        <Grid x:Name="Date_Time_Grid" Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <DatePicker Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20"/>
+
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Tijd" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text=""/>
+        </Grid>
+
+        <Grid x:Name="Button_Grid" Grid.Row="7" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="1" Grid.Column="1" Content = "Aanmaken Event" HorizontalAlignment = "Center" VerticalAlignment = "Bottom" Click="buttonCreate_Click" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.BorderBrush>
+                    <ImageBrush TileMode="None" Stretch="Fill"/>
+                </Button.BorderBrush>
+            </Button>
+        </Grid>
 
     </Grid>
     <!--<StackPanel>

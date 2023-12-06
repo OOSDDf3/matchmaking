@@ -72,7 +72,7 @@
                             Foreground="White"
                             FontSize="24"
                            
-                             Command="{Binding NavigateToEventsViewCommand}"
+                             Command="{Binding NavigateToEventCreateViewCommand}"
                              Style="{StaticResource MenuButtonTheme}" FontFamily="Bahnschrift SemiLight"
                              GroupName="keuzeLocatie"/>
 

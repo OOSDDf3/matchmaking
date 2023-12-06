@@ -19,6 +19,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static string LanguageProfile { get; set; }
         public static string EmailProfile { get; set; }
         public static string PasswordProfile { get; set; }
+        public static string HashedPassword {  get; set; }
         public static Byte[] ProfilePicture { get; set; }
 
         public static List<string> InterestsProfile { get; set; }
@@ -37,7 +38,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
         }
 
-        public Account(string name, string age, string address, string gender, string Language, string email, string password , Byte[] profilePicture) 
+        public Account(string name, string age, string address, string gender, string Language, string email, string password , string hashedPassword, Byte[] profilePicture) 
         {
             NameProfile = name;
             AgeProfile = age;
@@ -45,6 +46,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             GenderProfile = gender;
             EmailProfile = email;
             PasswordProfile = password;
+            HashedPassword = hashedPassword;
             ProfilePicture = profilePicture;
   
         }
@@ -64,7 +66,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
 
             ProfileViewModel.NameProfile = dataPerson["name"];
-            ProfileViewModel.AgeProfile = dataPerson["age"];
+            ProfileViewModel.BirthdateProfile = dataPerson["birthdate"];
             ProfileViewModel.AddressProfile = dataPerson["address"];
             ProfileViewModel.GenderProfile = dataPerson["gender"];
             ProfileViewModel.LanguageProfile = dataPerson["language"];

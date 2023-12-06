@@ -165,14 +165,14 @@
                                 Foreground="#272537"
                                 FontSize="25"
                                 HorizontalAlignment="Center"/>
-                    <TextBlock Text="Leeftijd"
+                    <TextBlock Text="Geboortedatum"
                                 Foreground="White"
                                 FontSize="20"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
-                    <TextBlock Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Text="{Binding BirthdateProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="#272537"
                            FontSize="22"
                            HorizontalAlignment="Center"
@@ -571,7 +571,7 @@
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToProfileViewCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

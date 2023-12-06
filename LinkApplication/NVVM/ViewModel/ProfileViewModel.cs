@@ -20,7 +20,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         //Tijdelijke opslag van account gegevens voor weergave.
         public static string NameProfile { get; set; }
-        public static string AgeProfile { get; set; }
+        public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
         public static string LanguageProfile { get; set; }
@@ -96,7 +96,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             Account.user_ID = 0;
             NameProfile = string.Empty;
-            AgeProfile = string.Empty;
+            BirthdateProfile = string.Empty;
             AddressProfile = string.Empty;
             GenderProfile = string.Empty;
             LanguageProfile = string.Empty;

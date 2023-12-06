@@ -212,15 +212,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
+            
+
             //gaat elke methode langs, deze checkt of hij leeg staat. Zo ja zet hij de foutmelding voor die desbetreffende textBox om hem rood te maken
             bool hasErrorEmpty = false;
-            //hasErrorEmpty |= CheckNaam();
-            //hasErrorEmpty |= CheckEmail();
-            //hasErrorEmpty |= CheckAge();
-            //hasErrorEmpty |= CheckStreet();
-            //hasErrorEmpty |= CheckPostalCode();
-            //hasErrorEmpty |= CheckGender();
-            //hasErrorEmpty |= CheckPassword(clearTextPassword);
+            hasErrorEmpty |= CheckNaam();
+            hasErrorEmpty |= CheckEmail();
+            hasErrorEmpty |= CheckAge();
+            hasErrorEmpty |= CheckStreet();
+            hasErrorEmpty |= CheckPostalCode();
+            hasErrorEmpty |= CheckGender();
+            hasErrorEmpty |= CheckPassword(clearTextPassword);
 
             //Checkt hier of alle velden zijn ingevuld, zo niet krijg je een error message. Zo wel gaat hij door naar de interesse pagina
             if (hasErrorEmpty)

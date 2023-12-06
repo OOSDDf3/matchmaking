@@ -100,13 +100,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             _connecter = new Database_Connecter();
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
+            string hashedPassword = PasswordHasher.HashPassword(clearTextPassword);
 
             if (Email.IsNullOrEmpty() || clearTextPassword.IsNullOrEmpty())
             {
                 ErrorMessage = "Email adres of wachtwoord is niet ingevuld";
 
             }
-            else if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
+            else if (_connecter.CheckLogin(Email, hashedPassword, out user_ID))
             {
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
                 ErrorMessage = "";

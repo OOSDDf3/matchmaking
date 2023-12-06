@@ -95,6 +95,10 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
+
+            <TextBlock  Grid.Row="8" Grid.Column="1" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="16"/>
+
+
             <Grid x:Name="Name_BirthDate_Grid" Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
@@ -307,7 +311,6 @@
             </Button>
         </Grid>
 
-        <TextBlock  Grid.Row="2" Grid.Column="1" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="16"/>
 
 
     </Grid>

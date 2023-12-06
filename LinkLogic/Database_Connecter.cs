@@ -55,7 +55,7 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
+                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `birthdate`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
@@ -151,7 +151,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language"};
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language"};
 
                     while (reader.Read())
                     {

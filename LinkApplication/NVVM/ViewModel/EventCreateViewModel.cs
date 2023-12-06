@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    public class HomeViewModel : Core.ViewModel
+    public class EventCreateViewModel : Core.ViewModel
     {
     }
 }

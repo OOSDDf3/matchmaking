@@ -170,7 +170,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         private void RegisterCheck(Object parameter)
         {
             //Code om password te binden
-            PasswordBox passwordBox = parameter as PasswordBox;
+            PasswordBox? passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
             //gaat elke methode langs, deze checkt of hij leeg staat. Zo ja zet hij de foutmelding voor die desbetreffende textBox om hem rood te maken

@@ -16,7 +16,7 @@ using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class LoginViewModel : Core.ViewModel
+    public class LoginViewModel : Core.ViewModel
     {
         Database_Connecter _connecter;
         Account_Info _account;

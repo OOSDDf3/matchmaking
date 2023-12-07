@@ -112,6 +112,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
                 ErrorMessage = "";
                 Navigation.NavigateTo<HomePageViewModel>();
+                Navigation.NavigateToNew<HomeViewModel>();
                 
             }
             else

@@ -40,7 +40,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<HomePageViewModel>(); }, canExecute: CanExecuteNavigateToHomePage);
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>();createAccount(); }, canExecute: CanExecuteNavigateToLoginPage);
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>();createAccount(); Account.LogOut(); }, canExecute: CanExecuteNavigateToLoginPage);
         }
 
         private bool CanExecuteNavigateToHomePage(object obj)
@@ -62,7 +62,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.HashedPassword, Int32.Parse(Account.AgeProfile), Account.AddressProfile, Account.GenderProfile , "Dutch");
+            _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.HashedPassword, Int32.Parse(Account.BirthdateProfile), Account.AddressProfile, Account.GenderProfile , "Dutch");
             _connecter.InsertIntoUserInterestList(_connecter.getUserID(Account.EmailProfile, Account.HashedPassword), Account.InterestsProfile , Account.ProfilePicture);
 
 

@@ -6,16 +6,15 @@ using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     class ProfileViewModel : Core.ViewModel
     {
+        public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
@@ -26,7 +25,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string LanguageProfile { get; set; }
         public static string EmailProfile { get; set; }
         public static string PasswordProfile { get; set; }
-
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -41,21 +39,18 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //Command voor navigeren naar login page, uitvoering staat in xaml bij de button
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
-        public RelayCommand NavigateToProfileViewCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
         {
-            
+
             //Daadwerkelijk maken van command
             Navigation = navService;
 
             
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
-            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
-            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Account.showUserInfo(); Navigation.NavigateToNew<ProfileViewModel>();  }, canExecute: o => true);
-
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);  
 
 
         }
@@ -70,7 +65,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if (ProfileView.magDoor)
             {
                 Navigation.NavigateToNew<HomeViewModel>();
-                ErrorMessage = "";
             }
             else
             {
@@ -90,8 +84,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
 
-
         //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
+
+
         private void LogOut()
         {
             Account.user_ID = 0;
@@ -104,7 +99,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordProfile = string.Empty;
 
             Account.NameProfile = string.Empty;
-            Account.AgeProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
             Account.AddressProfile = string.Empty;
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;

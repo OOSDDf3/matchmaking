@@ -13,7 +13,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static int user_ID;
 
         public static string NameProfile { get; set; }
-        public static string AgeProfile { get; set; }
+        public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
         public static string LanguageProfile { get; set; }
@@ -30,7 +30,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public Account(string name, string age, string address, string gender, string Language, string email, string password)
         {
             NameProfile = name;
-            AgeProfile = age;
+            BirthdateProfile = age;
             AddressProfile = address;
             GenderProfile = gender;
             EmailProfile = email;
@@ -41,7 +41,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public Account(string name, string age, string address, string gender, string Language, string email, string password , string hashedPassword, Byte[] profilePicture) 
         {
             NameProfile = name;
-            AgeProfile = age;
+            BirthdateProfile = age;
             AddressProfile = address;
             GenderProfile = gender;
             EmailProfile = email;
@@ -72,6 +72,18 @@ namespace LinkApplicationGraphics.NVVM.Model
             ProfileViewModel.LanguageProfile = dataPerson["language"];
             ProfileViewModel.EmailProfile = dataPerson["email"];
             ProfileViewModel.PasswordProfile = dataPerson["password"];
+        }
+
+        public static void LogOut()
+        {
+            Account.user_ID = 0;
+            Account.NameProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
+            Account.AddressProfile = string.Empty;
+            Account.GenderProfile = string.Empty;
+            Account.LanguageProfile = string.Empty;
+            Account.PasswordProfile = string.Empty;
+
         }
 
     }

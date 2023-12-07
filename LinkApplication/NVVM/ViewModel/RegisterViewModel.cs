@@ -186,7 +186,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.user_ID = 0;
 
             Account.NameProfile = string.Empty;
-            Account.AgeProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
             Account.AddressProfile = string.Empty;
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;

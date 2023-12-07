@@ -35,7 +35,7 @@ namespace LinkApplication
             services.AddSingleton<InterestViewModel>();
             services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<HomePageViewModel>();
-            services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<MatchingViewModel>();
             services.AddSingleton<MatchesViewModel>();
             services.AddSingleton<EventCreateViewModel>();
             services.AddSingleton<EventsViewModel>();

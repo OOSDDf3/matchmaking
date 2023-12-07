@@ -22,12 +22,20 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="2*"/>
-            
+
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
 
-        <Grid x:Name="Event1_Grid" Grid.Row="1" Grid.Column="1">
+        <Border Background="#FF729CA7" 
+                Grid.Column="1" 
+                Grid.Row="1"
+                BorderThickness="5"
+                BorderBrush="Black"
+                CornerRadius="30"
+                Padding="12,13,8,5"
+                Margin="10,0,10,0">
+            <Grid x:Name="Event1_Grid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -42,19 +50,61 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight" FontWeight="Heavy"/>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight" FontWeight="Heavy"/>
                 <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "01/01/2001 17:00" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse: " FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Hobby (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Locatie: " FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Locatie: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Stad (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "X/10 (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <Button Grid.Row="2" Grid.Column="5" Content = "Aanmelden" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Click="buttonCreate_Click" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventCreateViewCommand}">
+                <RadioButton Content="👤+" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie" Margin="0,0,0,8" Grid.RowSpan="2" >
+                    <RadioButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+
+                <RadioButton Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie" Margin="0,0,10,5" RenderTransformOrigin="-0.269,-1.18" >
+                    <RadioButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+
+                <Button Grid.Row="2" Grid.Column="5" Content = "Aanmelden" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Click="buttonCreate_Click" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventCreateViewCommand}" Margin="0,5,0,0">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -65,15 +115,17 @@
                     </Button.BorderBrush>
                 </Button>
             </Grid>
-
+        </Border>        
         
+
+
         <Grid x:Name="Filter_Category_Grid" Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            
+
             <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Center" VerticalAlignment = "Top" Content = "Filters" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Content = "Categorie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
@@ -103,7 +155,7 @@
             <CheckBox Content=""  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         </Grid>
-        
+
         <Grid x:Name="Button_Grid" Grid.Row="8" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -122,6 +174,6 @@
                 </Button.BorderBrush>
             </Button>
         </Grid>
-        
+
     </Grid>
 </UserControl>

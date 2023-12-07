@@ -82,6 +82,9 @@ namespace LinkApplicationGraphics.NVVM.View
             WachtwoordBox.Visibility = Visibility.Visible;
         }
 
-        
+        private void textBoxEmail_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

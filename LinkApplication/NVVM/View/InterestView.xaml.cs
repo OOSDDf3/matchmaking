@@ -28,9 +28,10 @@ namespace LinkApplicationGraphics.NVVM.View
     {
 
         List<CheckBox> checkBoxes = new List<CheckBox>();
-        List<string> intrestsPerson = new List<string>();
         Account account;
         Database_Connecter _connecter;
+        List<string> interestsPerson = new List<string>();
+
         public InterestView()
         {
             InitializeComponent();
@@ -38,25 +39,30 @@ namespace LinkApplicationGraphics.NVVM.View
                 "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
-
-            AddCheckBoxesToInterestsPage(interests);
-
+            _connecter = new Database_Connecter();
+            AddCategoriesToCombobox();
+            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            _connecter = new Database_Connecter();
             loopCheckbox();
             debugPrint();
 
             Debug.WriteLine(Account.NameProfile);
 
-           
+            Account.InterestsProfile = interestsPerson;
 
-            // Assuming you're outside of the App class
+        }
 
-
-
+        private void AddCategoriesToCombobox()
+        {
+            List<string> categories = _connecter.GetInterestCategories();
+            foreach (string category in categories)
+            {
+                comboBoxCategories.Items.Add(category); 
+            }
+            comboBoxCategories.SelectedIndex = 1;
         }
 
         private CheckBox SetupCheckBoxInterestsPage(int row, int col, string content)
@@ -71,10 +77,8 @@ namespace LinkApplicationGraphics.NVVM.View
                 VerticalAlignment = VerticalAlignment.Stretch,
                 SnapsToDevicePixels = true,
                 Content = content,
-                Name = content
-                
-                
-        };
+                Name = content              
+            };
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(12)));
             checkBox.Resources.Add(typeof(Border), borderStyle);
@@ -88,19 +92,19 @@ namespace LinkApplicationGraphics.NVVM.View
             return checkBox;
         }
 
-        public void AddCheckBoxesToInterestsPage(List<string> interests)
+        public void AddCheckBoxesToInterestsPage(string category)
         {
+            List<string> interests = _connecter.GetInterestsWithCategory(category);
             int counter = 0;
             for (int i = 0; i <= interests.Count/4; i++)
             {
-
                 for (int j = 0; j < 4; j++)
                 {
                     if (counter == interests.Count)
                     {
                         break;
                     }
-                    checkBoxes.Add( SetupCheckBoxInterestsPage(i, j, interests[counter]));
+                    checkBoxes.Add(SetupCheckBoxInterestsPage(i, j, interests[counter]));
                     counter++;
                 }
             }
@@ -112,20 +116,24 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 if(checkBox.IsChecked == true)
                 {
-
-                    intrestsPerson.Add(checkBox.Name);
-
+                    interestsPerson.Add(checkBox.Name);
                 }
             }
         }
 
         public void debugPrint()
         {
-            foreach(String naam in intrestsPerson) 
+            foreach(String naam in interestsPerson) 
             {
                 Debug.WriteLine(naam);
             }
             
+        }
+
+        private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CheckBoxGrid.Children.Clear();
+            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
     }
  

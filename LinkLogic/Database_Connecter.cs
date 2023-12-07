@@ -5,11 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SqlClient;
+using System.Xml.Linq;
+using static Azure.Core.HttpHeader;
 
 namespace LinkApplication
 {
@@ -46,14 +49,13 @@ namespace LinkApplication
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
         }
-
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `age`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
+                    string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `birthdate`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
@@ -70,6 +72,7 @@ namespace LinkApplication
                 Console.WriteLine(ex.ToString());
             }
         }
+
 
         public void UpdateAccount(int userID, string name, string email, string password, string address, string gender, string language)
         {
@@ -140,7 +143,7 @@ namespace LinkApplication
 
         public Dictionary<string, string> ShowUserInformation(int user_ID, string query)
         {
-            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+            Dictionary<string, string> keyValuePairs = new();
             try
             {
                 if (dbCon.IsConnect())
@@ -148,19 +151,18 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "age", "address", "gender", "language" };
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language"};
 
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.WriteLine(reader.GetValue(i).ToString());
+                            Console.Write(reader.GetValue(i).ToString() + " ");
                             keyValuePairs.Add(keys[i], reader.GetValue(i).ToString());
                         }
                         Console.WriteLine();
                     }
                     reader.Close();
-
                     return keyValuePairs;
                 }
                 return keyValuePairs;
@@ -173,27 +175,134 @@ namespace LinkApplication
             }
         }
 
-        //public int getUserID(string email, string password, string query)
-        //{
-        //    int userID = 0;
-        //    try
-        //    {
-        //        if (dbCon.IsConnect() & CheckLogin(email, password))
-        //        {
-        //            var cmd = new MySqlCommand(query, dbCon.Connection);
-        //            cmd.Parameters.AddWithValue("@email", email);
-        //            cmd.Parameters.AddWithValue("@password", password);
-        //            var reader = cmd.ExecuteReader();
-        //            return Int32.Parse(reader.GetValue(0).ToString());
-        //        }
-        //        else return userID;
-        //    }
 
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.ToString());
-        //        return userID;
-        //    }
-        //}
+        public int getUserID(string email, string password)
+        {
+            int user_ID = Int32.MinValue;
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+                    var user_ID_reader = cmdID.ExecuteReader();
+                    while (user_ID_reader.Read())
+                    {
+                        user_ID = Int32.Parse(user_ID_reader.GetValue(0).ToString());
+                    }
+                    user_ID_reader.Close();
+                }
+                return user_ID;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                dbCon.Close();
+                return user_ID;
+            }
+        }
+
+        public List<string> GetInterestCategories()
+        {
+            List<string> categories = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT DISTINCT category FROM Interests";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.WriteLine(reader.GetValue(i).ToString());
+                            categories.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                    reader.Close();
+                }
+                return categories;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return categories;
+            }
+        }
+
+        public List<string> GetInterestsWithCategory(string category)
+        {
+            List<string> interests = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT name FROM Interests WHERE category = @ca";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@ca", category);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.WriteLine(reader.GetValue(i).ToString());
+                            interests.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                    reader.Close();
+                }
+                return interests;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return interests;
+            }
+        }
+        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[]picture)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    foreach (string interest in interests)
+                    {
+                        string querySelect = "SELECT  interest_Id FROM Interests WHERE name = @in";
+                        var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                        cmdSelect.Parameters.AddWithValue("@in", interest);
+                        var reader = cmdSelect.ExecuteReader();
+                        int interest_ID = Int32.MinValue;
+                        while (reader.Read())
+                        {
+                            interest_ID = Int32.Parse(reader.GetValue(0).ToString());
+                        }
+                        reader.Close();
+                        Debug.WriteLine(interest_ID);
+                        Debug.WriteLine($"{user_ID}, {interest_ID}");
+
+                        string queryInsertInterest = "INSERT INTO `userinterestlist` (`user_ID`, `interest_ID`) VALUES (@us, @inID)";
+                        var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
+                        cmdInsertInterest.Parameters.AddWithValue("@us", user_ID);
+                        cmdInsertInterest.Parameters.AddWithValue("@inID", interest_ID);
+                        cmdInsertInterest.ExecuteNonQuery();
+                    }
+
+                    string queryInsertPicture = "INSERT INTO `profilepicture` (`user_ID`, `picture`) VALUES (@us1, @pi)";
+                    var cmdInsertPicture = new MySqlCommand(queryInsertPicture, dbCon.Connection);
+                    cmdInsertPicture.Parameters.Add("@us1", MySqlDbType.VarChar, 100).Value = user_ID;
+                    cmdInsertPicture.Parameters.Add("@pi", MySqlDbType.Blob).Value = picture;
+                    cmdInsertPicture.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
     }
 }

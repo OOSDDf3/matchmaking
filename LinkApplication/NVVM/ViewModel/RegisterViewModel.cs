@@ -1,4 +1,5 @@
 ﻿using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
 using Microsoft.Identity.Client;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,6 +72,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             {
                 _errorMessageAge = value;
                 OnPropertyChanged(nameof(ErrorMessageAge));
+            }
+        }
+
+        private string _errorMessageAgeNotANumber;
+        public string ErrorMessageAgeNotANumber
+        {
+            get => _errorMessageAgeNotANumber;
+            set
+            {
+                _errorMessageAgeNotANumber = value;
+                OnPropertyChanged(nameof(ErrorMessageAgeNotANumber));
             }
         }
         private string _errorMessageStreet;
@@ -149,7 +162,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             //code voor de commmands die uitgevoerd worden binnen de xaml knop
             Navigation = navService;
             NavigateToInterestCommand = new RelayCommand(execute: RegisterCheck, canExecute: o=> true);
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); ResetErrorMessage(); }, canExecute: o => true);
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); ResetErrorMessage(); LogOut(); }, canExecute: o => true);
 
 
         }
@@ -164,6 +177,32 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             ErrorMessagePostalCode = "";
             ErrorMessageGender = "";
             ErrorMessagePassword = "";
+            ErrorMessagePasswordToShort = "";
+
+        }
+
+        private void LogOut()
+        {
+            Account.user_ID = 0;
+
+            Account.NameProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
+            Account.AddressProfile = string.Empty;
+            Account.GenderProfile = string.Empty;
+            Account.LanguageProfile = string.Empty;
+            Account.PasswordProfile = string.Empty;
+
+            NameProfile = string.Empty;
+            AgeProfile = string.Empty;
+            StreetProfile = string.Empty;
+            PostalCodeProfile = string.Empty;
+            GenderProfile = string.Empty;
+            LanguageProfile = string.Empty;
+            EmailProfile = string.Empty;
+
+            IsFemale = false;
+            IsMale = false;
+            IsOther = false;
 
         }
 
@@ -173,30 +212,22 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordBox? passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
-            //gaat elke methode langs, deze checkt of hij leeg staat. Zo ja zet hij de foutmelding voor die desbetreffende textBox om hem rood te maken
-            bool hasError = false;
-            hasError |= CheckNaam();
-            hasError |= CheckEmail();
-            hasError |= CheckAge();
-            hasError |= CheckStreet();
-            hasError |= CheckPostalCode();
-            hasError |= CheckGender();
-            hasError |= passwordBox.Password.IsNullOrEmpty();
-            hasError |= passwordBox.Password.Length < 3;
+            
 
-            //Checkt of ingevulde password leeg is en of hij langer is dan 5 karakters.
-            if (passwordBox.Password.Length < 5 && passwordBox.Password.Length > 1) { ErrorMessagePasswordToShort = "Het wachtwoord moet langer zijn dan 5 karakters"; ErrorMessagePassword = "Password"; } 
-            if(passwordBox.Password.IsNullOrEmpty()) { ErrorMessagePassword = "Password"; }
-            if(passwordBox.Password.Length > 5 && !passwordBox.Password.IsNullOrEmpty())
-            {
-                ErrorMessagePasswordToShort = "";
-                ErrorMessagePassword = "";
-            }
+            //gaat elke methode langs, deze checkt of hij leeg staat. Zo ja zet hij de foutmelding voor die desbetreffende textBox om hem rood te maken
+            bool hasErrorEmpty = false;
+            hasErrorEmpty |= CheckNaam();
+            hasErrorEmpty |= CheckEmail();
+            hasErrorEmpty |= CheckAge();
+            hasErrorEmpty |= CheckStreet();
+            hasErrorEmpty |= CheckPostalCode();
+            hasErrorEmpty |= CheckGender();
+            hasErrorEmpty |= CheckPassword(clearTextPassword);
 
             //Checkt hier of alle velden zijn ingevuld, zo niet krijg je een error message. Zo wel gaat hij door naar de interesse pagina
-            if (hasError)
+            if (hasErrorEmpty)
             {
-                ErrorMessage = $"Een aantal gegevens ontbreken, vul deze in!";
+                ErrorMessage = $"Een aantal gegevens kloppen niet, vul deze in!";
             }
             else
 
@@ -237,16 +268,25 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         }
         private bool CheckEmail()
-        {
-            if (EmailProfile.IsNullOrEmpty())
+        {   
+            if (!EmailProfile.IsNullOrEmpty())
             {
-                ErrorMessageEmail = "Email";
-                return true;
+                if (Regex.IsMatch(EmailProfile, @"^[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+                {
+                    ErrorMessageEmail = "";
+                    return false;
+                }
+                else
+                {
+                    ErrorMessageEmail = "Email";
+                    return true;
+                }
             }
             else
             {
-                ErrorMessageEmail = "";
-                return false;
+
+                ErrorMessageEmail = "Email"; 
+                return true;
             }
         }
 
@@ -281,7 +321,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             if (!IsMale && !IsFemale && !IsOther )
             {
-                ErrorMessageGender = "❗";
+                ErrorMessageGender = "Gender";
                 return true;
             }
             else
@@ -289,6 +329,30 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 ErrorMessageGender = "";
                 return false;
             }
-        }    
+        } 
+        
+        private bool CheckPassword(String password) 
+        {
+            if (password.Length < 5 && password.Length > 0) 
+            { 
+                ErrorMessagePasswordToShort = "Het wachtwoord moet langer zijn dan 5 karakters"; ErrorMessagePassword = "Password"; 
+                return true;
+            }
+
+            if (password.IsNullOrEmpty()) { 
+                ErrorMessagePassword = "Password"; 
+                return true;
+            }
+
+
+
+            if (password.Length > 5 && !password.IsNullOrEmpty())
+            {
+                ErrorMessagePasswordToShort = "";
+                ErrorMessagePassword = "";
+                return false;
+            }
+            return false;
+        }
     }
 }

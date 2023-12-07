@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -27,6 +28,7 @@ namespace LinkApplicationGraphics.NVVM.View
     public partial class RegisterView : UserControl
     {
         Database_Connecter _connecter;
+        BitmapImage selectedImage;
 
         public RegisterView()
         {
@@ -80,9 +82,11 @@ namespace LinkApplicationGraphics.NVVM.View
             }
             Debug.WriteLine(gender);
 
-            //Account account = new Account(textBoxName.Text , textBoxAge.Text, textBoxStreet.Text, gender, "Dutch" ,textBoxEmail.Text, textBoxPassword.Password);
 
-            //_connecter.InsertAccount(textBoxName.Text, textBoxEmail.Text, plainPassword, Int32.Parse(textBoxAge.Text), $"{textBoxStreet.Text} {textBoxPostalCode.Text}", gender, "Dutch");
+            Account account = new Account(textBoxName.Text, textBoxAge.Text, textBoxStreet.Text, gender, "Dutch", textBoxEmail.Text, textBoxPassword.Password, PasswordHasher.HashPassword(textBoxPassword.Password), BufferFromImage(selectedImage));
+
+
+            //_connecter.InsertAccount("Jan", "Frederick", "Pieter", 1, "Hallo", "MyG", "Flikka", BufferFromImage(selectedImage));
 
         }
 
@@ -103,5 +107,42 @@ namespace LinkApplicationGraphics.NVVM.View
 
         }
 
+        private void buttonUplaod_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files|*.png";
+            openFileDialog.FilterIndex = 1;
+            if(openFileDialog.ShowDialog() == true)
+            {
+
+                selectedImage = new BitmapImage(new Uri(openFileDialog.FileName));
+                ImagePicture.Source = selectedImage;
+
+
+            }
+        }
+        public byte[] BufferFromImage(BitmapImage imageSource)
+        {
+            byte[] buffer = null;
+
+            try
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder(); // Or appropriate encoder based on image format
+                    encoder.Frames.Add(BitmapFrame.Create(imageSource));
+                    encoder.Save(ms);
+
+                    buffer = ms.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception as needed
+                Console.WriteLine(ex.ToString());
+            }
+
+            return buffer;
+        }
     }
 }

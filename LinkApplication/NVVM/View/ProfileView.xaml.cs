@@ -89,9 +89,19 @@ namespace LinkApplicationGraphics.NVVM.View
 
             if (IsEmailValid(EmailTextBox.Text) && IsPasswordValid(PasswordTextBox.Text))
             {
+                foreach (var (textBlock, border) in profileElements)
+                {
+                    textBlock.Visibility = Visibility.Visible;
+                    border.Visibility = Visibility.Hidden;
+                }
+                buttonSave.Visibility = Visibility.Hidden;
+
+                Account.showUserInfo();
+
                 magDoor = true;
                 dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
             }
+            else magDoor = false;
 
 
         }

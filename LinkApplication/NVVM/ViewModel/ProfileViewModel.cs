@@ -19,7 +19,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         //Tijdelijke opslag van account gegevens voor weergave.
         public static string NameProfile { get; set; }
-        public static string AgeProfile { get; set; }
+        public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
         public static string LanguageProfile { get; set; }
@@ -60,7 +60,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
-
         private void Opslaan(Object obj)
         {
             if (ProfileView.magDoor)
@@ -85,15 +84,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
 
-
-
         //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
+
 
         private void LogOut()
         {
             Account.user_ID = 0;
             NameProfile = string.Empty;
-            AgeProfile = string.Empty;
+            BirthdateProfile = string.Empty;
             AddressProfile = string.Empty;
             GenderProfile = string.Empty;
             LanguageProfile = string.Empty;
@@ -101,7 +99,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordProfile = string.Empty;
 
             Account.NameProfile = string.Empty;
-            Account.AgeProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
             Account.AddressProfile = string.Empty;
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;

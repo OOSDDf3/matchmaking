@@ -64,7 +64,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             if (ProfileView.magDoor)
             {
-                Navigation.NavigateToNew<HomeViewModel>();
+                Navigation.NavigateToNew<MatchingViewModel>();
             }
             else
             {

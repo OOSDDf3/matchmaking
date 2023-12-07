@@ -94,7 +94,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="1" Grid.Column="1" Content = "Aanmaken Event" HorizontalAlignment = "Center" VerticalAlignment = "Bottom" Click="buttonCreate_Click" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight">
+            <Button Grid.Row="1" Grid.Column="1" Content = "Aanmaken Event" HorizontalAlignment = "Center" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventsViewCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

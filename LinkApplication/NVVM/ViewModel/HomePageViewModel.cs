@@ -12,7 +12,7 @@ using System.Windows.Media.Effects;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class HomePageViewModel : Core.ViewModel
+    public class HomePageViewModel : Core.ViewModel
     {
         MainWindow mainWindow;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();

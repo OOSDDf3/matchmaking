@@ -17,9 +17,9 @@ using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class LoginViewModel : Core.ViewModel
+    public class LoginViewModel : Core.ViewModel
     {
-        Database_Connecter _connecter;
+        public Database_Connecter _connecter;
         Account_Info _account;
         public event EventHandler<string> EmailChanged;
 
@@ -95,7 +95,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
         //functie om te checken of account gegevns kloppen. Als hij niet doorkomt geeft hij een errormessage. Anders stuurt hij je door naar de main pagina.
-        private void Login(object parameter)
+        public void Login(object parameter)
         {
             _connecter = new Database_Connecter();
             PasswordBox passwordBox = parameter as PasswordBox;

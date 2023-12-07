@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class ProfileViewModel : Core.ViewModel
+    public class ProfileViewModel : Core.ViewModel
     {
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;

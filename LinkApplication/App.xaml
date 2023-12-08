@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/ComboBoxTheme.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type TypeName=viewModel:LoginViewModel}">
@@ -27,8 +28,8 @@
                 <view:HomePageView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type TypeName=viewModel:HomeViewModel}">
-                <view:HomeView/>
+            <DataTemplate DataType="{x:Type TypeName=viewModel:MatchingViewModel}">
+                <view:MatchingView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type TypeName=viewModel:ProfileViewModel}">
@@ -43,6 +44,9 @@
                 <view:EventsView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type TypeName=viewModel:EventCreateViewModel}">
+                <view:EventCreateView/>
+            </DataTemplate>
 
         </ResourceDictionary>
         

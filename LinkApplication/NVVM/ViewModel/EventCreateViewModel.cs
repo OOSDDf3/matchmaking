@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    public class EventsViewModel: Core.ViewModel
+    public class EventCreateViewModel : Core.ViewModel
     {
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -20,21 +20,18 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public RelayCommand NavigateToEventCreateViewCommand { get; set; }
-
+        public RelayCommand NavigateToEventsViewCommand { get; set; }
 
 
-        public EventsViewModel(INavigationService navService)
+
+        public EventCreateViewModel(INavigationService navService)
         {
             Navigation = navService;
 
-            //aanmaken command voor navigeren naar eventcreateview, command execution staat in xaml
-            //kijk naar commands login en registeren als je iets wel checken voor het uitvoeren van de command
-            NavigateToEventCreateViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventCreateViewModel>(); }, canExecute: o => true);
+            //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
+            NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
 
         }
-
 
 
     }

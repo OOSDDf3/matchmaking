@@ -1,6 +1,7 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
+using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class ProfileViewModel : Core.ViewModel
+    public class ProfileViewModel : Core.ViewModel
     {
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
         public static string NameProfile { get; set; }
-        public static string AgeProfile { get; set; }
+        public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
         public static string LanguageProfile { get; set; }
@@ -43,6 +44,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
         //Command voor navigeren naar login page, uitvoering staat in xaml bij de button
         public RelayCommand NavigateToLoginPageCommand { get; set; }
+        public RelayCommand NavigateToHomePageCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -54,6 +56,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);  
 
 
         }
@@ -63,12 +66,38 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             return true;
         }
 
+        private void Opslaan(Object obj)
+        {
+            if (ProfileView.magDoor)
+            {
+                Navigation.NavigateToNew<MatchingViewModel>();
+            }
+            else
+            {
+                ErrorMessage = "Het E-mail voldoet niet aan het standaard format en het wachtwoord moet minimaal 5 tekens lang zijn";
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+            }
+        }
+
+
         //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
+
+
         private void LogOut()
         {
             Account.user_ID = 0;
             NameProfile = string.Empty;
-            AgeProfile = string.Empty;
+            BirthdateProfile = string.Empty;
             AddressProfile = string.Empty;
             GenderProfile = string.Empty;
             LanguageProfile = string.Empty;
@@ -78,7 +107,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Interests = new();
 
             Account.NameProfile = string.Empty;
-            Account.AgeProfile = string.Empty;
+            Account.BirthdateProfile = string.Empty;
             Account.AddressProfile = string.Empty;
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;

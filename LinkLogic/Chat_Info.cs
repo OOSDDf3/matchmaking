@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace LinkApplication
 {
-    internal class Chat_Info
+    public class Chat_Info
     {
+        //Lijst aan chats als chatlog?
+        //Timestamp per bericht
+        //Type chat
+            //1 op 1
+            //Event\groep chat
     }
 }

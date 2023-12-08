@@ -12,11 +12,12 @@ using System.Windows.Media.Effects;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class HomePageViewModel : Core.ViewModel
+    public class HomePageViewModel : Core.ViewModel
     {
         MainWindow mainWindow;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         public List<string> interestsPerson = new List<string>();
+
 
         Database_Connecter _connecter;
 
@@ -44,10 +45,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public HomePageViewModel(INavigationService navService)
         {
             Navigation = navService;
-            NavigateToHomeViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<HomeViewModel>(); }, canExecute: o => true);
+            NavigateToHomeViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchingViewModel>(); }, canExecute: o => true);
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
             NavigateToMatchesViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchesViewModel>(); }, canExecute: o => true);
-            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); showUserInfo(); }, canExecute: CanExecuteNavigateToProfile);
+            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); Account.showUserInfo(); }, canExecute: CanExecuteNavigateToProfile);
 
         }
 

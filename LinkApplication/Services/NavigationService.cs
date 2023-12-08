@@ -12,7 +12,8 @@ namespace LinkApplicationGraphics.Services
     public interface INavigationService 
     { 
         public ViewModel CurrentView { get; }
-        public ViewModel NewView { get; } 
+        public ViewModel NewView { get; }
+
         void NavigateTo<T>() where T : ViewModel;
         void NavigateToNew<T>() where T : ViewModel;
     }

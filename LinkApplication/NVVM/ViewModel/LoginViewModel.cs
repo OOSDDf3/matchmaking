@@ -1,8 +1,9 @@
-﻿using LinkApplication;
+using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,9 +17,9 @@ using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    class LoginViewModel : Core.ViewModel
+    public class LoginViewModel : Core.ViewModel
     {
-        Database_Connecter _connecter;
+        public Database_Connecter _connecter;
         Account_Info _account;
         public event EventHandler<string> EmailChanged;
 
@@ -83,11 +84,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public LoginViewModel(INavigationService navService)
         {
-            
-
             Navigation = navService;
 
             ev_OnLoginSuccesfull += Account.GetUserID;
+
 
             NavigateToRegisterCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<RegisterViewModel>(); ErrorMessage = "";  }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: Login, canExecute: o => true);
@@ -95,26 +95,30 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
         //functie om te checken of account gegevns kloppen. Als hij niet doorkomt geeft hij een errormessage. Anders stuurt hij je door naar de main pagina.
-        private void Login(object parameter)
+        public void Login(object parameter)
         {
             _connecter = new Database_Connecter();
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
+            string hashedPassword = PasswordHasher.HashPassword(clearTextPassword);
 
-            if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
+            if (Email.IsNullOrEmpty() || clearTextPassword.IsNullOrEmpty())
             {
-                Debug.WriteLine(user_ID);
-
-                ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
-
-                ErrorMessage = "";
-                Navigation.NavigateTo<HomePageViewModel>();
+                ErrorMessage = "Email adres of wachtwoord is niet ingevuld";
 
             }
-
+            else if (_connecter.CheckLogin(Email, hashedPassword, out user_ID))
+            {
+                ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
+                ErrorMessage = "";
+                Navigation.NavigateTo<HomePageViewModel>();
+                Navigation.NavigateToNew<MatchingViewModel>();
+                
+            }
             else
             {
                 ErrorMessage = "Email adres of wachtwoord is verkeerd ingevuld";
+
             }
         }  
     }

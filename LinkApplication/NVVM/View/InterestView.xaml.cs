@@ -41,7 +41,7 @@ namespace LinkApplicationGraphics.NVVM.View
 
             _connecter = new Database_Connecter();
             AddCategoriesToCombobox();
-            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
+            AddCheckBoxesToInterestsPage(comboBoxCategories.Items[0].ToString());
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)

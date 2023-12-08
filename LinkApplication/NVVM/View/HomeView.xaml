@@ -8,7 +8,6 @@
              d:DesignHeight="850" d:DesignWidth="1600">
     <Grid>
         <TextBlock Text="PLACEHOLDER SWIPE" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="White"/>
-
     </Grid>
     <!--<StackPanel>
         <TextBlock Text="Discover"
@@ -16,7 +15,6 @@
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="0,0,0,20"/>
-
         <StackPanel Orientation="Horizontal"
                     Margin="0,0,0,10">
             <Border Width="400"
@@ -45,8 +43,6 @@
                                    FontSize="18"
                                    Margin="20,10,10,0"/>
                     </StackPanel>
-
-                    
                 </Grid>
             </Border>
 
@@ -99,7 +95,6 @@
                         CornerRadius="10"/>
 
             </StackPanel>
-
         </StackPanel>
     </StackPanel>-->
 </UserControl>

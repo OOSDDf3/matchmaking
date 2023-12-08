@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,12 +32,13 @@ namespace LinkApplicationGraphics.NVVM.View
         Account account;
         Database_Connecter _connecter;
         List<string> interestsPerson = new List<string>();
+        List<string> selectedInterests = new List<string>();
 
         public InterestView()
         {
             InitializeComponent();
-            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",  
-                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
+            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",
+                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen",
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
             _connecter = new Database_Connecter();
@@ -50,8 +52,6 @@ namespace LinkApplicationGraphics.NVVM.View
             //debugPrint();            
             Debug.WriteLine(Account.NameProfile);
             Account.InterestsProfile = interestsPerson;
-           
-
             // Assuming you're outside of the App class
 
 
@@ -63,7 +63,7 @@ namespace LinkApplicationGraphics.NVVM.View
             List<string> categories = _connecter.GetInterestCategories();
             foreach (string category in categories)
             {
-                comboBoxCategories.Items.Add(category); 
+                comboBoxCategories.Items.Add(category);
             }
             comboBoxCategories.SelectedIndex = 1;
         }
@@ -80,14 +80,18 @@ namespace LinkApplicationGraphics.NVVM.View
                 VerticalAlignment = VerticalAlignment.Stretch,
                 SnapsToDevicePixels = true,
                 Content = content,
-                Name = content              
+                Name = content,
+                FontFamily = new FontFamily("Bahnschrift SemiLight")
             };
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(12)));
             checkBox.Resources.Add(typeof(Border), borderStyle);
 
-            Style toggleButtonStyle = (Style)FindResource(typeof(ToggleButton)); // Assuming ToggleButton is defined in XAML resources
+            Style toggleButtonStyle = (Style)FindResource(typeof(ToggleButton));
             checkBox.Style = toggleButtonStyle;
+
+            checkBox.Checked += CheckboxChecked;
+            checkBox.Unchecked += CheckboxUnchecked;
 
             CheckBoxGrid.Children.Add(checkBox);
             Grid.SetRow(checkBox, row);
@@ -99,7 +103,7 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             List<string> interests = _connecter.GetInterestsWithCategory(category);
             int counter = 0;
-            for (int i = 0; i <= interests.Count/4; i++)
+            for (int i = 0; i <= interests.Count / 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -113,24 +117,67 @@ namespace LinkApplicationGraphics.NVVM.View
             }
         }
 
+        public void UpdateSelectedInterestsToSelectedSection()
+        {
+            SelectedGrid.Children.Clear();
+            int counter = 0;
+            for (int i = 0; i <= selectedInterests.Count / 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (counter == selectedInterests.Count)
+                    {
+                        break;
+                    }
+                    Label label = new Label()
+                    {
+                        Content = selectedInterests[counter],
+                        Foreground = Brushes.White,
+                        FontSize = 16,
+                        FontFamily = new FontFamily("Bahnschrift SemiLight")
+                    };
+                    SelectedGrid.Children.Add(label);
+                    Grid.SetRow(label, i);
+                    Grid.SetColumn(label, j);
+                    counter++;
+                }
+            }
+        }
+
         public void loopCheckbox()
         {
             foreach (CheckBox checkBox in checkBoxes)
             {
-                if(checkBox.IsChecked == true)
+                if (checkBox.IsChecked == true)
                 {
                     interestsPerson.Add(checkBox.Name);
                 }
             }
         }
 
+        public void CheckboxChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            selectedInterests.Add(box.Name);
+            UpdateSelectedInterestsToSelectedSection();
+
+        }
+
+        public void CheckboxUnchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            selectedInterests.Remove(box.Name);
+            UpdateSelectedInterestsToSelectedSection();
+
+        }
+
         public void debugPrint()
         {
-            foreach(String naam in interestsPerson) 
+            foreach (String naam in interestsPerson)
             {
                 Debug.WriteLine(naam);
             }
-            
+
         }
 
         private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,5 +186,5 @@ namespace LinkApplicationGraphics.NVVM.View
             AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
     }
- 
+
 }

@@ -16,6 +16,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     {
         MainWindow mainWindow;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
+        public List<string> interestsPerson = new List<string>();
 
         Database_Connecter _connecter;
 
@@ -63,6 +64,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             //Code voor ophalen informatie user en inzettend naar de pagina
             dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
+            interestsPerson = _connecter.GetInterestsWithUserID(Account.user_ID);
 
             ProfileViewModel.NameProfile = dataPerson["name"];
             ProfileViewModel.AgeProfile = dataPerson["age"];
@@ -71,8 +73,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             ProfileViewModel.LanguageProfile = dataPerson["language"];
             ProfileViewModel.EmailProfile = dataPerson["email"];
             ProfileViewModel.PasswordProfile = dataPerson["password"];
+            ProfileViewModel.Interests = interestsPerson;
         }
-
 
     }
 }

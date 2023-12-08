@@ -24,6 +24,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string LanguageProfile { get; set; }
         public static string EmailProfile { get; set; }
         public static string PasswordProfile { get; set; }
+        public static List<string> Interests { get; set; }
+        public static string _interests;
+        public static string InterestsProfile {
+            get => JoinInterestsToString();
+            set => _interests = value;
+        }
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -68,6 +74,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             LanguageProfile = string.Empty;
             EmailProfile = string.Empty;
             PasswordProfile = string.Empty;
+            InterestsProfile = string.Empty;
+            Interests = new();
 
             Account.NameProfile = string.Empty;
             Account.AgeProfile = string.Empty;
@@ -75,15 +83,13 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
+            Account.InterestsProfile = null;
 
         }
 
-
-
-
-
-
-
-
+        private static string JoinInterestsToString()
+        {
+            return string.Join(", ", Interests);
+        }
     }
 }

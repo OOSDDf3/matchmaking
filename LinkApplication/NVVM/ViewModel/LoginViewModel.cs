@@ -101,12 +101,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
 
-
-
             if (_connecter.CheckLogin(Email, clearTextPassword, out user_ID))
             {
                 Debug.WriteLine(user_ID);
-
 
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
 

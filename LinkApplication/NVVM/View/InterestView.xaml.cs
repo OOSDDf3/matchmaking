@@ -28,11 +28,12 @@ namespace LinkApplicationGraphics.NVVM.View
     public partial class InterestView : UserControl
     {
 
-        List<CheckBox> checkBoxes = new List<CheckBox>();
+        //List<CheckBox> checkBoxes = new List<CheckBox>();
         Account account;
         Database_Connecter _connecter;
         List<string> interestsPerson = new List<string>();
         List<string> selectedInterests = new List<string>();
+        Dictionary<string, List<CheckBox>> Interests = new Dictionary<string, List<CheckBox>>();
 
         public InterestView()
         {
@@ -42,7 +43,11 @@ namespace LinkApplicationGraphics.NVVM.View
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
             _connecter = new Database_Connecter();
-            AddCategoriesToCombobox();
+            List<string> categories = AddCategoriesToComboboxAndDictionary();
+            foreach (string category in categories)
+            {
+                AddCheckBoxesToInterestDictionary(category);
+            }
             AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
@@ -52,23 +57,23 @@ namespace LinkApplicationGraphics.NVVM.View
             //debugPrint();            
             Debug.WriteLine(Account.NameProfile);
             Account.InterestsProfile = interestsPerson;
-            // Assuming you're outside of the App class
-
-
-
         }
 
-        private void AddCategoriesToCombobox()
+        // Retrieves categories from database and saves them in a combobox en dictionary
+        private List<string> AddCategoriesToComboboxAndDictionary()
         {
             List<string> categories = _connecter.GetInterestCategories();
             foreach (string category in categories)
             {
                 comboBoxCategories.Items.Add(category);
+                Interests.Add(category, new List<CheckBox>());
             }
             comboBoxCategories.SelectedIndex = 1;
+            return categories;
         }
 
-        private CheckBox SetupCheckBoxInterestsPage(int row, int col, string content)
+        // Method that creates a new CheckBox object and returns it
+        private CheckBox SetupCheckBox(string content)
         {
             CheckBox checkBox = new CheckBox()
             {
@@ -93,15 +98,28 @@ namespace LinkApplicationGraphics.NVVM.View
             checkBox.Checked += CheckboxChecked;
             checkBox.Unchecked += CheckboxUnchecked;
 
-            CheckBoxGrid.Children.Add(checkBox);
-            Grid.SetRow(checkBox, row);
-            Grid.SetColumn(checkBox, col);
+            //CheckBoxGrid.Children.Add(checkBox);
+            //Grid.SetRow(checkBox, row);
+            //Grid.SetColumn(checkBox, col);
             return checkBox;
         }
 
-        public void AddCheckBoxesToInterestsPage(string category)
+        // Method that adds checkboxes to the dictionary according to category
+        private void AddCheckBoxesToInterestDictionary(string category)
         {
             List<string> interests = _connecter.GetInterestsWithCategory(category);
+            foreach (string interest in interests)
+            {
+                CheckBox checkbox = SetupCheckBox(interest);
+                Interests[category].Add(checkbox);
+            }
+            comboBoxCategories.SelectedIndex = 1;
+        }
+
+        // Method that retrieves checkboxes from dictionary and adds them to the grid
+        public void AddCheckBoxesToInterestsPage(string category)
+        {
+            List<CheckBox> interests = Interests[category];
             int counter = 0;
             for (int i = 0; i <= interests.Count / 4; i++)
             {
@@ -111,7 +129,9 @@ namespace LinkApplicationGraphics.NVVM.View
                     {
                         break;
                     }
-                    checkBoxes.Add(SetupCheckBoxInterestsPage(i, j, interests[counter]));
+                    CheckBoxGrid.Children.Add(interests[counter]);
+                    Grid.SetRow(interests[counter], i);
+                    Grid.SetColumn(interests[counter], j);
                     counter++;
                 }
             }
@@ -146,11 +166,14 @@ namespace LinkApplicationGraphics.NVVM.View
 
         public void loopCheckbox()
         {
-            foreach (CheckBox checkBox in checkBoxes)
+            foreach (KeyValuePair<string, List<CheckBox>> category in Interests)
             {
-                if (checkBox.IsChecked == true)
+                foreach (CheckBox checkBox in category.Value)
                 {
-                    interestsPerson.Add(checkBox.Name);
+                    if (checkBox.IsChecked == true)
+                    {
+                        interestsPerson.Add(checkBox.Name);
+                    }
                 }
             }
         }
@@ -160,7 +183,6 @@ namespace LinkApplicationGraphics.NVVM.View
             CheckBox box = (CheckBox)sender;
             selectedInterests.Add(box.Name);
             UpdateSelectedInterestsToSelectedSection();
-
         }
 
         public void CheckboxUnchecked(object sender, RoutedEventArgs e)
@@ -168,7 +190,6 @@ namespace LinkApplicationGraphics.NVVM.View
             CheckBox box = (CheckBox)sender;
             selectedInterests.Remove(box.Name);
             UpdateSelectedInterestsToSelectedSection();
-
         }
 
         public void debugPrint()
@@ -177,7 +198,6 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 Debug.WriteLine(naam);
             }
-
         }
 
         private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)

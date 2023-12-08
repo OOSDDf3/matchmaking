@@ -59,7 +59,7 @@ namespace LinkApplicationGraphics.NVVM.View
             Account.InterestsProfile = interestsPerson;
         }
 
-        // Retrieves categories from database and saves them in a combobox en dictionary
+        // Retrieves categories from database and saves them in a combobox and dictionary
         private List<string> AddCategoriesToComboboxAndDictionary()
         {
             List<string> categories = _connecter.GetInterestCategories();
@@ -97,10 +97,6 @@ namespace LinkApplicationGraphics.NVVM.View
 
             checkBox.Checked += CheckboxChecked;
             checkBox.Unchecked += CheckboxUnchecked;
-
-            //CheckBoxGrid.Children.Add(checkBox);
-            //Grid.SetRow(checkBox, row);
-            //Grid.SetColumn(checkBox, col);
             return checkBox;
         }
 
@@ -137,6 +133,7 @@ namespace LinkApplicationGraphics.NVVM.View
             }
         }
 
+        // Updates the selected interests shown on the interest page 
         public void UpdateSelectedInterestsToSelectedSection()
         {
             SelectedGrid.Children.Clear();
@@ -164,6 +161,7 @@ namespace LinkApplicationGraphics.NVVM.View
             }
         }
 
+        // Loops the checkboxes in the dictionary and adds the ones that are checked to the list of interests to be added to the database
         public void loopCheckbox()
         {
             foreach (KeyValuePair<string, List<CheckBox>> category in Interests)

@@ -1,11 +1,14 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.NVVM.ViewModel;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Media.Imaging;
+using ZstdSharp.Unsafe;
 
 namespace LinkApplicationGraphics.NVVM.Model
 {
@@ -22,8 +25,12 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static string PasswordProfile { get; set; }
         public static string HashedPassword {  get; set; }
         public static Byte[] ProfilePicture { get; set; }
+        public static BitmapImage ProfilePictureImage { get; set; }
 
+
+        //objecten voor interreses
         public static List<string> InterestsProfile { get; set; }
+        public static string InterestsProfileString { get; set; }
 
         public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         static Database_Connecter _connecter;
@@ -62,10 +69,9 @@ namespace LinkApplicationGraphics.NVVM.Model
             _connecter = new Database_Connecter();
 
 
-            //Code voor ophalen informatie user en inzettend naar de pagina
-
+            //Code voor ophalen informatie user en zetten gegevens voor account in profile weergaven.
             dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
-
+            
             ProfileViewModel.NameProfile = dataPerson["name"];
             ProfileViewModel.BirthdateProfile = dataPerson["birthdate"];
             ProfileViewModel.AddressProfile = dataPerson["address"];
@@ -73,6 +79,63 @@ namespace LinkApplicationGraphics.NVVM.Model
             ProfileViewModel.LanguageProfile = dataPerson["language"];
             ProfileViewModel.EmailProfile = dataPerson["email"];
             ProfileViewModel.PasswordProfile = dataPerson["password"];
+
+            //Code voor ophalen en zetten interreses voor account in profile weergaven
+            if(InterestsProfileString.IsNullOrEmpty())
+            {
+                InterestsProfile = _connecter.ShowUserInterests(Account.user_ID, "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID");
+
+                for (int i = 0; i < InterestsProfile.Count; i += 3)
+                {
+                    for (int j = i; j < i + 3 && j < InterestsProfile.Count; j++)
+                    {
+                        if (j == InterestsProfile.Count - 1)
+                        {
+                            InterestsProfileString += $"{InterestsProfile[j]}";
+                        }
+                        else
+                        {
+                            InterestsProfileString += $"{InterestsProfile[j]}, ";
+                        }
+                    }
+                    InterestsProfileString += Environment.NewLine;
+                }
+            }
+            ProfileViewModel.InterestsProfileString = InterestsProfileString;
+
+            //Code voor ophalen foto en zetten in profile weergave
+            ProfilePicture = _connecter.ShowUserPicture(Account.user_ID);
+
+            ProfileViewModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
+
+            //code voor vinden match tijdelijk
+            _connecter.GetMatchingUser(Account.user_ID);
+            
+
+
+
+        }
+        public static BitmapImage ImageFromBuffer(byte[] buffer)
+        {
+            BitmapImage image = new BitmapImage();
+
+            try
+            {
+                using (MemoryStream ms = new MemoryStream(buffer))
+                {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception as needed
+                Console.WriteLine(ex.ToString());
+            }
+
+            return image;
         }
 
         public static void LogOut()
@@ -84,6 +147,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
+            Account.InterestsProfileString = string.Empty ;
 
         }
 

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -25,6 +26,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string LanguageProfile { get; set; }
         public static string EmailProfile { get; set; }
         public static string PasswordProfile { get; set; }
+        public static string InterestsProfileString { get; set; }
+        public static BitmapImage ProfilePictureImage { get; set; }
+
+
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -97,6 +102,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             LanguageProfile = string.Empty;
             EmailProfile = string.Empty;
             PasswordProfile = string.Empty;
+            InterestsProfileString = string.Empty;
 
             Account.NameProfile = string.Empty;
             Account.BirthdateProfile = string.Empty;
@@ -104,6 +110,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
+            Account.InterestsProfileString = string.Empty;
 
         }
 

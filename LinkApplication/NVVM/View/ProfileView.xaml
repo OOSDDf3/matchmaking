@@ -11,7 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
 
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
@@ -23,6 +23,19 @@
             <ColumnDefinition Width="0.5*"/>
 
         </Grid.ColumnDefinitions>
+
+        <Grid x:Name="imageGrid" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding ProfilePictureImage}" Grid.Column="1"/>
+
+        </Grid>
+
+        
 
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Height="141" Grid.Row="1">
             <Border 
@@ -385,8 +398,8 @@
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
 
-                    <!--<Grid>
-                        <TextBlock Text="{Binding InterestsProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                    <Grid>
+                        <TextBlock Text="{Binding InterestsProfileString, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
                             FontSize="22"
                             HorizontalAlignment="Center"
@@ -420,16 +433,16 @@
                                  Name="InterestsTextBox"
                                  />
                         </Border>
-                    </Grid>-->
+                    </Grid>
 
-                    <TextBlock Text="Snelwandelen"
+                    <!--<TextBlock Text="Snelwandelen"
                     Foreground="#272537"
                     FontSize="22"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0"
                     FontFamily="Bahnschrift SemiLight"
-                    Name="InterestsTextBox"           />
+                    Name="InterestsTextBox"           />-->
                 </StackPanel>
             </Border>
 

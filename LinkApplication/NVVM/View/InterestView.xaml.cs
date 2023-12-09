@@ -48,10 +48,8 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             loopCheckbox();
             debugPrint();
-
-            Debug.WriteLine(Account.NameProfile);
-
             Account.InterestsProfile = interestsPerson;
+            Debug.WriteLine(Account.NameProfile);
 
         }
 

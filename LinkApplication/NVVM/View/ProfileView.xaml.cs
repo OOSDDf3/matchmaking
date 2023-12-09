@@ -94,9 +94,7 @@ namespace LinkApplicationGraphics.NVVM.View
                     textBlock.Visibility = Visibility.Visible;
                     border.Visibility = Visibility.Hidden;
                 }
-                buttonSave.Visibility = Visibility.Hidden;
-
-                Account.showUserInfo();
+                buttonSave.Visibility = Visibility.Hidden;            
 
                 magDoor = true;
                 dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);

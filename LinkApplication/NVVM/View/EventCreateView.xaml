@@ -42,7 +42,7 @@
                 </TextBox.Resources>
             </TextBox>
 
-            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesses" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
             <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text=""/>
         </Grid>
         
@@ -93,8 +93,19 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-
-            <Button Grid.Row="1" Grid.Column="1" Content = "Aanmaken Event" HorizontalAlignment = "Center" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventsViewCommand}">
+<!--Buttno om weer terug te gaan naar het event overzicht-->
+            <Button Grid.Row="1" Grid.Column="0" Content = "Terug" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventsViewCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.BorderBrush>
+                    <ImageBrush TileMode="None" Stretch="Fill"/>
+                </Button.BorderBrush>
+            </Button>
+<!--Button Om event aan te maken, dit moet de data doorsturing aan roepen?-->
+            <Button Grid.Row="1" Grid.Column="2" Content = "Aanmaken Event" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

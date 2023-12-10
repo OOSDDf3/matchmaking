@@ -1,4 +1,5 @@
-﻿using LinkApplicationGraphics.Core;
+﻿using LinkApplication;
+using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class EventCreateViewModel : Core.ViewModel
     {
+        Database_Connecter _connecter;
+
         public INavigationService _navigation;
         public INavigationService Navigation
         {
@@ -33,6 +36,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         }
 
+        private void createEvent()
+        {
+            _connecter = new Database_Connecter();
 
+            _connecter.InsertIntoEventsList();
+
+        }
     }
 }

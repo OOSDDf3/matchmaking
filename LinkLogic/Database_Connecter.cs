@@ -1,18 +1,6 @@
-﻿using Azure;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections;
+﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using static Azure.Core.HttpHeader;
 
 namespace LinkApplication
 {
@@ -49,6 +37,8 @@ namespace LinkApplication
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
         }
+
+        //Methode voor nieuwe account
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
@@ -74,6 +64,7 @@ namespace LinkApplication
         }
 
 
+        //Methode voor bijwerken van een bestaand account
         public void UpdateAccount(int userID, string name, string email, string password, string address, string gender, string language)
         {
             try
@@ -97,6 +88,7 @@ namespace LinkApplication
                 Console.WriteLine(ex.ToString());
             }
         }
+
 
         public bool CheckLogin(string email, string password, out int user_ID)
         {
@@ -151,7 +143,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language"};
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language" };
 
                     while (reader.Read())
                     {
@@ -262,7 +254,10 @@ namespace LinkApplication
                 return interests;
             }
         }
-        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[]picture)
+
+
+        //Bijwerken interesses van een bestaand account
+        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[] picture)
         {
             try
             {
@@ -293,7 +288,7 @@ namespace LinkApplication
                     string queryInsertPicture = "INSERT INTO `profilepicture` (`user_ID`, `picture`) VALUES (@us1, @pi)";
                     var cmdInsertPicture = new MySqlCommand(queryInsertPicture, dbCon.Connection);
                     cmdInsertPicture.Parameters.Add("@us1", MySqlDbType.VarChar, 100).Value = user_ID;
-                    cmdInsertPicture.Parameters.Add("@pi", MySqlDbType.Blob).Value = picture;
+                    cmdInsertPicture.Parameters.Add("@pi", MySqlDbType.LongBlob).Value = picture;
                     cmdInsertPicture.ExecuteNonQuery();
                 }
             }
@@ -304,5 +299,62 @@ namespace LinkApplication
             }
         }
 
+
+        //Methode voor het aanmaken van een event
+        public void InsertIntoEventsList()
+        {
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
+        //Methode voor annuleren(verwijderen) van een event
+        public void DeleteFromEventsList()
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        public Dictionary<string, string> ShowEventInformation()
+        {
+            Dictionary<string, string> keyEventPairs = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+                return keyEventPairs;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return keyEventPairs;
+            }
+        }
     }
 }

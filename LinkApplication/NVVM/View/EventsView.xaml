@@ -33,8 +33,8 @@
                 BorderThickness="5"
                 BorderBrush="Black"
                 CornerRadius="30"
-                Padding="12,13,8,5"
-                Margin="10,0,10,0">
+                Padding="12,13,12,5"
+                Margin="5,0,15,0">
             <Grid x:Name="Event1_Grid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -45,7 +45,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.75*"/>
-                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.6*"/>
                     <ColumnDefinition Width="0.75*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
@@ -62,7 +62,28 @@
                 <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "X/10 (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <RadioButton Content="👤+" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie" Margin="0,0,0,8" Grid.RowSpan="2" >
+                <RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Checked="RadioButton_Checked" Grid.RowSpan="2" >
+                    <RadioButton.Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderThickness="2" BorderBrush="Black" Background="{x:Null}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+
+                <RadioButton Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="-0.269,-1.18" >
                     <RadioButton.Style>
                         <Style TargetType="{x:Type ToggleButton}">
                             <Setter Property="Template">
@@ -83,28 +104,7 @@
                     </RadioButton.Style>
                 </RadioButton>
 
-                <RadioButton Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie" Margin="0,0,10,5" RenderTransformOrigin="-0.269,-1.18" >
-                    <RadioButton.Style>
-                        <Style TargetType="{x:Type ToggleButton}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsChecked" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </RadioButton.Style>
-                </RadioButton>
-
-                <Button Grid.Row="2" Grid.Column="5" Content = "Aanmelden" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventCreateViewCommand}" Margin="0,5,0,0">
+                <Button Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventCreateViewCommand}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -115,10 +115,10 @@
                     </Button.BorderBrush>
                 </Button>
             </Grid>
-        </Border>        
+        </Border>
+
+
         
-
-
         <Grid x:Name="Filter_Category_Grid" Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkApplication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class EventCreateView : UserControl
     {
+        Database_Connecter _connecter;
         public EventCreateView()
         {
             InitializeComponent();

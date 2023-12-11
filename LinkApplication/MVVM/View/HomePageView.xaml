@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="{x:Static SystemParameters.PrimaryScreenHeight}" d:DesignWidth="{x:Static SystemParameters.PrimaryScreenWidth}">
+    
+    
+    
     <Border Background="#FF314861" CornerRadius="40">
         <Grid>
             <Grid.ColumnDefinitions>

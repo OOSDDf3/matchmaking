@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,43 +28,52 @@ namespace LinkApplicationGraphics.NVVM.View
     public partial class InterestView : UserControl
     {
 
-        List<CheckBox> checkBoxes = new List<CheckBox>();
+        //List<CheckBox> checkBoxes = new List<CheckBox>();
         Account account;
         Database_Connecter _connecter;
         List<string> interestsPerson = new List<string>();
+        List<string> selectedInterests = new List<string>();
+        Dictionary<string, List<CheckBox>> Interests = new Dictionary<string, List<CheckBox>>();
 
         public InterestView()
         {
             InitializeComponent();
-            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",  
-                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen", 
+            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",
+                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen",
                 "Hockeyen", "Voetbal", "Computeren", "Gamen" };
 
             _connecter = new Database_Connecter();
-            AddCategoriesToCombobox();
-            AddCheckBoxesToInterestsPage(comboBoxCategories.Items[0].ToString());
+            List<string> categories = AddCategoriesToComboboxAndDictionary();
+            foreach (string category in categories)
+            {
+                AddCheckBoxesToInterestDictionary(category);
+            }
+            AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
             loopCheckbox();
-            debugPrint();
-            Account.InterestsProfile = interestsPerson;
+            //debugPrint();            
             Debug.WriteLine(Account.NameProfile);
-
+            Account.InterestsProfile = interestsPerson;
         }
 
-        private void AddCategoriesToCombobox()
+        // Retrieves categories from database and saves them in a combobox and dictionary
+        private List<string> AddCategoriesToComboboxAndDictionary()
         {
             List<string> categories = _connecter.GetInterestCategories();
             foreach (string category in categories)
             {
-                comboBoxCategories.Items.Add(category); 
+                comboBoxCategories.Items.Add(category);
+                Interests.Add(category, new List<CheckBox>());
             }
             comboBoxCategories.SelectedIndex = 1;
+            return categories;
         }
 
-        private CheckBox SetupCheckBoxInterestsPage(int row, int col, string content)
+        // Method that creates a new CheckBox object and returns it
+        private CheckBox SetupCheckBox(string content)
         {
             CheckBox checkBox = new CheckBox()
             {
@@ -75,26 +85,39 @@ namespace LinkApplicationGraphics.NVVM.View
                 VerticalAlignment = VerticalAlignment.Stretch,
                 SnapsToDevicePixels = true,
                 Content = content,
-                Name = content              
+                Name = content,
+                FontFamily = new FontFamily("Bahnschrift SemiLight")
             };
             Style borderStyle = new Style(typeof(Border));
             borderStyle.Setters.Add(new Setter(Border.CornerRadiusProperty, new CornerRadius(12)));
             checkBox.Resources.Add(typeof(Border), borderStyle);
 
-            Style toggleButtonStyle = (Style)FindResource(typeof(ToggleButton)); // Assuming ToggleButton is defined in XAML resources
+            Style toggleButtonStyle = (Style)FindResource(typeof(ToggleButton));
             checkBox.Style = toggleButtonStyle;
 
-            CheckBoxGrid.Children.Add(checkBox);
-            Grid.SetRow(checkBox, row);
-            Grid.SetColumn(checkBox, col);
+            checkBox.Checked += CheckboxChecked;
+            checkBox.Unchecked += CheckboxUnchecked;
             return checkBox;
         }
 
-        public void AddCheckBoxesToInterestsPage(string category)
+        // Method that adds checkboxes to the dictionary according to category
+        private void AddCheckBoxesToInterestDictionary(string category)
         {
             List<string> interests = _connecter.GetInterestsWithCategory(category);
+            foreach (string interest in interests)
+            {
+                CheckBox checkbox = SetupCheckBox(interest);
+                Interests[category].Add(checkbox);
+            }
+            comboBoxCategories.SelectedIndex = 1;
+        }
+
+        // Method that retrieves checkboxes from dictionary and adds them to the grid
+        public void AddCheckBoxesToInterestsPage(string category)
+        {
+            List<CheckBox> interests = Interests[category];
             int counter = 0;
-            for (int i = 0; i <= interests.Count/4; i++)
+            for (int i = 0; i <= interests.Count / 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
@@ -102,30 +125,77 @@ namespace LinkApplicationGraphics.NVVM.View
                     {
                         break;
                     }
-                    checkBoxes.Add(SetupCheckBoxInterestsPage(i, j, interests[counter]));
+                    CheckBoxGrid.Children.Add(interests[counter]);
+                    Grid.SetRow(interests[counter], i);
+                    Grid.SetColumn(interests[counter], j);
                     counter++;
                 }
             }
         }
 
-        public void loopCheckbox()
+        // Updates the selected interests shown on the interest page 
+        public void UpdateSelectedInterestsToSelectedSection()
         {
-            foreach (CheckBox checkBox in checkBoxes)
+            SelectedGrid.Children.Clear();
+            int counter = 0;
+            for (int i = 0; i <= selectedInterests.Count / 4; i++)
             {
-                if(checkBox.IsChecked == true)
+                for (int j = 0; j < 4; j++)
                 {
-                    interestsPerson.Add(checkBox.Name);
+                    if (counter == selectedInterests.Count)
+                    {
+                        break;
+                    }
+                    Label label = new Label()
+                    {
+                        Content = selectedInterests[counter],
+                        Foreground = Brushes.White,
+                        FontSize = 16,
+                        FontFamily = new FontFamily("Bahnschrift SemiLight")
+                    };
+                    SelectedGrid.Children.Add(label);
+                    Grid.SetRow(label, i);
+                    Grid.SetColumn(label, j);
+                    counter++;
                 }
             }
         }
 
+        // Loops the checkboxes in the dictionary and adds the ones that are checked to the list of interests to be added to the database
+        public void loopCheckbox()
+        {
+            foreach (KeyValuePair<string, List<CheckBox>> category in Interests)
+            {
+                foreach (CheckBox checkBox in category.Value)
+                {
+                    if (checkBox.IsChecked == true)
+                    {
+                        interestsPerson.Add(checkBox.Name);
+                    }
+                }
+            }
+        }
+
+        public void CheckboxChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            selectedInterests.Add(box.Name);
+            UpdateSelectedInterestsToSelectedSection();
+        }
+
+        public void CheckboxUnchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = (CheckBox)sender;
+            selectedInterests.Remove(box.Name);
+            UpdateSelectedInterestsToSelectedSection();
+        }
+
         public void debugPrint()
         {
-            foreach(String naam in interestsPerson) 
+            foreach (String naam in interestsPerson)
             {
                 Debug.WriteLine(naam);
             }
-            
         }
 
         private void comboBoxCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -134,5 +204,5 @@ namespace LinkApplicationGraphics.NVVM.View
             AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
     }
- 
+
 }

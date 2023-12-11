@@ -65,7 +65,7 @@ namespace LinkApplication
 
 
         //Methode voor bijwerken van een bestaand account
-        public void UpdateAccount(int userID, string name, string email, string password, string address, string gender, string language)
+        public void UpdateAccount(int userID, string name, string email, string address, string gender, string language)
         {
             try
             {

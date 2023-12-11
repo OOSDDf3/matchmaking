@@ -53,17 +53,24 @@ namespace LinkApplicationGraphics.NVVM.View
 
             if (!passwordboxCheck.Password.IsNullOrEmpty() && !passwordboxNew.Password.IsNullOrEmpty())
             {
-                if (_connecter.CheckLogin(ProfileViewModel.EmailProfile, hashedPasswordCheck))
+                if (IsPasswordValid(clearTextPasswordNew))
                 {
-                    _connecter.UpdatePassword(Account.user_ID, hashedPasswordNew);
-                    ErrorMessage.Foreground = Brushes.Green;
-                    ErrorMessage.Content = "Wachtwoord succesvol gewijzigd";  
-                    magDoor = true;
+                    if (_connecter.CheckLogin(ProfileViewModel.EmailProfile, hashedPasswordCheck))
+                    {
+                        _connecter.UpdatePassword(Account.user_ID, hashedPasswordNew);
+                        ErrorMessage.Foreground = Brushes.Green;
+                        ErrorMessage.Content = "Wachtwoord succesvol gewijzigd";
+                        magDoor = true;
+                    }
+                    else
+                    {
+                        magDoor = false;
+                        ErrorMessage.Content = "Het ingevulde oude wachtwoord is onjuist";
+                    }
                 }
                 else
                 {
-                    magDoor = false;
-                    ErrorMessage.Content = "Het oude wachtwoord is onjuist";
+                    ErrorMessage.Content = "Het ingevulde wachtwoord moet langer zijn dan 5 karakters";
                 }
             }
             else
@@ -72,11 +79,14 @@ namespace LinkApplicationGraphics.NVVM.View
                 ErrorMessage.Content = "Er is nog niks ingevuld!";
             }
 
-            
-
-
-
         }
+
+        private bool IsPasswordValid(string password)
+        {
+            // Voeg hier de wachtwoordvalidatielogica toe (bijv. minimale lengte)
+            return password.Length >= 5;
+        }
+
         public void ShowPasswordFunction()
         {
             PasswordUnmaskCheck.Visibility = Visibility.Visible;

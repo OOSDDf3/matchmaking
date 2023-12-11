@@ -71,12 +71,11 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "UPDATE `account` SET `name` = @na, `email` = @em, `password` = @pa,`address` = @ad, `gender` = @ge, `language` = @la WHERE `user_ID` = @userID;";
+                    string query = "UPDATE `account` SET `name` = @na, `email` = @em, `address` = @ad, `gender` = @ge, `language` = @la WHERE `user_ID` = @userID;";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@userID", MySqlDbType.Int32, 4).Value = userID;
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
-                    cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
                     cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
                     cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
                     cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
@@ -89,6 +88,25 @@ namespace LinkApplication
             }
         }
 
+        public void UpdatePassword(int userID, string password)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "UPDATE `account` SET `password` = @pa WHERE `user_ID` = @userID;";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.Add("@userID", MySqlDbType.Int32, 4).Value = userID;
+                    cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
+
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+        }
 
         public bool CheckLogin(string email, string password, out int user_ID)
         {
@@ -132,6 +150,43 @@ namespace LinkApplication
                 return false;
             }
         }
+
+        public bool CheckLogin(string email, string password)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
+                    var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
+                    cmdID.Parameters.AddWithValue("@email", email);
+                    cmdID.Parameters.AddWithValue("@password", password);
+
+                    string queryForInfo = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
+                    var cmd = new MySqlCommand(queryForInfo, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    var count = cmd.ExecuteScalar();
+                    if (count.ToString().Equals("1"))
+                    {
+                        Console.WriteLine("Login succesfull");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Login unsuccesfull");
+                        return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+
 
         public Dictionary<string, string> ShowUserInformation(int user_ID, string query)
         {

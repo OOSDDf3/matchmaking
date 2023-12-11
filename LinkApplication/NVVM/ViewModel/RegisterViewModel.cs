@@ -138,6 +138,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        private string _errorMessagePicture;
+        public string ErrorMessagePicture
+        {
+            get => _errorMessagePicture;
+            set
+            {
+                _errorMessagePicture = value;
+                OnPropertyChanged(nameof(ErrorMessagePicture));
+            }
+        }
+
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -222,7 +233,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             hasErrorEmpty |= CheckStreet();
             hasErrorEmpty |= CheckPostalCode();
             hasErrorEmpty |= CheckGender();
+            hasErrorEmpty |= CheckPicture();
             hasErrorEmpty |= CheckPassword(clearTextPassword);
+            
 
             //Checkt hier of alle velden zijn ingevuld, zo niet krijg je een error message. Zo wel gaat hij door naar de interesse pagina
             if (hasErrorEmpty)
@@ -237,8 +250,22 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
-        //hieronder de methodes voor het checken van requirements die we stellen
-        private bool CheckNaam()
+        private bool CheckPicture()
+        {
+            if (RegisterView.magDoorPicture)
+            {
+                ErrorMessagePicture = "Picture";
+                return true;
+            }
+            else
+            {
+                ErrorMessagePicture = "";
+                return false;
+
+            }
+        }
+            //hieronder de methodes voor het checken van requirements die we stellen
+            private bool CheckNaam()
         {
             if (NameProfile.IsNullOrEmpty())
             {

@@ -159,7 +159,6 @@ namespace LinkApplication
                 }
                 return keyValuePairs;
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
@@ -167,6 +166,147 @@ namespace LinkApplication
             }
         }
 
+        public List<string> ShowUserInterests(int user_ID, string query)
+        {
+            List<string> Interest_ID = new();
+            List<string> Interest_name = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    var cmdInterestID = new MySqlCommand(query, dbCon.Connection);
+                    cmdInterestID.Parameters.AddWithValue("@user_ID", user_ID);
+                    var reader = cmdInterestID.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Debug.Write(reader.GetValue(i).ToString() + " ");
+                            Interest_ID.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                    reader.Close();
+
+                    var queryName = "SELECT name FROM interests WHERE interest_ID = @interest_ID";
+                    var cmdInterestName = new MySqlCommand(queryName, dbCon.Connection);
+
+                    foreach (var id in Interest_ID)
+                    {
+                        cmdInterestName.Parameters.Clear();
+                        cmdInterestName.Parameters.AddWithValue("@interest_ID", id);
+
+                        using var readerInterestName = cmdInterestName.ExecuteReader();
+
+                        while (readerInterestName.Read())
+                        {
+                            Interest_name.Add(readerInterestName["name"].ToString());
+                            Debug.Write(readerInterestName["name"].ToString() + " ");
+                        }
+                    }
+                    return Interest_name;
+                }
+                return Interest_name;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return Interest_name;
+            }
+        }
+
+        //code voor het halen van user id's uit de database met matchende interesses
+        public Dictionary<int, int> GetMatchingUser(int user_ID)
+        {
+            //code voor ophalen van intereses van desbetreffende gebruiker
+            List<string> Interest_ID = new();
+            string queryInterest_ID = "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID";
+
+            var cmdInterestID = new MySqlCommand(queryInterest_ID, dbCon.Connection);
+            cmdInterestID.Parameters.AddWithValue("@user_ID", user_ID);
+            var reader = cmdInterestID.ExecuteReader();
+
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+
+                    Interest_ID.Add(reader.GetValue(i).ToString());
+                }
+            }
+            reader.Close();
+
+
+            //code voor ophalen andere users.
+            Dictionary<int, int> users = new();
+
+            string queryUser_ID = "SELECT user_ID FROM userinterestlist WHERE interest_ID = @interest_ID";
+            var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection);
+
+            foreach (var id in Interest_ID)
+            {
+                cmdSelect.Parameters.Clear();
+                cmdSelect.Parameters.AddWithValue("@interest_ID", id);
+                cmdSelect.Parameters.AddWithValue("@user_ID", user_ID);
+
+                var readerID = cmdSelect.ExecuteReader();
+
+                while (readerID.Read())
+                {
+                    int user_ID_selected = Convert.ToInt32(readerID["user_ID"]);
+
+                    if (user_ID_selected != user_ID)
+                    {
+                        if (!users.ContainsKey(user_ID_selected))
+                        {
+                            users.Add(user_ID_selected, 1);
+                        }
+                        else
+                        {
+                            users[user_ID_selected]++;
+                        }
+                    }
+                }
+                readerID.Close();
+            }
+
+            //testen of hij de goede gegevens ophaalt
+            foreach (var user in users)
+            {
+                Debug.WriteLine("");
+                Debug.WriteLine($"User ID: {user.Key}, Zelfde interesses: {user.Value}");
+            }
+
+            return users;
+
+        }
+        //code voor het halen van de foto uit de database
+        public byte[] ShowUserPicture(int user_ID)
+        {
+            byte[] pictureByte = null;
+            string queryPicture = "SELECT picture FROM profilepicture WHERE user_ID = @user_ID";
+
+            try
+            {
+                var cmdPicture = new MySqlCommand(queryPicture, dbCon.Connection);
+                cmdPicture.Parameters.AddWithValue("@user_ID", user_ID);
+                var reader = cmdPicture.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    pictureByte = (byte[])reader["picture"];
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle exception as needed
+                Console.WriteLine(ex.ToString());
+            }
+
+            return pictureByte;
+        }
 
         public int getUserID(string email, string password)
         {

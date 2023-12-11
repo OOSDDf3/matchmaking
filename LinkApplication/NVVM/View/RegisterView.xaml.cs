@@ -29,6 +29,7 @@ namespace LinkApplicationGraphics.NVVM.View
     {
         Database_Connecter _connecter;
         BitmapImage selectedImage;
+        public static bool magDoorPicture;
 
         public RegisterView()
         {
@@ -83,7 +84,15 @@ namespace LinkApplicationGraphics.NVVM.View
             Debug.WriteLine(gender);
 
 
-            Account account = new Account(textBoxName.Text, textBoxAge.Text, textBoxStreet.Text, gender, "Dutch", textBoxEmail.Text, textBoxPassword.Password, PasswordHasher.HashPassword(textBoxPassword.Password), BufferFromImage(selectedImage));
+            if (selectedImage != null)
+            {
+                Account account = new Account(textBoxName.Text, textBoxAge.Text, textBoxStreet.Text, gender, "Dutch", textBoxEmail.Text, textBoxPassword.Password, PasswordHasher.HashPassword(textBoxPassword.Password), BufferFromImage(selectedImage));
+                magDoorPicture = false;
+            }
+            else
+            {
+                magDoorPicture = true;
+            }
 
 
             //_connecter.InsertAccount("Jan", "Frederick", "Pieter", 1, "Hallo", "MyG", "Flikka", BufferFromImage(selectedImage));

@@ -42,7 +42,7 @@ namespace LinkApplicationGraphics.NVVM.View
             (TextBlockProfileLanguage, UpdateInformationTextBoxLanguage),
             //(TextBlockProfileInterests, UpdateInformationTextBoxInterests),
             (TextBlockProfileEmail, UpdateInformationTextBoxEmail),
-            (TextBlockProfilePassword, UpdateInformationTextBoxPassword),
+            //(TextBlockProfilePassword, UpdateInformationTextBoxPassword),
             };
 
         }
@@ -75,8 +75,8 @@ namespace LinkApplicationGraphics.NVVM.View
             string EmailTextBoxValue = EmailTextBox.Text;
             if (string.IsNullOrEmpty(EmailTextBoxValue)) { EmailTextBoxValue = TextBlockProfileEmail.Text; }
 
-            string PasswordTextBoxValue = PasswordTextBox.Text;
-            if (string.IsNullOrEmpty(PasswordTextBoxValue)) { PasswordTextBoxValue = TextBlockProfilePassword.Text; }
+            //string PasswordTextBoxValue = PasswordTextBox.Text;
+            //if (string.IsNullOrEmpty(PasswordTextBoxValue)) { PasswordTextBoxValue = TextBlockProfilePassword.Text; }
 
             string AddressTextBoxValue = AddressTextBox.Text;
             if (string.IsNullOrEmpty(AddressTextBoxValue)) { AddressTextBoxValue = TextBlockProfileAddress.Text; }
@@ -97,7 +97,7 @@ namespace LinkApplicationGraphics.NVVM.View
                 buttonSave.Visibility = Visibility.Hidden;            
 
                 magDoor = true;
-                dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, PasswordTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
+                dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
             }
             else magDoor = false;
 

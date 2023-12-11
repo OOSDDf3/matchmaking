@@ -44,6 +44,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //Command voor navigeren naar login page, uitvoering staat in xaml bij de button
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
+        public RelayCommand NavigateToPasswordChangePageCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -55,7 +56,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
-            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);  
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
+            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);  
 
 
         }

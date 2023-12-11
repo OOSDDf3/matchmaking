@@ -528,15 +528,16 @@
                     VerticalAlignment="Center"
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <Grid>
-                        <TextBlock Text="{Binding PasswordProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
-                            Foreground="#272537"
+                        <Button Content="Wachtwoord wijzigen"
+                            Foreground="Black"
                             FontSize="22"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
                             FontFamily="Bahnschrift SemiLight"
                             Name="TextBlockProfilePassword"
-                            Visibility="Visible"/>
+                            Command="{Binding NavigateToPasswordChangePageCommand}"    
+                            Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic"/>
 
                         <Border Background="Transparent" 
                                 BorderBrush="#272537"
@@ -572,7 +573,7 @@
 
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "150" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
+        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "150" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -584,7 +585,7 @@
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -40,6 +40,7 @@ namespace LinkApplication
             services.AddSingleton<EventCreateViewModel>();
             services.AddSingleton<EventsViewModel>();
             services.AddSingleton<ProfileViewModel>();
+            services.AddSingleton<PasswordChangeViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
 
 

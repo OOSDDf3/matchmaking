@@ -109,7 +109,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
 
@@ -129,7 +129,7 @@
              HorizontalAlignment="Center"/>
                     <TextBlock Text="Naam"
                     Foreground="White"
-                    FontSize="20"
+                    FontSize="18"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -137,7 +137,7 @@
                     <Grid>
                         <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="#272537"
-                           FontSize="22"
+                           FontSize="18"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Margin="0,5,0,0"
@@ -162,7 +162,7 @@
                                      Foreground="#AFAFAF"
                                      Background="Transparent"
                                      BorderThickness="0"
-                                     FontSize="20"
+                                     FontSize="18"
                                      GotFocus="TextBox_GotFocus"
                                      Margin="10,0,0,0"
                                      Name="NameTextbox">
@@ -189,14 +189,14 @@
                                 HorizontalAlignment="Center"/>
                     <TextBlock Text="Geboortedatum"
                                 Foreground="White"
-                                FontSize="20"
+                                FontSize="18"
                                 FontWeight="Bold"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding BirthdateProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="#272537"
-                           FontSize="22"
+                           FontSize="18"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Margin="0,5,0,0"
@@ -221,7 +221,7 @@
                      HorizontalAlignment="Center"/>
                     <TextBlock Text="Adres"
                      Foreground="White"
-                     FontSize="20"
+                     FontSize="18"
                      FontWeight="Bold"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center"
@@ -229,7 +229,7 @@
                     <Grid>
                         <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -254,7 +254,7 @@
                                      Foreground="#AFAFAF"
                                      Background="Transparent"
                                      BorderThickness="0"
-                                     FontSize="20"
+                                     FontSize="18"
                                      GotFocus="TextBox_GotFocus"
                                      Margin="10,0,0,0"
                                      PreviewTextInput="TextBox_PreviewTextInput"
@@ -275,13 +275,13 @@
                 <StackPanel>
                     <TextBlock
                 Text="⚥"
-                Margin="0, 5,0,0"
+                Margin="0,0,0,0"
                 Foreground="#272537"
                 FontSize="32"
                 HorizontalAlignment="Center"/>
                     <TextBlock Text="Gender"
                 Foreground="White"
-                FontSize="20"
+                FontSize="18"
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -289,7 +289,7 @@
                     <Grid>
                         <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -314,7 +314,7 @@
                                      Foreground="#AFAFAF"
                                      Background="Transparent"
                                      BorderThickness="0"
-                                     FontSize="20"
+                                     FontSize="18"
                                      GotFocus="TextBox_GotFocus"
                                      Margin="10,0,0,0"
                                      PreviewTextInput="TextBox_PreviewTextInput"
@@ -340,7 +340,7 @@
                     HorizontalAlignment="Center"/>
                     <TextBlock Text="Taal"
                     Foreground="White"
-                    FontSize="20"
+                    FontSize="18"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -348,7 +348,7 @@
                     <Grid>
                         <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -373,7 +373,7 @@
                                      Foreground="#AFAFAF"
                                      Background="Transparent"
                                      BorderThickness="0"
-                                     FontSize="20"
+                                     FontSize="18"
                                      GotFocus="TextBox_GotFocus"
                                      Margin="10,0,0,0"
                                      PreviewTextInput="TextBox_PreviewTextInput"
@@ -401,7 +401,7 @@
                     HorizontalAlignment="Center"/>
                     <TextBlock Text="Interesse"
                     Foreground="White"
-                    FontSize="20"
+                    FontSize="18"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -410,7 +410,7 @@
                     <Grid>
                         <TextBlock Text="{Binding InterestsProfileString, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -435,7 +435,7 @@
                                  Foreground="#AFAFAF"
                                  Background="Transparent"
                                  BorderThickness="0"
-                                 FontSize="20"
+                                 FontSize="18"
                                  GotFocus="TextBox_GotFocus"
                                  Margin="10,0,0,0"
                                  PreviewTextInput="TextBox_PreviewTextInput"
@@ -446,7 +446,7 @@
 
                     <!--<TextBlock Text="Snelwandelen"
                     Foreground="#272537"
-                    FontSize="22"
+                    FontSize="18"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0"
@@ -471,7 +471,7 @@
                     HorizontalAlignment="Center"/>
                     <TextBlock Text="Email"
                     Foreground="White"
-                    FontSize="20"
+                    FontSize="18"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -479,7 +479,7 @@
                     <Grid>
                         <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -504,7 +504,7 @@
                                      Foreground="#AFAFAF"
                                      Background="Transparent"
                                      BorderThickness="0"
-                                     FontSize="20"
+                                     FontSize="18"
                                      GotFocus="TextBox_GotFocus"
                                      Margin="10,0,0,0"
                                      PreviewTextInput="TextBox_PreviewTextInput"
@@ -531,7 +531,7 @@
                     HorizontalAlignment="Center"/>
                     <TextBlock Text="Wachtwoord"
                     Foreground="White"
-                    FontSize="20"
+                    FontSize="18"
                     FontWeight="Bold"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -539,7 +539,7 @@
                     <Grid>
                         <Button Content="Wachtwoord wijzigen"
                             Foreground="Black"
-                            FontSize="22"
+                            FontSize="18"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -565,7 +565,7 @@
                                  Foreground="#AFAFAF"
                                  Background="Transparent"
                                  BorderThickness="0"
-                                 FontSize="20"
+                                 FontSize="18"
                                  GotFocus="TextBox_GotFocus"
                                  Margin="10,0,0,0"
                                  PreviewTextInput="TextBox_PreviewTextInput"
@@ -582,7 +582,7 @@
 
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "140" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="20" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -595,8 +595,16 @@
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
-
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "140" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
         </Button>
 
         <TextBlock Background="Transparent" 
@@ -607,7 +615,7 @@
                VerticalAlignment="Top" 
                HorizontalAlignment="Center"
                Text="{Binding ErrorMessage}"
-               FontSize="20"
+               FontSize="18"
                TextAlignment="Center"
                TextWrapping="WrapWithOverflow"
                Margin="0,0,0,0"    

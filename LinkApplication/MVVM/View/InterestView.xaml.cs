@@ -77,8 +77,8 @@ namespace LinkApplicationGraphics.NVVM.View
         {
             CheckBox checkBox = new CheckBox()
             {
-                Height = 27,
-                Width = 120,
+                Height = 22,
+                Width = Double.NaN,
                 Foreground = Brushes.White,
                 Background = null,
                 HorizontalAlignment = HorizontalAlignment.Stretch,

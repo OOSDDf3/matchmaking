@@ -97,7 +97,7 @@
             </Grid.RowDefinitions>
 
 
-            <TextBlock  Grid.Row="8" Grid.Column="1" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="16"/>
+            <TextBlock  Grid.Row="8" Grid.Column="1" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="14"/>
 
 
             <Grid x:Name="Name_BirthDate_Grid" Grid.Row="1" Grid.Column="1">
@@ -107,8 +107,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Voornaam" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18" Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White" >
+                <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Voornaam" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <TextBox x:Name = "textBoxName" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" FontSize="14" Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White" >
                     <TextBox.Style>
                         <Style TargetType="TextBox">
                             <Style.Triggers>
@@ -125,9 +125,9 @@
                     </TextBox.Resources>
                 </TextBox>
 
-                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Geboortejaar" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Geboortejaar" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <TextBox x:Name = "textBoxAge" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18" Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White">
+                <TextBox x:Name = "textBoxAge" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" FontSize="14" Text="{Binding AgeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White">
                     <TextBox.Style>
                         <Style TargetType="TextBox">
                             <Style.Triggers>
@@ -149,8 +149,8 @@
             </Grid>
 
             
-            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" SelectionTextBrush="White" FontSize="18"  Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White"  >
+            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "E-mailadres" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <TextBox x:Name = "textBoxEmail" Grid.Row="2" Grid.Column="1"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" SelectionTextBrush="White" FontSize="14"  Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White"  >
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
@@ -169,7 +169,7 @@
             </TextBox>
 
 
-            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Gender" FontSize="16" Foreground="White"/>
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Gender" FontSize="14" Foreground="White"/>
             
             
             <!--Grid voor gender-->
@@ -203,10 +203,10 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Straatnaam" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-                <Label Grid.Column="2" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Postcode" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Straatnaam" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Column="2" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Postcode" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                <TextBox x:Name = "textBoxStreet" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18" Text="{Binding StreetProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White" >
+                <TextBox x:Name = "textBoxStreet" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" FontSize="14" Text="{Binding StreetProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White" >
                     <TextBox.Style>
                         <Style TargetType="TextBox">
                             <Style.Triggers>
@@ -223,7 +223,7 @@
                         </Style>
                     </TextBox.Resources>
                 </TextBox>
-                <TextBox x:Name = "textBoxPostalCode" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18" Text="{Binding PostalCodeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White">
+                <TextBox x:Name = "textBoxPostalCode" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" FontSize="14" Text="{Binding PostalCodeProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}" CaretBrush="White">
                     <TextBox.Style>
                         <Style TargetType="TextBox">
                             <Style.Triggers>
@@ -241,8 +241,8 @@
                 </TextBox>
             </Grid>
 
-            <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Wachtwoord" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <PasswordBox x:Name = "textBoxPassword" Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="18" CaretBrush="White">
+            <Label Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "Wachtwoord" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <PasswordBox x:Name = "textBoxPassword" Grid.Row="5" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom"  VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White" FontSize="14" CaretBrush="White">
                 <PasswordBox.Style>
                     <Style TargetType="PasswordBox">
                         <Style.Triggers>
@@ -255,7 +255,7 @@
                 </PasswordBox.Style>
             </PasswordBox>
 
-            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White"  FontSize="18"/>
+            <TextBox Name="PasswordUnmask" Visibility="Hidden" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Height="28" Background="{x:Null}" Foreground="White"  FontSize="14"/>
             <TextBlock x:Name="ShowPassword" Text="👁️" Grid.Row="5" Grid.Column="1" PreviewMouseDown="ShowPassword_PreviewMouseDown" PreviewMouseUp="ShowPassword_PreviewMouseUp" MouseLeave="ShowPassword_MouseLeave" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="26" Foreground="#FFABADB3"/>
 
             <!--Grid voor foto-->
@@ -267,13 +267,13 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.6*"/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="0.6*"/>
                 </Grid.RowDefinitions>
                 
                 
                 
-                <Label Grid.Row="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Profiel foto" FontSize="16" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Profiel foto" FontSize="14" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                 <Rectangle Grid.Row="1">
                     <Rectangle.Style>
@@ -291,7 +291,7 @@
                 </Rectangle>
                 <Image x:Name="ImagePicture" Grid.Row="1"/>
 
-                <Button Grid.Row="8" x:Name = "buttonUplaod" Content = "Upload foto" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="25" Background="{x:Null}" Foreground="White" FontSize="16" FontFamily="Bahnschrift SemiLight" BorderBrush="White" Click="buttonUplaod_Click">
+                <Button Grid.Row="8" x:Name = "buttonUplaod" Content = "Upload foto" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Height="25" Background="{x:Null}" Foreground="White" FontSize="14" FontFamily="Bahnschrift SemiLight" BorderBrush="White" Click="buttonUplaod_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -302,11 +302,11 @@
             </Grid>
             
 
-            <TextBlock  Grid.Row="6" Grid.Column="1" Text="{Binding ErrorMessagePasswordToShort}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="16"/>
+            <TextBlock  Grid.Row="6" Grid.Column="1" Text="{Binding ErrorMessagePasswordToShort}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFA40000" FontSize="14"/>
 
 
 
-            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
+            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="14" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
                 <Button.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>
@@ -318,7 +318,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToInterestCommand }" CommandParameter="{Binding ElementName=textBoxPassword}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="14" Command="{Binding NavigateToInterestCommand }" CommandParameter="{Binding ElementName=textBoxPassword}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
                 <Button.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>

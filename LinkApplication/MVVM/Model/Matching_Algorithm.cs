@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkApplication
+namespace LinkApplicationGraphics.NVVM.Model
 {
     public class Matching_Algorithm
     {

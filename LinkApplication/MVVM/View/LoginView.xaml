@@ -89,7 +89,7 @@
 
         <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ErrorMessage}" Foreground="#FFAD2E2E" FontSize="16"/>
 
-        <Button x:Name="ButtonInloggen" materialDesgin:ButtonAssist.CornerRadius="8" Grid.Column="2" Grid.Row="5" Content="Inloggen" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="#FFF1F1F1" Click="Login_Button" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToHomePageCommand}" CommandParameter="{Binding ElementName=WachtwoordBox}" >
+        <Button x:Name="ButtonInloggen" materialDesgin:ButtonAssist.CornerRadius="8" Grid.Column="2" Grid.Row="5" Content="Inloggen" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" Foreground="#FFF1F1F1" Click="Login_Button" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToHomePageCommand}" CommandParameter="{Binding ElementName=WachtwoordBox}" BorderBrush="{x:Null}" >
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="LinkApplicationGraphics.NVVM.View.RegisterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
@@ -305,23 +306,28 @@
 
 
 
-            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}">
+            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCancel" Content = "Annuleren" HorizontalAlignment = "Left" VerticalAlignment = "Bottom" Width = "125" Click="buttonCancel_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
                 <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
                 </Button.Resources>
             </Button>
 
-            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToInterestCommand }" CommandParameter="{Binding ElementName=textBoxPassword}" FontFamily="Bahnschrift SemiLight">
+            <Button Grid.Row="9" Grid.Column="1" x:Name = "buttonCreate" Content = "Doorgaan" HorizontalAlignment = "Right" VerticalAlignment = "Bottom" Width = "125" Click="buttonCreate_Click" Height="35" Background="#FF463692" Foreground="White" FontSize="16" Command="{Binding NavigateToInterestCommand }" CommandParameter="{Binding ElementName=textBoxPassword}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
                 <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
                 </Button.Resources>
-                <Button.BorderBrush>
-                    <ImageBrush TileMode="None" Stretch="Fill"/>
-                </Button.BorderBrush>
             </Button>
         </Grid>
 

@@ -1,15 +1,25 @@
 ﻿<UserControl x:Class="LinkApplicationGraphics.NVVM.View.ProfileView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
 
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
 
-    <Grid>
+        <Grid>
         <Grid.RowDefinitions>
 
             <RowDefinition Height="1.2*"/>
@@ -32,7 +42,13 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="{Binding ProfilePictureImage}" Grid.Column="1"/>
+            <Viewbox Grid.Column="1">
+                <Border BorderThickness="5" BorderBrush="White">
+                    <Image Stretch="None" Source="{Binding ProfilePictureImage}"/>
+                </Border>
+            </Viewbox>
+            
+
 
         </Grid>
 
@@ -46,9 +62,11 @@
             Background="#729CA7"
             Margin="10,0,10,10"
             BorderThickness="5">
+                
+                
 
                 <StackPanel>
-
+                    
                     <TextBlock Text="Jouw persoonlijke info"
                        Foreground="White"
                        FontSize="36"
@@ -574,27 +592,13 @@
 
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "150" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-            <Button.BorderBrush>
-                <ImageBrush TileMode="None" Stretch="Fill"/>
-            </Button.BorderBrush>
+        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "130" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-            <Button.BorderBrush>
-                <ImageBrush TileMode="None" Stretch="Fill"/>
-            </Button.BorderBrush>
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+
         </Button>
 
         <TextBlock Background="Transparent" 

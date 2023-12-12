@@ -60,7 +60,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="1" Grid.Column="0" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
+
+            <Button Grid.Row="1" Grid.Column="2" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="50"/>
@@ -71,7 +72,7 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="2" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
+            <Button Grid.Row="1" Grid.Column="0" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

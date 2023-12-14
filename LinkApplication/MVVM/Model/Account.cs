@@ -70,7 +70,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
 
             //Code voor ophalen informatie user en zetten gegevens voor account in profile weergaven.
-            dataPerson = _connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID");
+            dataPerson = _connecter.ShowUserInformation(Account.user_ID);
             
             ProfileViewModel.NameProfile = dataPerson["name"];
             ProfileViewModel.BirthdateProfile = dataPerson["birthdate"];
@@ -83,7 +83,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             //Code voor ophalen en zetten interreses voor account in profile weergaven
             if(InterestsProfileString.IsNullOrEmpty())
             {
-                InterestsProfile = _connecter.ShowUserInterests(Account.user_ID, "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID");
+                InterestsProfile = _connecter.ShowUserInterests(Account.user_ID);
 
                 for (int i = 0; i < InterestsProfile.Count; i += 3)
                 {
@@ -108,8 +108,8 @@ namespace LinkApplicationGraphics.NVVM.Model
 
             ProfileViewModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
 
-            //code voor vinden match tijdelijk
-            _connecter.GetMatchingUser(Account.user_ID);
+            
+            
             
 
 

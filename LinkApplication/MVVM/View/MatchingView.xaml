@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
+             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MatchingViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
     
@@ -33,26 +33,48 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
-
         <!-- Profile Picture -->
-        <Grid Grid.Row="1" Grid.Column="1" Margin="10">
-            <Border CornerRadius="15" Background="#FF729CA7" BorderThickness="5">
-                <StackPanel>
-                    <!-- Placeholder Profile Picture -->
-                    <TextBlock Text="Matchinfo" Foreground="White" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
+       
 
-                    <!-- Profile Information TextBox -->
-                    <TextBox Text="{Binding CurrentUserProfileInfo}"
-                      Foreground="White" FontSize="18"
-                             HorizontalAlignment="Center" VerticalAlignment="Center"
-                             Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"
-                             IsReadOnly="True"
-                             Background="Transparent" BorderThickness="0"/>
-                </StackPanel>
-            </Border>
+            <Border CornerRadius="15" Background="#FF729CA7" BorderThickness="0" Grid.Column="1" Grid.RowSpan="2">
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+                <!-- Placeholder Profile Picture -->
+
+                <Viewbox Grid.Column="1" Grid.Row="1">
+                    
+                        <Image Stretch="None" Source="{Binding MatchPictureImage}"/>
+                    
+                </Viewbox>
+                
+
+                <!-- Profile Information TextBox -->
+
+                <TextBlock Text="{Binding NameMatch}"
+                           VerticalAlignment="Center"
+                      Grid.Row="2"   
+                      Grid.Column="1"   
+                      Foreground="White" FontSize="18"   
+                      Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"
+                      Background="Transparent"/>
+
+
+            </Grid>
+        </Border>
 
             <!-- Accept and Decline Buttons -->
-        </Grid>
         <Grid x:Name="Button_Grid" Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -61,7 +83,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button Grid.Row="1" Grid.Column="2" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
+            <Button Grid.Row="1" Grid.Column="2" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="{Binding AcceptMatchCommand}">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="50"/>
@@ -72,7 +94,7 @@
                 </Button.BorderBrush>
             </Button>
 
-            <Button Grid.Row="1" Grid.Column="0" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
+            <Button Grid.Row="1" Grid.Column="0" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="{Binding DeclineMatchCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

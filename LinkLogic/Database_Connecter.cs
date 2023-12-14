@@ -188,9 +188,10 @@ namespace LinkApplication
         }
 
 
-        public Dictionary<string, string> ShowUserInformation(int user_ID, string query)
+        public Dictionary<string, string> ShowUserInformation(int user_ID)
         {
             Dictionary<string, string> keyValuePairs = new();
+            string query = "SELECT * FROM Account WHERE user_ID = @user_ID";
             try
             {
                 if (dbCon.IsConnect())
@@ -221,10 +222,12 @@ namespace LinkApplication
             }
         }
 
-        public List<string> ShowUserInterests(int user_ID, string query)
+        public List<string> ShowUserInterests(int user_ID)
         {
             List<string> Interest_ID = new();
             List<string> Interest_name = new();
+
+            string query = "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID";
             try
             {
                 if (dbCon.IsConnect())
@@ -460,7 +463,7 @@ namespace LinkApplication
                 {
                     foreach (string interest in interests)
                     {
-                        string querySelect = "SELECT  interest_Id FROM Interests WHERE name = @in";
+                        string querySelect = "SELECT interest_Id FROM Interests WHERE name = @in";
                         var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
                         cmdSelect.Parameters.AddWithValue("@in", interest);
                         var reader = cmdSelect.ExecuteReader();

@@ -80,12 +80,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if (userMatches.Count != 0)
             {
                 //haalt de userid op met de meest overeenkomende interreses
-                int keyWithMinValue = userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
-                userMatches.Remove(keyWithMinValue);
+                int userIDMatch = userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
+                userMatches.Remove(userIDMatch);
 
                 //haalt gegevens op van desbetreffende persoon
-                dataPerson = _connecter.ShowUserInformation(keyWithMinValue);
-                MatchPicture = _connecter.ShowUserPicture(keyWithMinValue);
+                dataPerson = _connecter.ShowUserInformation(userIDMatch);
+                MatchPicture = _connecter.ShowUserPicture(userIDMatch);
 
                 //zet de gegevens van de desbetreffende persoon
                 MatchPictureImage = Account.ImageFromBuffer(MatchPicture);
@@ -93,7 +93,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 dataPerson.Clear();
 
-                Debug.WriteLine(keyWithMinValue);
+                Debug.WriteLine(userIDMatch);
             }
             else
             {

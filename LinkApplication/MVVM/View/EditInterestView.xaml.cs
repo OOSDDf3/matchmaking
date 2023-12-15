@@ -48,15 +48,21 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 AddCheckBoxesToInterestDictionary(category);
             }
+            //For every interest from database update checkbox to show it is checked
+            List<List<string>> interestsList = _connecter.GetInterestsWithUserID(Account.user_ID);
+            foreach(List<string> interest in interestsList)
+            {
+                UpdateCheckboxesInDictionaryToChecked(interest[0], interest[1]);
+            }
             AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            //loopCheckbox();
+            loopCheckbox();
             //debugPrint();            
             //Debug.WriteLine(Account.NameProfile);
-            //Account.InterestsProfile = interestsPerson;
+            Account.InterestsProfile = interestsPerson;
         }
 
         // Retrieves categories from database and saves them in a combobox and dictionary
@@ -110,6 +116,17 @@ namespace LinkApplicationGraphics.NVVM.View
                 Interests[category].Add(checkbox);
             }
             comboBoxCategories.SelectedIndex = 1;
+        }
+
+        private void UpdateCheckboxesInDictionaryToChecked(string category, string interest)
+        {
+            for(int i =0;i < Interests[category].Count; i++)
+            {
+                if (Interests[category][i].Name == interest)
+                {
+                    Interests[category][i].IsChecked = true;
+                }
+            }
         }
 
         // Method that retrieves checkboxes from dictionary and adds them to the grid

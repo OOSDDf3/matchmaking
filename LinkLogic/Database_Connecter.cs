@@ -435,7 +435,7 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.WriteLine(reader.GetValue(i).ToString());
+                            Debug.WriteLine(reader.GetValue(i).ToString());
                             interests.Add(reader.GetValue(i).ToString());
                         }
                     }
@@ -451,23 +451,27 @@ namespace LinkApplication
         }
 
         // Retrieve list of interests from database using user_ID
-        public List<string> GetInterestsWithUserID(int user_ID)
+        public List<List<string>> GetInterestsWithUserID(int user_ID)
         {
-            List<string> interests = new();
+            List<List<string>> interests = new();
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "SELECT name FROM Interests WHERE interest_ID IN (SELECT interest_ID FROM userinterestlist WHERE user_ID = @us)";
+                    string query = "SELECT category, name FROM Interests WHERE interest_ID IN (SELECT interest_ID FROM userinterestlist WHERE user_ID = @us)";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@us", user_ID);
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        for (int i = 0; i < reader.FieldCount; i+=2)
                         {
-                            Console.WriteLine(reader.GetValue(i).ToString());
-                            interests.Add(reader.GetValue(i).ToString());
+                            Debug.WriteLine($"category: {reader.GetValue(i)}");
+                            Debug.WriteLine($"interest: {reader.GetValue(i+1)}");
+                            List<string> categoryInterestList = new();
+                            categoryInterestList.Add(reader.GetValue(i).ToString());
+                            categoryInterestList.Add(reader.GetValue(i+1).ToString());
+                            interests.Add(categoryInterestList);
                         }
                     }
                     reader.Close();

@@ -25,7 +25,7 @@ namespace LinkApplicationGraphics.NVVM.View
     /// <summary>
     /// Interaction logic for InterestView.xaml
     /// </summary>
-    public partial class InterestView : UserControl
+    public partial class EditInterestView : UserControl
     {
 
         //List<CheckBox> checkBoxes = new List<CheckBox>();
@@ -35,7 +35,7 @@ namespace LinkApplicationGraphics.NVVM.View
         List<string> selectedInterests = new List<string>();
         Dictionary<string, List<CheckBox>> Interests = new Dictionary<string, List<CheckBox>>();
 
-        public InterestView()
+        public EditInterestView()
         {
             InitializeComponent();
             List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",
@@ -51,12 +51,12 @@ namespace LinkApplicationGraphics.NVVM.View
             AddCheckBoxesToInterestsPage(comboBoxCategories.SelectedItem.ToString());
         }
 
-        private void buttonCreate_Click(object sender, RoutedEventArgs e)
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            loopCheckbox();
+            //loopCheckbox();
             //debugPrint();            
-            Debug.WriteLine(Account.NameProfile);
-            Account.InterestsProfile = interestsPerson;
+            //Debug.WriteLine(Account.NameProfile);
+            //Account.InterestsProfile = interestsPerson;
         }
 
         // Retrieves categories from database and saves them in a combobox and dictionary

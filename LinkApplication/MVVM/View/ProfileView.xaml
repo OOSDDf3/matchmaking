@@ -389,9 +389,9 @@
             <Border 
                 Grid.Row="3"
                 Grid.Column="2"
-        CornerRadius="20"                
-        Background="#729CA7 "
-        BorderThickness="5">
+                CornerRadius="20"                
+                Background="#729CA7 "
+                BorderThickness="5">
                 <StackPanel>
                     <TextBlock
                     Text="🤺"
@@ -408,7 +408,17 @@
                     Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
 
                     <Grid>
-                        <TextBlock Text="{Binding InterestsProfileString, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
+                        <Button Content="Interesses wijzigen"
+                                Foreground="Black"
+                                FontSize="22"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,5,0,0"
+                                FontFamily="Bahnschrift SemiLight"
+                                Name="TextBlockInterests"
+                                Command="{Binding NavigateToEditInterestPageCommand}"    
+                                Visibility="Visible" Background="{x:Null}" BorderBrush="{x:Null}" FontStyle="Italic"/>
+                        <!--<TextBlock Text="{Binding InterestsProfileString, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
                             FontSize="22"
                             HorizontalAlignment="Center"
@@ -416,7 +426,7 @@
                             Margin="0,5,0,0"
                             FontFamily="Bahnschrift SemiLight"
                             Name="TextBlockProfileInterests"
-                            Visibility="Visible"/>
+                            Visibility="Visible"/>-->
 
                         <Border Background="Transparent" 
                             BorderBrush="#272537"
@@ -519,9 +529,9 @@
             <Border 
                 Grid.Row="3"
                 Grid.Column="6"
-        CornerRadius="20"
-        Background="#729CA7"
-        BorderThickness="5">
+                CornerRadius="20"
+                Background="#729CA7"
+                BorderThickness="5">
                 <StackPanel>
                     <TextBlock
                     Text="🗓️"

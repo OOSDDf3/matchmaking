@@ -450,6 +450,37 @@ namespace LinkApplication
             }
         }
 
+        // Retrieve list of interests from database using user_ID
+        public List<string> GetInterestsWithUserID(int user_ID)
+        {
+            List<string> interests = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT name FROM Interests WHERE interest_ID IN (SELECT interest_ID FROM userinterestlist WHERE user_ID = @us)";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@us", user_ID);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.WriteLine(reader.GetValue(i).ToString());
+                            interests.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                    reader.Close();
+                }
+                return interests;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                dbCon.Close();
+                return interests;
+            }
+        }
 
         //Bijwerken interesses van een bestaand account
         public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[] picture)

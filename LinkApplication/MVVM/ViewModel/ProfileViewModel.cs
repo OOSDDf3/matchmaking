@@ -45,6 +45,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
         public RelayCommand NavigateToPasswordChangePageCommand { get; set; }
+        public RelayCommand NavigateToEditInterestPageCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -57,7 +58,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
             NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
-            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);  
+            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);
+            NavigateToEditInterestPageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EditInterestViewModel>(); }, canExecute: CanExecuteCommand);  
 
 
         }

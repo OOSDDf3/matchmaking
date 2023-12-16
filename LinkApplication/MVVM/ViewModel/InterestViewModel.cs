@@ -63,9 +63,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             _connecter = new Database_Connecter();
 
             _connecter.InsertAccount(Account.NameProfile, Account.EmailProfile, Account.HashedPassword, Int32.Parse(Account.BirthdateProfile), Account.AddressProfile, Account.GenderProfile , "Dutch");
-            _connecter.InsertIntoUserInterestList(_connecter.getUserID(Account.EmailProfile, Account.HashedPassword), Account.InterestsProfile , Account.ProfilePicture);
-
-
+            _connecter.InsertIntoUserInterestList(_connecter.getUserID(Account.EmailProfile, Account.HashedPassword), Account.InterestsProfile);
+            _connecter.InsertIntoProfilePicture(_connecter.getUserID(Account.EmailProfile, Account.HashedPassword), Account.ProfilePicture);
         }
 
  

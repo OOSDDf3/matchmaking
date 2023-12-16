@@ -1,6 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Azure;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using static Google.Protobuf.Reflection.SourceCodeInfo.Types;
 
 namespace LinkApplication
 {
@@ -39,7 +42,7 @@ namespace LinkApplication
         }
 
         //Methode voor nieuwe account
-        public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
+        public void InsertAccount(string name, string email, string password, int birthyear, string address, string gender, string language)
         {
             try
             {
@@ -50,7 +53,7 @@ namespace LinkApplication
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
                     cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
-                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = age;
+                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = birthyear;
                     cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
                     cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
                     cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
@@ -494,16 +497,22 @@ namespace LinkApplication
             }
         }
 
-
         //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList()
+        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateOnly date, TimeOnly time, int interest_ID)
         {
-
+            DateTime combinedDateTime = date.ToDateTime(TimeOnly.MinValue) + time.ToTimeSpan();
             try
             {
                 if (dbCon.IsConnect())
                 {
-
+                    string query = "INSERT INTO `events` (`eventID`,`eventName`,`maxAttendees`,`location`,`date`,`interestID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid);";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.Add("@ena", MySqlDbType.VarChar, 80).Value = eventName;
+                    cmd.Parameters.Add("@maxa", MySqlDbType.Int16, 4).Value = maxAttendees;
+                    cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
+                    cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
+                    cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = interest_ID;
+                    Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 
             }
@@ -515,13 +524,16 @@ namespace LinkApplication
         }
 
         //Methode voor annuleren(verwijderen) van een event
-        public void DeleteFromEventsList()
+        public void DeleteFromEventsList(int event_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-
+                    string query = "DELETE FROM `events` WHERE eventID = @eid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@eid", event_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 
             }
@@ -533,6 +545,7 @@ namespace LinkApplication
 
         }
 
+        //Methode voor weergave event informatie
         public Dictionary<string, string> ShowEventInformation()
         {
             Dictionary<string, string> keyEventPairs = new();
@@ -550,6 +563,44 @@ namespace LinkApplication
                 Debug.WriteLine(ex.ToString());
                 return keyEventPairs;
             }
+        }
+
+        //Methode om je aan te melden voor een event
+        public void InsertIntoUserEventsList()
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        //Methode om je af te melden voor een event
+        public void DeleteFromUserEventsList()
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
         }
     }
 }

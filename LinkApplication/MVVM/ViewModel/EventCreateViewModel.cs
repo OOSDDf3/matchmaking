@@ -43,5 +43,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             _connecter.InsertIntoEventsList();
 
         }
+
+        private void cancelEvent()
+        {
+            _connecter = new Database_Connecter();
+
+            _connecter.DeleteFromEventsList();
+        }
     }
 }

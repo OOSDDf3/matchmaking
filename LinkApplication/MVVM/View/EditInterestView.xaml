@@ -86,7 +86,7 @@
             </Grid>
             <ComboBox Grid.Column="1" x:Name="comboBoxCategories" Style="{StaticResource CustomComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="35" FontSize="16" SelectionChanged="comboBoxCategories_SelectionChanged"/>
 
-            <Label Grid.Column="1" Grid.Row="2" Content="Geselecteerd" Foreground="White" FontSize="24" FontFamily="Bahnschrift SemiLight" VerticalAlignment="Top"/>
+            <Label Grid.Column="1" Grid.Row="2" Content="Interesses" Foreground="White" FontSize="24" FontFamily="Bahnschrift SemiLight" VerticalAlignment="Top"/>
             <Rectangle Grid.Column="1" Grid.Row="2"  Fill="White" Stroke="White" Height="2" Width="Auto" VerticalAlignment="Bottom"/>
 
 

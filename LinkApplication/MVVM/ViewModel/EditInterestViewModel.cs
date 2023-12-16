@@ -33,12 +33,19 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public EditInterestViewModel(INavigationService navService)
         {
             Navigation = navService;
-            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); }, canExecute: CanExecuteNavigateToProfile);
+            NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); UpdateUserInterestList(); }, canExecute: CanExecuteNavigateToProfile);
         }
 
         private bool CanExecuteNavigateToProfile(object obj)
         {
             return true;
+        }
+
+        private void UpdateUserInterestList()
+        {
+            _connecter = new Database_Connecter();
+            _connecter.DeleteFromUserInterestListWithUserID(Account.user_ID);
+            _connecter.InsertIntoUserInterestList(Account.user_ID, Account.InterestsProfile);
         }
     }
 }

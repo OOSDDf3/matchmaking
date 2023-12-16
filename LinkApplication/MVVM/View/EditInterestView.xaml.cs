@@ -29,11 +29,11 @@ namespace LinkApplicationGraphics.NVVM.View
     {
 
         //List<CheckBox> checkBoxes = new List<CheckBox>();
-        Account account;
-        Database_Connecter _connecter;
-        List<string> interestsPerson = new List<string>();
-        List<string> selectedInterests = new List<string>();
-        Dictionary<string, List<CheckBox>> Interests = new Dictionary<string, List<CheckBox>>();
+        //private Account account;
+        private Database_Connecter _connecter;
+        private List<string> interestsPerson = new List<string>();
+        private List<string> selectedInterests = new List<string>();
+        private Dictionary<string, List<CheckBox>> Interests = new Dictionary<string, List<CheckBox>>();
 
         public EditInterestView()
         {
@@ -48,6 +48,7 @@ namespace LinkApplicationGraphics.NVVM.View
             {
                 AddCheckBoxesToInterestDictionary(category);
             }
+
             //For every interest from database update checkbox to show it is checked
             List<List<string>> interestsList = _connecter.GetInterestsWithUserID(Account.user_ID);
             foreach(List<string> interest in interestsList)

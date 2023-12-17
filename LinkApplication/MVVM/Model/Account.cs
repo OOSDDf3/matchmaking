@@ -27,8 +27,11 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static Byte[] ProfilePicture { get; set; }
         public static BitmapImage ProfilePictureImage { get; set; }
 
+        //count om te weten of je al een keer de matchinggegevens hebt opgevraagd of niet
+        public static int count = 0;
 
-        //objecten voor interreses
+
+        //objecten voor interreses, moet public voor andere klassen die deze gebruiken
         public static List<string> InterestsProfile { get; set; }
         public static string InterestsProfileString { get; set; }
 
@@ -71,7 +74,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
             //Code voor ophalen informatie user en zetten gegevens voor account in profile weergaven.
             dataPerson = _connecter.ShowUserInformation(Account.user_ID);
-            
+
             ProfileViewModel.NameProfile = dataPerson["name"];
             ProfileViewModel.BirthdateProfile = dataPerson["birthdate"];
             ProfileViewModel.AddressProfile = dataPerson["address"];
@@ -85,21 +88,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 InterestsProfile = _connecter.ShowUserInterests(Account.user_ID);
 
-                for (int i = 0; i < InterestsProfile.Count; i += 3)
-                {
-                    for (int j = i; j < i + 3 && j < InterestsProfile.Count; j++)
-                    {
-                        if (j == InterestsProfile.Count - 1)
-                        {
-                            InterestsProfileString += $"{InterestsProfile[j]}";
-                        }
-                        else
-                        {
-                            InterestsProfileString += $"{InterestsProfile[j]}, ";
-                        }
-                    }
-                    InterestsProfileString += Environment.NewLine;
-                }
+                InterestsProfileString = FormatInterests(InterestsProfile);
             }
             ProfileViewModel.InterestsProfileString = InterestsProfileString;
 
@@ -107,13 +96,6 @@ namespace LinkApplicationGraphics.NVVM.Model
             ProfilePicture = _connecter.ShowUserPicture(Account.user_ID);
 
             ProfileViewModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
-
-            
-            
-            
-
-
-
         }
         public static BitmapImage ImageFromBuffer(byte[] buffer)
         {
@@ -149,6 +131,14 @@ namespace LinkApplicationGraphics.NVVM.Model
             Account.PasswordProfile = string.Empty;
             Account.InterestsProfileString = string.Empty ;
 
+        }
+
+        public static string FormatInterests(List<string> interests)
+        {
+            return string.Join(Environment.NewLine, interests
+                .Select((value, index) => new { value, index })
+                .GroupBy(pair => pair.index / 3)
+                .Select(group => string.Join(", ", group.Select(pair => pair.value))));
         }
 
     }

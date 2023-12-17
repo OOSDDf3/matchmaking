@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
+using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -19,6 +21,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private Dictionary<int, int> userMatches = new Dictionary<int, int>();
         private Byte[] MatchPicture { get; set; }
+
+        private List<string> InterestsMatchList { get; set; }
 
         private BitmapImage matchPictureImage;
         public BitmapImage MatchPictureImage
@@ -44,6 +48,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        private string interestsMatch;
+        public string InterestsMatch
+        {
+            get { return interestsMatch; }
+            set
+            {
+                interestsMatch = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -65,17 +80,24 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             _connecter = new Database_Connecter();
 
-            //haalt matches op die zelfde interesses hebben
-            userMatches = _connecter.GetMatchingUser(Account.user_ID);
+            getNewMatch();
 
-
-            AcceptMatchCommand = new RelayCommand(execute: getNewMatch, canExecute: o => true);
-            DeclineMatchCommand = new RelayCommand(execute: getNewMatch, canExecute: o => true);
+            AcceptMatchCommand = new RelayCommand(execute: o=> { getNewMatch(); }, canExecute: o => true);
+            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
         }
 
-        private void getNewMatch(Object parameter)
+        
+
+        private void getNewMatch()
         {
             
+            if (Account.count == 0 && userMatches.IsNullOrEmpty())
+            {
+                //haalt matches op die zelfde interesses hebben
+                userMatches = _connecter.GetMatchingUser(Account.user_ID);
+                Account.count++;
+
+            }
 
             if (userMatches.Count != 0)
             {
@@ -90,21 +112,23 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 //zet de gegevens van de desbetreffende persoon
                 MatchPictureImage = Account.ImageFromBuffer(MatchPicture);
                 NameMatch = dataPerson["name"];
+                InterestsMatchList = _connecter.ShowUserInterests(userIDMatch);
+                InterestsMatch = Account.FormatInterests(InterestsMatchList);
+
 
                 dataPerson.Clear();
+
+
 
                 Debug.WriteLine(userIDMatch);
             }
             else
             {
+                InterestsMatch = string.Empty;
                 MatchPictureImage = null;
                 NameMatch = "Er zijn geen verdere matches gevonden";
                 
-            }
-            
-
-           
-
+            }                   
         }
     }
 }

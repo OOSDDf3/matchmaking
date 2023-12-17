@@ -27,6 +27,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public static event dg_Loginsuccesfull? ev_OnLoginSuccesfull;
 
+        MatchingViewModel matching;
 
         private string email;
         public string Email
@@ -112,6 +113,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));
                 ErrorMessage = "";
                 Navigation.NavigateTo<HomePageViewModel>();
+                
                 Navigation.NavigateToNew<MatchingViewModel>();
                 
             }

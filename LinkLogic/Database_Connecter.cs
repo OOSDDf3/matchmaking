@@ -498,20 +498,21 @@ namespace LinkApplication
         }
 
         //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateOnly date, TimeOnly time, int interest_ID)
+        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateOnly date, TimeOnly time, int interest_ID, int user_ID)
         {
             DateTime combinedDateTime = date.ToDateTime(TimeOnly.MinValue) + time.ToTimeSpan();
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `events` (`eventID`,`eventName`,`maxAttendees`,`location`,`date`,`interestID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid);";
+                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid, @uid);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@ena", MySqlDbType.VarChar, 80).Value = eventName;
                     cmd.Parameters.Add("@maxa", MySqlDbType.Int16, 4).Value = maxAttendees;
                     cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
                     cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
                     cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = interest_ID;
+                    cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = user_ID;
                     Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 
@@ -524,15 +525,16 @@ namespace LinkApplication
         }
 
         //Methode voor annuleren(verwijderen) van een event
-        public void DeleteFromEventsList(int event_ID)
+        public void DeleteFromEventsList(int event_ID, int user_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "DELETE FROM `events` WHERE eventID = @eid";
+                    string query = "DELETE FROM `events` WHERE event_ID = @eid AND user_ID = @uid";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@eid", event_ID);
+                    cmd.Parameters.AddWithValue("@eid", user_ID);
                     Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 

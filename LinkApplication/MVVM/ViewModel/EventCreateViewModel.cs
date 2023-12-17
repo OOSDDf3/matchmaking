@@ -12,6 +12,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     public class EventCreateViewModel : Core.ViewModel
     {
         Database_Connecter _connecter;
+        private string eventName { get; set; }
+        private int maxAttendees { get; set; }
+        private string location { get; set; }
+        private DateTime date { get; set; }
+        private TimeOnly time { get; set; }
+        private int interest_ID { get; set; }
+
+
+
 
         public INavigationService _navigation;
         public INavigationService Navigation

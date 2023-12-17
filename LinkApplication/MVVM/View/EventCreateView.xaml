@@ -51,7 +51,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White" >
+            <TextBox Text="{Binding eve}" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White" >
                  <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

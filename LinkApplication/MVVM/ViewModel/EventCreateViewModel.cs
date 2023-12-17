@@ -19,8 +19,11 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public string Location { get; set; }
         public DateTime DateEvent { get; set; }
         public string TimeEvent { get; set; }
-        public int Interest_ID { get; set; }
+        public string Interest { get; set; }
 
+        private int Interest_ID { get; set; }
+
+        public List<string> EventInterests { get; set; }
 
 
 
@@ -42,7 +45,13 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             Navigation = navService;
 
-            DateEvent = DateTime.Now;
+            _connecter = new Database_Connecter();
+
+            DateEvent = DateTime.Now.Date;
+
+            EventInterests = _connecter.ShowUserInterests(Account.user_ID);
+            
+
 
             //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
@@ -54,7 +63,11 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , 1, Account.user_ID);
+            
+
+            Interest_ID = _connecter.SelectEventInterestID(Interest);
+
+            _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
             Navigation.NavigateToNew<EventsViewModel>();
 
         }

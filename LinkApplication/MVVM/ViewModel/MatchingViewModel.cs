@@ -81,15 +81,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             _connecter = new Database_Connecter();
 
-            getNewMatch();
+           /* getNewMatch();
 
             AcceptMatchCommand = new RelayCommand(execute: o=> { getNewMatch(); }, canExecute: o => true);
-            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
+            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);*/
         }
 
         
 
-        private void getNewMatch()
+       /* private void getNewMatch()
         {
             
             if (Account.count == 0 && userMatches.IsNullOrEmpty())
@@ -137,7 +137,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 MatchPictureImage = null;
                 NameMatch = "Er zijn geen verdere matches gevonden";
                 
-            }                   
-        }
+            }                   */
+        /*}*/
     }
 }

@@ -61,15 +61,13 @@
                     <Image Source="{Binding MatchPictureImage}" Stretch="UniformToFill" />
                 </Border>-->
 
-                <Viewbox Grid.Row="1" Grid.Column="1">
+                <Viewbox Grid.Row="1" Grid.Column="1" Width="600" Height="400">
                     <Image Source="{Binding MatchPictureImage}"/>
-
                 </Viewbox>
 
 
                 <!-- Profile Information TextBox -->
-
-
+                
                 <Grid Grid.Row="3" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
@@ -77,7 +75,7 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
-                    <Rectangle Grid.Column="1"  Fill="White" Stroke="White" Height="2" Width="Auto" VerticalAlignment="Top"/>
+                    <Rectangle Grid.Column="0"  Fill="White" Stroke="White" Height="2" Width="Auto" VerticalAlignment="Top"/>
 
 
                     <TextBlock Text="{Binding NameMatch}"

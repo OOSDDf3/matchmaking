@@ -19,7 +19,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
-        public static string NameProfile { get; set; }
+        public static string NameProfile {  get; set; }
         public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
@@ -31,7 +31,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
 
-        public INavigationService _navigation;
+
+    public INavigationService _navigation;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -97,6 +98,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         private void LogOut()
         {
             Account.user_ID = 0;
+            Account.count = 0;
+
             NameProfile = string.Empty;
             BirthdateProfile = string.Empty;
             AddressProfile = string.Empty;

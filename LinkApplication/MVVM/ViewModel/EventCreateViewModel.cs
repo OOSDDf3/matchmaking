@@ -1,6 +1,8 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.Services;
+using LinkApplicationGraphics.NVVM.Model;
+using MaterialDesignThemes.Wpf.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +14,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     public class EventCreateViewModel : Core.ViewModel
     {
         Database_Connecter _connecter;
-        private string eventName { get; set; }
-        private int maxAttendees { get; set; }
-        private string location { get; set; }
-        private DateTime date { get; set; }
-        private TimeOnly time { get; set; }
-        private int interest_ID { get; set; }
+        public string EventName { get; set; }
+        public int MaxAttendees { get; set; }
+        public string Location { get; set; }
+        public DateTime DateEvent { get; set; }
+        public string TimeEvent { get; set; }
+        public int Interest_ID { get; set; }
 
 
 
@@ -34,14 +36,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
         public RelayCommand NavigateToEventsViewCommand { get; set; }
 
-
+        public RelayCommand CreateEventCommand { get; set; }
 
         public EventCreateViewModel(INavigationService navService)
         {
             Navigation = navService;
 
+            DateEvent = DateTime.Now;
+
             //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
+            CreateEventCommand = new RelayCommand(execute: o => { createEvent(); }, canExecute: o => true);
 
         }
 
@@ -49,15 +54,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            _connecter.InsertIntoEventsList();
+            _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , 1, Account.user_ID);
+            Navigation.NavigateToNew<EventsViewModel>();
 
         }
 
-        private void cancelEvent()
-        {
-            _connecter = new Database_Connecter();
+        //private void cancelEvent()
+        //{
+        //    _connecter = new Database_Connecter();
 
-            _connecter.DeleteFromEventsList();
-        }
+        //    _connecter.DeleteFromEventsList();
+        //}
     }
 }

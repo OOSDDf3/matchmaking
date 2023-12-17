@@ -498,9 +498,9 @@ namespace LinkApplication
         }
 
         //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateOnly date, TimeOnly time, int interest_ID, int user_ID)
+        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
         {
-            DateTime combinedDateTime = date.ToDateTime(TimeOnly.MinValue) + time.ToTimeSpan();
+            DateTime combinedDateTime = date + time.ToTimeSpan();
             try
             {
                 if (dbCon.IsConnect())
@@ -512,7 +512,7 @@ namespace LinkApplication
                     cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
                     cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
                     cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = interest_ID;
-                    cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = user_ID;
+                    cmd.Parameters.Add("@uid", MySqlDbType.Int32, 4).Value = user_ID;
                     Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 

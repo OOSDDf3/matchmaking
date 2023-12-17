@@ -21,14 +21,14 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
@@ -46,23 +46,31 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.2*"/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="0.1*"/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="0.2*"/>
                 </Grid.RowDefinitions>
                 <!-- Placeholder Profile Picture -->
 
-                <Viewbox Grid.Column="1" Grid.Row="1">
-                    
-                        <Image Stretch="None" Source="{Binding MatchPictureImage}"/>
-                    
+                <!--<Border Width="600" Height="400" Grid.Row="1" Grid.Column="1">
+                    <Border.Clip>
+                        <RectangleGeometry Rect="0,0,400,400" />
+                        --><!-- Set the size you want to display --><!--
+                    </Border.Clip>
+                    <Image Source="{Binding MatchPictureImage}" Stretch="UniformToFill" />
+                </Border>-->
+
+                <Viewbox Grid.Row="1" Grid.Column="1">
+                    <Image Source="{Binding MatchPictureImage}"/>
+
                 </Viewbox>
-                
+
 
                 <!-- Profile Information TextBox -->
 
 
-                <Grid Grid.Row="2" Grid.Column="1">
+                <Grid Grid.Row="3" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="2*"/>
@@ -73,18 +81,18 @@
 
 
                     <TextBlock Text="{Binding NameMatch}"
+                               Margin="20,0,0,0"
                                VerticalAlignment="Center"
                                Grid.Row="0"    
-                               HorizontalAlignment="Center"
                                Foreground="White" FontSize="22"   
                                FontFamily="Bahnschrift SemiLight"
                                Background="Transparent"/>
 
                     <TextBlock Text="{Binding InterestsMatch}"
+                               Margin="20,0,0,0"
                                 VerticalAlignment="Center"
                                 Grid.Row="1"
-                                HorizontalAlignment="Center"
-                                Foreground="White" FontSize="18"   
+                                Foreground="#FFE0DFDF" FontSize="18"   
                                 FontFamily="Bahnschrift SemiLight"
                                 Background="Transparent"/>
 

@@ -137,7 +137,7 @@
                     <Grid>
                         <TextBlock Text="{Binding NameProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="#272537"
-                           FontSize="22"
+                           FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Margin="0,5,0,0"
@@ -196,7 +196,7 @@
                                 Margin="0,5,0,0" FontFamily="Bahnschrift SemiLight"/>
                     <TextBlock Text="{Binding BirthdateProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                            Foreground="#272537"
-                           FontSize="22"
+                           FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Margin="0,5,0,0"
@@ -229,7 +229,7 @@
                     <Grid>
                         <TextBlock Text="{Binding AddressProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -289,7 +289,7 @@
                     <Grid>
                         <TextBlock Text="{Binding GenderProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -348,7 +348,7 @@
                     <Grid>
                         <TextBlock Text="{Binding LanguageProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -410,7 +410,7 @@
                     <Grid>
                         <TextBlock Text="{Binding InterestsProfileString, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -446,7 +446,7 @@
 
                     <!--<TextBlock Text="Snelwandelen"
                     Foreground="#272537"
-                    FontSize="22"
+                    FontSize="20"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="0,5,0,0"
@@ -479,7 +479,7 @@
                     <Grid>
                         <TextBlock Text="{Binding EmailProfile, Mode=Default, UpdateSourceTrigger=PropertyChanged}"
                             Foreground="#272537"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -539,7 +539,7 @@
                     <Grid>
                         <Button Content="Wachtwoord wijzigen"
                             Foreground="Black"
-                            FontSize="22"
+                            FontSize="20"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Margin="0,5,0,0"
@@ -582,7 +582,7 @@
 
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+        <Button Grid.Row="3" Grid.Column="1" x:Name = "buttonLogOut" Content = "⬅️ Uitloggen" HorizontalAlignment = "Left" VerticalAlignment = "Top" Width = "170" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="20" Command="{Binding NavigateToLoginPageCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
             <Button.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -595,8 +595,16 @@
         </Button>
 
 
-        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "170" Height="60" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="24" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
-
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "170" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="20" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
         </Button>
 
         <TextBlock Background="Transparent" 

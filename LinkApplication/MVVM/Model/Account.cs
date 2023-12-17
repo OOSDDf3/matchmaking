@@ -137,7 +137,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         {
             return string.Join(Environment.NewLine, interests
                 .Select((value, index) => new { value, index })
-                .GroupBy(pair => pair.index / 3)
+                .GroupBy(pair => pair.index / 5)
                 .Select(group => string.Join(", ", group.Select(pair => pair.value))));
         }
 

@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using ZstdSharp.Unsafe;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -101,6 +102,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             if (userMatches.Count != 0)
             {
+                int age = 0;
+
                 //haalt de userid op met de meest overeenkomende interreses
                 int userIDMatch = userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
                 userMatches.Remove(userIDMatch);
@@ -111,7 +114,13 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de gegevens van de desbetreffende persoon
                 MatchPictureImage = Account.ImageFromBuffer(MatchPicture);
-                NameMatch = dataPerson["name"];
+
+                //zet de naam en leeftijd van de persoon
+                DateTime currentDate = DateTime.Today;
+                age = currentDate.Year - Int32.Parse(dataPerson["birthdate"]);
+                NameMatch = $"{dataPerson["name"]}, {age} jaar";
+
+                //zet de interesses van de persoon
                 InterestsMatchList = _connecter.ShowUserInterests(userIDMatch);
                 InterestsMatch = Account.FormatInterests(InterestsMatchList);
 

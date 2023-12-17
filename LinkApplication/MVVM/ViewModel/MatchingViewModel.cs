@@ -122,7 +122,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de interesses van de persoon
                 InterestsMatchList = _connecter.ShowUserInterests(userIDMatch);
-                InterestsMatch = Account.FormatInterests(InterestsMatchList);
+                InterestsMatch = Account.FormatInterests(InterestsMatchList, 5);
 
 
                 dataPerson.Clear();

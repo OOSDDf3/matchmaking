@@ -88,7 +88,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 InterestsProfile = _connecter.ShowUserInterests(Account.user_ID);
 
-                InterestsProfileString = FormatInterests(InterestsProfile);
+                InterestsProfileString = FormatInterests(InterestsProfile, 2);
             }
             ProfileViewModel.InterestsProfileString = InterestsProfileString;
 
@@ -133,11 +133,11 @@ namespace LinkApplicationGraphics.NVVM.Model
 
         }
 
-        public static string FormatInterests(List<string> interests)
+        public static string FormatInterests(List<string> interests, int WordsPerColumn)
         {
             return string.Join(Environment.NewLine, interests
                 .Select((value, index) => new { value, index })
-                .GroupBy(pair => pair.index / 5)
+                .GroupBy(pair => pair.index / WordsPerColumn)
                 .Select(group => string.Join(", ", group.Select(pair => pair.value))));
         }
 

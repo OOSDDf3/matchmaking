@@ -66,7 +66,7 @@
         Grid.Row="2" Grid.Column="2" 
         FontWeight="Medium" FontFamily="Bahnschrift SemiLight"  
         CaretBrush="White" BorderThickness="0,0,0,3" 
-        MinWidth="450" HorizontalAlignment="Stretch" MinHeight="40" 
+        HorizontalAlignment="Stretch" 
         VerticalAlignment="Stretch" FontSize="20" BorderBrush="#FFF1F1F1" 
         Background="{x:Null}" Foreground="#FFF1F1F1" VerticalContentAlignment="Center" 
         SelectionOpacity="0.5" Height="45" Padding="40,0,0,0">

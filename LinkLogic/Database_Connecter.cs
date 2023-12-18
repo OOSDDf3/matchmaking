@@ -570,6 +570,14 @@ namespace LinkApplication
             }
         }
 
+        public void InsertIntoLikesDislikes(int user_ID, int user_ID_Liked, string action)
+        {
+            try
+            {
+                string insertLike = "INSERT INTO 'userLikesDislikes' ('user_ID', 'user_ID_Liked', 'action' ) VALUES (@user_ID, @user_ID_Like, @account)";
+            }
+        }
+
         //Methode voor ophalen interesse ID
         public int SelectEventInterestID(string interest)
         {

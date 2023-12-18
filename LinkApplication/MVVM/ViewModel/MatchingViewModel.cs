@@ -83,8 +83,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             getNewMatch();
 
-            AcceptMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
-            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
+            AcceptMatchCommand = new RelayCommand(execute: o => { likeMatch(); getNewMatch(); }, canExecute: o => true);
+            DeclineMatchCommand = new RelayCommand(execute: o => { dislikeMatch(); getNewMatch(); }, canExecute: o => true);
         }
 
         private void getNewMatch()
@@ -136,6 +136,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 NameMatch = "Er zijn geen verdere matches gevonden";
 
             }
+        }
+
+        private void likeMatch()
+        {
+            _connector.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
+        }
+
+        private void dislikeMatch()
+        {
+            _connector.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "dislike");
         }
     }
 }

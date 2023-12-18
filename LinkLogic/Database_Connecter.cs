@@ -574,7 +574,12 @@ namespace LinkApplication
         {
             try
             {
-                string insertLike = "INSERT INTO 'userLikesDislikes' ('user_ID', 'user_ID_Liked', 'action' ) VALUES (@user_ID, @user_ID_Like, @account)";
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertLike = "INSERT INTO 'userLikesDislikes' ('user_ID', 'user_ID_Liked', 'action' ) VALUES (@user_ID, @user_ID_Like, @account)";
+                    var cmdInsertLike = new MySqlCommand(queryInsertLike, dbCon.Connection);
+                    cmdInsertLike.Parameters.AddWithValue("@user_ID", user_ID);
+                }
             }
         }
 

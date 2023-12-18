@@ -687,6 +687,40 @@ namespace LinkApplication
             }
         }
 
+        //Methode Weergave alle event info?
+        public Dictionary<string, string> ShowAllEventInformation()
+        {
+            Dictionary<string, string> keyValuePairsEvent = new();
+            string query = "SELECT * FROM Events";
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID" };
+
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.Write(reader.GetValue(i).ToString() + " ");
+                            keyValuePairsEvent.Add(keys[i], reader.GetValue(i).ToString());
+                        }
+                        Console.WriteLine();
+                    }
+                    reader.Close();
+                    return keyValuePairsEvent;
+                }
+                return keyValuePairsEvent;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return keyValuePairsEvent;
+            }
+        }
+
         //Methode om je aan te melden voor een event
         public void InsertIntoUserEventsList()
         {

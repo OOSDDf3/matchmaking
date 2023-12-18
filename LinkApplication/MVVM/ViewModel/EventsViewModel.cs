@@ -1,4 +1,5 @@
-﻿using LinkApplicationGraphics.Core;
+﻿using LinkApplication;
+using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,19 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class EventsViewModel: Core.ViewModel
     {
+        public Dictionary<string, string> dataEvent = new Dictionary<string, string>();
+        Database_Connecter _connecter;
+
+        //Ondersteuning voor weergave?
+        public static int event_ID;
+        public static string NameEvent { get; set; }
+        public static string MaxAttendeesEvent { get; set; }
+        public static string LocationEvent { get; set; }
+        public static string DateTimeEvent { get; set; }
+        public static string InterestEvent { get; set; }
+
+
+
         public INavigationService _navigation;
         public INavigationService Navigation
         {

@@ -63,7 +63,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight" FontWeight="Heavy"/>
-                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "01/01/2001 17:00" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Uno" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Hobby (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
@@ -73,6 +73,9 @@
 
                 <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "X/10 (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum/Tijd: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "01/01/2001 17:00" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                 <RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Checked="RadioButton_Checked" Grid.RowSpan="2" >
                     <RadioButton.Style>
@@ -145,18 +148,7 @@
             <ComboBox Grid.Row="2" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Top" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderBrush="White"/>
         </Grid>
 
-        <Grid x:Name="Distance_Grid" Grid.Row="3" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Content = "Afstand (in KM)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <Slider Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Width="250"/>
-        </Grid>
-
-        <Grid x:Name="SignedUp_Grid" Grid.Row="5" Grid.Column="2">
+        <Grid x:Name="SignedUp_Grid" Grid.Row="3" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>

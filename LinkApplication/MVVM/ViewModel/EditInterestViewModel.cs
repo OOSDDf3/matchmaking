@@ -46,6 +46,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             _connecter = new Database_Connecter();
             _connecter.DeleteFromUserInterestListWithUserID(Account.user_ID);
             _connecter.InsertIntoUserInterestList(Account.user_ID, Account.InterestsProfile);
+
+
+            //haalt nieuwe match lijst op met nieuwe interreses
+            Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
         }
     }
 }

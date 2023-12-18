@@ -38,6 +38,11 @@ namespace LinkApplicationGraphics.NVVM.Model
         //public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         static Database_Connecter _connecter;
 
+        //usermatches
+
+        public static Dictionary<int, int> userMatches = new Dictionary<int, int>();
+
+
         public Account(string name, string age, string address, string gender, string Language, string email, string password)
         {
             NameProfile = name;

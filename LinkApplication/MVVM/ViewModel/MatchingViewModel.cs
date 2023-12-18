@@ -19,9 +19,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     {
         Database_Connecter _connecter;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
-
-        private Dictionary<int, int> userMatches = new Dictionary<int, int>();
         private Byte[] MatchPicture { get; set; }
+
+        private int userIDMatch;
 
         private List<string> InterestsMatchList { get; set; }
 
@@ -61,50 +61,37 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
 
-        public INavigationService _navigation;
-        public INavigationService Navigation
-        {
-            get => _navigation;
-            set
-            {
-                _navigation = value;
-                OnPropertyChanged();
-            }
-        }
-
         public RelayCommand AcceptMatchCommand {  get; set; }
         public RelayCommand DeclineMatchCommand { get; set; }
 
 
         public MatchingViewModel(INavigationService navService)
         {
-            Navigation = navService;
             _connecter = new Database_Connecter();
 
             getNewMatch();
 
-            AcceptMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
-            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
+            AcceptMatchCommand = new RelayCommand(execute: o => { likeMatch(); getNewMatch();}, canExecute: o => true);
+            DeclineMatchCommand = new RelayCommand(execute: o => { disLikeMatch(); getNewMatch();}, canExecute: o => true);
         }
 
         private void getNewMatch()
         {
 
-            if (Account.count == 0 && userMatches.IsNullOrEmpty())
+            if (Account.count == 0 && Account.userMatches.IsNullOrEmpty())
             {
                 //haalt matches op die zelfde interesses hebben
-                userMatches = _connecter.GetMatchingUser(Account.user_ID);
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
                 Account.count++;
-
             }
 
-            if (userMatches.Count != 0)
+            if (Account.userMatches.Count != 0)
             {
                 int age = 0;
 
                 //haalt de userid op met de meest overeenkomende interreses
-                int userIDMatch = userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
-                userMatches.Remove(userIDMatch);
+                userIDMatch = Account.userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
+                Account.userMatches.Remove(userIDMatch);
 
                 //haalt gegevens op van desbetreffende persoon
                 dataPerson = _connecter.ShowUserInformation(userIDMatch);
@@ -122,19 +109,34 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 InterestsMatchList = _connecter.ShowUserInterests(userIDMatch);
                 InterestsMatch = Account.FormatInterests(InterestsMatchList, 5);
 
-
                 dataPerson.Clear();
-
-
 
                 Debug.WriteLine(userIDMatch);
             }
             else
             {
+                userIDMatch = 0;
                 InterestsMatch = string.Empty;
                 MatchPictureImage = null;
                 NameMatch = "Er zijn geen verdere matches gevonden";
 
+            }
+        } 
+
+        private void likeMatch()
+        {
+            if(userIDMatch != 0)
+            {
+                _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
+            }
+            
+        }
+
+        private void disLikeMatch()
+        {
+            if (userIDMatch != 0)
+            {
+                _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "dislike");
             }
         }
     }

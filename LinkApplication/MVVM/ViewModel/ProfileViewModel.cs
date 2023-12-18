@@ -3,12 +3,14 @@ using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.NVVM.View;
 using LinkApplicationGraphics.Services;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
@@ -48,6 +50,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand NavigateToPasswordChangePageCommand { get; set; }
         public RelayCommand NavigateToEditInterestPageCommand { get; set; }
 
+        public RelayCommand DeleteAccountCommand { get; set; }
+
 
         public ProfileViewModel(INavigationService navService)
         {
@@ -57,17 +61,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             
 
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
-            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
-            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);
-            NavigateToEditInterestPageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EditInterestViewModel>(); }, canExecute: CanExecuteCommand);  
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: o => true);
+            NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: o => true);
+            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: o => true);
+            NavigateToEditInterestPageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EditInterestViewModel>(); }, canExecute: o => true);
+
+            //voor verwijderen van account
+            DeleteAccountCommand = new RelayCommand(execute: o => { DeleteAccount(); }, canExecute: o => true);
 
 
-        }
-
-        private bool CanExecuteCommand(Object obj)
-        {
-            return true;
         }
 
         private void Opslaan(Object obj)
@@ -92,11 +94,27 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
+        private void DeleteAccount()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                _connecter = new Database_Connecter();
+                _connecter.DeleteUser(Account.user_ID);
+                LogOut();
+
+                Navigation.NavigateTo<LoginViewModel>();
+                
+            }
+            else
+            {
+                // User clicked No or closed the dialog
+                // Do nothing or handle the cancellation
+            }
+        }
 
 
         //functie om alle tijdelijke opgeslagen account gegevens terug te zetten
-
-
         private void LogOut()
         {
             Account.user_ID = 0;
@@ -118,15 +136,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
             Account.InterestsProfileString = string.Empty;
-
         }
-
-
-
-
-
-
-
-
     }
 }

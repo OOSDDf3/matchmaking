@@ -576,9 +576,12 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string queryInsertLike = "INSERT INTO 'userLikesDislikes' ('user_ID', 'user_ID_Liked', 'action') VALUES (@user_ID, @user_ID_Like, @account)";
+                    string queryInsertLike = "INSERT INTO 'userlikesdislikes' ('user_ID', 'user_ID_Liked', 'action') VALUES (@user_ID, @user_ID_Like, @action)";
                     var cmdInsertLike = new MySqlCommand(queryInsertLike, dbCon.Connection);
                     cmdInsertLike.Parameters.AddWithValue("@user_ID", user_ID);
+                    cmdInsertLike.Parameters.AddWithValue("@user_ID_Liked", user_ID_Liked);
+                    cmdInsertLike.Parameters.AddWithValue("@action", action);
+                    cmdInsertLike.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)

@@ -22,10 +22,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private Dictionary<int, int> userMatches = new Dictionary<int, int>();
         private Byte[] MatchPicture { get; set; }
-
-        private List<string> InterestsMatchList { get; set; }
-
         private int userIDMatch;
+        private List<string> InterestsMatchList { get; set; }
 
         private BitmapImage matchPictureImage;
         public BitmapImage MatchPictureImage

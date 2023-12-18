@@ -88,7 +88,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 InterestsProfile = _connecter.ShowUserInterests(Account.user_ID);
 
-                InterestsProfileString = FormatInterests(InterestsProfile, 2);
+                InterestsProfileString = FormatInterests(InterestsProfile, 3);
             }
             ProfileViewModel.InterestsProfileString = InterestsProfileString;
 

@@ -653,22 +653,37 @@ namespace LinkApplication
         }
 
         //Methode voor weergave event informatie
-        public Dictionary<string, string> ShowEventInformation()
+        public Dictionary<string, string> ShowEventInformation(int event_ID)
         {
-            Dictionary<string, string> keyEventPairs = new();
+            Dictionary<string, string> keyValuePairsEvent = new();
+            string query = "SELECT * FROM Events WHERE event_ID = @event_ID";
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    
-                }
-                return keyEventPairs;
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@event_ID", event_ID);
+                    var reader = cmd.ExecuteReader();
+                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID"};
 
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.Write(reader.GetValue(i).ToString() + " ");
+                            keyValuePairsEvent.Add(keys[i], reader.GetValue(i).ToString());
+                        }
+                        Console.WriteLine();
+                    }
+                    reader.Close();
+                    return keyValuePairsEvent;
+                }
+                return keyValuePairsEvent;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return keyEventPairs;
+                Console.WriteLine(ex.ToString());
+                return keyValuePairsEvent;
             }
         }
 

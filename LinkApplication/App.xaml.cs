@@ -33,6 +33,7 @@ namespace LinkApplication
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<InterestViewModel>();
+            services.AddSingleton<EditInterestViewModel>();
             services.AddSingleton<RegisterViewModel>();
             services.AddSingleton<HomePageViewModel>();
             services.AddSingleton<MatchingViewModel>();

@@ -438,7 +438,7 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.WriteLine(reader.GetValue(i).ToString());
+                            Debug.WriteLine(reader.GetValue(i).ToString());
                             interests.Add(reader.GetValue(i).ToString());
                         }
                     }
@@ -453,9 +453,64 @@ namespace LinkApplication
             }
         }
 
+        // Retrieve list of interests from database using user_ID
+        public List<List<string>> GetInterestsWithUserID(int user_ID)
+        {
+            List<List<string>> interests = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT category, name FROM Interests WHERE interest_ID IN (SELECT interest_ID FROM userinterestlist WHERE user_ID = @us)";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@us", user_ID);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i+=2)
+                        {
+                            Debug.WriteLine($"category: {reader.GetValue(i)}");
+                            Debug.WriteLine($"interest: {reader.GetValue(i+1)}");
+                            List<string> categoryInterestList = new();
+                            categoryInterestList.Add(reader.GetValue(i).ToString());
+                            categoryInterestList.Add(reader.GetValue(i+1).ToString());
+                            interests.Add(categoryInterestList);
+                        }
+                    }
+                    reader.Close();
+                }
+                return interests;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                dbCon.Close();
+                return interests;
+            }
+        }
+
+        // Delete records from userinterestlist using user_ID
+        public void DeleteFromUserInterestListWithUserID(int userID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {                    
+                    string queryDelete = "DELETE FROM `userinterestlist` WHERE user_ID = @us";
+                    var cmdDelete = new MySqlCommand(queryDelete, dbCon.Connection);
+                    cmdDelete.Parameters.AddWithValue("@us", userID);
+                    cmdDelete.ExecuteNonQuery();                   
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
 
         //Bijwerken interesses van een bestaand account
-        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[] picture)
+        public void InsertIntoUserInterestList(int userID, List<string> interests)
         {
             try
             {
@@ -472,17 +527,32 @@ namespace LinkApplication
                         {
                             interest_ID = Int32.Parse(reader.GetValue(0).ToString());
                         }
+
                         reader.Close();
                         Debug.WriteLine(interest_ID);
-                        Debug.WriteLine($"{user_ID}, {interest_ID}");
+                        Debug.WriteLine($"{userID}, {interest_ID}");
 
                         string queryInsertInterest = "INSERT INTO `userinterestlist` (`user_ID`, `interest_ID`) VALUES (@us, @inID)";
                         var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
-                        cmdInsertInterest.Parameters.AddWithValue("@us", user_ID);
+                        cmdInsertInterest.Parameters.AddWithValue("@us", userID);
                         cmdInsertInterest.Parameters.AddWithValue("@inID", interest_ID);
                         cmdInsertInterest.ExecuteNonQuery();
-                    }
+                    }                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
 
+        public void InsertIntoProfilePicture(int user_ID, Byte[] picture)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
                     string queryInsertPicture = "INSERT INTO `profilepicture` (`user_ID`, `picture`) VALUES (@us1, @pi)";
                     var cmdInsertPicture = new MySqlCommand(queryInsertPicture, dbCon.Connection);
                     cmdInsertPicture.Parameters.Add("@us1", MySqlDbType.VarChar, 100).Value = user_ID;
@@ -498,8 +568,8 @@ namespace LinkApplication
         }
 
 
-        //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList()
+    //Methode voor het aanmaken van een event
+    public void InsertIntoEventsList()
         {
 
             try

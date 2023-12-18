@@ -35,7 +35,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static List<string> InterestsProfile { get; set; }
         public static string InterestsProfileString { get; set; }
 
-        public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
+        //public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         static Database_Connecter _connecter;
 
         public Account(string name, string age, string address, string gender, string Language, string email, string password)
@@ -46,7 +46,6 @@ namespace LinkApplicationGraphics.NVVM.Model
             GenderProfile = gender;
             EmailProfile = email;
             PasswordProfile = password;
-
         }
 
         public Account(string name, string age, string address, string gender, string Language, string email, string password , string hashedPassword, Byte[] profilePicture) 
@@ -58,8 +57,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             EmailProfile = email;
             PasswordProfile = password;
             HashedPassword = hashedPassword;
-            ProfilePicture = profilePicture;
-  
+            ProfilePicture = profilePicture;  
         }
 
         public static void GetUserID(object sender, LoginEventargs e)
@@ -70,7 +68,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static void showUserInfo()
         {
             _connecter = new Database_Connecter();
-
+            Dictionary<string, string> dataPerson = new Dictionary<string, string>();
 
             //Code voor ophalen informatie user en zetten gegevens voor account in profile weergaven.
             dataPerson = _connecter.ShowUserInformation(Account.user_ID);
@@ -129,8 +127,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             Account.GenderProfile = string.Empty;
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
-            Account.InterestsProfileString = string.Empty ;
-
+            Account.InterestsProfileString = string.Empty;
         }
 
         public static string FormatInterests(List<string> interests, int WordsPerColumn)

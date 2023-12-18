@@ -1,6 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Azure;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
+using static Google.Protobuf.Reflection.SourceCodeInfo.Types;
 
 namespace LinkApplication
 {
@@ -39,7 +42,7 @@ namespace LinkApplication
         }
 
         //Methode voor nieuwe account
-        public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
+        public void InsertAccount(string name, string email, string password, int birthdate, string address, string gender, string language)
         {
             try
             {
@@ -50,7 +53,7 @@ namespace LinkApplication
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
                     cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
-                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = age;
+                    cmd.Parameters.Add("@ag", MySqlDbType.Int32, 4).Value = birthdate;
                     cmd.Parameters.Add("@ad", MySqlDbType.VarChar, 100).Value = address;
                     cmd.Parameters.Add("@ge", MySqlDbType.VarChar, 10).Value = gender;
                     cmd.Parameters.Add("@la", MySqlDbType.VarChar, 50).Value = language;
@@ -567,16 +570,55 @@ namespace LinkApplication
             }
         }
 
-
-    //Methode voor het aanmaken van een event
-    public void InsertIntoEventsList()
+        //Methode voor ophalen interesse ID
+        public int SelectEventInterestID(string interest)
         {
-
+            int interest_ID = Int32.MinValue;
             try
             {
                 if (dbCon.IsConnect())
                 {
+                    string querySelect = "SELECT interest_Id FROM Interests WHERE name = @in";
+                    var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                    cmdSelect.Parameters.AddWithValue("@in", interest);
+                    var reader = cmdSelect.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        interest_ID = Int32.Parse(reader.GetValue(0).ToString());
+                    }
+                    reader.Close();
+                    Debug.WriteLine(interest_ID);
+                }
+                return interest_ID;
 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return interest_ID;
+            }
+        }
+    
+        
+
+        //Methode voor het aanmaken van een event
+        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
+        {
+            DateTime combinedDateTime = date + time.ToTimeSpan();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid, @uid);";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.Add("@ena", MySqlDbType.VarChar, 80).Value = eventName;
+                    cmd.Parameters.Add("@maxa", MySqlDbType.Int16, 4).Value = maxAttendees;
+                    cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
+                    cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
+                    cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = interest_ID;
+                    cmd.Parameters.Add("@uid", MySqlDbType.Int32, 4).Value = user_ID;
+                    Console.WriteLine(cmd.ExecuteNonQuery());
                 }
 
             }
@@ -588,7 +630,50 @@ namespace LinkApplication
         }
 
         //Methode voor annuleren(verwijderen) van een event
-        public void DeleteFromEventsList()
+        public void DeleteFromEventsList(int event_ID, int user_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "DELETE FROM `events` WHERE event_ID = @eid AND user_ID = @uid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@eid", event_ID);
+                    cmd.Parameters.AddWithValue("@uid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        //Methode voor weergave event informatie
+        public Dictionary<string, string> ShowEventInformation()
+        {
+            Dictionary<string, string> keyEventPairs = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    
+                }
+                return keyEventPairs;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return keyEventPairs;
+            }
+        }
+
+        //Methode om je aan te melden voor een event
+        public void InsertIntoUserEventsList()
         {
             try
             {
@@ -606,23 +691,23 @@ namespace LinkApplication
 
         }
 
-        public Dictionary<string, string> ShowEventInformation()
+        //Methode om je af te melden voor een event
+        public void DeleteFromUserEventsList()
         {
-            Dictionary<string, string> keyEventPairs = new();
             try
             {
                 if (dbCon.IsConnect())
                 {
 
                 }
-                return keyEventPairs;
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
-                return keyEventPairs;
+                dbCon.Close();
             }
+
         }
     }
 }

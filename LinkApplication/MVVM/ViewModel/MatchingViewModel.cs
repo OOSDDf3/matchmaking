@@ -81,17 +81,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
             _connecter = new Database_Connecter();
 
-           /* getNewMatch();
+            getNewMatch();
 
-            AcceptMatchCommand = new RelayCommand(execute: o=> { getNewMatch(); }, canExecute: o => true);
-            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);*/
+            AcceptMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
+            DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
         }
 
-        
-
-       /* private void getNewMatch()
+        private void getNewMatch()
         {
-            
+
             if (Account.count == 0 && userMatches.IsNullOrEmpty())
             {
                 //haalt matches op die zelfde interesses hebben
@@ -136,8 +134,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 InterestsMatch = string.Empty;
                 MatchPictureImage = null;
                 NameMatch = "Er zijn geen verdere matches gevonden";
-                
-            }                   */
-        /*}*/
+
+            }
+        }
     }
 }

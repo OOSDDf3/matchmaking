@@ -25,6 +25,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private List<string> InterestsMatchList { get; set; }
 
+        private int userIDMatch;
+
         private BitmapImage matchPictureImage;
         public BitmapImage MatchPictureImage
         {
@@ -62,6 +64,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
         public INavigationService _navigation;
+        
+
         public INavigationService Navigation
         {
             get => _navigation;
@@ -140,12 +144,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private void likeMatch()
         {
-            _connector.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
+            _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
         }
 
         private void dislikeMatch()
         {
-            _connector.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "dislike");
+            _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "dislike");
         }
     }
 }

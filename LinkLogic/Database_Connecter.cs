@@ -581,6 +581,11 @@ namespace LinkApplication
                     cmdInsertLike.Parameters.AddWithValue("@user_ID", user_ID);
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
         }
 
         //Methode voor ophalen interesse ID

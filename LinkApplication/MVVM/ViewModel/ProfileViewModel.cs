@@ -19,7 +19,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
-        public static string NameProfile { get; set; }
+        public static string NameProfile {  get; set; }
         public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
@@ -31,7 +31,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
 
-        public INavigationService _navigation;
+
+    public INavigationService _navigation;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -45,6 +46,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
         public RelayCommand NavigateToPasswordChangePageCommand { get; set; }
+        public RelayCommand NavigateToEditInterestPageCommand { get; set; }
 
 
         public ProfileViewModel(INavigationService navService)
@@ -57,7 +59,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
             NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: CanExecuteCommand);
-            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);  
+            NavigateToPasswordChangePageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<PasswordChangeViewModel>(); }, canExecute: CanExecuteCommand);
+            NavigateToEditInterestPageCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EditInterestViewModel>(); }, canExecute: CanExecuteCommand);  
 
 
         }
@@ -97,6 +100,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         private void LogOut()
         {
             Account.user_ID = 0;
+            Account.count = 0;
+
             NameProfile = string.Empty;
             BirthdateProfile = string.Empty;
             AddressProfile = string.Empty;

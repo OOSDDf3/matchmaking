@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
+             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MatchingViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
     
@@ -21,72 +21,214 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-
-
         <!-- Profile Picture -->
+       
+
+            <Border CornerRadius="15" Background="#FF729CA7" BorderThickness="0" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+
             <Grid Grid.Row="1" Grid.Column="1" Margin="10">
-                <Border CornerRadius="15" Background="#FF729CA7" BorderThickness="5">
-                    <StackPanel>
-                        <!-- Placeholder Profile Picture -->
-                        <TextBlock Text="Matchinfo" Foreground="White" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0"/>
-
-                        <!-- Profile Information TextBox -->
-                        <TextBox Text="{Binding CurrentUserProfileInfo}"
-                      Foreground="White" FontSize="18"
-                             HorizontalAlignment="Center" VerticalAlignment="Center"
-                             Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"
-                             IsReadOnly="True"
-                             Background="Transparent" BorderThickness="0"/>
-                    </StackPanel>
-                </Border>
-
-                <!-- Accept and Decline Buttons -->
-            </Grid>
-            <Grid x:Name="Button_Grid" Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.2*"/>
+                </Grid.RowDefinitions>
+                <!-- Placeholder Profile Picture -->
 
-                <Button Grid.Row="1" Grid.Column="2" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="50"/>
-                        </Style>
-                    </Button.Resources>
-                    <Button.BorderBrush>
-                        <ImageBrush TileMode="None" Stretch="Fill"/>
-                    </Button.BorderBrush>
-                </Button>
+                <!--<Border Width="600" Height="400" Grid.Row="1" Grid.Column="1">
+                    <Border.Clip>
+                        <RectangleGeometry Rect="0,0,400,400" />
+                        --><!-- Set the size you want to display --><!--
+                    </Border.Clip>
+                    <Image Source="{Binding MatchPictureImage}" Stretch="UniformToFill" />
+                </Border>-->
 
-                <Button Grid.Row="1" Grid.Column="0" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                    <Button.BorderBrush>
-                        <ImageBrush TileMode="None" Stretch="Fill"/>
-                    </Button.BorderBrush>
-                </Button>
+                <Viewbox Grid.Row="1" Grid.Column="1" Width="600" Height="400">
+                    <Image Source="{Binding MatchPictureImage}"/>
+                </Viewbox>
+
+
+                <!-- Profile Information TextBox -->
+                
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Rectangle Grid.Column="0"  Fill="White" Stroke="White" Height="2" Width="Auto" VerticalAlignment="Top"/>
+
+
+                    <TextBlock Text="{Binding NameMatch}"
+                               Margin="20,0,0,0"
+                               VerticalAlignment="Center"
+                               Grid.Row="0"    
+                               Foreground="White" FontSize="22"   
+                               FontFamily="Bahnschrift SemiLight"
+                               Background="Transparent"/>
+
+                    <TextBlock Text="{Binding InterestsMatch}"
+                               Margin="20,0,0,0"
+                                VerticalAlignment="Center"
+                                Grid.Row="1"
+                                Foreground="#FFE0DFDF" FontSize="18"   
+                                FontFamily="Bahnschrift SemiLight"
+                                Background="Transparent"/>
+
+                </Grid>
+
+                
+
+
 
             </Grid>
+        </Border>
+
+            <!-- Accept and Decline Buttons -->
+        <Grid x:Name="Button_Grid" Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button Grid.Row="1" Grid.Column="2" Content = "❤️" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="{Binding AcceptMatchCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50"/>
+                    </Style>
+                </Button.Resources>
+                <Button.BorderBrush>
+                    <ImageBrush TileMode="None" Stretch="Fill"/>
+                </Button.BorderBrush>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="0" Content = "🗙" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Height="75" Width="75" Background="#FF463692" Foreground="White" FontSize="25" FontFamily="Bahnschrift SemiLight" Command="{Binding DeclineMatchCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <Button.BorderBrush>
+                <ImageBrush TileMode="None" Stretch="Fill"/>
+            </Button.BorderBrush>
+        </Button>
+
+        </Grid>
 
     </Grid>
+    
+    <!--<StackPanel>
+        <TextBlock Text="Discover"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,20"/>
 
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,0,0,10">
+            <Border Width="400"
+                    Height="200">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#5bc3ff" Offset="0.0"/>
+                        <GradientStop Color="#3aa0ff" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,400,200"/>
+                </Border.Clip>
+
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="World leader&#x0a;in global finance"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0"/>
+                        <TextBlock Text="Get started today!"
+                                   Foreground="White"
+                                   FontSize="18"
+                                   Margin="20,10,10,0"/>
+                    </StackPanel>
+
+                    
+                </Grid>
+            </Border>
+
+            <Border Width="200"
+                    Height="200"
+                    CornerRadius="10"
+                    Margin="45,0,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Color="#ffc554" Offset="0.0"/>
+                        <GradientStop Color="#ffb73a" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </StackPanel>
+
+        <StackPanel>
+
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Margin" Value="15,0,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Most Watched"
+                       Foreground="White"
+                       FontSize="20"
+                       HorizontalAlignment="Left"
+                       Margin="0,0,0,10"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Border Width="150"
+                        Height="150"
+                        Background="#844eff"
+                        CornerRadius="10"
+                        Margin="0"/>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#4e99ff"
+                        CornerRadius="10"/>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#4eff91"
+                        CornerRadius="10"/>
+
+                <Border Width="150"
+                        Height="150"
+                        Background="#ecff4e"
+                        CornerRadius="10"/>
+
+            </StackPanel>
+
+        </StackPanel>
+    </StackPanel>-->
 </UserControl>

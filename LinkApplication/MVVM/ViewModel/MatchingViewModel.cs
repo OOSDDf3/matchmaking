@@ -12,12 +12,14 @@ using System.Windows.Media.Imaging;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using ZstdSharp.Unsafe;
+using System.Windows;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class MatchingViewModel : Core.ViewModel
     {
         Database_Connecter _connecter;
+
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         private Byte[] MatchPicture { get; set; }
 
@@ -69,8 +71,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            getNewMatch();
-
             AcceptMatchCommand = new RelayCommand(execute: o => { likeMatch(); getNewMatch();}, canExecute: o => true);
             DeclineMatchCommand = new RelayCommand(execute: o => { disLikeMatch(); getNewMatch();}, canExecute: o => true);
         }
@@ -121,7 +121,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 NameMatch = "Er zijn geen verdere matches gevonden";
 
             }
-        } 
+        }
+
+        public void OnUserControlLoaded()
+        {
+            getNewMatch();
+        }
 
         private void likeMatch()
         {

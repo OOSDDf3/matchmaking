@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LinkApplicationGraphics.Core;
+using LinkApplicationGraphics.NVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,14 @@ namespace LinkApplicationGraphics.NVVM.View
         public MatchingView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MatchingViewModel viewModel)
+            {
+                viewModel.OnUserControlLoaded();
+            }
         }
     }
 }

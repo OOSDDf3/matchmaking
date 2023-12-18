@@ -34,6 +34,9 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+
+
+        <Button Grid.Row="1" Width="250" Content="Reset likes" Command="{Binding ResetLikesCommand}"/>
         <!-- Profile Picture -->
        
 

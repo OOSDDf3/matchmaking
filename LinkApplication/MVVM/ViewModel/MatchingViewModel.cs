@@ -65,6 +65,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public RelayCommand AcceptMatchCommand {  get; set; }
         public RelayCommand DeclineMatchCommand { get; set; }
+        public RelayCommand ResetLikesCommand { get; set; }
 
 
         public MatchingViewModel(INavigationService navService)
@@ -73,16 +74,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             AcceptMatchCommand = new RelayCommand(execute: o => { likeMatch(); getNewMatch();}, canExecute: o => true);
             DeclineMatchCommand = new RelayCommand(execute: o => { disLikeMatch(); getNewMatch();}, canExecute: o => true);
+            ResetLikesCommand = new RelayCommand(execute: o => { resetLikes(); getNewMatch(); }, canExecute: o => true);
         }
 
         private void getNewMatch()
         {
 
-            if (Account.count == 0 && Account.userMatches.IsNullOrEmpty())
+            if (Account.userMatches.IsNullOrEmpty())
             {
                 //haalt matches op die zelfde interesses hebben
                 Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
-                Account.count++;
+                
             }
 
             if (Account.userMatches.Count != 0)
@@ -91,7 +93,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //haalt de userid op met de meest overeenkomende interreses
                 userIDMatch = Account.userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
-                Account.userMatches.Remove(userIDMatch);
+                
 
                 //haalt gegevens op van desbetreffende persoon
                 dataPerson = _connecter.ShowUserInformation(userIDMatch);
@@ -133,6 +135,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if(userIDMatch != 0)
             {
                 _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
+                Account.userMatches.Remove(userIDMatch);
             }
             
         }
@@ -142,7 +145,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             if (userIDMatch != 0)
             {
                 _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "dislike");
+                Account.userMatches.Remove(userIDMatch);
             }
+        }
+
+        private void resetLikes()
+        {
+            _connecter.ResetLikes(Account.user_ID);
+            Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
         }
     }
 }

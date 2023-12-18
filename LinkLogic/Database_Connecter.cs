@@ -793,5 +793,33 @@ namespace LinkApplication
                 dbCon.Close();
             }
         }
+
+        public void ResetLikes(int user_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    
+                    string queryDeleteAll = $"DELETE FROM `userlikesdislikes` WHERE user_ID = {user_ID}";
+                    var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
+                    cmdDeleteAll.ExecuteNonQuery();
+
+                    string queryDeleteLikes = $"DELETE FROM `userlikesdislikes` WHERE user_ID_Liked = {user_ID}";
+                    var cmdDeleteLikes = new MySqlCommand(queryDeleteLikes, dbCon.Connection);
+                    cmdDeleteLikes.ExecuteNonQuery();
+
+                }
+                else
+                {
+                    Debug.WriteLine("Werkt niet kut");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
     }
 }

@@ -803,11 +803,7 @@ namespace LinkApplication
                     
                     string queryDeleteAll = $"DELETE FROM `userlikesdislikes` WHERE user_ID = {user_ID}";
                     var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
-                    cmdDeleteAll.ExecuteNonQuery();
-
-                    string queryDeleteLikes = $"DELETE FROM `userlikesdislikes` WHERE user_ID_Liked = {user_ID}";
-                    var cmdDeleteLikes = new MySqlCommand(queryDeleteLikes, dbCon.Connection);
-                    cmdDeleteLikes.ExecuteNonQuery();
+                    cmdDeleteAll.ExecuteNonQuery();                   
 
                 }
                 else

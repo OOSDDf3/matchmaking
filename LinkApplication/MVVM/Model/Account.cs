@@ -28,10 +28,6 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static Byte[] ProfilePicture { get; set; }
         public static BitmapImage ProfilePictureImage { get; set; }
 
-        //count om te weten of je al een keer de matchinggegevens hebt opgevraagd of niet
-        public static int count = 0;
-
-
         //objecten voor interreses, moet public voor andere klassen die deze gebruiken
         public static List<string> InterestsProfile { get; set; }
         public static string InterestsProfileString { get; set; }

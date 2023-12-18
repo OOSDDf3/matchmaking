@@ -118,7 +118,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         private void LogOut()
         {
             Account.user_ID = 0;
-            Account.count = 0;
+            Account.userMatches.Clear();
 
             NameProfile = string.Empty;
             BirthdateProfile = string.Empty;

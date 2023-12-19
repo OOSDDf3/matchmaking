@@ -31,8 +31,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="1">
-                <Border BorderThickness="5" BorderBrush="#FF729CA7">
+            <Viewbox Grid.Column="1" >
+                <Border BorderThickness="5" BorderBrush="#FF729CA7" CornerRadius="4">
                     <Image Stretch="None" Source="{Binding ProfilePictureImage}"/>
                 </Border>
             </Viewbox>

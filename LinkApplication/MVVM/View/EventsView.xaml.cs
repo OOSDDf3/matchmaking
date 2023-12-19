@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkApplicationGraphics.NVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace LinkApplicationGraphics.NVVM.View
         public EventsView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is EventsViewModel viewModel)
+            {
+                viewModel.OnUserControlLoaded();
+            }
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)

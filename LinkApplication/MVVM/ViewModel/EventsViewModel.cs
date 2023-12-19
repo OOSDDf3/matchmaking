@@ -5,6 +5,7 @@ using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,8 +54,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             NavigateToEventCreateViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventCreateViewModel>(); }, canExecute: o => true);
 
             _connecter = new Database_Connecter();
-            
             AddEventsToList(_connecter.ShowAllEventInformation());
+
+
+        }
+
+        public void OnUserControlLoaded()
+        {
+                _connecter = new Database_Connecter();
+                AddEventsToList(_connecter.ShowAllEventInformation());
         }
 
         public void AddEventsToList(List<Dictionary<string, string>> eventList)

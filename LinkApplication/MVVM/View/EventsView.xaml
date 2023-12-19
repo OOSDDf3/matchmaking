@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1600">
+             d:DesignHeight="850" d:DesignWidth="1600"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
         <ResourceDictionary>

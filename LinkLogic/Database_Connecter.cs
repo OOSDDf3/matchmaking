@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -602,6 +603,57 @@ namespace LinkApplication
                     cmdInsertLike.Parameters.AddWithValue("@ac", action);
 
                     cmdInsertLike.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
+        public bool CheckMatch(int user_ID, int user_ID_Liked)
+        {
+            bool checkMatch = false;
+            string action;
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryCheckMatch = $"SELECT action FROM userLikesDislikes WHERE user_ID = {user_ID_Liked} AND user_ID_Liked = {user_ID}" ;
+                    var cmdCheckMatch = new MySqlCommand(queryCheckMatch, dbCon.Connection);                
+                    var reader = cmdCheckMatch.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        action = reader.GetValue(0).ToString();
+                        if (action.Equals("like"))
+                        {
+                            checkMatch = true;
+                        }
+                    }
+                    reader.Close();
+                }
+                return checkMatch;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return checkMatch;
+            }
+        }
+
+        public void InsertMatch(int user_ID, int user_ID_Matched)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertMatch = $"INSERT INTO `usermatches` (`user_ID`, `user_ID_Matched`) VALUES ({user_ID}, {user_ID_Matched})";
+                    var cmdInsertMatch = new MySqlCommand(queryInsertMatch, dbCon.Connection);
+
+                    cmdInsertMatch.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)

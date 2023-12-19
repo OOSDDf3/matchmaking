@@ -11,8 +11,11 @@ using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
+using MaterialDesignThemes;
+using MaterialDesignColors;
 using ZstdSharp.Unsafe;
 using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -136,8 +139,18 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             {
                 _connecter.InsertIntoLikesDislikes(Account.user_ID, userIDMatch, "like");
                 Account.userMatches.Remove(userIDMatch);
+
+                if (_connecter.CheckMatch(Account.user_ID, userIDMatch))
+                {
+                    _connecter.InsertMatch(Account.user_ID, userIDMatch);
+                    MessageBox.Show("Hoera, je hebt een match!");
+                    
+
+                }
+
+
             }
-            
+
         }
 
         private void disLikeMatch()

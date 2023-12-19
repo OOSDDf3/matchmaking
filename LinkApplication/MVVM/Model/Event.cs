@@ -1,12 +1,16 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.ViewModel;
+using LinkApplicationGraphics.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LinkApplicationGraphics.NVVM.Model
 {
@@ -24,6 +28,9 @@ namespace LinkApplicationGraphics.NVVM.Model
         static Database_Connecter _connecter;
 
         public RelayCommand DeleteEventCommand { get; set; }
+
+        public static ObservableCollection<Event> ListOfEvents { get; set; }
+
 
         public Event(int event_ID, string eventname, string maxattendees, string location, string datetime, string interest_ID)
         {
@@ -59,15 +66,38 @@ namespace LinkApplicationGraphics.NVVM.Model
             _connecter = new Database_Connecter();
             if (parameter is int _eventID)
             {
-                // Access the Event ID (Tag) here
                 int eventID = _eventID;
-                Debug.WriteLine(eventID);
-                Debug.WriteLine(_eventID);
 
-                _connecter.DeleteFromEventsList(eventID, Account.user_ID);
+                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je dit event wil verwijderen", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    MessageBox.Show("Event is verwijderd, herlaad de pagina");
+                    _connecter.DeleteFromEventsList(eventID, Account.user_ID);
+                    Event.AddEventsToList(_connecter.ShowAllEventInformation());
+                }
+                else
+                {
+                    
+                }
             }
+        }
 
-
+        public static void AddEventsToList(List<Dictionary<string, string>> eventList)
+        {
+            Event.ListOfEvents = new ObservableCollection<Event>();
+            foreach (var eventDict in eventList)
+            {
+                Event newEvent = new Event(
+                    Int32.Parse(eventDict["event_ID"]),
+                    eventDict["eventname"],
+                    eventDict["maxattendees"],
+                    eventDict["location"],
+                    eventDict["date"],
+                    eventDict["interest_ID"]
+                );
+                Event.ListOfEvents.Add(newEvent);
+            }
+            EventsViewModel.ListOfEvents = Event.ListOfEvents;
         }
     }
 }

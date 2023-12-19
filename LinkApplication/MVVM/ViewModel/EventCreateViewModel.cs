@@ -67,6 +67,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Interest_ID = _connecter.SelectEventInterestID(Interest);
 
             _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
+
+            Event.AddEventsToList(_connecter.ShowAllEventInformation());
             Navigation.NavigateToNew<EventsViewModel>();
 
         }

@@ -25,7 +25,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string DateTimeEvent { get; set; }
         public static string InterestEvent { get; set; }
 
-        public ObservableCollection<Event> ListOfEvents { get; set; }
+        public static ObservableCollection<Event> ListOfEvents { get; set; }
+
 
 
         public INavigationService _navigation;
@@ -56,7 +57,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             
 
             _connecter = new Database_Connecter();
-            AddEventsToList(_connecter.ShowAllEventInformation());
+            Event.AddEventsToList(_connecter.ShowAllEventInformation());
 
 
         }
@@ -64,24 +65,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public void OnUserControlLoaded()
         {
                 _connecter = new Database_Connecter();
-                AddEventsToList(_connecter.ShowAllEventInformation());
+                Event.AddEventsToList(_connecter.ShowAllEventInformation());
         }
 
-        public void AddEventsToList(List<Dictionary<string, string>> eventList)
-        {
-            ListOfEvents = new ObservableCollection<Event>();
-            foreach(var eventDict in eventList) {
-                Event newEvent = new Event(
-                    event_ID = Int32.Parse(eventDict["event_ID"]),
-                    NameEvent = eventDict["eventname"],
-                    MaxAttendeesEvent = eventDict["maxattendees"],
-                    LocationEvent = eventDict["location"],
-                    DateTimeEvent = eventDict["date"],
-                    InterestEvent = eventDict["interest_ID"]
-                );
-                ListOfEvents.Add(newEvent);
-            }
-        }
+        
 
         
 

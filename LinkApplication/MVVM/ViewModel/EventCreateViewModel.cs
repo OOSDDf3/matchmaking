@@ -45,12 +45,11 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             Navigation = navService;
 
-            _connecter = new Database_Connecter();
-
             DateEvent = DateTime.Now.Date;
 
+            _connecter = new Database_Connecter();
             EventInterests = _connecter.ShowUserInterests(Account.user_ID);
-            
+
 
 
             //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
@@ -72,11 +71,5 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         }
 
-        //private void cancelEvent()
-        //{
-        //    _connecter = new Database_Connecter();
-
-        //    _connecter.DeleteFromEventsList();
-        //}
     }
 }

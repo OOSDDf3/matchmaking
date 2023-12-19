@@ -7,8 +7,9 @@
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EventCreateViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600"
+             >
              
-            >
+           
 
     <UserControl.Resources>
         <ResourceDictionary>

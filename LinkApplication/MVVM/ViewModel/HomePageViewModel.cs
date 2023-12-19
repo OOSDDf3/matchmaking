@@ -45,7 +45,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             Navigation = navService;
             NavigateToHomeViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchingViewModel>(); }, canExecute: o => true);
-            NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); Event.showEventInfo(); }, canExecute: CanExecuteNavigateToEvents);
+            NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: CanExecuteNavigateToEvents);
             NavigateToMatchesViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<MatchesViewModel>(); }, canExecute: o => true);
             NavigateToProfileViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<ProfileViewModel>(); Account.showUserInfo(); }, canExecute: CanExecuteNavigateToProfile);
 

@@ -45,6 +45,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
 
+
         public EventsViewModel(INavigationService navService)
         {
             Navigation = navService;
@@ -52,6 +53,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             //aanmaken command voor navigeren naar eventcreateview, command execution staat in xaml
             //kijk naar commands login en registeren als je iets wel checken voor het uitvoeren van de command
             NavigateToEventCreateViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventCreateViewModel>(); }, canExecute: o => true);
+            
 
             _connecter = new Database_Connecter();
             AddEventsToList(_connecter.ShowAllEventInformation());
@@ -80,6 +82,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 ListOfEvents.Add(newEvent);
             }
         }
+
+        
 
     }
 }

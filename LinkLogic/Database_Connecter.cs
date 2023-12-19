@@ -1,9 +1,5 @@
-﻿using Azure;
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
+﻿using MySql.Data.MySqlClient;
 using System.Diagnostics;
-using System.Reflection;
-using static Google.Protobuf.Reflection.SourceCodeInfo.Types;
 
 namespace LinkApplication
 {
@@ -470,13 +466,13 @@ namespace LinkApplication
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        for (int i = 0; i < reader.FieldCount; i+=2)
+                        for (int i = 0; i < reader.FieldCount; i += 2)
                         {
                             Debug.WriteLine($"category: {reader.GetValue(i)}");
-                            Debug.WriteLine($"interest: {reader.GetValue(i+1)}");
+                            Debug.WriteLine($"interest: {reader.GetValue(i + 1)}");
                             List<string> categoryInterestList = new();
                             categoryInterestList.Add(reader.GetValue(i).ToString());
-                            categoryInterestList.Add(reader.GetValue(i+1).ToString());
+                            categoryInterestList.Add(reader.GetValue(i + 1).ToString());
                             interests.Add(categoryInterestList);
                         }
                     }
@@ -498,11 +494,11 @@ namespace LinkApplication
             try
             {
                 if (dbCon.IsConnect())
-                {                    
+                {
                     string queryDelete = "DELETE FROM `userinterestlist` WHERE user_ID = @us";
                     var cmdDelete = new MySqlCommand(queryDelete, dbCon.Connection);
                     cmdDelete.Parameters.AddWithValue("@us", userID);
-                    cmdDelete.ExecuteNonQuery();                   
+                    cmdDelete.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -540,7 +536,7 @@ namespace LinkApplication
                         cmdInsertInterest.Parameters.AddWithValue("@us", userID);
                         cmdInsertInterest.Parameters.AddWithValue("@inID", interest_ID);
                         cmdInsertInterest.ExecuteNonQuery();
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -599,8 +595,8 @@ namespace LinkApplication
                 return interest_ID;
             }
         }
-    
-        
+
+
 
         //Methode voor het aanmaken van een event
         public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
@@ -664,7 +660,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@event_ID", event_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID"};
+                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID" };
 
                     while (reader.Read())
                     {
@@ -688,36 +684,41 @@ namespace LinkApplication
         }
 
         //Methode Weergave alle event info?
-        public Dictionary<string, string> ShowAllEventInformation()
+        public List<Dictionary<string, string>> ShowAllEventInformation()
         {
-            Dictionary<string, string> keyValuePairsEvent = new();
-            string query = "SELECT * FROM Events";
+            List<string> eventsIDList = new();
+            List<Dictionary<string, string>> eventsInfoList = new();
+            string query = "SELECT event_ID FROM Events";
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                    var reader = cmd.ExecuteReader();
-                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID" };
+                    var cmdEventID = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmdEventID.ExecuteReader();
 
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.Write(reader.GetValue(i).ToString() + " ");
-                            keyValuePairsEvent.Add(keys[i], reader.GetValue(i).ToString());
+                            Debug.Write(reader.GetValue(i).ToString() + " ");
+                            eventsIDList.Add(reader.GetValue(i).ToString());
                         }
-                        Console.WriteLine();
                     }
                     reader.Close();
-                    return keyValuePairsEvent;
+
+                    foreach (var id in eventsIDList)
+                    {
+                        int event_ID = int.Parse(id);
+                        eventsInfoList.Add(ShowEventInformation(event_ID));
+                    }
+                    return eventsInfoList;
                 }
-                return keyValuePairsEvent;
+                return eventsInfoList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return keyValuePairsEvent;
+                return eventsInfoList;
             }
         }
 

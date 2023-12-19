@@ -11,7 +11,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class EventsViewModel: Core.ViewModel
     {
-        public Dictionary<string, string> dataEvent = new Dictionary<string, string>();
+
         Database_Connecter _connecter;
 
         //Ondersteuning voor weergave?
@@ -36,6 +36,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
         public RelayCommand NavigateToEventCreateViewCommand { get; set; }
+
+
 
 
 

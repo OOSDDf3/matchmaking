@@ -34,17 +34,18 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static void showEventInfo()
         {
             _connecter = new Database_Connecter();
-            Dictionary<string, string> dataEvent = new Dictionary<string, string>();
+            List<Dictionary<string, string>> dataEvent = new();
 
             dataEvent = _connecter.ShowAllEventInformation();
 
-            
-            EventsViewModel.NameEvent = dataEvent["eventname"];
-            EventsViewModel.MaxAttendeesEvent = dataEvent["maxattendees"];
-            EventsViewModel.LocationEvent = dataEvent["location"];
-            EventsViewModel.DateTimeEvent = dataEvent["date"];
-            EventsViewModel.InterestEvent = dataEvent["interest_ID"];
-
+            foreach (var eventDict in dataEvent) 
+            {
+                EventsViewModel.NameEvent = eventDict["eventname"];
+                EventsViewModel.MaxAttendeesEvent = eventDict["maxattendees"];
+                EventsViewModel.LocationEvent = eventDict["location"];
+                EventsViewModel.DateTimeEvent = eventDict["date"];
+                EventsViewModel.InterestEvent = eventDict["interest_ID"];
+            }
         }
     }
 }

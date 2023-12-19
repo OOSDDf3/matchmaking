@@ -4,10 +4,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:model="clr-namespace:LinkApplicationGraphics.NVVM.Model"
+             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:model="clr-namespace:LinkApplicationGraphics.NVVM.Model" xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ProfileViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600">
-
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,8 +31,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="1">
-                <Border BorderThickness="5" BorderBrush="#FF729CA7">
+            <Viewbox Grid.Column="1" >
+                <Border BorderThickness="5" BorderBrush="#FF729CA7" CornerRadius="4">
                     <Image Stretch="None" Source="{Binding ProfilePictureImage}"/>
                 </Border>
             </Viewbox>
@@ -80,12 +79,12 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                        <TextBlock Text="Beheer je profiel informatie"
+                        <TextBlock Text="Bewerk je profiel informatie"
                            Foreground="#272537"
                            FontSize="28"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight"/>
+                           Margin="0,10,0,0" FontFamily="Bahnschrift SemiLight" Cursor="Hand"/>
                     </Button>
 
                 </StackPanel>
@@ -604,6 +603,18 @@
             </Button.Resources>
         </Button>
 
+        <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonDelete" Content = "Account verwijderen" HorizontalAlignment = "Center" VerticalAlignment = "Top" Width = "230" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="20" Command="{Binding DeleteAccountCommand}" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
+        </Button>
+
 
         <Button Visibility="Hidden" Grid.Row="3" Grid.Column="1" x:Name = "buttonSave" Content = "Opslaan" HorizontalAlignment = "Right" VerticalAlignment = "Top" Width = "170" Height="40" Background="#FF463692" Foreground="#FFF1F1F1" FontSize="20" Command="{Binding NavigateToHomePageCommand}" FontFamily="Bahnschrift SemiLight" Click="buttonSave_Click" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
             <Button.Resources>
@@ -617,12 +628,13 @@
             </Button.Resources>
         </Button>
 
+
         <TextBlock Background="Transparent" 
                Grid.Column="1" 
-               Grid.Row="3" 
+               Grid.Row="2" 
                Height="80" 
                Width="800" 
-               VerticalAlignment="Top" 
+               VerticalAlignment="Bottom" 
                HorizontalAlignment="Center"
                Text="{Binding ErrorMessage}"
                FontSize="20"

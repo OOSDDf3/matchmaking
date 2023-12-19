@@ -3,6 +3,7 @@ using LinkApplicationGraphics.NVVM.ViewModel;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace LinkApplicationGraphics.NVVM.Model
     public class Account
     {
         public static int user_ID;
-
+        //Alle properties voor profielweergave
         public static string NameProfile { get; set; }
         public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
@@ -27,10 +28,6 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static Byte[] ProfilePicture { get; set; }
         public static BitmapImage ProfilePictureImage { get; set; }
 
-        //count om te weten of je al een keer de matchinggegevens hebt opgevraagd of niet
-        public static int count = 0;
-
-
         //objecten voor interreses, moet public voor andere klassen die deze gebruiken
         public static List<string> InterestsProfile { get; set; }
         public static string InterestsProfileString { get; set; }
@@ -38,15 +35,11 @@ namespace LinkApplicationGraphics.NVVM.Model
         //public static Dictionary<string, string> dataPerson = new Dictionary<string, string>();
         static Database_Connecter _connecter;
 
-        public Account(string name, string age, string address, string gender, string Language, string email, string password)
-        {
-            NameProfile = name;
-            BirthdateProfile = age;
-            AddressProfile = address;
-            GenderProfile = gender;
-            EmailProfile = email;
-            PasswordProfile = password;
-        }
+        //usermatches
+        public static Dictionary<int, int> userMatches = new Dictionary<int, int>();
+
+        //properties voor matchweergave
+        
 
         public Account(string name, string age, string address, string gender, string Language, string email, string password , string hashedPassword, Byte[] profilePicture) 
         {
@@ -118,6 +111,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             return image;
         }
 
+        
         public static void LogOut()
         {
             Account.user_ID = 0;

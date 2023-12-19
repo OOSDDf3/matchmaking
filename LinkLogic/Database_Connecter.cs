@@ -1,4 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Azure;
+using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Relational;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace LinkApplication
@@ -293,8 +298,25 @@ namespace LinkApplication
             }
             reader.Close();
 
+            //code voor ophalen users die al geliked of disliked zijn
+            List<int> likedUser_ID = new();
+            string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
 
-            //code voor ophalen andere users.
+            var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection);
+            cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+            var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader();
+
+            while (readerLikeduser_ID.Read())
+            {
+                for (int i = 0; i < readerLikeduser_ID.FieldCount; i++)
+                {
+
+                    likedUser_ID.Add(Int32.Parse(readerLikeduser_ID.GetValue(i).ToString()));
+                }
+            }
+            readerLikeduser_ID.Close();
+
+            //code voor ophalen andere users met matchende interresses
             Dictionary<int, int> users = new();
 
             string queryUser_ID = "SELECT user_ID FROM userinterestlist WHERE interest_ID = @interest_ID";
@@ -312,7 +334,7 @@ namespace LinkApplication
                 {
                     int user_ID_selected = Convert.ToInt32(readerID["user_ID"]);
 
-                    if (user_ID_selected != user_ID)
+                    if (!likedUser_ID.Contains(user_ID_selected) && user_ID_selected != user_ID)
                     {
                         if (!users.ContainsKey(user_ID_selected))
                         {
@@ -566,6 +588,79 @@ namespace LinkApplication
             }
         }
 
+        public void InsertIntoLikesDislikes(int user_ID, int user_ID_Liked, string action)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertLike = "INSERT INTO `userLikesDislikes` (`user_ID`, `user_ID_Liked`, `action` ) VALUES (@usid, @usidlik, @ac)";
+                    var cmdInsertLike = new MySqlCommand(queryInsertLike, dbCon.Connection);
+                    cmdInsertLike.Parameters.AddWithValue("@usid", user_ID);
+                    cmdInsertLike.Parameters.AddWithValue("@usidlik", user_ID_Liked);
+                    cmdInsertLike.Parameters.AddWithValue("@ac", action);
+
+                    cmdInsertLike.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
+        public bool CheckMatch(int user_ID, int user_ID_Liked)
+        {
+            bool checkMatch = false;
+            string action;
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryCheckMatch = $"SELECT action FROM userLikesDislikes WHERE user_ID = {user_ID_Liked} AND user_ID_Liked = {user_ID}" ;
+                    var cmdCheckMatch = new MySqlCommand(queryCheckMatch, dbCon.Connection);                
+                    var reader = cmdCheckMatch.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        action = reader.GetValue(0).ToString();
+                        if (action.Equals("like"))
+                        {
+                            checkMatch = true;
+                        }
+                    }
+                    reader.Close();
+                }
+                return checkMatch;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return checkMatch;
+            }
+        }
+
+        public void InsertMatch(int user_ID, int user_ID_Matched)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertMatch = $"INSERT INTO `usermatches` (`user_ID`, `user_ID_Matched`) VALUES ({user_ID}, {user_ID_Matched})";
+                    var cmdInsertMatch = new MySqlCommand(queryInsertMatch, dbCon.Connection);
+
+                    cmdInsertMatch.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
         //Methode voor ophalen interesse ID
         public int SelectEventInterestID(string interest)
         {
@@ -758,6 +853,73 @@ namespace LinkApplication
                 dbCon.Close();
             }
 
+        }
+
+        public void DeleteUser(int userID)
+        {
+            List<string> tablesToDelete = new List<string>
+                {                  
+                    "account",
+                    "events",
+                    "usereventlist",
+                    "profilepicture",
+                    "userinterestlist",
+                    "userlikesdislikes"
+                };
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    foreach (string table in tablesToDelete)
+                    {
+
+                        try
+                        {
+                            string queryDeleteAll = $"DELETE FROM `{table}` WHERE user_ID = {userID}";
+                            var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
+                            cmdDeleteAll.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            Debug.WriteLine($"{table} is niet gelukt a neef");
+                        }
+                    }
+
+                    string queryDeleteLikes = $"DELETE FROM `userlikesdislikes` WHERE user_ID_Liked = {userID}";
+                    var cmdDeleteLikes = new MySqlCommand(queryDeleteLikes, dbCon.Connection);
+                    cmdDeleteLikes.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
+        public void ResetLikes(int user_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    
+                    string queryDeleteAll = $"DELETE FROM `userlikesdislikes` WHERE user_ID = {user_ID}";
+                    var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
+                    cmdDeleteAll.ExecuteNonQuery();                   
+
+                }
+                else
+                {
+                    Debug.WriteLine("Werkt niet kut");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
         }
     }
 }

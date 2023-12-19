@@ -57,6 +57,7 @@ namespace LinkApplicationGraphics.NVVM.View
                     border.Visibility = Visibility.Visible;
             }
             buttonSave.Visibility = Visibility.Visible;
+            buttonDelete.Visibility = Visibility.Visible;
             ErrorMessageTextBlock.Visibility = Visibility.Visible;
         }
 

@@ -57,9 +57,9 @@
 
             <Rectangle Grid.Column="1" Grid.Row="3" Fill="#FF729CA7" Stroke="#FF729CA7" Height="30" Width="Auto" VerticalAlignment="Top" />
 
-            <Border Grid.Column="1" Grid.Row="2" Background="#FF162B31"/>
+            <Border Grid.Column="1" Grid.Row="2" Background="#FF3A4346"/>
             
-            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF162B31" CornerRadius="25">
+            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Background="#FF3A4346" CornerRadius="25">
                 
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Grid.RowDefinitions>

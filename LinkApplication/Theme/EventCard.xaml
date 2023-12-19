@@ -49,7 +49,7 @@
                             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum/Tijd: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                             <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding DateTimeEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-                            <RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Grid.RowSpan="2">
+                            <!--<RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Grid.RowSpan="2">
                                 <RadioButton.Style>
                                     <Style TargetType="{x:Type ToggleButton}">
                                         <Setter Property="Template">
@@ -68,28 +68,20 @@
                                         </Style.Triggers>
                                     </Style>
                                 </RadioButton.Style>
-                            </RadioButton>
+                            </RadioButton>-->
 
 
-                            <Button Tag="{Binding Event_ID}" Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="25" Foreground="#272537" BorderBrush="{x:Null}" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}" RenderTransformOrigin="-0.269,-1.18" >
-                                <!--<Button.Style>
-                                    <Style TargetType="{x:Type ToggleButton}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ToggleButton">
-                                                    <Border BorderThickness="2" BorderBrush="{x:Null}" Background="{x:Null}">
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
+                            <Button Tag="{Binding Event_ID}" Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}" RenderTransformOrigin="-0.269,-1.18" >
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <Trigger Property="IsChecked" Value="True">
-                                                <Setter Property="Background" Value="White" />
-                                            </Trigger>
+                                            <DataTrigger Binding="{Binding Organiser}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Button.Style>-->
+                                </Button.Style>
                             </Button>
 
                             <Button Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">

@@ -23,6 +23,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public string LocationEvent { get; set; }
         public string DateTimeEvent { get; set; }
         public string InterestEvent { get; set; }
+        public string Organiser {  get; set; }
 
 
         static Database_Connecter _connecter;
@@ -32,7 +33,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public static ObservableCollection<Event> ListOfEvents { get; set; }
 
 
-        public Event(int event_ID, string eventname, string maxattendees, string location, string datetime, string interest_ID)
+        public Event(int event_ID, string eventname, string maxattendees, string location, string datetime, string interest_ID, string user_ID)
         {
             DeleteEventCommand = new RelayCommand(execute: deleteEvent, canExecute: o => true);
 
@@ -42,6 +43,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             LocationEvent = location;
             DateTimeEvent = datetime;
             InterestEvent = interest_ID;
+            Organiser = user_ID;
         }
 
         public static void showEventInfo()
@@ -58,6 +60,7 @@ namespace LinkApplicationGraphics.NVVM.Model
                 EventsViewModel.LocationEvent = eventDict["location"];
                 EventsViewModel.DateTimeEvent = eventDict["date"];
                 EventsViewModel.InterestEvent = eventDict["interest_ID"];
+                EventsViewModel.Organiser = eventDict["user_id"];
             }
         }
 
@@ -68,16 +71,19 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 int eventID = _eventID;
 
-                MessageBoxResult result = MessageBox.Show("Weet je zeker dat je dit event wil verwijderen", "Confirmation", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                if (Int32.Parse(Organiser) == Account.user_ID)
                 {
-                    MessageBox.Show("Event is verwijderd, herlaad de pagina");
-                    _connecter.DeleteFromEventsList(eventID, Account.user_ID);
-                    Event.AddEventsToList(_connecter.ShowAllEventInformation());
-                }
-                else
-                {
-                    
+                    MessageBoxResult result = MessageBox.Show("Weet je zeker dat je dit event wil verwijderen", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        MessageBox.Show("Event is verwijderd, herlaad de pagina");
+                        _connecter.DeleteFromEventsList(eventID, Account.user_ID);
+                        Event.AddEventsToList(_connecter.ShowAllEventInformation());
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
         }
@@ -93,11 +99,15 @@ namespace LinkApplicationGraphics.NVVM.Model
                     eventDict["maxattendees"],
                     eventDict["location"],
                     eventDict["date"],
-                    eventDict["interest_ID"]
+                    eventDict["interest_ID"],
+                    eventDict["user_ID"]
                 );
                 Event.ListOfEvents.Add(newEvent);
             }
             EventsViewModel.ListOfEvents = Event.ListOfEvents;
         }
+
+
+
     }
 }

@@ -24,6 +24,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public static string LocationEvent { get; set; }
         public static string DateTimeEvent { get; set; }
         public static string InterestEvent { get; set; }
+        public static string Organiser { get; set; }
 
         public static ObservableCollection<Event> ListOfEvents { get; set; }
 
@@ -64,13 +65,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public void OnUserControlLoaded()
         {
-                _connecter = new Database_Connecter();
-                Event.AddEventsToList(_connecter.ShowAllEventInformation());
+            _connecter = new Database_Connecter();
+            Event.AddEventsToList(_connecter.ShowAllEventInformation());
+            
         }
 
-        
 
-        
+
+
 
     }
 }

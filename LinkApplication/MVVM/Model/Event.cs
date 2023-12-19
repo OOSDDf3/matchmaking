@@ -10,13 +10,13 @@ namespace LinkApplicationGraphics.NVVM.Model
 {
     public class Event
     {
-        public static int Event_ID;
+        public int Event_ID;
 
-        public static string NameEvent { get; set; }
-        public static string MaxAttendeesEvent { get; set; }
-        public static string LocationEvent { get; set; }
-        public static string DateTimeEvent { get; set; }
-        public static string InterestEvent { get; set; }
+        public string NameEvent { get; set; }
+        public string MaxAttendeesEvent { get; set; }
+        public string LocationEvent { get; set; }
+        public string DateTimeEvent { get; set; }
+        public string InterestEvent { get; set; }
 
 
         static Database_Connecter _connecter;

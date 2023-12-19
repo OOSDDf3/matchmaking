@@ -27,27 +27,30 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-
+            <RowDefinition Height="8*"/>
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-
-
-        <Border Background="#FF729CA7" 
+        <ListView Grid.Row="1" Grid.Column="1" 
+                  ItemsSource="{Binding ListOfEvents}"
+                  ItemContainerStyle="{StaticResource EventCard}"
+                  />
+        <!--<Border Background="#FF729CA7" 
                 Grid.Column="1" 
                 Grid.Row="1"
                 BorderThickness="5"
                 BorderBrush="Black"
                 CornerRadius="30"
                 Padding="12,13,12,5"
-                Margin="5,0,15,0">
-            <Grid x:Name="Event1_Grid" Grid.Row="1" Grid.Column="1">
+                Margin="5,5,15,0"
+                Height="170"
+                VerticalAlignment="Top">
+            <Grid x:Name="Event1_Grid" Grid.Row="2" Grid.Column="1" Height="150" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -131,7 +134,8 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-        </Border>
+        </Border>-->
+        
 
 
         
@@ -140,24 +144,26 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Center" VerticalAlignment = "Top" Content = "Filters" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Content = "Categorie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <ComboBox Grid.Row="2" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Top" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderBrush="White"/>
-        </Grid>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Content = "Categorie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <ComboBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Top" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderBrush="White"/>
+        <!--</Grid>-->
 
-        <Grid x:Name="SignedUp_Grid" Grid.Row="3" Grid.Column="2">
-            <Grid.RowDefinitions>
+        <!--<Grid x:Name="SignedUp_Grid" Grid.Row="2" Grid.Column="2">-->
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
 
-            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Status" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Aangemeld" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <CheckBox Content=""  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Foreground="White" materialDesign:CheckBoxAssist.CheckBoxSize="30" Background="White" OpacityMask="White" />
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Status" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Aangemeld" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <CheckBox Content=""  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Foreground="White" materialDesign:CheckBoxAssist.CheckBoxSize="30" Background="White" OpacityMask="White" />
 
         </Grid>
 

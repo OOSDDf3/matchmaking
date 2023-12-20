@@ -25,6 +25,8 @@ namespace LinkApplicationGraphics.NVVM.Model
         public string InterestEvent { get; set; }
         public string Organiser {  get; set; }
 
+        public static bool IsOrganiser {  get; set; }
+
 
         static Database_Connecter _connecter;
 
@@ -36,6 +38,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public Event(int event_ID, string eventname, string maxattendees, string location, string datetime, string interest_ID, string user_ID)
         {
             DeleteEventCommand = new RelayCommand(execute: deleteEvent, canExecute: o => true);
+            IsOrganiser = false;
 
             Event_ID = event_ID;
             NameEvent = eventname;
@@ -82,7 +85,7 @@ namespace LinkApplicationGraphics.NVVM.Model
                     }
                     else
                     {
-
+                        
                     }
                 }
             }

@@ -38,5 +38,10 @@ namespace LinkApplicationGraphics.NVVM.View
         {
 
         }
+
+        private void DeleteEventButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

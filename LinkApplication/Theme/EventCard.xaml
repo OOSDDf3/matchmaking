@@ -71,15 +71,15 @@
                             </RadioButton>-->
 
 
-                            <Button Tag="{Binding Event_ID}" Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}" RenderTransformOrigin="-0.269,-1.18" >
+                            <Button x:Name ="DeleteEventButton" Tag="{Binding Event_ID}" Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}" RenderTransformOrigin="-0.269,-1.18" >
                                 <Button.Style>
                                     <Style TargetType="Button">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <!--<Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Organiser}" Value="">
+                                            <DataTrigger Binding="{Binding IsDeleteButtonVisible}" Value="True">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
-                                        </Style.Triggers>
+                                        </Style.Triggers>-->
                                     </Style>
                                 </Button.Style>
                             </Button>

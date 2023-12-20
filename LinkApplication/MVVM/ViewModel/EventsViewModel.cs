@@ -5,6 +5,7 @@ using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
-    public class EventsViewModel: Core.ViewModel
+    public class EventsViewModel: Core.ViewModel, INotifyPropertyChanged
     {
 
         Database_Connecter _connecter;
@@ -28,6 +29,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public static ObservableCollection<Event> ListOfEvents { get; set; }
 
+        private bool isDeleteEventButtonVisible;
 
 
         public INavigationService _navigation;
@@ -45,7 +47,20 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
 
+        
 
+        public bool IsDeleteEventButtonVisible
+        {
+            get { return isDeleteEventButtonVisible; }
+            set
+            {
+                if (isDeleteEventButtonVisible != value && Int32.Parse(Organiser) == Account.user_ID)
+                {
+                    isDeleteEventButtonVisible = value;
+                    OnPropertyChanged(nameof(IsDeleteEventButtonVisible));
+                }
+            }
+        }
 
 
         public EventsViewModel(INavigationService navService)

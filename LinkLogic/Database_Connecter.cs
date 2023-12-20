@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -23,13 +24,6 @@ namespace LinkApplication
         public Database_Connecter()
         {
             ConnectToLocalDatabase();
-            //InsertAccount("Joas", "joas@hotmail.com", "securepassword", 70, "streetname 42", "Male", "English");
-            //CheckLogin("Joas Weeda", "newpassword");
-            //CheckLogin("Joas", "securepassword");
-            //CheckLogin("Joas", "unsecurepassword");
-            //ShowUserInformation("Joas Weeda", "newpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            //ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            //dbCon.Close();
         }
 
         protected void ConnectToLocalDatabase()
@@ -49,6 +43,7 @@ namespace LinkApplication
             dbCon.UserName = "SA";
             dbCon.Password = "@Matchingf3";
         }
+
         public void InsertAccount(string name, string email, string password, int age, string address, string gender, string language)
         {
             try
@@ -72,7 +67,6 @@ namespace LinkApplication
                 Console.WriteLine(ex.ToString());
             }
         }
-
 
         public void UpdateAccount(int userID, string name, string email, string address, string gender, string language)
         {
@@ -207,7 +201,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@user_ID", user_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language"};
+                    string[] keys = new string[8] { "user_ID", "name", "email", "password", "birthdate", "address", "gender", "language" };
 
                     while (reader.Read())
                     {
@@ -459,8 +453,8 @@ namespace LinkApplication
             }
         }
 
-        
-        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[]picture)
+
+        public void InsertIntoUserInterestList(int user_ID, List<string> interests, Byte[] picture)
         {
             try
             {
@@ -502,8 +496,88 @@ namespace LinkApplication
             }
         }
 
+        public void InsertIntoUserChats(int userID1, int userID2)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertChat = "INSERT INTO `userchats` (`user_ID1`, `user_ID2`) VALUES (@us1, @us2)";
+                    var cmdInsertchat = new MySqlCommand(queryInsertChat, dbCon.Connection);
+                    cmdInsertchat.Parameters.AddWithValue("@us1", userID1);
+                    cmdInsertchat.Parameters.AddWithValue("@us2", userID2);
+                    cmdInsertchat.ExecuteNonQuery();                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
 
+        public int GetChat_IDWithUser_IDs(int userID1, int userID2)
+        {
+            int chatID = 0;
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID1 = @us1 AND user_ID2 = @us2";
+                    var cmdSelectChatID = new MySqlCommand(querySelectChatID, dbCon.Connection);
+                    cmdSelectChatID.Parameters.AddWithValue("@us1", userID1);
+                    cmdSelectChatID.Parameters.AddWithValue("@us2", userID2);
+                    var reader = cmdSelectChatID.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        chatID = Int32.Parse(reader.GetValue(0).ToString());
+                    }
+                    reader.Close();
+                }
+                return chatID;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return chatID;
+            }
+        }
 
+        public void InsertIntoMessages(int chatID, int userID, string message)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string queryInsertChat = "INSERT INTO `chatmessages` (`chat_ID`, `user_ID`, `message`) VALUES (@chat, @us, @mess)";
+                    var cmdInsertchat = new MySqlCommand(queryInsertChat, dbCon.Connection);
+                    cmdInsertchat.Parameters.AddWithValue("@chat", chatID);
+                    cmdInsertchat.Parameters.AddWithValue("@us", userID);
+                    cmdInsertchat.Parameters.AddWithValue("@mess", message);
+                    cmdInsertchat.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+        }
+
+    //    string querySelectChat_ID = "SELECT chat_ID FROM userchats WHERE user_ID1 = @us1 AND user_ID2 = ";
+    //    var cmdSelectChat_ID = new MySqlCommand(querySelectChat_ID, dbCon.Connection);
+    //    cmdInsertchat.Parameters.AddWithValue("@us1", userID1);
+    //  cmdInsertchat.Parameters.AddWithValue("@us2", userID2);
+    //  var reader = cmdSelectChat_ID.ExecuteReader();
+    //    int chat_ID = Int32.MinValue;
+    //  while (reader.Read())
+    //  {
+    //      chat_ID = Int32.Parse(reader.GetValue(0).ToString());
+    //  }
+    //reader.Close();
+    //  string queryInsertInterest = "INSERT INTO `chatmessages` (`chat_ID`, `message`) VALUES (@chat, @mess)";
+    //var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
+    //cmdInsertInterest.Parameters.AddWithValue("@chat", chat_ID);
+    //  cmdInsertInterest.ExecuteNonQuery();
     }
-
 }

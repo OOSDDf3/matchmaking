@@ -21,6 +21,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //Ondersteuning voor weergave?
         public static int event_ID;
         public static string NameEvent { get; set; }
+        public static string CurrentAttendeesEvent { get; set; }
         public static string MaxAttendeesEvent { get; set; }
         public static string LocationEvent { get; set; }
         public static string DateTimeEvent { get; set; }
@@ -29,7 +30,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public static ObservableCollection<Event> ListOfEvents { get; set; }
 
-        private bool isDeleteEventButtonVisible;
+ /*       private bool isDeleteEventButtonVisible;*/
 
 
         public INavigationService _navigation;
@@ -44,12 +45,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
         public RelayCommand NavigateToEventCreateViewCommand { get; set; }
+               
 
-
-
-        
-
-        public bool IsDeleteEventButtonVisible
+/*        public bool IsDeleteEventButtonVisible
         {
             get { return isDeleteEventButtonVisible; }
             set
@@ -60,7 +58,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                     OnPropertyChanged(nameof(IsDeleteEventButtonVisible));
                 }
             }
-        }
+        }*/
 
 
         public EventsViewModel(INavigationService navService)

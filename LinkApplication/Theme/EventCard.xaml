@@ -44,7 +44,9 @@
                             <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding LocationEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                             <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
-                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding MaxAttendeesEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "{Binding CurrentAttendeesEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Center" VerticalAlignment = "Top" Content = "  /  " FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "{Binding MaxAttendeesEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum/Tijd: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                             <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding DateTimeEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
@@ -84,7 +86,7 @@
                                 </Button.Style>
                             </Button>
 
-                            <Button Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}">
+                            <Button Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding JoinEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
                                 <Button.Resources>
                                     <ResourceDictionary>
                                         <ResourceDictionary.MergedDictionaries>

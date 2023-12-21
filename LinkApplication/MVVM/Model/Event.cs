@@ -19,6 +19,7 @@ namespace LinkApplicationGraphics.NVVM.Model
         public int Event_ID { get; set; }
 
         public string NameEvent { get; set; }
+        public string CurrentAttendeesEvent { get; set; }
         public string MaxAttendeesEvent { get; set; }
         public string LocationEvent { get; set; }
         public string DateTimeEvent { get; set; }
@@ -31,17 +32,22 @@ namespace LinkApplicationGraphics.NVVM.Model
         static Database_Connecter _connecter;
 
         public RelayCommand DeleteEventCommand { get; set; }
+        public RelayCommand JoinEventCommand { get; set; }
+        public RelayCommand LeaveEventCommand { get; set; }
 
         public static ObservableCollection<Event> ListOfEvents { get; set; }
 
 
-        public Event(int event_ID, string eventname, string maxattendees, string location, string datetime, string interest_ID, string user_ID)
+        public Event(int event_ID, string eventname, string currentattendees,  string maxattendees, string location, string datetime, string interest_ID, string user_ID)
         {
             DeleteEventCommand = new RelayCommand(execute: deleteEvent, canExecute: o => true);
-            IsOrganiser = false;
+            JoinEventCommand = new RelayCommand(execute: joinEvent, canExecute: o => true);
+            LeaveEventCommand = new RelayCommand(execute: leaveEvent, canExecute: o => true);
+            /*IsOrganiser = false;*/
 
             Event_ID = event_ID;
             NameEvent = eventname;
+            CurrentAttendeesEvent = currentattendees;
             MaxAttendeesEvent = maxattendees;
             LocationEvent = location;
             DateTimeEvent = datetime;
@@ -59,6 +65,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             foreach (var eventDict in dataEvent) 
             {
                 EventsViewModel.NameEvent = eventDict["eventname"];
+                EventsViewModel.CurrentAttendeesEvent = eventDict["currentattendees"];
                 EventsViewModel.MaxAttendeesEvent = eventDict["maxattendees"];
                 EventsViewModel.LocationEvent = eventDict["location"];
                 EventsViewModel.DateTimeEvent = eventDict["date"];
@@ -76,7 +83,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
                 if (Int32.Parse(Organiser) == Account.user_ID)
                 {
-                    MessageBoxResult result = MessageBox.Show("Weet je zeker dat je dit event wil verwijderen", "Confirmation", MessageBoxButton.YesNo);
+                    MessageBoxResult result = MessageBox.Show("Weet je zeker dat je dit event wil annuleren?", "Confirmation", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {
                         MessageBox.Show("Event is verwijderd, herlaad de pagina");
@@ -91,18 +98,54 @@ namespace LinkApplicationGraphics.NVVM.Model
             }
         }
 
+        private void joinEvent(object parameter)
+        {
+            _connecter = new Database_Connecter();
+            if (parameter is int _eventID)
+            {
+                int eventID = _eventID;
+
+                _connecter.InsertIntoUserEventsList(eventID, Account.user_ID);
+            }
+        }
+
+        private void leaveEvent(object parameter)
+        {
+            _connecter = new Database_Connecter();
+            if (parameter is int _eventID)
+            {
+                int eventID = _eventID;
+
+                    MessageBoxResult result = MessageBox.Show("Weet je zeker dat je je wilt afmelden voor dit event?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        MessageBox.Show("Je hebt je succesvol afgemeld");
+                        _connecter.DeleteFromUserEventsList(eventID, Account.user_ID);
+                        Event.AddEventsToList(_connecter.ShowAllEventInformation());
+                    }
+                    else
+                    {
+
+                    }
+                
+            }
+
+        }
+
         public static void AddEventsToList(List<Dictionary<string, string>> eventList)
         {
+            _connecter = new Database_Connecter();
             Event.ListOfEvents = new ObservableCollection<Event>();
             foreach (var eventDict in eventList)
             {
                 Event newEvent = new Event(
                     Int32.Parse(eventDict["event_ID"]),
                     eventDict["eventname"],
+                    eventDict["currentattendees"],
                     eventDict["maxattendees"],
                     eventDict["location"],
                     eventDict["date"],
-                    eventDict["interest_ID"],
+                    _connecter.SelectEventInterestName(Int32.Parse(eventDict["interest_ID"])),
                     eventDict["user_ID"]
                 );
                 Event.ListOfEvents.Add(newEvent);

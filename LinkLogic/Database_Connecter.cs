@@ -691,19 +691,50 @@ namespace LinkApplication
             }
         }
 
-
-
-        //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
+        //Methode voor ophalen interesse
+        public string SelectEventInterestName(int interestID)
         {
-            DateTime combinedDateTime = date + time.ToTimeSpan();
+            string interestName = null;
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid, @uid);";
+                    string querySelect = "SELECT name FROM Interests WHERE interest_Id = @id";
+                    var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                    cmdSelect.Parameters.AddWithValue("@id", interestID);
+                    var reader = cmdSelect.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        interestName = reader.GetString(0);
+                    }
+                    reader.Close();
+                    Debug.WriteLine(interestName);
+                }
+                return interestName;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return interestName;
+            }
+        }
+
+
+        //Methode voor het aanmaken van een event
+        public void InsertIntoEventsList(string eventName, int currentAttendees, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
+        {
+            DateTime combinedDateTime = date + time.ToTimeSpan();
+            currentAttendees = 1;
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`currentAttendees`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @cura, @maxa, @lo, @date, @iid, @uid);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@ena", MySqlDbType.VarChar, 80).Value = eventName;
+                    cmd.Parameters.Add("@cura", MySqlDbType.Int16, 4).Value = currentAttendees;
                     cmd.Parameters.Add("@maxa", MySqlDbType.Int16, 4).Value = maxAttendees;
                     cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
                     cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
@@ -755,7 +786,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@event_ID", event_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[7] { "event_ID", "eventname", "maxattendees", "location", "date", "interest_ID", "user_ID" };
+                    string[] keys = new string[8] { "event_ID", "eventname", "currentAttendees", "maxattendees", "location", "date", "interest_ID", "user_ID" };
 
                     while (reader.Read())
                     {
@@ -818,13 +849,13 @@ namespace LinkApplication
         }
 
         //Methode om je aan te melden voor een event
-        public void InsertIntoUserEventsList()
+        public void InsertIntoUserEventsList(int event_ID, int user_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-
+                    //UserID koppelen aan eventID, die zetten in nieuwe tabel
                 }
 
             }
@@ -837,7 +868,7 @@ namespace LinkApplication
         }
 
         //Methode om je af te melden voor een event
-        public void DeleteFromUserEventsList()
+        public void DeleteFromUserEventsList(int event_ID, int user_ID)
         {
             try
             {
@@ -855,6 +886,26 @@ namespace LinkApplication
 
         }
 
+        //Methode om currentAttendee waarde bij te werken
+        public void UpdateCurrentAttendees()
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        //Account verwijderen
         public void DeleteUser(int userID)
         {
             List<string> tablesToDelete = new List<string>

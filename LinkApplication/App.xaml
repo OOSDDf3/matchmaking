@@ -11,7 +11,9 @@
 
                 <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="/Theme/ComboBoxTheme.xaml"/>
-
+                <ResourceDictionary Source="/Theme/MatchChatCard.xaml"/>
+                <ResourceDictionary Source="/Theme/MessageCard.xaml"/>
+                <ResourceDictionary Source="/Theme/MessageBox.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
 

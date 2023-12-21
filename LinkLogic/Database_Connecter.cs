@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -24,6 +25,11 @@ namespace LinkApplication
         public Database_Connecter()
         {
             ConnectToLocalDatabase();
+            var messages = GetMessagesWithUserIDs(27, 30);
+            //foreach (var message in messages)
+            //{
+            //    Debug.Write($"Keys: {message.Keys}, Values: {message.Values}");
+            //}
         }
 
         protected void ConnectToLocalDatabase()
@@ -516,7 +522,7 @@ namespace LinkApplication
             }
         }
 
-        public int GetChat_IDWithUser_IDs(int userID1, int userID2)
+        public int GetChatIDWithUserIDs(int userID1, int userID2)
         {
             int chatID = 0;
             try
@@ -564,20 +570,97 @@ namespace LinkApplication
             }
         }
 
-    //    string querySelectChat_ID = "SELECT chat_ID FROM userchats WHERE user_ID1 = @us1 AND user_ID2 = ";
-    //    var cmdSelectChat_ID = new MySqlCommand(querySelectChat_ID, dbCon.Connection);
-    //    cmdInsertchat.Parameters.AddWithValue("@us1", userID1);
-    //  cmdInsertchat.Parameters.AddWithValue("@us2", userID2);
-    //  var reader = cmdSelectChat_ID.ExecuteReader();
-    //    int chat_ID = Int32.MinValue;
-    //  while (reader.Read())
-    //  {
-    //      chat_ID = Int32.Parse(reader.GetValue(0).ToString());
-    //  }
-    //reader.Close();
-    //  string queryInsertInterest = "INSERT INTO `chatmessages` (`chat_ID`, `message`) VALUES (@chat, @mess)";
-    //var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
-    //cmdInsertInterest.Parameters.AddWithValue("@chat", chat_ID);
-    //  cmdInsertInterest.ExecuteNonQuery();
+        public List<Dictionary<string, string>> GetMatchesWithUserID(int userID)
+        {
+            List<Dictionary<string, string>> matches = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {                    
+                    string querySelectMatchData = "SELECT A.user_ID, A.name, PP.picture FROM account AS A JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
+                        "WHERE A.user_ID IN (SELECT user_ID_Matched FROM usermatches WHERE user_ID = @us);";
+                    var cmdSelectMatchData = new MySqlCommand(querySelectMatchData, dbCon.Connection);
+                    cmdSelectMatchData.Parameters.AddWithValue("@us", userID);
+                    var reader = cmdSelectMatchData.ExecuteReader();
+                    string[] keys = new string[] { "user_ID", "name", "profilePicture" };
+                    int valueAmount = keys.Length;
+                    while (reader.Read())
+                    {
+                        Dictionary<string, string> matchDict = new();
+                        for (int i = 0; i < reader.FieldCount; i+= valueAmount)
+                        {
+                            //Debug.Write(i);
+                            for (int j = 0; j < valueAmount; j++)
+                            {
+                                //Debug.Write(j);
+                                //Debug.WriteLine(reader.GetValue(i + j).ToString());                                                              
+                                matchDict.Add(keys[j], reader.GetValue(i+j).ToString());                             
+                            }
+                            matches.Add(matchDict);
+                            foreach(var match in matchDict)
+                            {
+                                Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
+                            }
+                            Debug.Write("\n");
+                        }
+                    }
+                    reader.Close();
+                }
+                return matches;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return matches;
+            }
+        }
+
+        public List<Dictionary<string, string>> GetMessagesWithUserIDs(int user_ID, int user_ID_Matched)
+        {
+            List<Dictionary<string, string>> messages = new();
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string querySelectMatchData = "" +
+                        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
+                        "FROM userchats AS UC " +
+                        "JOIN chatmessages AS M ON UC.chat_ID " +
+                        "JOIN account AS A ON M.user_ID = A.user_ID " +
+                        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
+                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm);";
+                    var cmdSelectMatchData = new MySqlCommand(querySelectMatchData, dbCon.Connection);
+                    cmdSelectMatchData.Parameters.AddWithValue("@us", user_ID);
+                    cmdSelectMatchData.Parameters.AddWithValue("@usm", user_ID_Matched);
+                    var reader = cmdSelectMatchData.ExecuteReader();
+                    string[] keys = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
+                    int valueAmount = keys.Length;
+                    while (reader.Read())
+                    {
+                        Dictionary<string, string> messageDict = new();
+                        for (int i = 0; i < reader.FieldCount; i += valueAmount)
+                        {
+                            for (int j = 0; j < valueAmount; j++)
+                            {
+                                messageDict.Add(keys[j], reader.GetValue(i + j).ToString());
+                            }
+                            messages.Add(messageDict);
+                            foreach (var message in messageDict)
+                            {
+                                Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
+                            }
+                            Debug.Write("\n");
+                        }
+                    }
+                    reader.Close();
+                }
+                return messages;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return messages;
+            }
+        }
     }
 }

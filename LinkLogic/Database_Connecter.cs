@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -786,7 +787,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@event_ID", event_ID);
                     var reader = cmd.ExecuteReader();
-                    string[] keys = new string[8] { "event_ID", "eventname", "currentAttendees", "maxattendees", "location", "date", "interest_ID", "user_ID" };
+                    string[] keys = new string[8] { "event_ID", "eventname", "currentattendees", "maxattendees", "location", "date", "interest_ID", "user_ID" };
 
                     while (reader.Read())
                     {
@@ -855,7 +856,13 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    //UserID koppelen aan eventID, die zetten in nieuwe tabel
+                    string query = "INSERT INTO `usereventlist` (`event_ID`, `user_ID`) VALUES (@evid, @usid)";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                    UpdateCurrentAttendees(event_ID, "add");
                 }
 
             }
@@ -874,7 +881,13 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
+                    string query = "DELETE FROM `usereventlist` WHERE event_ID = @evid AND user_ID = @usid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
 
+                    UpdateCurrentAttendees(event_ID , "delete");
                 }
 
             }
@@ -887,13 +900,25 @@ namespace LinkApplication
         }
 
         //Methode om currentAttendee waarde bij te werken
-        public void UpdateCurrentAttendees()
+        public void UpdateCurrentAttendees(int event_ID, string calculation)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
+                    if(calculation.Equals("add"))
+                    {
+                        string addQuery = "UPDATE Events SET totalAttendees = currentAttendees + 1  WHERE event_ID = @evid";
+                        var addCmd = new MySqlCommand(addQuery, dbCon.Connection);
+                        addCmd.Parameters.AddWithValue("@evid", event_ID);
+                    }
 
+                    if (calculation.Equals("delete"))
+                    {
+                        string delQuery = "UPDATE Events SET totalAttendees = currentAttendees - 1  WHERE event_ID = @evid";
+                        var delCmd = new MySqlCommand(delQuery, dbCon.Connection);
+                        delCmd.Parameters.AddWithValue("@evid", event_ID);
+                    }
                 }
 
             }
@@ -901,6 +926,34 @@ namespace LinkApplication
             {
                 Debug.WriteLine(ex.ToString());
                 dbCon.Close();
+            }
+
+        }
+
+        //Methode om te zien of een user zich heeft aangemeld
+        public bool IsUserAttending(int event_ID, int user_ID)
+        {
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT COUNT(*) > 0 AS user_attending FROM `usereventlist` WHERE event_ID = @evid AND user_ID = @usid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                   object result = cmd.ExecuteScalar();
+                    return Convert.ToBoolean(result);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return false;
             }
 
         }

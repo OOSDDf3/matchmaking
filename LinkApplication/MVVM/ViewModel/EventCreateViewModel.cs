@@ -15,6 +15,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     {
         Database_Connecter _connecter;
         public string EventName { get; set; }
+        public int CurrentAttendeesEvent { get; set; }
         public int MaxAttendees { get; set; }
         public string Location { get; set; }
         public DateTime DateEvent { get; set; }
@@ -66,7 +67,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             Interest_ID = _connecter.SelectEventInterestID(Interest);
 
-            _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
+            _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
 
             Event.AddEventsToList(_connecter.ShowAllEventInformation());
             Navigation.NavigateToNew<EventsViewModel>();

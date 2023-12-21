@@ -105,7 +105,12 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 int eventID = _eventID;
 
-                _connecter.InsertIntoUserEventsList(eventID, Account.user_ID);
+                if (!(_connecter.IsUserAttending(eventID, Account.user_ID)))
+                {
+                    _connecter.InsertIntoUserEventsList(eventID, Account.user_ID);
+                    MessageBox.Show("Je hebt je succesvol aangemeld");
+                    Event.AddEventsToList(_connecter.ShowAllEventInformation());
+                }
             }
         }
 
@@ -116,6 +121,8 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 int eventID = _eventID;
 
+                if (_connecter.IsUserAttending(eventID, Account.user_ID))
+                {
                     MessageBoxResult result = MessageBox.Show("Weet je zeker dat je je wilt afmelden voor dit event?", "Confirmation", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {
@@ -127,7 +134,7 @@ namespace LinkApplicationGraphics.NVVM.Model
                     {
 
                     }
-                
+                }
             }
 
         }

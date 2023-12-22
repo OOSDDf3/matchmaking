@@ -65,8 +65,19 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
 
             Event.AddEventsToList(_connecter.ShowAllEventInformation());
+            emptyInputFields();
             Navigation.NavigateToNew<EventsViewModel>();
+            
         }
 
+        private void emptyInputFields()
+        {
+            EventName = string.Empty;
+            MaxAttendees = 0;
+            Location = string.Empty;
+            InterestEvent = string.Empty;
+            TimeEvent = string.Empty;
+            
+        }
     }
 }

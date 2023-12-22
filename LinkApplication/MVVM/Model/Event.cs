@@ -6,11 +6,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LinkApplicationGraphics.NVVM.Model
 {
@@ -54,6 +56,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             InterestEvent = interest_ID;
             Organiser = user_ID;
         }
+
 
         public static void showEventInfo()
         {
@@ -100,6 +103,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
         private void joinEvent(object parameter)
         {
+            
             _connecter = new Database_Connecter();
             if (parameter is int _eventID)
             {
@@ -107,23 +111,28 @@ namespace LinkApplicationGraphics.NVVM.Model
 
                 if (!(_connecter.IsUserAttending(eventID, Account.user_ID)) && (_connecter.IsMaxAttendanceReached(eventID) == false))
                 {
+                    
                     _connecter.InsertIntoUserEventsList(eventID, Account.user_ID);
                    _connecter.AddUserAsAttendee(eventID);
                     MessageBox.Show("Je hebt je succesvol aangemeld");
                     Event.AddEventsToList(_connecter.ShowAllEventInformation());
+
                 }
+                
                 Event.AddEventsToList(_connecter.ShowAllEventInformation());
+              
             }
         }
 
         private void leaveEvent(object parameter)
         {
+            
             _connecter = new Database_Connecter();
             if (parameter is int _eventID)
             {
                 int eventID = _eventID;
 
-                if (_connecter.IsUserAttending(eventID, Account.user_ID))
+                if (_connecter.IsUserAttending(eventID, Account.user_ID) && !(Int32.Parse(Organiser) != Account.user_ID))
                 {
                     MessageBoxResult result = MessageBox.Show("Weet je zeker dat je je wilt afmelden voor dit event?", "Confirmation", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
@@ -131,16 +140,20 @@ namespace LinkApplicationGraphics.NVVM.Model
                         MessageBox.Show("Je hebt je succesvol afgemeld");
                         _connecter.DeleteFromUserEventsList(eventID, Account.user_ID);
                         _connecter.DeleteUserAsAttendee(eventID);
+                        
                         Event.AddEventsToList(_connecter.ShowAllEventInformation());
                     }
                     else
                     {
 
                     }
+                    
                 }
             }
 
         }
+
+
 
         public static void AddEventsToList(List<Dictionary<string, string>> eventList)
         {

@@ -34,7 +34,12 @@ namespace LinkApplicationGraphics.NVVM.View
             }
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void AanmeldButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void AfmeldButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

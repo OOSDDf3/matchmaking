@@ -86,7 +86,7 @@
                                 </Button.Style>
                             </Button>
 
-                            <Button Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding JoinEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
+                            <Button x:Name = "aanmeldButton" Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding JoinEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
                                 <Button.Resources>
                                     <ResourceDictionary>
                                         <ResourceDictionary.MergedDictionaries>
@@ -97,6 +97,17 @@
                                     </ResourceDictionary>
                                 </Button.Resources>
                             </Button>
+                            <!--<Button x:Name = "afmeldButton" Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Afmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding LeaveEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
+                                <Button.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </Button.Resources>
+                            </Button>-->
                         </Grid>
                     </Border>
                 </ControlTemplate>

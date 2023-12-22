@@ -14,9 +14,11 @@ namespace LinkApplicationGraphics.NVVM.Model
     {
         private ObservableCollection<MessageModel> messages;
 
+        public int ChatID { get; set; }
+        public int UserID { get; set; }
         public string Username { get; set; }
-
-        public string LastMessage = "Last message placeholder";
+        public string UsernameColor { get; set; }
+        public string LastMessage => (Messages.Count > 0) ? Messages.Last().Message : " ";
         public Byte[] ProfilePicture { get; set; }
         public static BitmapImage ProfilePictureImage { get; set; }
         public ObservableCollection<MessageModel> Messages { get => messages; set => messages = value; }
@@ -25,7 +27,9 @@ namespace LinkApplicationGraphics.NVVM.Model
         public MatchModel()
         {
             Messages = new ObservableCollection<MessageModel>();
-            MatchModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
+            //MatchModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
+            Random r = new Random();
+            UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
         }
     }
 }

@@ -18,7 +18,7 @@
                                      Background="Transparent"
                                      TextWrapping="Wrap"
                                      BorderThickness="0"
-                                     FontSize="16"
+                                     FontSize="20"
                                      Foreground="Gray"
                                      CaretBrush="Gray"
                                      Margin="18,0,0,0"
@@ -32,6 +32,7 @@
                                        Text="@Message"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
+                                       FontSize="20"
                                        Margin="20,0,0,0"
                                        Foreground="DarkGray">
                                 <TextBlock.Style>

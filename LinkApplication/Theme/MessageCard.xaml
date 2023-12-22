@@ -5,12 +5,15 @@
             <Setter.Value>
                 <ControlTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="50" Height="50"
+                        <Border Width="40" Height="40"
+                                Background="{Binding UsernameColor}"
+                                CornerRadius="25"/>
+                        <!--<Ellipse Width="40" Height="40"
                                  Margin="10,0,0,-5">
                             <Ellipse.Fill>
-                                <SolidColorBrush Color="BurlyWood"/>
+                                <SolidColorBrush Color="{Binding UsernameColor}"/>
                             </Ellipse.Fill>
-                        </Ellipse>
+                        </Ellipse>-->
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="{Binding Username}"
@@ -25,6 +28,7 @@
                             </StackPanel>
                             <Label Content="{Binding Message}"
                                    Foreground="White"
+                                   FontSize="18"
                                    VerticalAlignment="Center"
                                    Margin="0,0,-5,0"/>                            
                         </StackPanel>

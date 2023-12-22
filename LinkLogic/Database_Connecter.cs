@@ -529,10 +529,10 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID1 = @us1 AND user_ID2 = @us2";
+                    string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
                     var cmdSelectChatID = new MySqlCommand(querySelectChatID, dbCon.Connection);
-                    cmdSelectChatID.Parameters.AddWithValue("@us1", userID1);
-                    cmdSelectChatID.Parameters.AddWithValue("@us2", userID2);
+                    cmdSelectChatID.Parameters.AddWithValue("@us", userID1);
+                    cmdSelectChatID.Parameters.AddWithValue("@usm", userID2);
                     var reader = cmdSelectChatID.ExecuteReader();
                     while (reader.Read())
                     {
@@ -555,12 +555,12 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string queryInsertChat = "INSERT INTO `chatmessages` (`chat_ID`, `user_ID`, `message`) VALUES (@chat, @us, @mess)";
-                    var cmdInsertchat = new MySqlCommand(queryInsertChat, dbCon.Connection);
-                    cmdInsertchat.Parameters.AddWithValue("@chat", chatID);
-                    cmdInsertchat.Parameters.AddWithValue("@us", userID);
-                    cmdInsertchat.Parameters.AddWithValue("@mess", message);
-                    cmdInsertchat.ExecuteNonQuery();
+                    string queryInsertMessage = "INSERT INTO `chatmessages` (`chat_ID`, `user_ID`, `message`) VALUES (@chat, @us, @mess)";
+                    var cmdInsertMessage = new MySqlCommand(queryInsertMessage, dbCon.Connection);
+                    cmdInsertMessage.Parameters.AddWithValue("@chat", chatID);
+                    cmdInsertMessage.Parameters.AddWithValue("@us", userID);
+                    cmdInsertMessage.Parameters.AddWithValue("@mess", message);
+                    cmdInsertMessage.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -587,7 +587,7 @@ namespace LinkApplication
                     while (reader.Read())
                     {
                         Dictionary<string, string> matchDict = new();
-                        for (int i = 0; i < reader.FieldCount; i+= valueAmount)
+                        for (int i = 0; i < reader.FieldCount; i+=valueAmount)
                         {
                             //Debug.Write(i);
                             for (int j = 0; j < valueAmount; j++)
@@ -597,11 +597,11 @@ namespace LinkApplication
                                 matchDict.Add(keys[j], reader.GetValue(i+j).ToString());                             
                             }
                             matches.Add(matchDict);
-                            foreach(var match in matchDict)
-                            {
-                                Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
-                            }
-                            Debug.Write("\n");
+                            //foreach(var match in matchDict)
+                            //{
+                            //    Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
+                            //}
+                            //Debug.Write("\n");
                         }
                     }
                     reader.Close();
@@ -628,7 +628,8 @@ namespace LinkApplication
                         "JOIN chatmessages AS M ON UC.chat_ID " +
                         "JOIN account AS A ON M.user_ID = A.user_ID " +
                         "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
-                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm);";
+                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
+                        "ORDER BY M.message_ID;";
                     var cmdSelectMatchData = new MySqlCommand(querySelectMatchData, dbCon.Connection);
                     cmdSelectMatchData.Parameters.AddWithValue("@us", user_ID);
                     cmdSelectMatchData.Parameters.AddWithValue("@usm", user_ID_Matched);
@@ -645,11 +646,11 @@ namespace LinkApplication
                                 messageDict.Add(keys[j], reader.GetValue(i + j).ToString());
                             }
                             messages.Add(messageDict);
-                            foreach (var message in messageDict)
-                            {
-                                Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
-                            }
-                            Debug.Write("\n");
+                            //foreach (var message in messageDict)
+                            //{
+                            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
+                            //}
+                            //Debug.Write("\n");
                         }
                     }
                     reader.Close();

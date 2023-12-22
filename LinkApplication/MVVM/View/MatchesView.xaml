@@ -34,10 +34,11 @@
                 <RowDefinition Height="90"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Matches"
+            <Label Content="Chats"
                    VerticalAlignment="Center"
                    FontWeight="Medium"
                    Foreground="White"
+                   FontSize="28"
                    Margin="8,0,0,0"/>
             <ListView ItemsSource="{Binding Matches}"
                       Background="Transparent"

@@ -1,6 +1,7 @@
 ﻿using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
+using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,18 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class MatchesViewModel : Core.ViewModel
     {
+
+        public INavigationService _navigation;
+        public INavigationService Navigation
+        {
+            get => _navigation;
+            set
+            {
+                _navigation = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Database_Connecter _Connecter;
         public ObservableCollection<MessageModel> Messages { get; set; }
         public ObservableCollection<MatchModel> Matches { get; set; }
@@ -42,7 +55,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public RelayCommand SendCommand { get; set; }
 
-        public MatchesViewModel()
+        public MatchesViewModel(INavigationService navService)
         {
             _Connecter = new Database_Connecter();
             
@@ -63,7 +76,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private void GetMatches()
         {
-            Username = _Connecter.ShowUserInformation(Account.user_ID, "SELECT * FROM Account WHERE user_ID = @user_ID")["name"];
+            Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
             Status = "Online";
 
             List<Dictionary<string, string>> MatchesData = _Connecter.GetMatchesWithUserID(Account.user_ID);

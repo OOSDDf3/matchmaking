@@ -107,6 +107,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de naam en leeftijd van de persoon
                 DateTime currentDate = DateTime.Today;
+                Debug.WriteLine(dataPerson.Keys);
                 age = currentDate.Year - Int32.Parse(dataPerson["birthdate"]);
                 NameMatch = $"{dataPerson["name"]}, {age} jaar";
 
@@ -143,8 +144,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 if (_connecter.CheckMatch(Account.user_ID, userIDMatch))
                 {
                     _connecter.InsertMatch(Account.user_ID, userIDMatch);
-                    MessageBox.Show("Hoera, je hebt een match!");
-                    
+                    _connecter.InsertIntoUserChats(Account.user_ID, userIDMatch);
+                    _connecter.InsertIntoUserChats(_connecter.GetChatIDWithUserIDs(Account.user_ID, userIDMatch), userIDMatch, Account.user_ID);
+                    MessageBox.Show("Hoera, je hebt een match!");                  
 
                 }
 

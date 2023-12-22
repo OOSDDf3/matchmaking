@@ -21,7 +21,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         Database_Connecter _connecter;
 
         //Tijdelijke opslag van account gegevens voor weergave.
-        public static string NameProfile {  get; set; }
+        public static string NameProfile { get; set; }
         public static string BirthdateProfile { get; set; }
         public static string AddressProfile { get; set; }
         public static string GenderProfile { get; set; }
@@ -34,7 +34,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
 
 
-    public INavigationService _navigation;
+        public INavigationService _navigation;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -59,7 +59,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             //Daadwerkelijk maken van command
             Navigation = navService;
 
-            
+
 
             NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: o => true);
             NavigateToHomePageCommand = new RelayCommand(execute: Opslaan, canExecute: o => true);
@@ -104,7 +104,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 LogOut();
 
                 Navigation.NavigateTo<LoginViewModel>();
-                
+
             }
             else
             {

@@ -3,10 +3,110 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
+             xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" 
+             xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1600">
+             d:DesignHeight="850" d:DesignWidth="1600"
+             Background="Transparent">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    
     <Grid>
-        <TextBlock Text="PLACEHOLDER MATCHES" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Foreground="White"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="1" Background="Transparent">
+            <Grid HorizontalAlignment="Stretch">
+                <!--<Label Content="Matches" Foreground="White" FontSize="20" FontWeight="SemiBold"/>-->
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="90"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Matches"
+                   VerticalAlignment="Center"
+                   FontWeight="Medium"
+                   Foreground="White"
+                   Margin="8,0,0,0"/>
+            <ListView ItemsSource="{Binding Matches}"
+                      Background="Transparent"
+                      SelectedItem="{Binding SelectedMatch}"
+                      Grid.Row="1"
+                      BorderThickness="0"
+                      ItemContainerStyle="{StaticResource MatchChatCard}"/>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                <Border CornerRadius="25"
+                        Width="50" Height="50"
+                        Background="#3BFF6F"
+                        Margin="18,0,0,0"/>
+
+                <StackPanel VerticalAlignment="Center">
+                    <Label Content="{Binding Username}"
+                           Foreground="White"
+                           Margin="8,-5,0,-5"
+                           FontSize="30" Width="Auto" Height="Auto"/>
+                    <Label Content="{Binding Status}"
+                           Foreground="Gray"
+                           Margin="8,-4,0,-5"
+                           FontSize="20" Width="Auto" Height="Auto"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+                <RowDefinition Height="90"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="#2F3136" BorderThickness="0,0,0,5">
+                <Grid HorizontalAlignment="Stretch"
+                      Margin="8">
+                    <Label Content="{Binding SelectedMatch.Username}"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           FontSize="20"
+                           Margin="5,0,5,0"
+                           VerticalAlignment="Center"/>
+                    <StackPanel>
+                        
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+
+            <ListView ItemsSource="{Binding SelectedMatch.Messages}"
+                      Background="Transparent"
+                      ItemContainerStyle="{StaticResource MessageCard}"
+                      BorderThickness="0"
+                      Margin="8,0,0,0"
+                      Grid.Row="1" />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Height="70"
+                         Text="Message @Username"
+                         Style="{StaticResource MessageBox}"
+                         Grid.ColumnSpan="2"/>
+                
+            </Grid>          
+        </Grid>
     </Grid>
 </UserControl>

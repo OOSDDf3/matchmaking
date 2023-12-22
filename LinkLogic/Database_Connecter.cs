@@ -4,9 +4,17 @@ using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Reflection;
 using static Google.Protobuf.Reflection.SourceCodeInfo.Types;
+using System.Reflection.PortableExecutable;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using static Azure.Core.HttpHeader;
 
 namespace LinkApplication
 {
@@ -17,13 +25,11 @@ namespace LinkApplication
         public Database_Connecter()
         {
             ConnectToLocalDatabase();
-            //InsertAccount("Joas", "joas@hotmail.com", "securepassword", 70, "streetname 42", "Male", "English");
-            //CheckLogin("Joas Weeda", "newpassword");
-            //CheckLogin("Joas", "securepassword");
-            //CheckLogin("Joas", "unsecurepassword");
-            //ShowUserInformation("Joas Weeda", "newpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            //ShowUserInformation("Joas Weeda", "falsenewpassword", "SELECT * FROM Account WHERE name = @userName AND password = @password");
-            //dbCon.Close();
+            var messages = GetMessagesWithUserIDs(27, 30);
+            //foreach (var message in messages)
+            //{
+            //    Debug.Write($"Keys: {message.Keys}, Values: {message.Values}");
+            //}
         }
 
         protected void ConnectToLocalDatabase()

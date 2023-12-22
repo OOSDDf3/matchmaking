@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="ListViewItem" x:Key="MatchChatCard">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#FE4636A1"/>
+            </Trigger>
+        </Style.Triggers>
+
+        <Setter Property="Background" Value="#FF5646A4"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Background="{TemplateBinding Background}"
+                            Height="80"
+                            CornerRadius="10"
+                            Margin="8,2,8,2">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="10,0,0,0">
+                            
+                            <Border Width="40" Height="40"
+                                    Background="{Binding UsernameColor}"
+                                    CornerRadius="25"/>
+                            <!--<Ellipse Width="40" Height="40">
+                                <Ellipse.Fill>
+                                    --><!--<ImageBrush/>--><!--
+                                    <SolidColorBrush Color="Black"/>
+                                </Ellipse.Fill>
+                            </Ellipse>-->
+                            <StackPanel>
+                                <Label Content="{Binding Username}"
+                                       Foreground="White"
+                                       FontSize="20"
+                                       Margin="8,5,0,-5"/>
+                                <Label Content="{Binding LastMessage}"
+                                       MaxWidth="200"
+                                       Foreground="Gray"
+                                       FontSize="16"
+                                       Margin="8,-4,0,-5"/>                                
+                            </StackPanel>
+                        </StackPanel>                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -862,7 +862,7 @@ namespace LinkApplication
                     cmd.Parameters.AddWithValue("@usid", user_ID);
                     Console.WriteLine(cmd.ExecuteNonQuery());
 
-                    UpdateCurrentAttendees(event_ID, "add");
+                    
                 }
 
             }
@@ -887,7 +887,7 @@ namespace LinkApplication
                     cmd.Parameters.AddWithValue("@usid", user_ID);
                     Console.WriteLine(cmd.ExecuteNonQuery());
 
-                    UpdateCurrentAttendees(event_ID , "delete");
+                    
                 }
 
             }
@@ -899,26 +899,42 @@ namespace LinkApplication
 
         }
 
-        //Methode om currentAttendee waarde bij te werken
-        public void UpdateCurrentAttendees(int event_ID, string calculation)
+        //Methoden om currentAttendee waarde bij te werken
+        public void AddUserAsAttendee(int event_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    if(calculation.Equals("add"))
-                    {
-                        string addQuery = "UPDATE Events SET totalAttendees = currentAttendees + 1  WHERE event_ID = @evid";
-                        var addCmd = new MySqlCommand(addQuery, dbCon.Connection);
-                        addCmd.Parameters.AddWithValue("@evid", event_ID);
-                    }
 
-                    if (calculation.Equals("delete"))
-                    {
-                        string delQuery = "UPDATE Events SET totalAttendees = currentAttendees - 1  WHERE event_ID = @evid";
-                        var delCmd = new MySqlCommand(delQuery, dbCon.Connection);
-                        delCmd.Parameters.AddWithValue("@evid", event_ID);
-                    }
+                    string addQuery = "UPDATE Events SET currentAttendees = currentAttendees + 1  WHERE event_ID = @evid";
+                    var addCmd = new MySqlCommand(addQuery, dbCon.Connection);
+                    addCmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(addCmd.ExecuteNonQuery());
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        public void DeleteUserAsAttendee(int event_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                    string delQuery = "UPDATE Events SET currentAttendees = currentAttendees - 1  WHERE event_ID = @evid";
+                    var delCmd = new MySqlCommand(delQuery, dbCon.Connection);
+                    delCmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(delCmd.ExecuteNonQuery());
+
                 }
 
             }
@@ -944,8 +960,45 @@ namespace LinkApplication
                     cmd.Parameters.AddWithValue("@usid", user_ID);
                     Console.WriteLine(cmd.ExecuteNonQuery());
 
-                   object result = cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar();
                     return Convert.ToBoolean(result);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return false;
+            }
+
+        }
+
+
+        //Methode om te checken of event al vol zit met aanmeldingen
+        public bool IsMaxAttendanceReached(int event_ID)
+        {
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT currentAttendees >= maxAttendees AS reachedMaxAttendees FROM `events` WHERE event_ID = @evid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                    bool reachedMaxAttendees = Convert.ToBoolean(cmd.ExecuteScalar());
+
+                    // Check the result
+                    if (reachedMaxAttendees)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 return false;
             }

@@ -105,12 +105,14 @@ namespace LinkApplicationGraphics.NVVM.Model
             {
                 int eventID = _eventID;
 
-                if (!(_connecter.IsUserAttending(eventID, Account.user_ID)))
+                if (!(_connecter.IsUserAttending(eventID, Account.user_ID)) && (_connecter.IsMaxAttendanceReached(eventID) == false))
                 {
                     _connecter.InsertIntoUserEventsList(eventID, Account.user_ID);
+                   _connecter.AddUserAsAttendee(eventID);
                     MessageBox.Show("Je hebt je succesvol aangemeld");
                     Event.AddEventsToList(_connecter.ShowAllEventInformation());
                 }
+                Event.AddEventsToList(_connecter.ShowAllEventInformation());
             }
         }
 
@@ -128,6 +130,7 @@ namespace LinkApplicationGraphics.NVVM.Model
                     {
                         MessageBox.Show("Je hebt je succesvol afgemeld");
                         _connecter.DeleteFromUserEventsList(eventID, Account.user_ID);
+                        _connecter.DeleteUserAsAttendee(eventID);
                         Event.AddEventsToList(_connecter.ShowAllEventInformation());
                     }
                     else
@@ -160,7 +163,60 @@ namespace LinkApplicationGraphics.NVVM.Model
             EventsViewModel.ListOfEvents = Event.ListOfEvents;
         }
 
+        public static void FilterInterestEventsToList(List<Dictionary<string, string>> eventList, int interest_ID)
+        {
+            _connecter = new Database_Connecter();
+            Event.ListOfEvents = new ObservableCollection<Event>();
+            foreach (var eventDict in eventList)
+            {
+                Event newEvent = new Event(
+                    Int32.Parse(eventDict["event_ID"]),
+                    eventDict["eventname"],
+                    eventDict["currentattendees"],
+                    eventDict["maxattendees"],
+                    eventDict["location"],
+                    eventDict["date"],
+                    _connecter.SelectEventInterestName(Int32.Parse(eventDict["interest_ID"])),
+                    eventDict["user_ID"]
+                );
 
+                if ((Int32.Parse(eventDict["interest_ID"]) == interest_ID)) 
+                {
+                    Event.ListOfEvents.Add(newEvent);
+                }
+                
+                
+            }
+            EventsViewModel.ListOfEvents = Event.ListOfEvents;
+        }
+
+
+        public static void FilterAttendanceEventsToList(List<Dictionary<string, string>> eventList, int user_ID)
+        {
+            _connecter = new Database_Connecter();
+            Event.ListOfEvents = new ObservableCollection<Event>();
+            foreach (var eventDict in eventList)
+            {
+                Event newEvent = new Event(
+                    Int32.Parse(eventDict["event_ID"]),
+                    eventDict["eventname"],
+                    eventDict["currentattendees"],
+                    eventDict["maxattendees"],
+                    eventDict["location"],
+                    eventDict["date"],
+                    _connecter.SelectEventInterestName(Int32.Parse(eventDict["interest_ID"])),
+                    eventDict["user_ID"]
+                );
+
+                if (_connecter.IsUserAttending(Int32.Parse(eventDict["event_ID"]), user_ID))
+                {
+                    Event.ListOfEvents.Add(newEvent);
+                }
+
+
+            }
+            EventsViewModel.ListOfEvents = Event.ListOfEvents;
+        }
 
     }
 }

@@ -20,13 +20,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public string Location { get; set; }
         public DateTime DateEvent { get; set; }
         public string TimeEvent { get; set; }
-        public string Interest { get; set; }
+        public string InterestEvent { get; set; }
 
         private int Interest_ID { get; set; }
 
-        public List<string> EventInterests { get; set; }
+        public List<string> EventCreateViewInterests { get; set; }
 
+        public RelayCommand NavigateToEventsViewCommand { get; set; }
 
+        public RelayCommand CreateEventCommand { get; set; }
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -38,9 +40,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RelayCommand NavigateToEventsViewCommand { get; set; }
 
-        public RelayCommand CreateEventCommand { get; set; }
 
         public EventCreateViewModel(INavigationService navService)
         {
@@ -49,29 +49,23 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             DateEvent = DateTime.Now.Date;
 
             _connecter = new Database_Connecter();
-            EventInterests = _connecter.ShowUserInterests(Account.user_ID);
-
-
+            EventCreateViewInterests = _connecter.ShowUserInterests(Account.user_ID);
 
             //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
             CreateEventCommand = new RelayCommand(execute: o => { createEvent(); }, canExecute: o => true);
-
         }
 
         private void createEvent()
         {
             _connecter = new Database_Connecter();
 
-            
-
-            Interest_ID = _connecter.SelectEventInterestID(Interest);
+            Interest_ID = _connecter.SelectEventInterestID(InterestEvent);
 
             _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
 
             Event.AddEventsToList(_connecter.ShowAllEventInformation());
             Navigation.NavigateToNew<EventsViewModel>();
-
         }
 
     }

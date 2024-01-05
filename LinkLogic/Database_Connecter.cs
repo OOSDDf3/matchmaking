@@ -929,6 +929,17 @@ namespace LinkApplication
                         chatID = Int32.Parse(reader.GetValue(0).ToString());
                     }
                     reader.Close();
+
+                    string querySelectChatID2 = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
+                    var cmdSelectChatID2 = new MySqlCommand(querySelectChatID2, dbCon.Connection);
+                    cmdSelectChatID2.Parameters.AddWithValue("@us", userID2);
+                    cmdSelectChatID2.Parameters.AddWithValue("@usm", userID1);
+                    var reader2 = cmdSelectChatID2.ExecuteReader();
+                    while (reader2.Read())
+                    {
+                        chatID = Int32.Parse(reader2.GetValue(0).ToString());
+                    }
+                    reader2.Close();
                 }
                 return chatID;
             }
@@ -995,6 +1006,36 @@ namespace LinkApplication
                         }
                     }
                     reader.Close();
+
+                    string querySelectMatchData2 = "SELECT A.user_ID, A.name, PP.picture FROM account AS A JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
+                        "WHERE A.user_ID IN (SELECT user_ID FROM usermatches WHERE user_ID_Matched = @us2);";
+                    var cmdSelectMatchData2 = new MySqlCommand(querySelectMatchData2, dbCon.Connection);
+                    cmdSelectMatchData2.Parameters.AddWithValue("@us2", userID);
+                    var reader2 = cmdSelectMatchData2.ExecuteReader();
+                    string[] keys2 = new string[] { "user_ID", "name", "profilePicture" };
+                    int valueAmount2 = keys.Length;
+                    while (reader2.Read())
+                    {
+                        Dictionary<string, string> matchDict = new();
+                        for (int i = 0; i < reader2.FieldCount; i += valueAmount)
+                        {
+                            //Debug.Write(i);
+                            for (int j = 0; j < valueAmount; j++)
+                            {
+                                //Debug.Write(j);
+                                //Debug.WriteLine(reader.GetValue(i + j).ToString());                                                              
+                                matchDict.Add(keys[j], reader2.GetValue(i + j).ToString());
+                            }
+                            matches.Add(matchDict);
+                            //foreach(var match in matchDict)
+                            //{
+                            //    Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
+                            //}
+                            //Debug.Write("\n");
+                        }
+                    }
+                    reader2.Close();
+
                 }
                 return matches;
             }
@@ -1044,14 +1085,50 @@ namespace LinkApplication
                         }
                     }
                     reader.Close();
+
+
+                    string querySelectMatchData2 = "" +
+                        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
+                        "FROM userchats AS UC " +
+                        "JOIN chatmessages AS M ON UC.chat_ID " +
+                        "JOIN account AS A ON M.user_ID = A.user_ID " +
+                        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
+                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
+                        "ORDER BY M.message_ID;";
+                    var cmdSelectMatchData2 = new MySqlCommand(querySelectMatchData2, dbCon.Connection);
+                    cmdSelectMatchData2.Parameters.AddWithValue("@us", user_ID_Matched);
+                    cmdSelectMatchData2.Parameters.AddWithValue("@usm", user_ID);
+                    var reader2 = cmdSelectMatchData2.ExecuteReader();
+                    string[] keys2 = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
+                    int valueAmount2 = keys2.Length;
+                    while (reader2.Read())
+                    {
+                        Dictionary<string, string> messageDict2 = new();
+                        for (int i = 0; i < reader2.FieldCount; i += valueAmount2)
+                        {
+                            for (int j = 0; j < valueAmount2; j++)
+                            {
+                                messageDict2.Add(keys2[j], reader2.GetValue(i + j).ToString());
+                            }
+                            messages.Add(messageDict2);
+                            //foreach (var message in messageDict)
+                            //{
+                            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
+                            //}
+                            //Debug.Write("\n");
+                        }
+                    }
+                    reader2.Close();
                 }
                 return messages;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.ToString());
                 return messages;
             }
         }
     }
+
 }

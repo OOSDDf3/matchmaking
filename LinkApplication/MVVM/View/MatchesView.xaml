@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" 
-             xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel"
+             xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MatchesViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600"
-             Background="Transparent">
+             Background="Transparent"
+             Loaded="UserControl_Loaded">
     <UserControl.Resources>
         
     </UserControl.Resources>

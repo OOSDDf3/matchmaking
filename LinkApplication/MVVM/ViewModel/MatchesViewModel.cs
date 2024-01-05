@@ -1,4 +1,5 @@
-﻿using LinkApplication;
+﻿using Google.Protobuf;
+using LinkApplication;
 using LinkApplicationGraphics.Core;
 using LinkApplicationGraphics.NVVM.Model;
 using LinkApplicationGraphics.Services;
@@ -64,17 +65,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Navigation = navService;
 
             _Connecter = new Database_Connecter();
-            
+
             Messages = new ObservableCollection<MessageModel>();
             Matches = new ObservableCollection<MatchModel>();
 
             Random r = new Random();
             UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
 
-            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
-
             SendCommand = new RelayCommand(o =>
-            {                
+            {
                 _Connecter.InsertIntoMessages(SelectedMatch.ChatID, Account.user_ID, Message);
                 MessageModel model = new MessageModel();
                 model.Username = Username;
@@ -86,6 +85,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
                 Message = "";
             }, canExecute: o => true);
+
+            GetMatches();
+            UpdateMessages();
+        }
+
+        public void OnUserControlLoaded()
+        {
+            Matches.Clear();
+            Messages.Clear();
+            
 
             GetMatches();
             UpdateMessages();
@@ -104,6 +113,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 matchModel.UserID = Int32.Parse(match["user_ID"]);
                 matchModel.Username = match["name"];
                 matchModel.ProfilePicture = _Connecter.ShowUserPicture(Int32.Parse(match["user_ID"]));
+
+                Debug.WriteLine(matchModel.ChatID);
                 Matches.Add(matchModel);
             }
         }
@@ -113,8 +124,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {            
             foreach (var matchModel in Matches)
             {
-                Messages = new ObservableCollection<MessageModel>();
-                matchModel.Messages = new ObservableCollection<MessageModel>();
+                
                 List<Dictionary<string, string>> messagesData = _Connecter.GetMessagesWithUserIDs(Account.user_ID, matchModel.UserID);
                 foreach (var message in messagesData)
                 {
@@ -124,6 +134,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                     messageModel.ImageSource = _Connecter.ShowUserPicture(Int32.Parse(message["user_ID"]));
                     messageModel.Message = message["message"];
                     messageModel.Time = DateTime.Parse(message["time"]);
+
                     matchModel.Messages.Add(messageModel);
                 }
             }

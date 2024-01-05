@@ -25,7 +25,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
         public MessageModel()
         {
-            MessageModel.Image = Account.ImageFromBuffer(ImageSource);
+            //MessageModel.Image = Account.ImageFromBuffer(ImageSource);
         }
     }
 }

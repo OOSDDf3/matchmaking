@@ -968,7 +968,7 @@ namespace LinkApplication
                 if (dbCon.IsConnect())
                 {
                     string querySelectMatchData = "SELECT A.user_ID, A.name, PP.picture FROM account AS A JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
-                        "WHERE A.user_ID IN (SELECT user_ID_Matched FROM usermatches WHERE user_ID = @us);";
+                        "WHERE A.user_ID IN (SELECT user_ID_Matched FROM usermatches WHERE user_ID = @us );";
                     var cmdSelectMatchData = new MySqlCommand(querySelectMatchData, dbCon.Connection);
                     cmdSelectMatchData.Parameters.AddWithValue("@us", userID);
                     var reader = cmdSelectMatchData.ExecuteReader();

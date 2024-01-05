@@ -5,9 +5,11 @@ using LinkApplicationGraphics.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -31,7 +33,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public string Username { get; set; }
         public string Status { get; set; }
-
+        public string UsernameColor { get; set; }
 
         private MatchModel _selectedMatch;
         public MatchModel SelectedMatch
@@ -53,21 +55,47 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        public INavigationService _navigation;
+        public INavigationService Navigation
+        {
+            get => _navigation;
+            set
+            {
+                _navigation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand SendCommand { get; set; }
 
         public MatchesViewModel(INavigationService navService)
         {
+
+            Navigation = navService;
+
             _Connecter = new Database_Connecter();
             
-            //Messages = new ObservableCollection<MessageModel>();
+            Messages = new ObservableCollection<MessageModel>();
             Matches = new ObservableCollection<MatchModel>();
+
+            Random r = new Random();
+            UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
+
+            NavigateToLoginPageCommand = new RelayCommand(execute: o => { Navigation.NavigateTo<LoginViewModel>(); LogOut(); }, canExecute: CanExecuteCommand);
 
             SendCommand = new RelayCommand(o =>
             {                
                 _Connecter.InsertIntoMessages(SelectedMatch.ChatID, Account.user_ID, Message);
-                UpdateMessages();
-                Message = "";
+                MessageModel model = new MessageModel();
+                model.Username = Username;
+                model.UsernameColor = UsernameColor;
+                model.Message = Message;
+                model.Time = DateTime.Now;
+                SelectedMatch.Messages.Add(model);
+                //UpdateMessages();
                 OnPropertyChanged();
+                Message = "";
             }, canExecute: o => true);
 
             GetMatches();
@@ -96,14 +124,14 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {            
             foreach (var matchModel in Matches)
             {
-                //Messages = new ObservableCollection<MessageModel>();
+                Messages = new ObservableCollection<MessageModel>();
                 matchModel.Messages = new ObservableCollection<MessageModel>();
                 List<Dictionary<string, string>> messagesData = _Connecter.GetMessagesWithUserIDs(Account.user_ID, matchModel.UserID);
                 foreach (var message in messagesData)
                 {
                     MessageModel messageModel = new MessageModel();
                     messageModel.Username = message["name"];
-                    messageModel.UsernameColor = matchModel.UsernameColor;
+                    messageModel.UsernameColor = UsernameColor;
                     messageModel.ImageSource = _Connecter.ShowUserPicture(Int32.Parse(message["user_ID"]));
                     messageModel.Message = message["message"];
                     messageModel.Time = DateTime.Parse(message["time"]);
@@ -112,17 +140,20 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        private bool CanExecuteCommand(Object obj)
+        {
+            return true;
+        }
+
         private void LogOut()
         {
-            Account.user_ID = 0;
+            Username = string.Empty;
+            UsernameColor = string.Empty;
 
-            Account.NameProfile = string.Empty;
-            Account.BirthdateProfile = string.Empty;
-            Account.AddressProfile = string.Empty;
-            Account.GenderProfile = string.Empty;
-            Account.LanguageProfile = string.Empty;
-            Account.PasswordProfile = string.Empty;
-            Account.InterestsProfileString = string.Empty;
+            Debug.WriteLine("LOGOUT SUCCESFUL");
+
+            Messages = new ObservableCollection<MessageModel>();
+            Matches.Clear();
 
         }
     }

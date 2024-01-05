@@ -96,7 +96,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //haalt de userid op met de meest overeenkomende interreses
                 userIDMatch = Account.userMatches.OrderByDescending(kvp => kvp.Value).First().Key;
-                
+                Debug.WriteLine($"userIDMatch: {userIDMatch}");
 
                 //haalt gegevens op van desbetreffende persoon
                 dataPerson = _connecter.ShowUserInformation(userIDMatch);
@@ -107,7 +107,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de naam en leeftijd van de persoon
                 DateTime currentDate = DateTime.Today;
-                Debug.WriteLine(dataPerson.Keys);
+                foreach(var key in dataPerson.Keys)
+                {
+                    Debug.Write($"{key}, ");
+                }
                 age = currentDate.Year - Int32.Parse(dataPerson["birthdate"]);
                 NameMatch = $"{dataPerson["name"]}, {age} jaar";
 
@@ -117,7 +120,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 dataPerson.Clear();
 
-                Debug.WriteLine(userIDMatch);
+                //Debug.WriteLine(userIDMatch);
             }
             else
             {
@@ -145,7 +148,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 {
                     _connecter.InsertMatch(Account.user_ID, userIDMatch);
                     _connecter.InsertIntoUserChats(Account.user_ID, userIDMatch);
-                    _connecter.InsertIntoUserChats(_connecter.GetChatIDWithUserIDs(Account.user_ID, userIDMatch), userIDMatch, Account.user_ID);
+                    //_connecter.InsertIntoUserChats(_connecter.GetChatIDWithUserIDs(Account.user_ID, userIDMatch), userIDMatch, Account.user_ID);
                     MessageBox.Show("Hoera, je hebt een match!");                  
 
                 }

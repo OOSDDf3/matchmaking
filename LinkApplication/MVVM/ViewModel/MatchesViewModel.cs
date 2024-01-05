@@ -55,17 +55,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
-        public INavigationService _navigation;
-        public INavigationService Navigation
-        {
-            get => _navigation;
-            set
-            {
-                _navigation = value;
-                OnPropertyChanged();
-            }
-        }
-
         public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand SendCommand { get; set; }
 

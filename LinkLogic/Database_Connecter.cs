@@ -919,10 +919,10 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID1 = @us1 AND user_ID2 = @us2";
+                    string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
                     var cmdSelectChatID = new MySqlCommand(querySelectChatID, dbCon.Connection);
-                    cmdSelectChatID.Parameters.AddWithValue("@us1", userID1);
-                    cmdSelectChatID.Parameters.AddWithValue("@us", userID2);
+                    cmdSelectChatID.Parameters.AddWithValue("@us", userID1);
+                    cmdSelectChatID.Parameters.AddWithValue("@usm", userID2);
                     var reader = cmdSelectChatID.ExecuteReader();
                     while (reader.Read())
                     {

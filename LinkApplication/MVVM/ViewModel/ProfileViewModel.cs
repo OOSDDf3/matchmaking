@@ -136,6 +136,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             Account.LanguageProfile = string.Empty;
             Account.PasswordProfile = string.Empty;
             Account.InterestsProfileString = string.Empty;
+
+            MatchesViewModel.LogOut();
         }
     }
 }

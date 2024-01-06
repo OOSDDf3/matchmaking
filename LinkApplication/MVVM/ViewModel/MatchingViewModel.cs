@@ -107,10 +107,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de naam en leeftijd van de persoon
                 DateTime currentDate = DateTime.Today;
-                foreach(var key in dataPerson.Keys)
-                {
-                    Debug.Write($"{key}, ");
-                }
+                //foreach(var key in dataPerson.Keys)
+                //{
+                //    Debug.Write($"{key}, ");
+                //}
                 age = currentDate.Year - Int32.Parse(dataPerson["birthdate"]);
                 NameMatch = $"{dataPerson["name"]}, {age} jaar";
 

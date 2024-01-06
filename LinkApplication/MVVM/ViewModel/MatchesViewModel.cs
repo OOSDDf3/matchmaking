@@ -29,12 +29,12 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         }
 
         private Database_Connecter _Connecter;
-        public ObservableCollection<MessageModel> Messages { get; set; }
-        public ObservableCollection<MatchModel> Matches { get; set; }
+        //public static ObservableCollection<MessageModel> Messages { get; set; }
+        public static ObservableCollection<MatchModel> Matches { get; set; }
 
-        public string Username { get; set; }
+        public static string Username { get; set; }
         public string Status { get; set; }
-        public string UsernameColor { get; set; }
+        public static string UsernameColor { get; set; }
 
         private MatchModel _selectedMatch;
         public MatchModel SelectedMatch
@@ -55,8 +55,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public RelayCommand NavigateToLoginPageCommand { get; set; }
         public RelayCommand SendCommand { get; set; }
 
         public MatchesViewModel(INavigationService navService)
@@ -66,11 +64,11 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             _Connecter = new Database_Connecter();
 
-            Messages = new ObservableCollection<MessageModel>();
-            Matches = new ObservableCollection<MatchModel>();
-
             Random r = new Random();
             UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
+
+            //Messages = new ObservableCollection<MessageModel>();
+            Matches = new ObservableCollection<MatchModel>();
 
             SendCommand = new RelayCommand(o =>
             {
@@ -86,6 +84,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 Message = "";
             }, canExecute: o => true);
 
+            Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
+            Status = "Online";
             GetMatches();
             UpdateMessages();
         }
@@ -93,11 +93,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public void OnUserControlLoaded()
         {
             Matches.Clear();
-            Messages.Clear();
-            
+            //Messages.Clear();
+
+            //Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
+            //Status = "Online";
 
             GetMatches();
             UpdateMessages();
+
+            //Random r = new Random();
+            //UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
         }
 
         private void GetMatches()
@@ -114,7 +119,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 matchModel.Username = match["name"];
                 matchModel.ProfilePicture = _Connecter.ShowUserPicture(Int32.Parse(match["user_ID"]));
 
-                Debug.WriteLine(matchModel.ChatID);
+                Debug.WriteLine($"matchmodel.ChatID: {matchModel.ChatID}");
                 Matches.Add(matchModel);
             }
         }
@@ -127,10 +132,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 
                 List<Dictionary<string, string>> messagesData = _Connecter.GetMessagesWithUserIDs(Account.user_ID, matchModel.UserID);
                 foreach (var message in messagesData)
-                {
+                {                    
                     MessageModel messageModel = new MessageModel();
                     messageModel.Username = message["name"];
-                    messageModel.UsernameColor = UsernameColor;
+                    messageModel.UsernameColor = "#3BFF6F";
                     messageModel.ImageSource = _Connecter.ShowUserPicture(Int32.Parse(message["user_ID"]));
                     messageModel.Message = message["message"];
                     messageModel.Time = DateTime.Parse(message["time"]);
@@ -140,21 +145,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
-        private bool CanExecuteCommand(Object obj)
-        {
-            return true;
-        }
-
-        private void LogOut()
+        public static void LogOut()
         {
             Username = string.Empty;
-            UsernameColor = string.Empty;
+            //UsernameColor = string.Empty;
 
             Debug.WriteLine("LOGOUT SUCCESFUL");
 
-            Messages = new ObservableCollection<MessageModel>();
+            //Messages = new ObservableCollection<MessageModel>();
             Matches.Clear();
-
         }
     }
 }

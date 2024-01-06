@@ -929,17 +929,19 @@ namespace LinkApplication
                         chatID = Int32.Parse(reader.GetValue(0).ToString());
                     }
                     reader.Close();
-
-                    string querySelectChatID2 = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
-                    var cmdSelectChatID2 = new MySqlCommand(querySelectChatID2, dbCon.Connection);
-                    cmdSelectChatID2.Parameters.AddWithValue("@us", userID2);
-                    cmdSelectChatID2.Parameters.AddWithValue("@usm", userID1);
-                    var reader2 = cmdSelectChatID2.ExecuteReader();
-                    while (reader2.Read())
+                    if (chatID == 0)
                     {
-                        chatID = Int32.Parse(reader2.GetValue(0).ToString());
+                        string querySelectChatID2 = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
+                        var cmdSelectChatID2 = new MySqlCommand(querySelectChatID2, dbCon.Connection);
+                        cmdSelectChatID2.Parameters.AddWithValue("@us", userID2);
+                        cmdSelectChatID2.Parameters.AddWithValue("@usm", userID1);
+                        var reader2 = cmdSelectChatID2.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            chatID = Int32.Parse(reader2.GetValue(0).ToString());
+                        }
+                        reader2.Close();
                     }
-                    reader2.Close();
                 }
                 return chatID;
             }
@@ -1049,23 +1051,23 @@ namespace LinkApplication
         public List<Dictionary<string, string>> GetMessagesWithUserIDs(int user_ID, int user_ID_Matched)
         {
             List<Dictionary<string, string>> messages = new();
+            int chatID = GetChatIDWithUserIDs(user_ID, user_ID_Matched);
+            Debug.WriteLine($"chatID in GetMessagesUserIDs: {chatID}");
             try
             {
                 if (dbCon.IsConnect())
                 {
                     string querySelectMatchData = "" +
-                        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
+                        "SELECT A.user_ID, A.name, M.message, M.time " +
                         "FROM userchats AS UC " +
-                        "JOIN chatmessages AS M ON UC.chat_ID " +
+                        "JOIN chatmessages AS M ON UC.chat_ID = M.chat_ID " +
                         "JOIN account AS A ON M.user_ID = A.user_ID " +
-                        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
-                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
+                        "WHERE M.chat_ID = @chatID " +
                         "ORDER BY M.message_ID;";
                     var cmdSelectMatchData = new MySqlCommand(querySelectMatchData, dbCon.Connection);
-                    cmdSelectMatchData.Parameters.AddWithValue("@us", user_ID);
-                    cmdSelectMatchData.Parameters.AddWithValue("@usm", user_ID_Matched);
+                    cmdSelectMatchData.Parameters.AddWithValue("@chatID", chatID);
                     var reader = cmdSelectMatchData.ExecuteReader();
-                    string[] keys = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
+                    string[] keys = new string[] { "user_ID", "name", "message", "time" };
                     int valueAmount = keys.Length;
                     while (reader.Read())
                     {
@@ -1087,38 +1089,38 @@ namespace LinkApplication
                     reader.Close();
 
 
-                    string querySelectMatchData2 = "" +
-                        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
-                        "FROM userchats AS UC " +
-                        "JOIN chatmessages AS M ON UC.chat_ID " +
-                        "JOIN account AS A ON M.user_ID = A.user_ID " +
-                        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
-                        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
-                        "ORDER BY M.message_ID;";
-                    var cmdSelectMatchData2 = new MySqlCommand(querySelectMatchData2, dbCon.Connection);
-                    cmdSelectMatchData2.Parameters.AddWithValue("@us", user_ID_Matched);
-                    cmdSelectMatchData2.Parameters.AddWithValue("@usm", user_ID);
-                    var reader2 = cmdSelectMatchData2.ExecuteReader();
-                    string[] keys2 = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
-                    int valueAmount2 = keys2.Length;
-                    while (reader2.Read())
-                    {
-                        Dictionary<string, string> messageDict2 = new();
-                        for (int i = 0; i < reader2.FieldCount; i += valueAmount2)
-                        {
-                            for (int j = 0; j < valueAmount2; j++)
-                            {
-                                messageDict2.Add(keys2[j], reader2.GetValue(i + j).ToString());
-                            }
-                            messages.Add(messageDict2);
-                            //foreach (var message in messageDict)
-                            //{
-                            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
-                            //}
-                            //Debug.Write("\n");
-                        }
-                    }
-                    reader2.Close();
+                //    string querySelectMatchData2 = "" +
+                //        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
+                //        "FROM userchats AS UC " +
+                //        "JOIN chatmessages AS M ON UC.chat_ID " +
+                //        "JOIN account AS A ON M.user_ID = A.user_ID " +
+                //        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
+                //        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
+                //        "ORDER BY M.message_ID;";
+                //    var cmdSelectMatchData2 = new MySqlCommand(querySelectMatchData2, dbCon.Connection);
+                //    cmdSelectMatchData2.Parameters.AddWithValue("@us", user_ID_Matched);
+                //    cmdSelectMatchData2.Parameters.AddWithValue("@usm", user_ID);
+                //    var reader2 = cmdSelectMatchData2.ExecuteReader();
+                //    string[] keys2 = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
+                //    int valueAmount2 = keys2.Length;
+                //    while (reader2.Read())
+                //    {
+                //        Dictionary<string, string> messageDict2 = new();
+                //        for (int i = 0; i < reader2.FieldCount; i += valueAmount2)
+                //        {
+                //            for (int j = 0; j < valueAmount2; j++)
+                //            {
+                //                messageDict2.Add(keys2[j], reader2.GetValue(i + j).ToString());
+                //            }
+                //            messages.Add(messageDict2);
+                //            //foreach (var message in messageDict)
+                //            //{
+                //            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
+                //            //}
+                //            //Debug.Write("\n");
+                //        }
+                //    }
+                //    reader2.Close();
                 }
                 return messages;
             }

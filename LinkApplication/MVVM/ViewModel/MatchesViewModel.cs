@@ -32,6 +32,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         //public static ObservableCollection<MessageModel> Messages { get; set; }
         public static ObservableCollection<MatchModel> Matches { get; set; }
 
+        public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
+
         public static string Username { get; set; }
         public string Status { get; set; }
         public static string UsernameColor { get; set; }
@@ -59,33 +61,25 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public MatchesViewModel(INavigationService navService)
         {
-
             Navigation = navService;
 
             _Connecter = new Database_Connecter();
 
+            dataPerson = _Connecter.ShowUserInformation(Account.user_ID);
+
             Random r = new Random();
             UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
 
-            //Messages = new ObservableCollection<MessageModel>();
             Matches = new ObservableCollection<MatchModel>();
 
             SendCommand = new RelayCommand(o =>
             {
                 _Connecter.InsertIntoMessages(SelectedMatch.ChatID, Account.user_ID, Message);
-                MessageModel model = new MessageModel();
-                model.Username = Username;
-                model.UsernameColor = UsernameColor;
-                model.Message = Message;
-                model.Time = DateTime.Now;
-                SelectedMatch.Messages.Add(model);
-                //UpdateMessages();
-                OnPropertyChanged();
+                SelectedMatch.Messages.Clear();
+                UpdateMessages();
                 Message = "";
             }, canExecute: o => true);
 
-            Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
-            Status = "Online";
             GetMatches();
             UpdateMessages();
         }
@@ -93,16 +87,15 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public void OnUserControlLoaded()
         {
             Matches.Clear();
-            //Messages.Clear();
-
-            //Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
-            //Status = "Online";
+            if(SelectedMatch != null)
+            {
+                SelectedMatch.Messages.Clear();
+            }
 
             GetMatches();
             UpdateMessages();
 
-            //Random r = new Random();
-            //UsernameColor = new SolidColorBrush(Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 255))).ToString();
+            Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
         }
 
         private void GetMatches()
@@ -152,8 +145,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             Debug.WriteLine("LOGOUT SUCCESFUL");
 
-            //Messages = new ObservableCollection<MessageModel>();
-            Matches.Clear();
+            if(Matches != null)
+            {
+                Matches.Clear();
+            }
         }
     }
 }

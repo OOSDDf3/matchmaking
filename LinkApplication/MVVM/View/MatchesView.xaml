@@ -75,7 +75,8 @@
                 <RowDefinition Height="90"/>
             </Grid.RowDefinitions>
 
-            <Border BorderBrush="#2F3136" BorderThickness="0,0,0,5">
+            <!--<Border BorderBrush="#2F3136" BorderThickness="0,0,0,5">-->
+            <Border BorderBrush="#FFFFFF" BorderThickness="0,0,0,5">
                 <Grid HorizontalAlignment="Stretch"
                       Margin="8">
                     <Label Content="{Binding SelectedMatch.Username}"

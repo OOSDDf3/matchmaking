@@ -44,8 +44,7 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </TextBlock.Style>
-                                
+                                </TextBlock.Style>                                
                             </TextBlock>
                         </Grid>
                     </Border>

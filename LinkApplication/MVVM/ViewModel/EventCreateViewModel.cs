@@ -15,17 +15,20 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     {
         Database_Connecter _connecter;
         public string EventName { get; set; }
+        public int CurrentAttendeesEvent { get; set; }
         public int MaxAttendees { get; set; }
         public string Location { get; set; }
         public DateTime DateEvent { get; set; }
         public string TimeEvent { get; set; }
-        public string Interest { get; set; }
+        public string InterestEvent { get; set; }
 
         private int Interest_ID { get; set; }
 
-        public List<string> EventInterests { get; set; }
+        public List<string> EventCreateViewInterests { get; set; }
 
+        public RelayCommand NavigateToEventsViewCommand { get; set; }
 
+        public RelayCommand CreateEventCommand { get; set; }
 
         public INavigationService _navigation;
         public INavigationService Navigation
@@ -37,46 +40,44 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RelayCommand NavigateToEventsViewCommand { get; set; }
 
-        public RelayCommand CreateEventCommand { get; set; }
 
         public EventCreateViewModel(INavigationService navService)
         {
             Navigation = navService;
 
-            _connecter = new Database_Connecter();
-
             DateEvent = DateTime.Now.Date;
 
-            EventInterests = _connecter.ShowUserInterests(Account.user_ID);
-            
-
+            _connecter = new Database_Connecter();
+            EventCreateViewInterests = _connecter.ShowUserInterests(Account.user_ID);
 
             //aanmaken navigation command terug naar de eventsview, command execution staat in xaml
             NavigateToEventsViewCommand = new RelayCommand(execute: o => { Navigation.NavigateToNew<EventsViewModel>(); }, canExecute: o => true);
             CreateEventCommand = new RelayCommand(execute: o => { createEvent(); }, canExecute: o => true);
-
         }
 
         private void createEvent()
         {
             _connecter = new Database_Connecter();
 
-            
+            Interest_ID = _connecter.SelectEventInterestID(InterestEvent);
 
-            Interest_ID = _connecter.SelectEventInterestID(Interest);
+            _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
 
-            _connecter.InsertIntoEventsList(EventName, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
+            Event.AddEventsToList(_connecter.ShowAllEventInformation());
+            emptyInputFields();
             Navigation.NavigateToNew<EventsViewModel>();
-
+            
         }
 
-        //private void cancelEvent()
-        //{
-        //    _connecter = new Database_Connecter();
-
-        //    _connecter.DeleteFromEventsList();
-        //}
+        private void emptyInputFields()
+        {
+            EventName = string.Empty;
+            MaxAttendees = 0;
+            Location = string.Empty;
+            InterestEvent = string.Empty;
+            TimeEvent = string.Empty;
+            
+        }
     }
 }

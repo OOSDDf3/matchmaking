@@ -7,8 +7,9 @@
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View" xmlns:viewmodel="clr-namespace:LinkApplicationGraphics.NVVM.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:EventCreateViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1600"
+             >
              
-            >
+           
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -60,7 +61,7 @@
             </TextBox>
 
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White"  ItemsSource="{Binding EventInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Interest, Mode=TwoWay}"/>
+            <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White"  ItemsSource="{Binding EventCreateViewInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding InterestEvent, Mode=TwoWay}"/>
         </Grid>
         
 
@@ -98,10 +99,10 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <DatePicker Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Foreground="White" FontSize="20" BorderThickness="0,0,0,3" BorderBrush="White" Background="{x:Null}" OpacityMask="#FFE8CFCF" Text="{Binding DateEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding DateEvent, Mode=Default}"/>
+            <DatePicker Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Foreground="White" FontSize="20" BorderThickness="0,0,0,3" BorderBrush="White" Background="{x:Null}" OpacityMask="#FFE8CFCF" Text="{Binding DateEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding DateEvent, Mode=Default}" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Tijd" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <materialDesign:TimePicker Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding TimeEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White"/>
+            <materialDesign:TimePicker Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding TimeEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" PreviewKeyDown="TimePicker_PreviewKeyDown"/>
         </Grid>
 
         <Grid x:Name="Button_Grid" Grid.Row="7" Grid.Column="1">

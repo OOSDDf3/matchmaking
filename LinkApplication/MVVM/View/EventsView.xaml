@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LinkApplicationGraphics.NVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1600">
+             d:DesignHeight="850" d:DesignWidth="1600"
+             Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -27,27 +28,30 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
-
+            <RowDefinition Height="8*"/>
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
+            <!--<RowDefinition Height="0.5*"/>-->
+            <!--<RowDefinition Height="2*"/>-->
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-
-
-        <Border Background="#FF729CA7" 
+        <ListView Grid.Row="1" Grid.Column="1" 
+                  ItemsSource="{Binding ListOfEvents}"
+                  ItemContainerStyle="{StaticResource EventCard}"
+                  />
+        <!--<Border Background="#FF729CA7" 
                 Grid.Column="1" 
                 Grid.Row="1"
                 BorderThickness="5"
                 BorderBrush="Black"
                 CornerRadius="30"
                 Padding="12,13,12,5"
-                Margin="5,0,15,0">
-            <Grid x:Name="Event1_Grid" Grid.Row="1" Grid.Column="1">
+                Margin="5,5,15,0"
+                Height="170"
+                VerticalAlignment="Top">
+            <Grid x:Name="Event1_Grid" Grid.Row="2" Grid.Column="1" Height="150" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -63,7 +67,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight" FontWeight="Heavy"/>
-                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "01/01/2001 17:00" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Uno" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                 <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Hobby (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
@@ -73,6 +77,9 @@
 
                 <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
                 <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "X/10 (haal binnen)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum/Tijd: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "01/01/2001 17:00" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
                 <RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Checked="RadioButton_Checked" Grid.RowSpan="2" >
                     <RadioButton.Style>
@@ -128,7 +135,8 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-        </Border>
+        </Border>-->
+        
 
 
         
@@ -137,35 +145,26 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Center" VerticalAlignment = "Top" Content = "Filters" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
 
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Content = "Categorie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <ComboBox Grid.Row="2" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Top" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderBrush="White"/>
-        </Grid>
+            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Content = "Categorie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <ComboBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Top" VerticalContentAlignment="Center" Height="32" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderBrush="White" ItemsSource="{Binding EventViewInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding InterestEvent, Mode=TwoWay}"/>
+        <!--</Grid>-->
 
-        <Grid x:Name="Distance_Grid" Grid.Row="3" Grid.Column="2">
-            <Grid.RowDefinitions>
+        <!--<Grid x:Name="SignedUp_Grid" Grid.Row="2" Grid.Column="2">-->
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
 
-            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Content = "Afstand (in KM)" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <Slider Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Center" Width="250"/>
-        </Grid>
-
-        <Grid x:Name="SignedUp_Grid" Grid.Row="5" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Status" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Aangemeld" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <CheckBox Content=""  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Foreground="White" materialDesign:CheckBoxAssist.CheckBoxSize="30" Background="White" OpacityMask="White" />
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Status" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Left" VerticalAlignment = "Center" Content = "Aangemeld" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+            <CheckBox Content=""  Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Foreground="White" materialDesign:CheckBoxAssist.CheckBoxSize="30" Background="White" OpacityMask="White" Command="{Binding FilterAttendanceCommand}" />
 
         </Grid>
 
@@ -177,6 +176,38 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Row="1" Grid.Column="1" Content = "Aanmaken Event" HorizontalAlignment = "Center" VerticalAlignment = "Center" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding NavigateToEventCreateViewCommand}" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
+                <Button.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Button.Resources>
+            </Button>
+        </Grid>
+
+        <Grid x:Name="Filter_Button_Grid" Grid.Row="8" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="1" Grid.Column="0" Content = "Filter" HorizontalAlignment = "Center" VerticalAlignment = "Center" Height="35" Width="125" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding FilterInterestCommand}" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
+                <Button.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.MergedDictionaries>
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Button.Resources>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="2" Content = "Reset" HorizontalAlignment = "Center" VerticalAlignment = "Center" Height="35" Width="125" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding ResetFilterCommand}" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5">
                 <Button.Resources>
                     <ResourceDictionary>
                         <ResourceDictionary.MergedDictionaries>

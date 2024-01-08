@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkApplicationGraphics.NVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,25 @@ namespace LinkApplicationGraphics.NVVM.View
             InitializeComponent();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is EventsViewModel viewModel)
+            {
+                viewModel.OnUserControlLoaded();
+            }
+        }
+
+        private void AanmeldButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void AfmeldButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteEventButton_Clicked(object sender, RoutedEventArgs e)
         {
 
         }

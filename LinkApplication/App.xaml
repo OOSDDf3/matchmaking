@@ -14,6 +14,8 @@
                 <ResourceDictionary Source="/Theme/MatchChatCard.xaml"/>
                 <ResourceDictionary Source="/Theme/MessageCard.xaml"/>
                 <ResourceDictionary Source="/Theme/MessageBox.xaml"/>
+                <ResourceDictionary Source="/Theme/EventCard.xaml"/>
+
 
             </ResourceDictionary.MergedDictionaries>
 

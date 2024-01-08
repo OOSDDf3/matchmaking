@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Relational;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
@@ -491,13 +492,13 @@ namespace LinkApplication
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        for (int i = 0; i < reader.FieldCount; i+=2)
+                        for (int i = 0; i < reader.FieldCount; i += 2)
                         {
                             Debug.WriteLine($"category: {reader.GetValue(i)}");
-                            Debug.WriteLine($"interest: {reader.GetValue(i+1)}");
+                            Debug.WriteLine($"interest: {reader.GetValue(i + 1)}");
                             List<string> categoryInterestList = new();
                             categoryInterestList.Add(reader.GetValue(i).ToString());
-                            categoryInterestList.Add(reader.GetValue(i+1).ToString());
+                            categoryInterestList.Add(reader.GetValue(i + 1).ToString());
                             interests.Add(categoryInterestList);
                         }
                     }
@@ -519,11 +520,11 @@ namespace LinkApplication
             try
             {
                 if (dbCon.IsConnect())
-                {                    
+                {
                     string queryDelete = "DELETE FROM `userinterestlist` WHERE user_ID = @us";
                     var cmdDelete = new MySqlCommand(queryDelete, dbCon.Connection);
                     cmdDelete.Parameters.AddWithValue("@us", userID);
-                    cmdDelete.ExecuteNonQuery();                   
+                    cmdDelete.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -561,7 +562,7 @@ namespace LinkApplication
                         cmdInsertInterest.Parameters.AddWithValue("@us", userID);
                         cmdInsertInterest.Parameters.AddWithValue("@inID", interest_ID);
                         cmdInsertInterest.ExecuteNonQuery();
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)
@@ -693,20 +694,51 @@ namespace LinkApplication
                 return interest_ID;
             }
         }
-    
-        
 
-        //Methode voor het aanmaken van een event
-        public void InsertIntoEventsList(string eventName, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
+        //Methode voor ophalen interesse
+        public string SelectEventInterestName(int interestID)
         {
-            DateTime combinedDateTime = date + time.ToTimeSpan();
+            string interestName = null;
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @maxa, @lo, @date, @iid, @uid);";
+                    string querySelect = "SELECT name FROM Interests WHERE interest_Id = @id";
+                    var cmdSelect = new MySqlCommand(querySelect, dbCon.Connection);
+                    cmdSelect.Parameters.AddWithValue("@id", interestID);
+                    var reader = cmdSelect.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        interestName = reader.GetString(0);
+                    }
+                    reader.Close();
+                    Debug.WriteLine(interestName);
+                }
+                return interestName;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return interestName;
+            }
+        }
+
+
+        //Methode voor het aanmaken van een event
+        public void InsertIntoEventsList(string eventName, int currentAttendees, int maxAttendees, string location, DateTime date, TimeOnly time, int interest_ID, int user_ID)
+        {
+            DateTime combinedDateTime = date + time.ToTimeSpan();
+            currentAttendees = 1;
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "INSERT INTO `events` (`event_ID`,`eventName`,`currentAttendees`,`maxAttendees`,`location`,`date`,`interest_ID`,`user_ID`) VALUES (NULL, @ena, @cura, @maxa, @lo, @date, @iid, @uid);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.Add("@ena", MySqlDbType.VarChar, 80).Value = eventName;
+                    cmd.Parameters.Add("@cura", MySqlDbType.Int16, 4).Value = currentAttendees;
                     cmd.Parameters.Add("@maxa", MySqlDbType.Int16, 4).Value = maxAttendees;
                     cmd.Parameters.Add("@lo", MySqlDbType.VarChar, 80).Value = location;
                     cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
@@ -747,33 +779,93 @@ namespace LinkApplication
         }
 
         //Methode voor weergave event informatie
-        public Dictionary<string, string> ShowEventInformation()
+        public Dictionary<string, string> ShowEventInformation(int event_ID)
         {
-            Dictionary<string, string> keyEventPairs = new();
+            Dictionary<string, string> keyValuePairsEvent = new();
+            string query = "SELECT * FROM Events WHERE event_ID = @event_ID";
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    
-                }
-                return keyEventPairs;
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@event_ID", event_ID);
+                    var reader = cmd.ExecuteReader();
+                    string[] keys = new string[8] { "event_ID", "eventname", "currentattendees", "maxattendees", "location", "date", "interest_ID", "user_ID" };
 
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Console.Write(reader.GetValue(i).ToString() + " ");
+                            keyValuePairsEvent.Add(keys[i], reader.GetValue(i).ToString());
+                        }
+                        Console.WriteLine();
+                    }
+                    reader.Close();
+                    return keyValuePairsEvent;
+                }
+                return keyValuePairsEvent;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return keyEventPairs;
+                Console.WriteLine(ex.ToString());
+                return keyValuePairsEvent;
+            }
+        }
+
+        //Methode Weergave alle event info?
+        public List<Dictionary<string, string>> ShowAllEventInformation()
+        {
+            List<string> eventsIDList = new();
+            List<Dictionary<string, string>> eventsInfoList = new();
+            string query = "SELECT event_ID FROM Events";
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    var cmdEventID = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmdEventID.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            Debug.Write(reader.GetValue(i).ToString() + " ");
+                            eventsIDList.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                    reader.Close();
+
+                    foreach (var id in eventsIDList)
+                    {
+                        int event_ID = int.Parse(id);
+                        eventsInfoList.Add(ShowEventInformation(event_ID));
+                    }
+                    return eventsInfoList;
+                }
+                return eventsInfoList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return eventsInfoList;
             }
         }
 
         //Methode om je aan te melden voor een event
-        public void InsertIntoUserEventsList()
+        public void InsertIntoUserEventsList(int event_ID, int user_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
+                    string query = "INSERT INTO `usereventlist` (`event_ID`, `user_ID`) VALUES (@evid, @usid)";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
 
+                    
                 }
 
             }
@@ -786,12 +878,42 @@ namespace LinkApplication
         }
 
         //Methode om je af te melden voor een event
-        public void DeleteFromUserEventsList()
+        public void DeleteFromUserEventsList(int event_ID, int user_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
+                    string query = "DELETE FROM `usereventlist` WHERE event_ID = @evid AND user_ID = @usid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        //Methoden om currentAttendee waarde bij te werken
+        public void AddUserAsAttendee(int event_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                    string addQuery = "UPDATE Events SET currentAttendees = currentAttendees + 1  WHERE event_ID = @evid";
+                    var addCmd = new MySqlCommand(addQuery, dbCon.Connection);
+                    addCmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(addCmd.ExecuteNonQuery());
 
                 }
 
@@ -804,6 +926,95 @@ namespace LinkApplication
 
         }
 
+        public void DeleteUserAsAttendee(int event_ID)
+        {
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+
+                    string delQuery = "UPDATE Events SET currentAttendees = currentAttendees - 1  WHERE event_ID = @evid";
+                    var delCmd = new MySqlCommand(delQuery, dbCon.Connection);
+                    delCmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(delCmd.ExecuteNonQuery());
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+            }
+
+        }
+
+        //Methode om te zien of een user zich heeft aangemeld
+        public bool IsUserAttending(int event_ID, int user_ID)
+        {
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT COUNT(*) > 0 AS user_attending FROM `usereventlist` WHERE event_ID = @evid AND user_ID = @usid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    cmd.Parameters.AddWithValue("@usid", user_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                    object result = cmd.ExecuteScalar();
+                    return Convert.ToBoolean(result);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return false;
+            }
+
+        }
+
+
+        //Methode om te checken of event al vol zit met aanmeldingen
+        public bool IsMaxAttendanceReached(int event_ID)
+        {
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    string query = "SELECT currentAttendees >= maxAttendees AS reachedMaxAttendees FROM `events` WHERE event_ID = @evid";
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@evid", event_ID);
+                    Console.WriteLine(cmd.ExecuteNonQuery());
+
+                    bool reachedMaxAttendees = Convert.ToBoolean(cmd.ExecuteScalar());
+
+                    // Check the result
+                    if (reachedMaxAttendees)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                dbCon.Close();
+                return false;
+            }
+
+        }
+
+        //Account verwijderen
         public void DeleteUser(int userID)
         {
             List<string> tablesToDelete = new List<string>

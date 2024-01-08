@@ -1,4 +1,5 @@
 ﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace LinkApplicationGraphics.NVVM.View
         public EventCreateView()
         {
             InitializeComponent();
+        }
+
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true; // Prevent keyboard input
+        }
+
+        private void TimePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true; // Prevent keyboard input
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

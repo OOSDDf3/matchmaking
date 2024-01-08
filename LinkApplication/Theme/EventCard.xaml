@@ -1,0 +1,117 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign= "http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Style TargetType="ListViewItem" x:Key="EventCard">
+        <Style.Triggers>
+            
+        </Style.Triggers>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border Background="#FF729CA7" 
+                            Grid.Column="1" 
+                            Grid.Row="1"
+                            BorderThickness="5"
+                            BorderBrush="Black"
+                            CornerRadius="30"
+                            Padding="12,13,12,5"
+                            Margin="5,50,15,0"
+                            Height="170"
+                            >
+                        <Grid x:Name="Event1_Grid" Grid.Row="2" Grid.Column="1" Height="150" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition Width="0.75*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight" FontWeight="Heavy"/>
+                            <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding NameEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding InterestEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Locatie: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding LocationEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                            <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Aantal Deelnemers: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Left" VerticalAlignment = "Top" Content = "{Binding CurrentAttendeesEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Center" VerticalAlignment = "Top" Content = "  /  " FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="2" Grid.Column="3" HorizontalAlignment = "Right" VerticalAlignment = "Top" Content = "{Binding MaxAttendeesEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                            <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum/Tijd: " FontSize="20" Foreground="#272537" FontFamily="Bahnschrift SemiLight"/>
+                            <Label Grid.Row="1" Grid.Column="3" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "{Binding DateTimeEvent}" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
+
+                            <!--<RadioButton Content="+👤" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="" GroupName="keuzeLocatie"  RenderTransformOrigin="0.902,0.586" Grid.RowSpan="2">
+                                <RadioButton.Style>
+                                    <Style TargetType="{x:Type ToggleButton}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ToggleButton">
+                                                    <Border BorderThickness="2" BorderBrush="Black" Background="{x:Null}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Background" Value="White" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </RadioButton.Style>
+                            </RadioButton>-->
+
+
+                            <Button x:Name ="DeleteEventButton" Tag="{Binding Event_ID}" Content="🗑" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" FontSize="20" Foreground="#272537" BorderBrush="{x:Null}" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}" RenderTransformOrigin="-0.269,-1.18" >
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <!--<Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsDeleteButtonVisible}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>-->
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button x:Name = "aanmeldButton" Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Aanmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding JoinEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
+                                <Button.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </Button.Resources>
+                            </Button>
+                            <!--<Button x:Name = "afmeldButton" Tag="{Binding Event_ID}" Grid.Row="2" Grid.Column="4" Content = "Afmelden" HorizontalAlignment="Right" VerticalAlignment = "Top" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" materialDesign:ButtonAssist.CornerRadius="5" BorderBrush="{x:Null}" Command="{Binding LeaveEventCommand}" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}">
+                                <Button.Resources>
+                                    <ResourceDictionary>
+                                        <ResourceDictionary.MergedDictionaries>
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                                        </ResourceDictionary.MergedDictionaries>
+                                    </ResourceDictionary>
+                                </Button.Resources>
+                            </Button>-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

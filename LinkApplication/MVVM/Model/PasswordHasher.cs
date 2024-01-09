@@ -10,6 +10,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 {
     public class PasswordHasher
     {
+        //code voor hashen password
         public static string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -19,7 +20,7 @@ namespace LinkApplicationGraphics.NVVM.Model
 
                 for (int i = 0; i < hashedBytes.Length; i++)
                 {
-                    builder.Append(hashedBytes[i].ToString("x2")); // Convert bytes to hexadecimal string
+                    builder.Append(hashedBytes[i].ToString("x2")); // Zet letters om naar hexidicimale getallen
                 }
 
                 return builder.ToString();

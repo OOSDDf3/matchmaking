@@ -87,7 +87,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             {
                 //haalt matches op die zelfde interesses hebben
                 Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
-                
+
             }
 
             if (Account.userMatches.Count != 0)
@@ -107,10 +107,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
                 //zet de naam en leeftijd van de persoon
                 DateTime currentDate = DateTime.Today;
-                //foreach(var key in dataPerson.Keys)
-                //{
-                //    Debug.Write($"{key}, ");
-                //}
                 age = currentDate.Year - Int32.Parse(dataPerson["birthdate"]);
                 NameMatch = $"{dataPerson["name"]}, {age} jaar";
 
@@ -119,9 +115,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 InterestsMatch = Account.FormatInterests(InterestsMatchList, 5);
 
                 dataPerson.Clear();
-
-                //Debug.WriteLine(userIDMatch);
             }
+
             else
             {
                 userIDMatch = 0;
@@ -150,12 +145,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                     _connecter.InsertIntoUserChats(Account.user_ID, userIDMatch);
                     //_connecter.InsertIntoUserChats(_connecter.GetChatIDWithUserIDs(Account.user_ID, userIDMatch), userIDMatch, Account.user_ID);
                     MessageBox.Show("Hoera, je hebt een match!");                  
-
                 }
-
-
             }
-
         }
 
         private void disLikeMatch()

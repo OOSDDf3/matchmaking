@@ -74,7 +74,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private void Opslaan(Object obj)
         {
-            if (ProfileView.magDoor)
+            if (ProfileView.isAccept)
             {
                 Navigation.NavigateToNew<MatchingViewModel>();
             }

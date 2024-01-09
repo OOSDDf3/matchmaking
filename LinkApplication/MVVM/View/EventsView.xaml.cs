@@ -33,20 +33,5 @@ namespace LinkApplicationGraphics.NVVM.View
                 viewModel.OnUserControlLoaded();
             }
         }
-
-        private void AanmeldButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void AfmeldButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteEventButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 }

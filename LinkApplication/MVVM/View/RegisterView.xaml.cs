@@ -42,14 +42,6 @@ namespace LinkApplicationGraphics.NVVM.View
         public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
         public void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
 
-        private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void buttonCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {

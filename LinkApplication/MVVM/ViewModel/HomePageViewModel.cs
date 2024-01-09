@@ -17,12 +17,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         MainWindow mainWindow;
         public Dictionary<string, string> dataPerson = new Dictionary<string, string>();
 
-
         Database_Connecter _connecter;
-
-        
-
-        
 
         public INavigationService _navigation;
         public INavigationService Navigation

@@ -25,6 +25,7 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class PasswordChangeView : UserControl
     {
+        //code voor preview password
         public void ShowPassword_PreviewMouseDown(object sender, MouseButtonEventArgs e) => ShowPasswordFunction();
         public void ShowPassword_PreviewMouseUp(object sender, MouseButtonEventArgs e) => HidePasswordFunction();
         public void ShowPassword_MouseLeave(object sender, MouseEventArgs e) => HidePasswordFunction();
@@ -42,6 +43,7 @@ namespace LinkApplicationGraphics.NVVM.View
             InitializeComponent();
         }
 
+        //knop save
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             _connecter = new Database_Connecter();
@@ -51,10 +53,13 @@ namespace LinkApplicationGraphics.NVVM.View
             string clearTextPasswordNew = passwordboxNew.Password;
             string hashedPasswordNew = PasswordHasher.HashPassword(clearTextPasswordNew);
 
+            //checkt eerst of passwordbox leeg is
             if (!passwordboxCheck.Password.IsNullOrEmpty() && !passwordboxNew.Password.IsNullOrEmpty())
             {
+                //checkt erna of password klopt met requirements
                 if (IsPasswordValid(clearTextPasswordNew))
                 {
+                    //checkt of password klopt met de gegevens die staan in de databaSe
                     if (_connecter.CheckLogin(ProfileViewModel.EmailProfile, hashedPasswordCheck))
                     {
                         _connecter.UpdatePassword(Account.user_ID, hashedPasswordNew);
@@ -83,10 +88,10 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private bool IsPasswordValid(string password)
         {
-            // Voeg hier de wachtwoordvalidatielogica toe (bijv. minimale lengte)
             return password.Length >= 5;
         }
 
+        //code voor weergeven password met oogje
         public void ShowPasswordFunction()
         {
             PasswordUnmaskCheck.Visibility = Visibility.Visible;

@@ -54,24 +54,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public RelayCommand FilterAttendanceCommand { get; set; }
         public RelayCommand ResetFilterCommand { get; set; }
 
-        //Zichtbaarheid delete button aanpassen
-
-        /*        public bool IsDeleteEventButtonVisible
-                {
-                    get { return isDeleteEventButtonVisible; }
-                    set
-                    {
-                        if (isDeleteEventButtonVisible != value && Int32.Parse(Organiser) == Account.user_ID)
-                        {
-                            isDeleteEventButtonVisible = value;
-                            OnPropertyChanged(nameof(IsDeleteEventButtonVisible));
-                        }
-                    }
-                }*/
-
-
-
-
         public EventsViewModel(INavigationService navService)
         {
             _connecter = new Database_Connecter();

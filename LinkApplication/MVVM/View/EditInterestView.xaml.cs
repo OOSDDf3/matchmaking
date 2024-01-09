@@ -38,9 +38,7 @@ namespace LinkApplicationGraphics.NVVM.View
         public EditInterestView()
         {
             InitializeComponent();
-            List<string> interests = new() { "Basketballen", "Volleyballen", "Hondermeterstilliggen", "Fietsen", "Knikkeren", "Hardlopen", "Klootschieten", "Flierleppen",
-                "Hockeyen", "Voet", "Computeren", "Gamen", "Basketballen", "Volleyballen", "Honderdmeter", "Fietsen", "Knikkeren", "Lopen", "Klootschieten", "Flierleppen",
-                "Hockeyen", "Voetbal", "Computeren", "Gamen" }; // TODO: aanvullen database
+           
 
             _connecter = new Database_Connecter();
             List<string> categories = AddCategoriesToComboboxAndDictionary();

@@ -28,12 +28,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public RelayCommand NavigateToRegisterCommand { get; set; }
         public RelayCommand NavigateToHomePageCommand { get; set; }
         public RelayCommand NavigateToLoginPageCommand { get; set; }    
-
-
 
         public InterestViewModel(INavigationService navService)
         {
@@ -45,16 +42,10 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         private bool CanExecuteNavigateToHomePage(object obj)
         {
-            
-
-           
             return true;
         }   
         private bool CanExecuteNavigateToLoginPage(object obj)
-        {
-            
-
-           
+        {         
             return true;
         }
 

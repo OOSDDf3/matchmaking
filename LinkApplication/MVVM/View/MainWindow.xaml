@@ -47,7 +47,7 @@
         <Label Grid.Column="2" Grid.Row="1" Content="L I N K" Foreground="#FFF1F1F1" FontSize="100" HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="{x:Null}" SnapsToDevicePixels="True" FontFamily="Kimberley Bl"/>
 
 
-        <Button x:Name="ButtonInloggen" Grid.Column="2" Grid.Row="4" Content="START" FontSize="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF1F1F1" Click="Login_Button" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToLoginPageCommand}">
+        <Button x:Name="ButtonInloggen" Grid.Column="2" Grid.Row="4" Content="START" FontSize="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF1F1F1" Cursor="Hand" SnapsToDevicePixels="True" Height="40" Background="#FF5646A4" FontFamily="Bahnschrift SemiLight" FontWeight="Bold" Command="{Binding NavigateToLoginPageCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="7"/>

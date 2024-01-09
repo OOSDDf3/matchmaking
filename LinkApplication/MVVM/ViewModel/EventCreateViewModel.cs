@@ -84,11 +84,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             else
             {
                 MessageBox.Show("Een of meer velden zijn nog niet ingevuld!");
-            }
-
-
-            
-            
+            }          
         }
 
         private void emptyInputFields()

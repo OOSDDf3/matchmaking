@@ -29,7 +29,7 @@ namespace LinkApplicationGraphics.NVVM.View
         private List<(TextBlock, Border)> profileElements;
         Database_Connecter dbConnector = new Database_Connecter();
 
-        public static bool magDoor;
+        public static bool isAccept;
 
         public ProfileView()
         {
@@ -70,6 +70,8 @@ namespace LinkApplicationGraphics.NVVM.View
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
+            //checkt of alle boxes leeg zijn of niet, zo niet wordt gegevens tijdelijk opgeslagen om vervolgensdeze in de database te vervangen
+
             string NameTextBoxValue = NameTextbox.Text;
             if (string.IsNullOrEmpty(NameTextBoxValue)) { NameTextBoxValue = TextBlockProfileName.Text; }
 
@@ -89,9 +91,10 @@ namespace LinkApplicationGraphics.NVVM.View
             if (string.IsNullOrEmpty(LanguageTextBoxValue)) { LanguageTextBoxValue = TextBlockProfileLanguage.Text; }
 
             
-
+            //checkt of email en wachtwoord valid zijn volgens checks
             if (IsEmailValid(EmailTextBox.Text) && IsPasswordValid(PasswordTextBox.Text))
             {
+                //code voor zichtbaarheid textvakken bij klikken op wijzigen
                 foreach (var (textBlock, border) in profileElements)
                 {
                     textBlock.Visibility = Visibility.Visible;
@@ -99,10 +102,10 @@ namespace LinkApplicationGraphics.NVVM.View
                 }
                 buttonSave.Visibility = Visibility.Hidden;            
 
-                magDoor = true;
+                isAccept = true;
                 dbConnector.UpdateAccount(Account.user_ID, NameTextBoxValue, EmailTextBoxValue, AddressTextBoxValue, GenderTextBoxValue, LanguageTextBoxValue);
             }
-            else magDoor = false;
+            else isAccept = false;
 
 
         }

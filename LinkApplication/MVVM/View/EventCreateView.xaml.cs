@@ -39,11 +39,6 @@ namespace LinkApplicationGraphics.NVVM.View
             e.Handled = true; // Prevent keyboard input
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         
     }
 }

@@ -37,10 +37,8 @@ namespace LinkApplicationGraphics.NVVM.Model
 
         //usermatches
         public static Dictionary<int, int> userMatches = new Dictionary<int, int>();
-
-        //properties voor matchweergave
         
-
+        //constructor voor tijdelijke opslag accountgegevens
         public Account(string name, string age, string address, string gender, string Language, string email, string password , string hashedPassword, Byte[] profilePicture) 
         {
             NameProfile = name;
@@ -53,11 +51,13 @@ namespace LinkApplicationGraphics.NVVM.Model
             ProfilePicture = profilePicture;  
         }
 
+        //methode voor ophalen userid
         public static void GetUserID(object sender, LoginEventargs e)
         {
             user_ID = e.User_ID;
         }
 
+        //methode voor tonen user informatie op profielpagina
         public static void showUserInfo()
         {
             _connecter = new Database_Connecter();
@@ -88,6 +88,8 @@ namespace LinkApplicationGraphics.NVVM.Model
 
             ProfileViewModel.ProfilePictureImage = Account.ImageFromBuffer(ProfilePicture);
         }
+
+        //code voor omzetten byte array naar bitmapimage
         public static BitmapImage ImageFromBuffer(byte[] buffer)
         {
             BitmapImage image = new BitmapImage();
@@ -104,14 +106,13 @@ namespace LinkApplicationGraphics.NVVM.Model
             }
             catch (Exception ex)
             {
-                // Handle exception as needed
                 Console.WriteLine(ex.ToString());
             }
 
             return image;
         }
 
-        
+        //methode om uit te loggen, alle gegevens worden dan teruggezet
         public static void LogOut()
         {
             Account.user_ID = 0;
@@ -124,6 +125,7 @@ namespace LinkApplicationGraphics.NVVM.Model
             Account.InterestsProfileString = string.Empty;
         }
 
+        //dynamische code voor tonen interreses
         public static string FormatInterests(List<string> interests, int WordsPerColumn)
         {
             return string.Join(Environment.NewLine, interests

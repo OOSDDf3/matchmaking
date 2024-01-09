@@ -98,15 +98,21 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         public void Login(object parameter)
         {
             _connecter = new Database_Connecter();
+
+            //zet de passwordbox hier om hem te hashen
             PasswordBox passwordBox = parameter as PasswordBox;
             string clearTextPassword = passwordBox.Password;
             string hashedPassword = PasswordHasher.HashPassword(clearTextPassword);
 
+
+            //checkt of email of password leeg is
             if (Email.IsNullOrEmpty() || clearTextPassword.IsNullOrEmpty())
             {
                 ErrorMessage = "Email adres of wachtwoord is niet ingevuld";
 
             }
+
+            //checkt of gegevens kloppen
             else if (_connecter.CheckLogin(Email, hashedPassword, out user_ID))
             {
                 ev_OnLoginSuccesfull.Invoke(this, new LoginEventargs(user_ID));

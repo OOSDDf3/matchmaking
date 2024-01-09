@@ -28,26 +28,6 @@ namespace LinkApplication
             InitializeComponent();
 
         }
-        private void ReturnToMainPageButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ForgotPassword_Button(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Register_Button(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Login_Button(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
 
         private void Window_Closed(object sender, EventArgs e)
         {

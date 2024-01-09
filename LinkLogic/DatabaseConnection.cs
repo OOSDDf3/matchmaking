@@ -9,9 +9,9 @@ namespace LinkApplication
 {
     public class DatabaseConnection
     {
-        private DatabaseConnection()
-        {
-        }
+        //private DatabaseConnection()
+        //{
+        //}
 
         public string Server { get; set; }
         public string Database { get; set; }

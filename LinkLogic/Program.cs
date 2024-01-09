@@ -1,4 +1,6 @@
 ﻿
 using LinkApplication;
 
-Database_Connecter database_Connecter = new Database_Connecter();
+static void Main()
+{ 
+}

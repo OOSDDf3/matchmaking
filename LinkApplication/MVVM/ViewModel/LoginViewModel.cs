@@ -20,7 +20,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
     public class LoginViewModel : Core.ViewModel
     {
         public Database_Connecter _connecter;
-        Account_Info _account;
+
         public event EventHandler<string> EmailChanged;
 
         public delegate void dg_Loginsuccesfull(object sender, LoginEventargs e);

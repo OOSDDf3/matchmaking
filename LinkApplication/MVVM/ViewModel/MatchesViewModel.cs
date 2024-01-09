@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
@@ -36,7 +37,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public static string Username { get; set; }
         public string Status { get; set; }
-        public static string UsernameColor { get; set; }
+        public string UsernameColor { get; set; }
 
         private MatchModel _selectedMatch;
         public MatchModel SelectedMatch
@@ -74,10 +75,17 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             SendCommand = new RelayCommand(o =>
             {
-                _Connecter.InsertIntoMessages(SelectedMatch.ChatID, Account.user_ID, Message);
-                SelectedMatch.Messages.Clear();
-                UpdateMessages();
-                Message = "";
+                if(SelectedMatch != null)
+                {
+                    _Connecter.InsertIntoMessages(SelectedMatch.ChatID, Account.user_ID, Message);
+                    SelectedMatch.Messages.Clear();
+                    UpdateMessages();
+                    Message = "";
+                }
+                else
+                {
+                    MessageBox.Show("Selecteer eerst een match!");
+                }
             }, canExecute: o => true);
 
             GetMatches();
@@ -86,6 +94,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
         public void OnUserControlLoaded()
         {
+            Username = string.Empty;
+
             Matches.Clear();
             if(SelectedMatch != null)
             {
@@ -94,8 +104,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             GetMatches();
             UpdateMessages();
-
-            Username = _Connecter.ShowUserInformation(Account.user_ID)["name"];
         }
 
         private void GetMatches()
@@ -145,7 +153,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 
             Debug.WriteLine("LOGOUT SUCCESFUL");
 
-            if(Matches != null)
+            if (Matches != null)
             {
                 Matches.Clear();
             }

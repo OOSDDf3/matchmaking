@@ -52,7 +52,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Eventnaam" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding EventName , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
+            <TextBox x:Name="EventTextBox" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding EventName , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
                  <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -61,7 +61,7 @@
             </TextBox>
 
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Interesse" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White"  ItemsSource="{Binding EventCreateViewInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding InterestEvent, Mode=TwoWay}"/>
+            <ComboBox x:Name="TextBoxInterests" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White"  ItemsSource="{Binding EventCreateViewInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding InterestEvent, Mode=TwoWay}"/>
         </Grid>
         
 
@@ -73,7 +73,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Max. aantal deelnemers" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding MaxAttendees , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
+            <TextBox x:Name="TextBoxAttendees" Grid.Row="1" Grid.Column="0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding MaxAttendees , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
                 <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -82,7 +82,7 @@
             </TextBox>
 
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Locatie" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <TextBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding Location , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
+            <TextBox x:Name="TextBoxLocation" Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding Location , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" >
                 <TextBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -99,10 +99,10 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Datum" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <DatePicker Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Foreground="White" FontSize="20" BorderThickness="0,0,0,3" BorderBrush="White" Background="{x:Null}" OpacityMask="#FFE8CFCF" Text="{Binding DateEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding DateEvent, Mode=Default}" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
+            <DatePicker x:Name="TextBoxDate" Grid.Row="1" Grid.Column="0" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Foreground="White" FontSize="20" BorderThickness="0,0,0,3" BorderBrush="White" Background="{x:Null}" OpacityMask="#FFE8CFCF" Text="{Binding DateEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedDate="{Binding DateEvent, Mode=Default}" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
             <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Top" Content = "Tijd" FontSize="20" Foreground="White" FontFamily="Bahnschrift SemiLight"/>
-            <materialDesign:TimePicker Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding TimeEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" PreviewKeyDown="TimePicker_PreviewKeyDown"/>
+            <materialDesign:TimePicker x:Name="TextBoxTime" Grid.Row="1" Grid.Column="2" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="{Binding TimeEvent , Mode=Default, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0,0,0,1" BorderBrush="White" PreviewKeyDown="TimePicker_PreviewKeyDown"/>
         </Grid>
 
         <Grid x:Name="Button_Grid" Grid.Row="7" Grid.Column="1">
@@ -123,7 +123,7 @@
                 </Button.BorderBrush>
             </Button>
 <!--Button Om event aan te maken, dit moet de data doorsturing aan roepen?-->
-            <Button Grid.Row="1" Grid.Column="2" Content = "Aanmaken Event" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding CreateEventCommand}" materialDesign:ButtonAssist.CornerRadius="5">
+            <Button Grid.Row="1" Grid.Column="2" Content = "Aanmaken Event" HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" Height="35" Width="200" Background="#FF463692" Foreground="White" FontSize="20" FontFamily="Bahnschrift SemiLight" Command="{Binding CreateEventCommand}" materialDesign:ButtonAssist.CornerRadius="5" >
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

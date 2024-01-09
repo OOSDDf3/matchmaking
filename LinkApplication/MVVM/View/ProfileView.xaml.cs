@@ -88,6 +88,8 @@ namespace LinkApplicationGraphics.NVVM.View
             string LanguageTextBoxValue = LanguageTextBox.Text;
             if (string.IsNullOrEmpty(LanguageTextBoxValue)) { LanguageTextBoxValue = TextBlockProfileLanguage.Text; }
 
+            
+
             if (IsEmailValid(EmailTextBox.Text) && IsPasswordValid(PasswordTextBox.Text))
             {
                 foreach (var (textBlock, border) in profileElements)

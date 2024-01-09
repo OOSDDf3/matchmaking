@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.Windows;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -60,13 +62,32 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
-            Interest_ID = _connecter.SelectEventInterestID(InterestEvent);
 
-            _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location , DateEvent, TimeOnly.Parse(TimeEvent) , Interest_ID , Account.user_ID);
+            //checks of velden zijn ingevuld
+            bool hasErrorEmpty = false;
+            hasErrorEmpty |= String.IsNullOrEmpty(EventName);
+            hasErrorEmpty |= String.IsNullOrEmpty(MaxAttendees.ToString());
+            hasErrorEmpty |= String.IsNullOrEmpty(Location);
+            hasErrorEmpty |= TimeEvent == null;
+            hasErrorEmpty |= InterestEvent == null;          
 
-            Event.AddEventsToList(_connecter.ShowAllEventInformation());
-            emptyInputFields();
-            Navigation.NavigateToNew<EventsViewModel>();
+            if (!hasErrorEmpty)
+            {
+                Interest_ID = _connecter.SelectEventInterestID(InterestEvent);
+
+                _connecter.InsertIntoEventsList(EventName, CurrentAttendeesEvent, MaxAttendees, Location, DateEvent, TimeOnly.Parse(TimeEvent), Interest_ID, Account.user_ID);
+
+                Event.AddEventsToList(_connecter.ShowAllEventInformation());
+                emptyInputFields();
+                Navigation.NavigateToNew<EventsViewModel>();
+            }
+            else
+            {
+                MessageBox.Show("Een of meer velden zijn nog niet ingevuld!");
+            }
+
+
+            
             
         }
 

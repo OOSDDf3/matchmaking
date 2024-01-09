@@ -28,6 +28,7 @@ namespace LinkApplication
             ConnectToLocalDatabase();
         }
 
+        // Methode voor het connecten met de lokale database
         protected void ConnectToLocalDatabase()
         {
             dbCon = DatabaseConnection.Instance();
@@ -37,6 +38,7 @@ namespace LinkApplication
             dbCon.Password = "";
         }
 
+        // Methode voor het connecten met de skylab database
         protected void ConnectToServerDatabase()
         {
             dbCon = DatabaseConnection.Instance();
@@ -46,7 +48,7 @@ namespace LinkApplication
             dbCon.Password = "@Matchingf3";
         }
 
-        //Methode voor nieuwe account
+        // Methode voor het toevoegen van een nieuw account
         public void InsertAccount(string name, string email, string password, int birthdate, string address, string gender, string language)
         {
             try
@@ -55,6 +57,8 @@ namespace LinkApplication
                 {
                     string query = "INSERT INTO `account` (`user_ID`, `name`, `email`, `password`, `birthdate`, `address`, `gender`, `language`) VALUES (NULL, @na, @em, @pa, @ag, @ad, @ge, @la);";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                    // Toevoegen van parameters aan de query
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
                     cmd.Parameters.Add("@pa", MySqlDbType.VarChar, 100).Value = password;
@@ -81,6 +85,8 @@ namespace LinkApplication
                 {
                     string query = "UPDATE `account` SET `name` = @na, `email` = @em, `address` = @ad, `gender` = @ge, `language` = @la WHERE `user_ID` = @userID;";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
+
+                    // Toevoegen van parameters aan de query
                     cmd.Parameters.Add("@userID", MySqlDbType.Int32, 4).Value = userID;
                     cmd.Parameters.Add("@na", MySqlDbType.VarChar, 100).Value = name;
                     cmd.Parameters.Add("@em", MySqlDbType.VarChar, 100).Value = email;
@@ -96,6 +102,7 @@ namespace LinkApplication
             }
         }
 
+        //Methode voor bijwerken van een wachtwoord wat hoort bij een account
         public void UpdatePassword(int userID, string password)
         {
             try
@@ -116,6 +123,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor checken van inloggegevens, geeft user_ID terug
         public bool CheckLogin(string email, string password, out int user_ID)
         {
             user_ID = Int32.MinValue;
@@ -123,6 +131,7 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
+                    // Query om user_ID op te halen met email en wachtwoord
                     string queryForID = "SELECT user_ID FROM Account WHERE email = @email AND password = @password";
                     var cmdID = new MySqlCommand(queryForID, dbCon.Connection);
                     cmdID.Parameters.AddWithValue("@email", email);
@@ -134,6 +143,7 @@ namespace LinkApplication
                     }
                     user_ID_reader.Close();
 
+                    // Query om te checken of er maar 1 is van deze combinatie email en wachtwoord
                     string queryForInfo = "SELECT Count(*) FROM Account WHERE email = @email AND password = @password";
                     var cmd = new MySqlCommand(queryForInfo, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@email", email);
@@ -159,6 +169,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor checken van inloggegevens (wordt alleen gebruikt voor wijzigen wachtwoord)
         public bool CheckLogin(string email, string password)
         {
             try
@@ -195,7 +206,7 @@ namespace LinkApplication
             }
         }
 
-
+        // Methode om gebruikers informatie op te halen, geeft een dictionary terug
         public Dictionary<string, string> ShowUserInformation(int user_ID)
         {
             Dictionary<string, string> keyValuePairs = new();
@@ -211,6 +222,7 @@ namespace LinkApplication
 
                     while (reader.Read())
                     {
+                        // Loopt door alle velden in de reader en voegt ze één voor één toe aan de dictionary als keyvaluepair
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
                             Console.Write(reader.GetValue(i).ToString() + " ");
@@ -230,6 +242,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het ophalen van de interesses met een user_ID
         public List<string> ShowUserInterests(int user_ID)
         {
             List<string> Interest_ID = new();
@@ -246,6 +259,7 @@ namespace LinkApplication
 
                     while (reader.Read())
                     {
+                        // Loopt door alle interest_IDs die de goede user_ID hebben en voegt ze toe aan een lijst
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
                             Debug.Write(reader.GetValue(i).ToString() + " ");
@@ -264,6 +278,7 @@ namespace LinkApplication
 
                         using var readerInterestName = cmdInterestName.ExecuteReader();
 
+                        // Loopt door de lijst van interest_IDs en zoekt de naam op om die toe te voegen aan de lijst die uiteindelijk teruggeven wordt
                         while (readerInterestName.Read())
                         {
                             Interest_name.Add(readerInterestName["name"].ToString());
@@ -296,7 +311,6 @@ namespace LinkApplication
             {
                 for (int i = 0; i < reader.FieldCount; i++)
                 {
-
                     Interest_ID.Add(reader.GetValue(i).ToString());
                 }
             }
@@ -353,16 +367,9 @@ namespace LinkApplication
                 readerID.Close();
             }
 
-            //testen of hij de goede gegevens ophaalt
-            foreach (var user in users)
-            {
-                Debug.WriteLine("");
-                Debug.WriteLine($"User ID: {user.Key}, Zelfde interesses: {user.Value}");
-            }
-
             return users;
-
         }
+
         //code voor het halen van de foto uit de database
         public byte[] ShowUserPicture(int user_ID)
         {
@@ -384,13 +391,13 @@ namespace LinkApplication
             }
             catch (Exception ex)
             {
-                // Handle exception as needed
                 Console.WriteLine(ex.ToString());
             }
 
             return pictureByte;
         }
 
+        // Methode voor het ophalen van een user_ID met email en wachtwoord
         public int getUserID(string email, string password)
         {
             int user_ID = Int32.MinValue;
@@ -419,6 +426,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het ophalen van de interesse categoriën 
         public List<string> GetInterestCategories()
         {
             List<string> categories = new();
@@ -433,7 +441,7 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.WriteLine(reader.GetValue(i).ToString());
+                            //Console.WriteLine(reader.GetValue(i).ToString());
                             categories.Add(reader.GetValue(i).ToString());
                         }
                     }
@@ -448,6 +456,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het ophalen van de interesses die horen bij een categorie 
         public List<string> GetInterestsWithCategory(string category)
         {
             List<string> interests = new();
@@ -463,7 +472,7 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Debug.WriteLine(reader.GetValue(i).ToString());
+                            //Debug.WriteLine(reader.GetValue(i).ToString());
                             interests.Add(reader.GetValue(i).ToString());
                         }
                     }
@@ -494,8 +503,8 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i += 2)
                         {
-                            Debug.WriteLine($"category: {reader.GetValue(i)}");
-                            Debug.WriteLine($"interest: {reader.GetValue(i + 1)}");
+                            //Debug.WriteLine($"category: {reader.GetValue(i)}");
+                            //Debug.WriteLine($"interest: {reader.GetValue(i + 1)}");
                             List<string> categoryInterestList = new();
                             categoryInterestList.Add(reader.GetValue(i).ToString());
                             categoryInterestList.Add(reader.GetValue(i + 1).ToString());
@@ -554,8 +563,8 @@ namespace LinkApplication
                         }
 
                         reader.Close();
-                        Debug.WriteLine(interest_ID);
-                        Debug.WriteLine($"{userID}, {interest_ID}");
+                        //Debug.WriteLine(interest_ID);
+                        //Debug.WriteLine($"{userID}, {interest_ID}");
 
                         string queryInsertInterest = "INSERT INTO `userinterestlist` (`user_ID`, `interest_ID`) VALUES (@us, @inID)";
                         var cmdInsertInterest = new MySqlCommand(queryInsertInterest, dbCon.Connection);
@@ -572,6 +581,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het toevoegen van een profielfoto gekoppeld aan een user_ID
         public void InsertIntoProfilePicture(int user_ID, Byte[] picture)
         {
             try
@@ -592,6 +602,8 @@ namespace LinkApplication
             }
         }
 
+
+        // Methode voor het toevoegen van een like/dislike gekoppeld aan een user_ID en user_ID_Liked van degene die geliket of gedisliket
         public void InsertIntoLikesDislikes(int user_ID, int user_ID_Liked, string action)
         {
             try
@@ -614,6 +626,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het checken van een match met behulp van twee user_IDs, geeft true terug als het een like is
         public bool CheckMatch(int user_ID, int user_ID_Liked)
         {
             bool checkMatch = false;
@@ -623,8 +636,8 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
-                    string queryCheckMatch = $"SELECT action FROM userLikesDislikes WHERE user_ID = {user_ID_Liked} AND user_ID_Liked = {user_ID}" ;
-                    var cmdCheckMatch = new MySqlCommand(queryCheckMatch, dbCon.Connection);                
+                    string queryCheckMatch = $"SELECT action FROM userLikesDislikes WHERE user_ID = {user_ID_Liked} AND user_ID_Liked = {user_ID}";
+                    var cmdCheckMatch = new MySqlCommand(queryCheckMatch, dbCon.Connection);
                     var reader = cmdCheckMatch.ExecuteReader();
                     while (reader.Read())
                     {
@@ -646,6 +659,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het toevoegen van een match
         public void InsertMatch(int user_ID, int user_ID_Matched)
         {
             try
@@ -682,7 +696,7 @@ namespace LinkApplication
                         interest_ID = Int32.Parse(reader.GetValue(0).ToString());
                     }
                     reader.Close();
-                    Debug.WriteLine(interest_ID);
+                    //Debug.WriteLine(interest_ID);
                 }
                 return interest_ID;
 
@@ -712,7 +726,7 @@ namespace LinkApplication
                         interestName = reader.GetString(0);
                     }
                     reader.Close();
-                    Debug.WriteLine(interestName);
+                    //Debug.WriteLine(interestName);
                 }
                 return interestName;
 
@@ -744,7 +758,7 @@ namespace LinkApplication
                     cmd.Parameters.Add("@date", MySqlDbType.DateTime).Value = combinedDateTime;
                     cmd.Parameters.Add("@iid", MySqlDbType.Int32, 4).Value = interest_ID;
                     cmd.Parameters.Add("@uid", MySqlDbType.Int32, 4).Value = user_ID;
-                    Console.WriteLine(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
                 }
 
             }
@@ -766,7 +780,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@eid", event_ID);
                     cmd.Parameters.AddWithValue("@uid", user_ID);
-                    Console.WriteLine(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
                 }
 
             }
@@ -778,7 +792,7 @@ namespace LinkApplication
 
         }
 
-        //Methode voor weergave event informatie
+        //Methode voor weergave event informatie, geeft een dictionary terug
         public Dictionary<string, string> ShowEventInformation(int event_ID)
         {
             Dictionary<string, string> keyValuePairsEvent = new();
@@ -796,10 +810,9 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Console.Write(reader.GetValue(i).ToString() + " ");
+                            //Console.Write(reader.GetValue(i).ToString() + " ");
                             keyValuePairsEvent.Add(keys[i], reader.GetValue(i).ToString());
                         }
-                        Console.WriteLine();
                     }
                     reader.Close();
                     return keyValuePairsEvent;
@@ -830,7 +843,7 @@ namespace LinkApplication
                     {
                         for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            Debug.Write(reader.GetValue(i).ToString() + " ");
+                            //Debug.Write(reader.GetValue(i).ToString() + " ");
                             eventsIDList.Add(reader.GetValue(i).ToString());
                         }
                     }
@@ -863,9 +876,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@evid", event_ID);
                     cmd.Parameters.AddWithValue("@usid", user_ID);
-                    Console.WriteLine(cmd.ExecuteNonQuery());
-
-                    
+                    cmd.ExecuteNonQuery();
                 }
 
             }
@@ -888,11 +899,8 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@evid", event_ID);
                     cmd.Parameters.AddWithValue("@usid", user_ID);
-                    Console.WriteLine(cmd.ExecuteNonQuery());
-
-                    
+                    cmd.ExecuteNonQuery();
                 }
-
             }
             catch (Exception ex)
             {
@@ -913,10 +921,8 @@ namespace LinkApplication
                     string addQuery = "UPDATE Events SET currentAttendees = currentAttendees + 1  WHERE event_ID = @evid";
                     var addCmd = new MySqlCommand(addQuery, dbCon.Connection);
                     addCmd.Parameters.AddWithValue("@evid", event_ID);
-                    Console.WriteLine(addCmd.ExecuteNonQuery());
-
+                    addCmd.ExecuteNonQuery();
                 }
-
             }
             catch (Exception ex)
             {
@@ -926,6 +932,7 @@ namespace LinkApplication
 
         }
 
+        // Methode voor het aanpassen van aantal aanwezigen bij een event
         public void DeleteUserAsAttendee(int event_ID)
         {
             try
@@ -933,13 +940,11 @@ namespace LinkApplication
                 if (dbCon.IsConnect())
                 {
 
-                    string delQuery = "UPDATE Events SET currentAttendees = currentAttendees - 1  WHERE event_ID = @evid";
+                    string delQuery = "UPDATE Events SET currentAttendees = currentAttendees - 1 WHERE event_ID = @evid";
                     var delCmd = new MySqlCommand(delQuery, dbCon.Connection);
                     delCmd.Parameters.AddWithValue("@evid", event_ID);
-                    Console.WriteLine(delCmd.ExecuteNonQuery());
-
+                    delCmd.ExecuteNonQuery();
                 }
-
             }
             catch (Exception ex)
             {
@@ -952,7 +957,6 @@ namespace LinkApplication
         //Methode om te zien of een user zich heeft aangemeld
         public bool IsUserAttending(int event_ID, int user_ID)
         {
-
             try
             {
                 if (dbCon.IsConnect())
@@ -961,7 +965,7 @@ namespace LinkApplication
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@evid", event_ID);
                     cmd.Parameters.AddWithValue("@usid", user_ID);
-                    Console.WriteLine(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
 
                     object result = cmd.ExecuteScalar();
                     return Convert.ToBoolean(result);
@@ -981,7 +985,6 @@ namespace LinkApplication
         //Methode om te checken of event al vol zit met aanmeldingen
         public bool IsMaxAttendanceReached(int event_ID)
         {
-
             try
             {
                 if (dbCon.IsConnect())
@@ -989,7 +992,7 @@ namespace LinkApplication
                     string query = "SELECT currentAttendees >= maxAttendees AS reachedMaxAttendees FROM `events` WHERE event_ID = @evid";
                     var cmd = new MySqlCommand(query, dbCon.Connection);
                     cmd.Parameters.AddWithValue("@evid", event_ID);
-                    Console.WriteLine(cmd.ExecuteNonQuery());
+                    cmd.ExecuteNonQuery();
 
                     bool reachedMaxAttendees = Convert.ToBoolean(cmd.ExecuteScalar());
 
@@ -1011,20 +1014,24 @@ namespace LinkApplication
                 dbCon.Close();
                 return false;
             }
-
         }
 
-        //Account verwijderen
+        //Account verwijderen en de andere records uit alle tabellen 
         public void DeleteUser(int userID)
         {
             List<string> tablesToDelete = new List<string>
-                {                  
+                {
                     "account",
                     "events",
                     "usereventlist",
                     "profilepicture",
                     "userinterestlist",
-                    "userlikesdislikes"
+                    "userlikesdislikes",
+                    "usermatches",
+                    "userlikesdislikes",
+                    "userevents",
+                    "userchats",
+                    "chatmessages",
                 };
             try
             {
@@ -1032,16 +1039,15 @@ namespace LinkApplication
                 {
                     foreach (string table in tablesToDelete)
                     {
-
                         try
                         {
                             string queryDeleteAll = $"DELETE FROM `{table}` WHERE user_ID = {userID}";
                             var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
                             cmdDeleteAll.ExecuteNonQuery();
-                        }
-                        catch
+                        } 
+                        catch (Exception ex)
                         {
-                            Debug.WriteLine($"{table} is niet gelukt a neef");
+                            Debug.WriteLine(ex.ToString());
                         }
                     }
 
@@ -1049,6 +1055,10 @@ namespace LinkApplication
                     var cmdDeleteLikes = new MySqlCommand(queryDeleteLikes, dbCon.Connection);
                     cmdDeleteLikes.ExecuteNonQuery();
 
+                    string queryDeleteMatches = $"DELETE FROM `usermatches` WHERE user_ID_Matched = {userID}";
+                    var cmdDeleteMatches = new MySqlCommand(queryDeleteMatches, dbCon.Connection);
+                    cmdDeleteMatches.ExecuteNonQuery();
+
                 }
             }
             catch (Exception ex)
@@ -1058,21 +1068,16 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het resetten van likes/dislikes tijdens het testen
         public void ResetLikes(int user_ID)
         {
             try
             {
                 if (dbCon.IsConnect())
                 {
-                    
                     string queryDeleteAll = $"DELETE FROM `userlikesdislikes` WHERE user_ID = {user_ID}";
                     var cmdDeleteAll = new MySqlCommand(queryDeleteAll, dbCon.Connection);
-                    cmdDeleteAll.ExecuteNonQuery();                   
-
-                }
-                else
-                {
-                    Debug.WriteLine("Werkt niet kut");
+                    cmdDeleteAll.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -1082,6 +1087,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het toevoegen van een chat gekoppeld aan twee user_IDs
         public void InsertIntoUserChats(int userID, int userIDMatched)
         {
             try
@@ -1102,6 +1108,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het toevoegen van een chat gekoppeld aan twee user_IDs met een chat_ID meegegeven (dit kon uiteindelijk niet)
         public void InsertIntoUserChats(int chatID, int userID, int userIDMatched)
         {
             try
@@ -1123,6 +1130,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het krijgen van een chat_ID met behulp van de twee user_IDs
         public int GetChatIDWithUserIDs(int userID1, int userID2)
         {
             int chatID = 0;
@@ -1130,10 +1138,11 @@ namespace LinkApplication
             {
                 if (dbCon.IsConnect())
                 {
+                    // Query om chat_Id op te halen met meegegeven IDs
                     string querySelectChatID = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
                     var cmdSelectChatID = new MySqlCommand(querySelectChatID, dbCon.Connection);
-                    cmdSelectChatID.Parameters.AddWithValue("@us", userID1);
-                    cmdSelectChatID.Parameters.AddWithValue("@usm", userID2);
+                    cmdSelectChatID.Parameters.AddWithValue("@us", userID1); // Let op hier is 1 user_ID
+                    cmdSelectChatID.Parameters.AddWithValue("@usm", userID2); // en 2 user_ID_Matched
                     var reader = cmdSelectChatID.ExecuteReader();
                     while (reader.Read())
                     {
@@ -1144,8 +1153,8 @@ namespace LinkApplication
                     {
                         string querySelectChatID2 = "SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm";
                         var cmdSelectChatID2 = new MySqlCommand(querySelectChatID2, dbCon.Connection);
-                        cmdSelectChatID2.Parameters.AddWithValue("@us", userID2);
-                        cmdSelectChatID2.Parameters.AddWithValue("@usm", userID1);
+                        cmdSelectChatID2.Parameters.AddWithValue("@us", userID2); // Hier is het andersom, 2 is user_ID
+                        cmdSelectChatID2.Parameters.AddWithValue("@usm", userID1); // en 1 is user_ID_Matched
                         var reader2 = cmdSelectChatID2.ExecuteReader();
                         while (reader2.Read())
                         {
@@ -1163,6 +1172,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het toevoegen van berichten
         public void InsertIntoMessages(int chatID, int userID, string message)
         {
             try
@@ -1184,6 +1194,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het ophalen van de matches en geeft een dictionary terug
         public List<Dictionary<string, string>> GetMatchesWithUserID(int userID)
         {
             List<Dictionary<string, string>> matches = new();
@@ -1203,19 +1214,11 @@ namespace LinkApplication
                         Dictionary<string, string> matchDict = new();
                         for (int i = 0; i < reader.FieldCount; i += valueAmount)
                         {
-                            //Debug.Write(i);
                             for (int j = 0; j < valueAmount; j++)
-                            {
-                                //Debug.Write(j);
-                                //Debug.WriteLine(reader.GetValue(i + j).ToString());                                                              
+                            {                                                            
                                 matchDict.Add(keys[j], reader.GetValue(i + j).ToString());
                             }
                             matches.Add(matchDict);
-                            //foreach(var match in matchDict)
-                            //{
-                            //    Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
-                            //}
-                            //Debug.Write("\n");
                         }
                     }
                     reader.Close();
@@ -1232,19 +1235,11 @@ namespace LinkApplication
                         Dictionary<string, string> matchDict = new();
                         for (int i = 0; i < reader2.FieldCount; i += valueAmount)
                         {
-                            //Debug.Write(i);
                             for (int j = 0; j < valueAmount; j++)
-                            {
-                                //Debug.Write(j);
-                                //Debug.WriteLine(reader.GetValue(i + j).ToString());                                                              
+                            {                                                             
                                 matchDict.Add(keys[j], reader2.GetValue(i + j).ToString());
                             }
                             matches.Add(matchDict);
-                            //foreach(var match in matchDict)
-                            //{
-                            //    Debug.Write($"Key: {match.Key}, Value: {match.Value}; ");
-                            //}
-                            //Debug.Write("\n");
                         }
                     }
                     reader2.Close();
@@ -1259,6 +1254,7 @@ namespace LinkApplication
             }
         }
 
+        // Methode voor het ophalen van de berichten die horen bij de chat 
         public List<Dictionary<string, string>> GetMessagesWithUserIDs(int user_ID, int user_ID_Matched)
         {
             List<Dictionary<string, string>> messages = new();
@@ -1290,48 +1286,9 @@ namespace LinkApplication
                                 messageDict.Add(keys[j], reader.GetValue(i + j).ToString());
                             }
                             messages.Add(messageDict);
-                            //foreach (var message in messageDict)
-                            //{
-                            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
-                            //}
-                            //Debug.Write("\n");
                         }
                     }
                     reader.Close();
-
-
-                //    string querySelectMatchData2 = "" +
-                //        "SELECT A.user_ID, A.name, PP.picture, M.message, M.time " +
-                //        "FROM userchats AS UC " +
-                //        "JOIN chatmessages AS M ON UC.chat_ID " +
-                //        "JOIN account AS A ON M.user_ID = A.user_ID " +
-                //        "JOIN profilepicture AS PP ON A.user_ID = PP.user_ID " +
-                //        "WHERE UC.chat_ID = (SELECT chat_ID FROM userchats WHERE user_ID = @us AND user_ID_Matched = @usm)" +
-                //        "ORDER BY M.message_ID;";
-                //    var cmdSelectMatchData2 = new MySqlCommand(querySelectMatchData2, dbCon.Connection);
-                //    cmdSelectMatchData2.Parameters.AddWithValue("@us", user_ID_Matched);
-                //    cmdSelectMatchData2.Parameters.AddWithValue("@usm", user_ID);
-                //    var reader2 = cmdSelectMatchData2.ExecuteReader();
-                //    string[] keys2 = new string[] { "user_ID", "name", "profilePicture", "message", "time" };
-                //    int valueAmount2 = keys2.Length;
-                //    while (reader2.Read())
-                //    {
-                //        Dictionary<string, string> messageDict2 = new();
-                //        for (int i = 0; i < reader2.FieldCount; i += valueAmount2)
-                //        {
-                //            for (int j = 0; j < valueAmount2; j++)
-                //            {
-                //                messageDict2.Add(keys2[j], reader2.GetValue(i + j).ToString());
-                //            }
-                //            messages.Add(messageDict2);
-                //            //foreach (var message in messageDict)
-                //            //{
-                //            //    Debug.Write($"Key: {message.Key}, Value: {message.Value}; ");
-                //            //}
-                //            //Debug.Write("\n");
-                //        }
-                //    }
-                //    reader2.Close();
                 }
                 return messages;
             }

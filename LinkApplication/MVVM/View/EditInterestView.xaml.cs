@@ -27,9 +27,6 @@ namespace LinkApplicationGraphics.NVVM.View
     /// </summary>
     public partial class EditInterestView : UserControl
     {
-
-        //List<CheckBox> checkBoxes = new List<CheckBox>();
-        //private Account account;
         private Database_Connecter _connecter;
         private List<string> interestsPerson = new List<string>();
         private List<string> selectedInterests = new List<string>();
@@ -131,7 +128,6 @@ namespace LinkApplicationGraphics.NVVM.View
         // Method that retrieves checkboxes from dictionary and adds them to the grid
         public void AddCheckBoxesToInterestsPage(string category)
         {
-
             List<CheckBox> interests = Interests[category];
             int counter = 0;
             for (int i = 0; i <= interests.Count / 4; i++) // Get rid of magic numbers

@@ -505,9 +505,11 @@ namespace LinkApplication
                         {
                             //Debug.WriteLine($"category: {reader.GetValue(i)}");
                             //Debug.WriteLine($"interest: {reader.GetValue(i + 1)}");
-                            List<string> categoryInterestList = new();
-                            categoryInterestList.Add(reader.GetValue(i).ToString());
-                            categoryInterestList.Add(reader.GetValue(i + 1).ToString());
+                            List<string> categoryInterestList = new()
+                            {
+                                reader.GetValue(i).ToString(),
+                                reader.GetValue(i + 1).ToString()
+                            };
                             interests.Add(categoryInterestList);
                         }
                     }

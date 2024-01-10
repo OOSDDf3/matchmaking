@@ -14,7 +14,6 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
 {
     public class EditInterestViewModel : Core.ViewModel
     {
-        MainWindow mainWindow;
         Database_Connecter _connecter;
 
         public INavigationService _navigation;

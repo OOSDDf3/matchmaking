@@ -142,7 +142,9 @@
                 <TextBlock Text="Filter by Interests" Foreground="White" FontSize="16" Margin="0,0,0,10"/>
 
                 <!-- Assuming Interests is a collection property in your ViewModel -->
-                <ComboBox ItemsSource="{Binding InterestCategories}" 
+                <ComboBox Grid.Row="1" Grid.Column="2"  HorizontalAlignment = "Stretch" VerticalAlignment = "Bottom" VerticalContentAlignment="Center" Height="40" Background="{x:Null}" Foreground="White" FontSize="20" Text="" BorderThickness="0,0,0,1" BorderBrush="White"  ItemsSource="{Binding EventInterests, Mode=Default, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Interest, Mode=TwoWay}"/>
+
+                <ComboBox ItemsSource="{Binding MatchCategories}" 
                           SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" 
                           DisplayMemberPath="InterestCategory" 
                           SelectedValuePath="InterestCategory"

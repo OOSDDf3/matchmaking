@@ -162,14 +162,16 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        public List<string> MatchInterests { get; set; }
+
         public MatchingViewModel(INavigationService navService)
         {
             Navigation = navService;
             _connecter = new Database_Connecter();
 
             GetUserInterests();
-            InterestCategories = _connecter.GetInterestCategories();
-
+            //InterestCategories = _connecter.GetInterestCategories();
+            MatchInterests = _connecter.ShowUserInterests(Account.user_ID);
             getNewMatch();
 
             AcceptMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);

@@ -88,6 +88,7 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 //haalt matches op die zelfde interesses hebben
                 Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
 
+
             }
 
             if (Account.userMatches.Count != 0)

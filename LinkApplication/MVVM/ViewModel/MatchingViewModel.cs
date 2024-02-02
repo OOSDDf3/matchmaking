@@ -72,14 +72,103 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        /*private List<string> interestCategories;
+        public List<string> InterestCategories
+        {
+            get { return interestCategories; }
+            set
+            {
+                interestCategories = value;
+                OnPropertyChanged();
+            }
+        }*/
+
+        /*  private string selectedCategory;
+          public string SelectedCategory
+          {
+              get { return selectedCategory; }
+              set
+              {
+                  selectedCategory = value;
+                  OnPropertyChanged();
+                  // Optionally, update the interests based on the selected category
+                  UpdateInterests();
+              }
+          }*/
+
+        private List<string> interestCategories;
+        public List<string> InterestCategories
+        {
+            get { return interestCategories; }
+            set
+            {
+                interestCategories = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string selectedCategory;
+        public string SelectedCategory
+        {
+            get { return selectedCategory; }
+            set
+            {
+                selectedCategory = value;
+                OnPropertyChanged();
+                UpdateInterests(); // Call your existing method to update interests based on the selected category
+                getNewMatch(); // Call your method to get new matches based on the updated interests
+            }
+        }
+
+        private void UpdateInterests()
+        {
+            // Fetch interests based on the selected category
+            AvailableInterests = _connecter.GetInterestsWithCategory(SelectedCategory);
+        }
+
+        private List<string> availableInterests;
+        public List<string> AvailableInterests
+        {
+            get { return availableInterests; }
+            set
+            {
+                availableInterests = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string selectedInterest;
+        public string SelectedInterest
+        {
+            get { return selectedInterest; }
+            set
+            {
+                selectedInterest = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand AcceptMatchCommand {  get; set; }
         public RelayCommand DeclineMatchCommand { get; set; }
 
+        private List<string> userInterests;
+        public List<string> UserInterests
+        {
+            get { return userInterests; }
+            set
+            {
+                userInterests = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MatchingViewModel(INavigationService navService)
         {
             Navigation = navService;
             _connecter = new Database_Connecter();
+
+            GetUserInterests();
+            InterestCategories = _connecter.GetInterestCategories();
 
             getNewMatch();
 
@@ -87,8 +176,22 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             DeclineMatchCommand = new RelayCommand(execute: o => { getNewMatch(); }, canExecute: o => true);
         }
 
+        private List<string> GetUserInterestCategories()
+        {
+            List<string> userInterestCategories = _connecter.GetInterestCategories();
+            return userInterestCategories;
+        }
+
+        private void GetUserInterests()
+        {
+            // Assuming you have a method in Database_Connecter to get user interests
+            UserInterests = _connecter.ShowUserInterests(Account.user_ID);
+        }
+
         private void getNewMatch()
         {
+
+
 
             if (Account.count == 0 && userMatches.IsNullOrEmpty())
             {
@@ -122,6 +225,8 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
                 InterestsMatchList = _connecter.ShowUserInterests(userIDMatch);
                 InterestsMatch = Account.FormatInterests(InterestsMatchList, 5);
 
+                userMatches = _connecter.GetMatchingUser(userIDMatch, SelectedInterest);
+                Account.count++;
 
                 dataPerson.Clear();
 

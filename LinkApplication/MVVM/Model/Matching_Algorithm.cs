@@ -16,5 +16,7 @@ namespace LinkApplicationGraphics.NVVM.Model
                 //2 dezelfde? waarde = 2
 
         //Bij het aanpassen van filter, de aangepaste criterea meenemen bij beoordeling
+
+
     }
 }

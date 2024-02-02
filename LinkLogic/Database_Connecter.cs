@@ -276,6 +276,39 @@ namespace LinkApplication
             }
         }
 
+       /* public List<string> ShowUserInterests(int user_ID)
+        {
+            List<string> interests = new List<string>();
+
+            string query = "SELECT interests.name FROM userinterestlist " +
+                           "JOIN interests ON userinterestlist.interest_ID = interests.interest_ID " +
+                           "WHERE userinterestlist.user_ID = @user_ID";
+
+            try
+            {
+                if (dbCon.IsConnect())
+                {
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    cmd.Parameters.AddWithValue("@user_ID", user_ID);
+
+                    using var reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        interests.Add(reader["name"].ToString());
+                        Debug.Write(reader["name"].ToString() + " ");
+                    }
+                }
+                return interests;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return interests;
+            }
+        }*/
+
+
         //code voor het halen van user id's uit de database met matchende interesses
         public Dictionary<int, int> GetMatchingUser(int user_ID)
         {
@@ -339,8 +372,51 @@ namespace LinkApplication
             }
 
             return users;
-
         }
+
+        public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest)
+        {
+            // Code for retrieving users with the selected interest
+            Dictionary<int, int> users = new Dictionary<int, int>();
+
+            string queryMatchingUsers = "SELECT user_ID FROM userinterestlist " +
+                                        "WHERE interest_ID IN (SELECT interest_ID FROM Interests WHERE name = @selectedInterest) " +
+                                        "AND user_ID != @user_ID";
+
+            var cmdMatchingUsers = new MySqlCommand(queryMatchingUsers, dbCon.Connection);
+            cmdMatchingUsers.Parameters.AddWithValue("@selectedInterest", selectedInterest);
+            cmdMatchingUsers.Parameters.AddWithValue("@user_ID", user_ID);
+
+            using var readerMatchingUsers = cmdMatchingUsers.ExecuteReader();
+
+            while (readerMatchingUsers.Read())
+            {
+                int matchingUserID = Convert.ToInt32(readerMatchingUsers["user_ID"]);
+                if (!users.ContainsKey(matchingUserID))
+                {
+                    users.Add(matchingUserID, 1);
+                }
+                else
+                {
+                    users[matchingUserID]++;
+                }
+            }
+
+            readerMatchingUsers.Close();
+
+            // Print the retrieved data for testing
+            foreach (var user in users)
+            {
+                Debug.WriteLine("");
+                Debug.WriteLine($"User ID: {user.Key}, Matching Interests Count: {user.Value}");
+            }
+
+            return users;
+        }
+
+
+
+
         //code voor het halen van de foto uit de database
         public byte[] ShowUserPicture(int user_ID)
         {

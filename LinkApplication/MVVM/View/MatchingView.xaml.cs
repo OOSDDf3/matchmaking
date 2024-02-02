@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LinkApplication;
+using LinkApplicationGraphics.NVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace LinkApplicationGraphics.NVVM.View
         public MatchingView()
         {
             InitializeComponent();
+            Database_Connecter _connecter;
         }
     }
 }

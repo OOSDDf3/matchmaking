@@ -16,6 +16,7 @@ using MaterialDesignColors;
 using ZstdSharp.Unsafe;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
+using System.ComponentModel;
 
 namespace LinkApplicationGraphics.NVVM.ViewModel
 {
@@ -65,6 +66,35 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
             }
         }
 
+        // for filter
+        public List<string> MatchingInterests
+        {
+            get; set;
+        }
+
+        private string _selectedInterest;
+
+        public string SelectedInterest
+        {
+            get { return _selectedInterest; }
+            set
+            {
+                if (_selectedInterest != value)
+                {
+                    _selectedInterest = value;
+                    OnPropertyChanged(nameof(SelectedInterest));
+                    // Call your method to refresh matches here if needed
+                    getNewMatch();
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public RelayCommand AcceptMatchCommand {  get; set; }
         public RelayCommand DeclineMatchCommand { get; set; }
@@ -75,6 +105,9 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         {
             _connecter = new Database_Connecter();
 
+            //for filter
+            MatchingInterests = _connecter.ShowUserInterests(Account.user_ID);
+
             AcceptMatchCommand = new RelayCommand(execute: o => { likeMatch(); getNewMatch();}, canExecute: o => true);
             DeclineMatchCommand = new RelayCommand(execute: o => { disLikeMatch(); getNewMatch();}, canExecute: o => true);
             ResetLikesCommand = new RelayCommand(execute: o => { resetLikes(); getNewMatch(); }, canExecute: o => true);
@@ -83,13 +116,48 @@ namespace LinkApplicationGraphics.NVVM.ViewModel
         private void getNewMatch()
         {
 
-            if (Account.userMatches.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(SelectedInterest))
+            {
+                // Filter the matches based on the selected interest
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID, SelectedInterest);
+            }
+            else
+            {
+                // If no interest is selected, get all matches
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
+            }
+
+            /*if (!string.IsNullOrEmpty(SelectedInterest))
+            {
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID, SelectedInterest);
+            }
+            else if (Account.userMatches.IsNullOrEmpty())
             {
                 //haalt matches op die zelfde interesses hebben
                 Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
 
 
+            }*/
+
+            /*if (!string.IsNullOrEmpty(SelectedInterest))
+            {
+                Account.userMatches = _connecter.GetMatchingUserWithInterest(Account.user_ID, SelectedInterest);
             }
+            else if (Account.userMatches.IsNullOrEmpty())
+            {
+                //haalt matches op die zelfde interesses hebben
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
+
+
+            }*/
+
+            /*if (Account.userMatches.IsNullOrEmpty())
+            {
+                //haalt matches op die zelfde interesses hebben
+                Account.userMatches = _connecter.GetMatchingUser(Account.user_ID);
+
+
+            }*/
 
             if (Account.userMatches.Count != 0)
             {

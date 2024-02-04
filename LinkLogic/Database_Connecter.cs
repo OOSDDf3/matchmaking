@@ -370,6 +370,335 @@ namespace LinkApplication
             return users;
         }
 
+        /*public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest = null)
+        {
+            // code for retrieving interests of the user
+            List<string> interest_ID = new List<string>();
+            string queryInterest_ID = "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID";
+
+            using (var cmdInterestID = new MySqlCommand(queryInterest_ID, dbCon.Connection))
+            {
+                cmdInterestID.Parameters.AddWithValue("@user_ID", user_ID);
+                using (var reader = cmdInterestID.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            interest_ID.Add(reader.GetValue(i).ToString());
+                        }
+                    }
+                }
+            }
+
+            // code for retrieving users who are already liked or disliked
+            List<int> likedUser_ID = new List<int>();
+            string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
+
+            using (var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection))
+            {
+                cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+                using (var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader())
+                {
+                    while (readerLikeduser_ID.Read())
+                    {
+                        for (int i = 0; i < readerLikeduser_ID.FieldCount; i++)
+                        {
+                            likedUser_ID.Add(Int32.Parse(readerLikeduser_ID.GetValue(i).ToString()));
+                        }
+                    }
+                }
+            }
+
+            // code for retrieving other users with matching interests
+            Dictionary<int, int> users = new Dictionary<int, int>();
+
+            string queryUser_ID = "SELECT user_ID FROM userinterestlist WHERE interest_ID = @interest_ID";
+            using (var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection))
+            {
+                foreach (var id in interest_ID)
+                {
+                    cmdSelect.Parameters.Clear();
+                    cmdSelect.Parameters.AddWithValue("@interest_ID", id);
+                    cmdSelect.Parameters.AddWithValue("@user_ID", user_ID);
+
+                    using (var readerID = cmdSelect.ExecuteReader())
+                    {
+                        while (readerID.Read())
+                        {
+                            int user_ID_selected = Convert.ToInt32(readerID["user_ID"]);
+
+                            if (!likedUser_ID.Contains(user_ID_selected) && user_ID_selected != user_ID)
+                            {
+                                if (!users.ContainsKey(user_ID_selected))
+                                {
+                                    users.Add(user_ID_selected, 1);
+                                }
+                                else
+                                {
+                                    users[user_ID_selected]++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }*/
+
+        /* public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest)
+         {
+             // code for retrieving interests of the user
+             List<string> interest_ID = new List<string>();
+             string queryInterest_ID = "SELECT interest_ID FROM userinterestlist WHERE user_ID = @user_ID";
+
+             using (var cmdInterestID = new MySqlCommand(queryInterest_ID, dbCon.Connection))
+             {
+                 cmdInterestID.Parameters.AddWithValue("@user_ID", user_ID);
+                 using (var reader = cmdInterestID.ExecuteReader())
+                 {
+                     while (reader.Read())
+                     {
+                         for (int i = 0; i < reader.FieldCount; i++)
+                         {
+                             interest_ID.Add(reader.GetValue(i).ToString());
+                         }
+                     }
+                 }
+             }
+
+             // code for retrieving users who are already liked or disliked
+             List<int> likedUser_ID = new List<int>();
+             string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
+
+             using (var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection))
+             {
+                 cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+                 using (var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader())
+                 {
+                     while (readerLikeduser_ID.Read())
+                     {
+                         for (int i = 0; i < readerLikeduser_ID.FieldCount; i++)
+                         {
+                             likedUser_ID.Add(Int32.Parse(readerLikeduser_ID.GetValue(i).ToString()));
+                         }
+                     }
+                 }
+             }
+
+             // code for retrieving other users with matching interests
+             Dictionary<int, int> users = new Dictionary<int, int>();
+
+             string queryUser_ID = "SELECT user_ID FROM userinterestlist WHERE interest_ID = @interest_ID";
+             using (var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection))
+             {
+                 foreach (var id in interest_ID)
+                 {
+                     cmdSelect.Parameters.Clear();
+                     cmdSelect.Parameters.AddWithValue("@interest_ID", id);
+                     cmdSelect.Parameters.AddWithValue("@user_ID", user_ID);
+
+                     using (var readerID = cmdSelect.ExecuteReader())
+                     {
+                         while (readerID.Read())
+                         {
+                             int user_ID_selected = Convert.ToInt32(readerID["user_ID"]);
+
+                             // Check if the selectedInterest is provided and matches the current interest
+                             if ((selectedInterest == null || id == selectedInterest) &&
+                                 !likedUser_ID.Contains(user_ID_selected) &&
+                                 user_ID_selected != user_ID)
+                             {
+                                 if (!users.ContainsKey(user_ID_selected))
+                                 {
+                                     users.Add(user_ID_selected, 1);
+                                 }
+                                 else
+                                 {
+                                     users[user_ID_selected]++;
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
+
+             return users;
+         }*/
+
+        /*public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest = null)
+        {
+            List<int> likedUser_ID = new List<int>();
+
+            // Retrieve users who are already liked or disliked
+            string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
+
+            using (var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection))
+            {
+                cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+
+                using (var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader())
+                {
+                    while (readerLikeduser_ID.Read())
+                    {
+                        likedUser_ID.Add(readerLikeduser_ID.GetInt32(0));
+                    }
+                }
+            }
+
+            // Retrieve other users with matching interests
+            Dictionary<int, int> users = new Dictionary<int, int>();
+
+            string queryUser_ID = "SELECT user_ID FROM userinterestlist WHERE 1 = 1";
+
+            if (!string.IsNullOrEmpty(selectedInterest))
+            {
+                queryUser_ID += " AND interest_ID = @interest_ID";
+            }
+
+            using (var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection))
+            {
+                if (!string.IsNullOrEmpty(selectedInterest))
+                {
+                    cmdSelect.Parameters.AddWithValue("@interest_ID", selectedInterest);
+                }
+
+                using (var readerID = cmdSelect.ExecuteReader())
+                {
+                    while (readerID.Read())
+                    {
+                        int user_ID_selected = readerID.GetInt32(0);
+
+                        if (!likedUser_ID.Contains(user_ID_selected) && user_ID_selected != user_ID)
+                        {
+                            users.TryGetValue(user_ID_selected, out var count);
+                            users[user_ID_selected] = count + 1;
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }*/
+
+        /*public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest = null)
+        {
+            List<int> likedUser_ID = new List<int>();
+
+            // Retrieve users who are already liked or disliked
+            string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
+
+            using (var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection))
+            {
+                cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+
+                using (var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader())
+                {
+                    while (readerLikeduser_ID.Read())
+                    {
+                        likedUser_ID.Add(readerLikeduser_ID.GetInt32(0));
+                    }
+                }
+            }
+
+            // Retrieve other users with matching interests
+            Dictionary<int, int> users = new Dictionary<int, int>();
+
+            string queryUser_ID = "SELECT user_ID FROM userinterestlist";
+
+            // If a specific interest is selected, add a condition to filter by that interest
+            if (!string.IsNullOrEmpty(selectedInterest))
+            {
+                queryUser_ID += " WHERE interest_ID = @interest_ID";
+            }
+
+            using (var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection))
+            {
+                if (!string.IsNullOrEmpty(selectedInterest))
+                {
+                    cmdSelect.Parameters.AddWithValue("@interest_ID", selectedInterest);
+                }
+
+                using (var readerID = cmdSelect.ExecuteReader())
+                {
+                    while (readerID.Read())
+                    {
+                        int user_ID_selected = readerID.GetInt32(0);
+
+                        // Check if the user is not liked or disliked
+                        if (!likedUser_ID.Contains(user_ID_selected) && user_ID_selected != user_ID)
+                        {
+                            users.TryGetValue(user_ID_selected, out var count);
+                            users[user_ID_selected] = count + 1;
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }*/
+
+        public Dictionary<int, int> GetMatchingUser(int user_ID, string selectedInterest = null)
+        {
+            List<int> likedUser_ID = new List<int>();
+
+            // Retrieve users who are already liked or disliked
+            string queryLikeduser_ID = "SELECT user_ID_Liked FROM userlikesdislikes WHERE user_ID = @user_ID";
+
+            using (var cmdLikeduser_ID = new MySqlCommand(queryLikeduser_ID, dbCon.Connection))
+            {
+                cmdLikeduser_ID.Parameters.AddWithValue("@user_ID", user_ID);
+
+                using (var readerLikeduser_ID = cmdLikeduser_ID.ExecuteReader())
+                {
+                    while (readerLikeduser_ID.Read())
+                    {
+                        likedUser_ID.Add(readerLikeduser_ID.GetInt32(0));
+                    }
+                }
+            }
+
+            // Retrieve other users with matching interests
+            Dictionary<int, int> users = new Dictionary<int, int>();
+
+            string queryUser_ID = "SELECT user_ID FROM userinterestlist";
+
+            // If a specific interest is selected, add a condition to filter by that interest
+            if (!string.IsNullOrEmpty(selectedInterest))
+            {
+                // Assuming interest_ID is a foreign key pointing to interests table
+                queryUser_ID += " WHERE interest_ID IN (SELECT interest_ID FROM interests WHERE name = @interestName)";
+            }
+
+            using (var cmdSelect = new MySqlCommand(queryUser_ID, dbCon.Connection))
+            {
+                if (!string.IsNullOrEmpty(selectedInterest))
+                {
+                    cmdSelect.Parameters.AddWithValue("@interestName", selectedInterest);
+                }
+
+                using (var readerID = cmdSelect.ExecuteReader())
+                {
+                    while (readerID.Read())
+                    {
+                        int user_ID_selected = readerID.GetInt32(0);
+
+                        // Check if the user is not liked or disliked
+                        if (!likedUser_ID.Contains(user_ID_selected) && user_ID_selected != user_ID)
+                        {
+                            users.TryGetValue(user_ID_selected, out var count);
+                            users[user_ID_selected] = count + 1;
+                        }
+                    }
+                }
+            }
+
+            return users;
+        }
+
+
+
         //code voor het halen van de foto uit de database
         public byte[] ShowUserPicture(int user_ID)
         {
